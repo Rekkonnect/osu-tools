@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.HighPerformance" Version="8.2.2" />
+    <PackageReference Include="Garyon" Version="0.3.3" />
+    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\mrflashstudio\OsuParsers\OsuParsers\OsuParsers.csproj" />
+    <ProjectReference Include="..\OsuTools.Common\OsuTools.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Mania\KeySpecific\" />
+  </ItemGroup>
+
+</Project>
