@@ -38,6 +38,11 @@ public class ManiaBeatmapInfo
 
     public required OrderedMapList<int, SnappedPosition>
         ChordSnappedPositions { get; init; }
+
+    public int HitObjectCount
+        => Beatmap?.HitObjects.Count
+        ?? ChordListInfo.NonEmptyPressColumns
+            .Sum(s => s.PressColumns.PopCount());
 }
 
 public class TimingPointInfo

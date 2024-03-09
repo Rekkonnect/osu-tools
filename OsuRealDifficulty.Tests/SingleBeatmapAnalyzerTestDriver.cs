@@ -2,19 +2,17 @@
 
 namespace OsuRealDifficulty.Tests;
 
-public sealed class SingleBeatmapAnalyzerTestDriver(
+public class SingleBeatmapAnalyzerTestDriver(
     ManiaBeatmapInfo beatmapInfo,
-    IBeatmapAnnotationAnalyzer analyzer)
+    IBeatmapAnalyzer analyzer)
+    : BaseBeatmapAnalyzerDriver
 {
     public readonly MapAnnotationList SourceChordListAnnotations = [];
     public readonly MapAnnotationList NormalizedChordListAnnotations = [];
 
-    public AnalyzedDifficulty AnalyzedDifficulty { get; } = AnalyzedDifficulty.NewPending;
-    public CalculationResult CalculationResult { get; private set; } = CalculationResult.Pending;
-
     public ManiaBeatmapInfo BeatmapInfo { get; } = beatmapInfo;
 
-    public void Execute()
+    public override Task Execute(CancellationToken cancellationToken = default)
     {
         var completeContext = new CompleteBeatmapAnnotationAnalysisContext
         {
@@ -23,28 +21,27 @@ public sealed class SingleBeatmapAnalyzerTestDriver(
             CommittedNormalizedChordListAnnotations = null!,
             SourceChordListAnnotations = SourceChordListAnnotations,
             NormalizedChordListAnnotations = NormalizedChordListAnnotations,
-            CancellationToken = CancellationToken.None,
+            CancellationToken = cancellationToken,
+            AnalyzerDiagnostics = new(),
         };
 
         // Perform analysis
-        analyzer.Analyze(completeContext);
-        CalculationResult = analyzer.CalculateDifficultyResult(completeContext);
-        ref var calculationResultRef = ref analyzer.CalculationResultRef(AnalyzedDifficulty);
-        calculationResultRef = CalculationResult;
+        AnalyzeAny(analyzer, completeContext);
+        return Task.CompletedTask;
     }
 
     public static SingleBeatmapAnalyzerTestDriver CreateWithOnlyChordList(
         ChordList chordList,
-        IBeatmapAnnotationAnalyzer analyzer)
+        IBeatmapAnalyzer analyzer)
     {
         return CreateWithOnlyChordLists(chordList, null, analyzer);
     }
     public static SingleBeatmapAnalyzerTestDriver CreateWithOnlyChordLists(
         ChordList chordList,
         ChordList? normalizedChordList,
-        IBeatmapAnnotationAnalyzer analyzer)
+        IBeatmapAnalyzer analyzer)
     {
-        var info = ManiaBeatmapInfoConstructor.Instance
+        var info = ManiaBeatmapInfoConstruction.Instance
             .CreateInfoForChordListWithNormalization(
                 chordList, normalizedChordList);
 

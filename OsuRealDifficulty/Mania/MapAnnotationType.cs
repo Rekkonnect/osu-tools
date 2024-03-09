@@ -11,6 +11,8 @@ public enum MapAnnotationType
     Trill,
     Dump,
     Singlestream,
+    ChordGap,
+    ChordGapPattern,
 
     // Tech
     RhythmicalIrregularity,

@@ -23,11 +23,13 @@ public class DifficultyCalculationProfile_4K()
             Chord = 1,
             Speed = 0.96,
             Trill = 0.92,
+            ChordGap = 0.85,
         },
         Stamina = new()
         {
             LongBurst = 1,
             SingleHandTrill = 1,
+            SteadyRateStream = 1,
         },
         Tech = new()
         {
@@ -43,7 +45,7 @@ public class DifficultyCalculationProfile_4K()
             RiceMix = 0.65,
             Shield = 0.8,
         },
-        SV = new()
+        Scrolling = new()
         {
             Fast = 1,
             Slow = 0.9,
@@ -71,11 +73,13 @@ public class DifficultyCalculationProfile_4K()
             Chord = 0.25,
             Speed = 0.64,
             Trill = 0.8,
+            ChordGap = 0.6,
         },
         Stamina = new()
         {
             LongBurst = 0.35,
             SingleHandTrill = 0.9,
+            SteadyRateStream = 0.25,
         },
         Tech = new()
         {
@@ -91,7 +95,7 @@ public class DifficultyCalculationProfile_4K()
             RiceMix = 0.15,
             Shield = 0.25,
         },
-        SV = new()
+        Scrolling = new()
         {
             Fast = 0.6,
             Slow = 0.8,

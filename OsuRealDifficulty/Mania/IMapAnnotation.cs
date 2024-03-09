@@ -58,6 +58,30 @@ public record ChordAnnotation(int Offset, int NoteCount)
     public MapAnnotationType Type => MapAnnotationType.Chord;
 }
 
+// NOTE: This does not handle simultaneously appearing patterns
+// This might be handled from another subcategory of Tech in the future
+public record PatternTypeSwitchAnnotation(
+    int OffsetStart, int OffsetEnd,
+    MapAnnotationType FirstPatternType, MapAnnotationType SecondPatternType)
+    : IPattern
+{
+    public MapAnnotationType Type => MapAnnotationType.PatternTypeSwitch;
+}
+
+public record ChordGapAnnotation(int Offset, int GapSize)
+    : IMapAnnotation
+{
+    public MapAnnotationType Type => MapAnnotationType.ChordGap;
+}
+
+public record ChordGapPatternAnnotation(int OffsetStart, int OffsetEnd, int GapSize)
+    : IPattern
+{
+    public MapAnnotationType Type => MapAnnotationType.ChordGap;
+
+    public int Length => OffsetEnd - OffsetStart;
+}
+
 /// <summary>
 /// Represents a trill pattern, consisting of at least 3 chords.
 /// Each trill instance may consist of multiple columns, as specified.

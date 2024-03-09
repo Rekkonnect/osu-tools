@@ -2,64 +2,14 @@
 
 namespace OsuRealDifficulty.Mania;
 
-public abstract class BasePatternAnalyzer<TPattern> : IBeatmapNotePatternAnalyzer
-    where TPattern : IMapAnnotation
-{
-    public abstract void Analyze(BeatmapAnnotationAnalysisContext context);
-
-    protected abstract double SourceChordListWeight { get; }
-    protected double NormalizedChordListWeight => 1 - SourceChordListWeight;
-
-    public double CalculateDifficultyResult(CompleteBeatmapAnnotationAnalysisContext context)
-    {
-        context.GetChordListSpecificContexts(
-            out var sourceChordListContext,
-            out var normalizedChordListContext);
-
-        var sourceValue = CalculateDifficultyResult(sourceChordListContext);
-        var resultingValue = sourceValue;
-
-        if (normalizedChordListContext is not null)
-        {
-            var normalizedAbsoluteValue = CalculateDifficultyResult(
-                normalizedChordListContext.Value);
-
-            resultingValue = new AnalysisDifficultyValue(
-                sourceValue.AbsoluteValue * SourceChordListWeight +
-                normalizedAbsoluteValue.AbsoluteValue * NormalizedChordListWeight);
-        }
-
-        return resultingValue.NormalizedValue;
-    }
-
-    private AnalysisDifficultyValue CalculateDifficultyResult(
-        BeatmapAnnotationAnalysisContext context)
-    {
-        var annotations = context.Annotations;
-
-        double absoluteValue = 0;
-        foreach (var annotation in annotations)
-        {
-            if (annotation is not TPattern pattern)
-                continue;
-
-            absoluteValue += CalculatePatternAbsoluteValue(pattern);
-        }
-
-        return new(absoluteValue);
-    }
-
-    protected abstract double CalculatePatternAbsoluteValue(TPattern pattern);
-
-    public abstract ref CalculationResult CalculationResultRef(
-        AnalyzedDifficulty difficulty);
-}
-
-public sealed class TrillPatternAnalyzer : IBeatmapNotePatternAnalyzer
+public sealed class TrillPatternAnalyzer
+    : BaseSingleAnnotationFullAnalyzer<TrillPattern>
 {
     public static TrillPatternAnalyzer Instance { get; } = new();
 
-    public void Analyze(BeatmapAnnotationAnalysisContext context)
+    protected override double SourceChordListWeight => 0.8;
+
+    public override void AnalyzeAnnotations(BeatmapAnnotationAnalysisContext context)
     {
         var chordPressColumns = context.AffectedChordList.NonEmptyPressColumns;
         chordPressColumns.DeconstructLists(out var chords, out var pressColumns);
@@ -214,49 +164,7 @@ public sealed class TrillPatternAnalyzer : IBeatmapNotePatternAnalyzer
         }
     }
 
-    public double CalculateDifficultyResult(CompleteBeatmapAnnotationAnalysisContext context)
-    {
-        const double sourceWeight = 0.8;
-        const double normalizedWeight = 1 - sourceWeight;
-
-        context.GetChordListSpecificContexts(
-            out var sourceChordListContext,
-            out var normalizedChordListContext);
-
-        var sourceValue = CalculateDifficultyResult(sourceChordListContext);
-        var resultingValue = sourceValue;
-
-        if (normalizedChordListContext is not null)
-        {
-            var normalizedAbsoluteValue = CalculateDifficultyResult(
-                normalizedChordListContext.Value);
-
-            resultingValue = new AnalysisDifficultyValue(
-                sourceValue.AbsoluteValue * sourceWeight +
-                normalizedAbsoluteValue.AbsoluteValue * normalizedWeight);
-        }
-
-        return resultingValue.NormalizedValue;
-    }
-
-    private AnalysisDifficultyValue CalculateDifficultyResult(
-        BeatmapAnnotationAnalysisContext context)
-    {
-        var annotations = context.Annotations;
-
-        double absoluteValue = 0;
-        foreach (var annotation in annotations)
-        {
-            if (annotation is not TrillPattern pattern)
-                continue;
-
-            absoluteValue += CalculatePatternAbsoluteValue(pattern);
-        }
-
-        return new(absoluteValue);
-    }
-
-    private static double CalculatePatternAbsoluteValue(TrillPattern pattern)
+    protected override double CalculatePatternAbsoluteValue(TrillPattern pattern)
     {
         var cps = pattern.ColumnHitsPerSecond;
         int columnCount = pattern.ColumnCount;
@@ -267,7 +175,7 @@ public sealed class TrillPatternAnalyzer : IBeatmapNotePatternAnalyzer
         return value;
     }
 
-    ref CalculationResult IBeatmapAnnotationAnalyzer.CalculationResultRef(
+    public override ref CalculationResult CalculationResultRef(
         AnalyzedDifficulty difficulty)
     {
         return ref difficulty.Dexterity.Trill;

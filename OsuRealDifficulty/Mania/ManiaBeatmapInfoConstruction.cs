@@ -1,18 +1,14 @@
-﻿using CommunityToolkit.HighPerformance.Helpers;
-using Garyon.DataStructures;
-using Garyon.Extensions;
+﻿using Garyon.DataStructures;
 using OsuFileTools;
 using OsuParsers.Beatmaps;
-using OsuParsers.Database.Objects;
 using OsuTools.Common;
 using System.Diagnostics.CodeAnalysis;
-using System.Security.Cryptography;
 
 namespace OsuRealDifficulty.Mania;
 
-public sealed class ManiaBeatmapInfoConstructor
+public sealed class ManiaBeatmapInfoConstruction
 {
-    public static ManiaBeatmapInfoConstructor Instance { get; } = new();
+    public static ManiaBeatmapInfoConstruction Instance { get; } = new();
 
     public ManiaBeatmapInfo CreateInfoForChordList(ChordList chordList)
     {

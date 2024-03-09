@@ -20,11 +20,13 @@ public class AnalyzedDifficulty
             Chord = CalculationResult.Pending,
             Speed = CalculationResult.Pending,
             Trill = CalculationResult.Pending,
+            ChordGap = CalculationResult.Pending,
         },
         Stamina = new()
         {
             LongBurst = CalculationResult.Pending,
             SingleHandTrill = CalculationResult.Pending,
+            SteadyRateStream = CalculationResult.Pending,
         },
         Tech = new()
         {
@@ -40,7 +42,7 @@ public class AnalyzedDifficulty
             RiceMix = CalculationResult.Pending,
             Shield = CalculationResult.Pending,
         },
-        SV = new()
+        Scrolling = new()
         {
             Fast = CalculationResult.Pending,
             Slow = CalculationResult.Pending,
@@ -55,7 +57,7 @@ public class AnalyzedDifficulty
     public required JackRate Jack;
     public required StaminaRate Stamina;
     public required LNRate LN;
-    public required SVRate SV;
+    public required ScrollingRate Scrolling;
 
     public struct DexterityRate
     {
@@ -84,6 +86,11 @@ public class AnalyzedDifficulty
         /// The occurrence of quick singlestream chords.
         /// </summary>
         public required CalculationResult Singlestream;
+        /// <summary>
+        /// The occurrence and impact of gaps in the notes between chords and
+        /// the gaps that are formed between chords.
+        /// </summary>
+        public required CalculationResult ChordGap;
     }
 
     public struct TechRate
@@ -244,6 +251,10 @@ public class AnalyzedDifficulty
         /// density, disregarding the individual patterns.
         /// </summary>
         public required CalculationResult LongBurst;
+        /// <summary>
+        /// Represents the longer streams whose chords remain equidistant.
+        /// </summary>
+        public required CalculationResult SteadyRateStream;
     }
 
     public struct LNRate
@@ -271,7 +282,7 @@ public class AnalyzedDifficulty
         public required CalculationResult LNShield;
     }
 
-    public struct SVRate
+    public struct ScrollingRate
     {
         /// <summary>
         /// Reflects the burst of SVs that occur in a time window.

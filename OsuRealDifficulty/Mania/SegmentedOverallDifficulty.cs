@@ -9,5 +9,5 @@ public struct SegmentedOverallDifficulty
     public double Jack;
     public double Stamina;
     public double LN;
-    public double SV;
+    public double Scrolling;
 }

@@ -6,7 +6,7 @@ using System.Text;
 namespace OsuRealDifficulty.Tests.Mania;
 
 public abstract class BeatmapAnalyzerTests<T> : BeatmapAnalyzerTests
-    where T : class, IBeatmapAnnotationAnalyzer
+    where T : class, IBeatmapAnalyzer
 {
     protected override T? DefaultAnalyzer => null;
 
@@ -61,7 +61,7 @@ public abstract class BeatmapAnalyzerTests<T> : BeatmapAnalyzerTests
 
 public abstract class BeatmapAnalyzerTests
 {
-    protected virtual IBeatmapAnnotationAnalyzer? DefaultAnalyzer => null;
+    protected virtual IBeatmapAnalyzer? DefaultAnalyzer => null;
 
     protected static void AssertAnnotationListsEqual(
         MapAnnotationList expected,
@@ -143,7 +143,7 @@ public abstract class BeatmapAnalyzerTests
             builder.AppendLine(',');
         }
         builder.Append('}');
-        return builder.ToString(); 
+        return builder.ToString();
     }
 
     protected void AssertAnalysis(
@@ -195,14 +195,14 @@ public abstract class BeatmapAnalyzerTests
             keys);
     }
 
-    protected SingleBeatmapAnalyzerTestDriver DriverWithOnlyChordListString(
+    protected virtual SingleBeatmapAnalyzerTestDriver DriverWithOnlyChordListString(
         string chordListString)
     {
         var chordList = ChordListParsing.Parse(chordListString);
         return DriverWithOnlyChordList(chordList);
     }
 
-    protected SingleBeatmapAnalyzerTestDriver DriverWithOnlyChordListStrings(
+    protected virtual SingleBeatmapAnalyzerTestDriver DriverWithOnlyChordListStrings(
         string chordListString,
         string normalizedChordListString)
     {
@@ -211,14 +211,15 @@ public abstract class BeatmapAnalyzerTests
         return DriverWithOnlyChordLists(chordList, normalizedChordList);
     }
 
-    protected SingleBeatmapAnalyzerTestDriver DriverWithOnlyChordList(ChordList list)
+    protected virtual SingleBeatmapAnalyzerTestDriver DriverWithOnlyChordList(
+        ChordList list)
     {
         return SingleBeatmapAnalyzerTestDriver.CreateWithOnlyChordList(
             list,
             DefaultAnalyzer!);
     }
 
-    protected SingleBeatmapAnalyzerTestDriver DriverWithOnlyChordLists(
+    protected virtual SingleBeatmapAnalyzerTestDriver DriverWithOnlyChordLists(
         ChordList list,
         ChordList? normalizedChordList)
     {
@@ -228,14 +229,7 @@ public abstract class BeatmapAnalyzerTests
             DefaultAnalyzer!);
     }
 
-    protected void AssertExecuteWithValidCalculationResult(SingleBeatmapAnalyzerTestDriver driver)
-    {
-        driver.Execute();
-        var value = driver.CalculationResult;
-        Assert.That(value.IsValid, Is.True);
-    }
-
-    protected BitVector32 Press(string pressString)
+    protected static BitVector32 Press(string pressString)
     {
         int value = 0;
 

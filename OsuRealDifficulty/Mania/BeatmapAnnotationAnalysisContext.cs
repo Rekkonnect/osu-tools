@@ -8,6 +8,8 @@ public readonly struct BeatmapAnnotationAnalysisContext
 
     public required IReadOnlyTypeKeyedList<IMapAnnotation> CommittedAnnotations { get; init; }
 
+    public required EsotericDiagnosticBag? AnalyzerDiagnostics { get; init; }
+
     public required CancellationToken CancellationToken { get; init; }
 
     public void AddAnnotation(IMapAnnotation annotation)

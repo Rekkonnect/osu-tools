@@ -1,13 +1,13 @@
 ﻿namespace OsuRealDifficulty.Mania;
 
 public sealed class SinglestreamPatternAnalyzer
-    : BaseSinglePatternAnalyzer<SinglestreamPattern>
+    : BaseSingleAnnotationFullAnalyzer<SinglestreamPattern>
 {
     public static SinglestreamPatternAnalyzer Instance { get; } = new();
 
     protected override double SourceChordListWeight => 0.65;
 
-    public override void Analyze(BeatmapAnnotationAnalysisContext context)
+    public override void AnalyzeAnnotations(BeatmapAnnotationAnalysisContext context)
     {
         var chordPressColumns = context.AffectedChordList.NonEmptyPressColumns;
         chordPressColumns.DeconstructLists(out var chords, out var pressColumns);
@@ -33,7 +33,7 @@ public sealed class SinglestreamPatternAnalyzer
                 var columnBits = 0;
                 while (true)
                 {
-                    int nextIndex = i + length + 1;
+                    int nextIndex = i + length;
                     if (nextIndex >= chords.Length)
                         break;
 
@@ -96,12 +96,8 @@ public sealed class SinglestreamPatternAnalyzer
 
         // Column distance matters more for parsing difficulty
         var columnDistance = pattern.TotalColumnDistance;
-        var normalizedColumnDistance = Math.Log(columnDistance);
-        var averageDistance = pattern.AverageColumnDistance;
-        var noteCount = pattern.NoteCount;
         var nps = pattern.NotesPerSecond;
-        double intensity = 2D - (2D / (noteCount - 2));
-        var value = nps * columnDistance / 3;
+        var value = Math.Log(nps, 4) * Math.Pow(columnDistance, 1.3) / 3;
         return value;
     }
 

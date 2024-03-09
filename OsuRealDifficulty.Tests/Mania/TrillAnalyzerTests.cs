@@ -2,9 +2,9 @@ using OsuRealDifficulty.Mania;
 
 namespace OsuRealDifficulty.Tests.Mania;
 
-public class TrillAnalyzerTests : BeatmapAnalyzerTests<TrillPatternAnalyzer>
+public class TrillAnalyzerTests : FullBeatmapAnalyzerTests<TrillPatternAnalyzer>
 {
-    protected override TrillPatternAnalyzer? DefaultAnalyzer
+    protected override TrillPatternAnalyzer DefaultAnalyzer
         => TrillPatternAnalyzer.Instance;
 
     #region Annotations
@@ -422,16 +422,7 @@ public class TrillAnalyzerTests : BeatmapAnalyzerTests<TrillPatternAnalyzer>
             | -  | 0
             """;
 
-        var easyDriver = DriverWithOnlyChordListString(easy);
-        var hardDriver = DriverWithOnlyChordListString(hard);
-
-        AssertExecuteWithValidCalculationResult(easyDriver);
-        AssertExecuteWithValidCalculationResult(hardDriver);
-
-        var easyDifficulty = easyDriver.CalculationResult.Value;
-        var hardDifficulty = hardDriver.CalculationResult.Value;
-
-        Assert.That(hardDifficulty, Is.GreaterThan(easyDifficulty));
+        AssertComparedDifficulty(easy, hard);
     }
 
     [Test]
@@ -458,21 +449,7 @@ public class TrillAnalyzerTests : BeatmapAnalyzerTests<TrillPatternAnalyzer>
             | ---| 0
             """;
 
-        var easyDriver = DriverWithOnlyChordListString(easy);
-        var hardDriver = DriverWithOnlyChordListString(hard);
-        var harderDriver = DriverWithOnlyChordListString(harder);
-
-        AssertExecuteWithValidCalculationResult(easyDriver);
-        AssertExecuteWithValidCalculationResult(hardDriver);
-        AssertExecuteWithValidCalculationResult(harderDriver);
-
-        var easyDifficulty = easyDriver.CalculationResult.Value;
-        var hardDifficulty = hardDriver.CalculationResult.Value;
-        var harderDifficulty = harderDriver.CalculationResult.Value;
-
-        Assert.That(hardDifficulty, Is.GreaterThan(easyDifficulty));
-        Assert.That(harderDifficulty, Is.GreaterThan(easyDifficulty));
-        Assert.That(harderDifficulty, Is.GreaterThan(hardDifficulty));
+        AssertAscendingDifficulty(easy, hard, harder);
     }
 
     [Test]
@@ -492,16 +469,7 @@ public class TrillAnalyzerTests : BeatmapAnalyzerTests<TrillPatternAnalyzer>
             | -     | 0
             """;
 
-        var fourDriver = DriverWithOnlyChordListString(four);
-        var sevenDriver = DriverWithOnlyChordListString(seven);
-
-        AssertExecuteWithValidCalculationResult(fourDriver);
-        AssertExecuteWithValidCalculationResult(sevenDriver);
-
-        var fourDifficulty = fourDriver.CalculationResult.Value;
-        var sevenDifficulty = sevenDriver.CalculationResult.Value;
-
-        Assert.That(fourDifficulty, Is.EqualTo(sevenDifficulty));
+        AssertEqualDifficulty(four, seven);
     }
 
     #endregion

@@ -11,6 +11,8 @@ public readonly struct CompleteBeatmapAnnotationAnalysisContext
     public required IReadOnlyTypeKeyedList<IMapAnnotation>?
         CommittedNormalizedChordListAnnotations { get; init; }
 
+    public required EsotericDiagnosticBag AnalyzerDiagnostics { get; init; }
+
     public required CancellationToken CancellationToken { get; init; }
 
     public BeatmapAnnotationAnalysisContext ContextForSourceChordList()
@@ -22,8 +24,10 @@ public readonly struct CompleteBeatmapAnnotationAnalysisContext
             Annotations = SourceChordListAnnotations,
             CommittedAnnotations = CommittedSourceChordListAnnotations,
             CancellationToken = CancellationToken,
+            AnalyzerDiagnostics = AnalyzerDiagnostics,
         };
     }
+
     public BeatmapAnnotationAnalysisContext? ContextForNormalizedChordList()
     {
         // If no normalized chord list exists, we have no context to return
@@ -37,6 +41,7 @@ public readonly struct CompleteBeatmapAnnotationAnalysisContext
             Annotations = NormalizedChordListAnnotations!,
             CommittedAnnotations = CommittedNormalizedChordListAnnotations!,
             CancellationToken = CancellationToken,
+            AnalyzerDiagnostics = AnalyzerDiagnostics,
         };
     }
 
