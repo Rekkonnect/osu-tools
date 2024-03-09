@@ -1,4 +1,4 @@
-﻿namespace OsuRealDifficulty.Mania;
+﻿namespace OsuRealDifficulty;
 
 public partial class MapAnnotationList : List<IMapAnnotation>
 {

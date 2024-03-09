@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace OsuRealDifficulty.Mania;
+namespace OsuRealDifficulty.Utilities;
 
 public static class NumericExtensions
 {

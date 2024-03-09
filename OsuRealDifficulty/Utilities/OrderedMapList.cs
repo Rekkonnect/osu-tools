@@ -3,7 +3,7 @@ using Garyon.Extensions.ArrayExtensions;
 using Garyon.Objects;
 using System.Diagnostics.CodeAnalysis;
 
-namespace OsuRealDifficulty.Mania;
+namespace OsuRealDifficulty.Utilities;
 
 // Data structures are very important in any project
 
@@ -65,7 +65,7 @@ public sealed class OrderedMapList<TKey, TValue>(int capacity)
         int max = _map.Length - 1;
         while (min <= max)
         {
-            int mid = (min + max) >> 1;
+            int mid = min + max >> 1;
             var midKey = _map[mid].Key;
             var comparison = midKey.GetComparisonResult(key);
             switch (comparison)

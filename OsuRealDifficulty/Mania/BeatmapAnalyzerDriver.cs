@@ -1,6 +1,4 @@
-﻿using System.Threading.Channels;
-
-namespace OsuRealDifficulty.Mania;
+﻿namespace OsuRealDifficulty.Mania;
 
 public abstract class BaseBeatmapAnalyzerDriver
 {

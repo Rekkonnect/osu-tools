@@ -1,4 +1,6 @@
-﻿namespace OsuRealDifficulty.Mania;
+﻿using OsuRealDifficulty.Mania;
+
+namespace OsuRealDifficulty;
 
 public readonly struct TimeDivisor(int denominator)
 {
@@ -41,7 +43,7 @@ public readonly struct TimeDivisor(int denominator)
 
     // Regular divisors are 1 and multiples of 2
     public bool IsRegular => Denominator.PopCount() is 1;
-    public bool IsTriple => (Denominator % 3) is 0;
+    public bool IsTriple => Denominator % 3 is 0;
 
     public bool IsIrregular => !IsRegular && !IsTriple;
 

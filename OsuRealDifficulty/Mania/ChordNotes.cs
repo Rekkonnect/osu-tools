@@ -1,7 +1,4 @@
-﻿using System.Collections.Specialized;
-using System.Diagnostics;
-
-namespace OsuRealDifficulty.Mania;
+﻿namespace OsuRealDifficulty.Mania;
 
 /// <summary>
 /// Represents the state of the notes of a chord.

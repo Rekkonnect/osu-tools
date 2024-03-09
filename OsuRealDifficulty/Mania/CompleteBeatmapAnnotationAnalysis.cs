@@ -1,6 +1,4 @@
-﻿using OsuParsers.Beatmaps;
-
-namespace OsuRealDifficulty.Mania;
+﻿namespace OsuRealDifficulty.Mania;
 
 public static class CompleteBeatmapAnnotationAnalysis
 {

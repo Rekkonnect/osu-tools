@@ -1,6 +1,6 @@
 ﻿using OsuParsers.Beatmaps.Objects;
 
-namespace OsuRealDifficulty.Mania;
+namespace OsuRealDifficulty;
 
 public readonly record struct BeatSnappedPosition(int Beat, int Index, TimeDivisor Divisor)
 {

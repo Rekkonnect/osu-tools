@@ -1,6 +1,4 @@
-﻿using System.Collections.Specialized;
-
-namespace OsuRealDifficulty.Mania;
+﻿namespace OsuRealDifficulty.Mania;
 
 public static class HandOccupationCalculation
 {

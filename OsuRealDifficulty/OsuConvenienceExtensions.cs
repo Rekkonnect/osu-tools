@@ -1,15 +1,13 @@
-﻿using OsuFileTools;
-using OsuParsers.Beatmaps;
-using OsuParsers.Beatmaps.Objects;
+﻿using OsuParsers.Beatmaps.Objects;
 using OsuParsers.Beatmaps.Sections;
 
-namespace OsuRealDifficulty.Mania;
+namespace OsuRealDifficulty;
 
 public static class OsuConvenienceExtensions
 {
     public static int ManiaKeyCount(this Beatmap beatmap)
     {
-        return ManiaKeyCount(beatmap.DifficultySection);
+        return beatmap.DifficultySection.ManiaKeyCount();
     }
     public static int ManiaKeyCount(this BeatmapDifficultySection difficultySection)
     {

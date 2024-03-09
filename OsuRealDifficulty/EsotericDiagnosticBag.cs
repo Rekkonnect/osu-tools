@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace OsuRealDifficulty.Mania;
+namespace OsuRealDifficulty;
 
 public sealed class EsotericDiagnosticBag
 {

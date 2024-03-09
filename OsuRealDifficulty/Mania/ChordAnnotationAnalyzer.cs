@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace OsuRealDifficulty.Mania;
+﻿namespace OsuRealDifficulty.Mania;
 
 public sealed class ChordAnnotationAnalyzer
     : BaseSingleAnnotationFullAnalyzer<ChordAnnotation>

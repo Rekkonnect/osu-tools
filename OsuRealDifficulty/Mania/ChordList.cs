@@ -1,10 +1,4 @@
-﻿using CommunityToolkit.HighPerformance;
-using OsuFileTools;
-using OsuParsers.Beatmaps;
-using OsuTools.Common;
-using System.Collections.Specialized;
-
-namespace OsuRealDifficulty.Mania;
+﻿namespace OsuRealDifficulty.Mania;
 
 // TODO: Into record or struct?
 // TODO: Chord[] into Memory<Chord>

@@ -1,4 +1,4 @@
-﻿namespace OsuFileTools;
+﻿namespace OsuTools.Common;
 
 public readonly record struct BeatLength(double Length)
 {

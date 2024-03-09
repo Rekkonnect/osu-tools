@@ -4,7 +4,7 @@ using Garyon.Reflection;
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 
-namespace OsuRealDifficulty.Mania;
+namespace OsuRealDifficulty.Utilities;
 
 public sealed class TypeKeyedList<T>
     : IReadOnlyTypeKeyedList<T>

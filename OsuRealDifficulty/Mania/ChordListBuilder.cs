@@ -1,5 +1,4 @@
-﻿using OsuParsers.Beatmaps;
-using OsuParsers.Beatmaps.Objects.Mania;
+﻿using OsuParsers.Beatmaps.Objects.Mania;
 using OsuParsers.Enums;
 
 namespace OsuRealDifficulty.Mania;

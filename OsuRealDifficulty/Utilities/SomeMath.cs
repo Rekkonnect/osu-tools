@@ -1,4 +1,4 @@
-﻿namespace OsuRealDifficulty.Mania;
+﻿namespace OsuRealDifficulty.Utilities;
 
 /// <summary>
 /// This is some math. For more math, enroll into a CS course.

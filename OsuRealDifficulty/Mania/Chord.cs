@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace OsuRealDifficulty.Mania;
+﻿namespace OsuRealDifficulty.Mania;
 
 [DebuggerDisplay($"{{{nameof(DebuggerDisplay)}(),nq}}")]
 public struct Chord

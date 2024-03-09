@@ -1,7 +1,4 @@
 ﻿using Garyon.DataStructures;
-using OsuFileTools;
-using OsuParsers.Beatmaps;
-using OsuTools.Common;
 using System.Diagnostics.CodeAnalysis;
 
 namespace OsuRealDifficulty.Mania;

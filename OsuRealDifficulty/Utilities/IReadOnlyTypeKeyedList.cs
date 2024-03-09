@@ -1,4 +1,4 @@
-﻿namespace OsuRealDifficulty.Mania;
+﻿namespace OsuRealDifficulty.Utilities;
 
 public interface IReadOnlyTypeKeyedList<T>
     : IEnumerable<T>
