@@ -24,12 +24,24 @@ public static class CompleteBeatmapAnnotationAnalysis
         // analyzers having detected their pattern switches and therefore being
         // given access to the annotations they have emitted
 
+        // TODO: Consider the alternative of automatically discovering all available
+        // analyzers and calculating their dependency graph via reflection
+        // Currently this is not chosen due to the limited and non-expandable scope
+        // of the feature
+
         // TODO: Revisit once analyzers are all implemented
+
         driver.Add([
             ChordAnnotationAnalyzer.Instance,
             SpeedAnnotationAnalyzer.Instance,
             SinglestreamPatternAnalyzer.Instance,
             TrillPatternAnalyzer.Instance,
+            JackPatternAnalyzer.Instance,
+        ]);
+
+        driver.Add([
+            AnchorPatternDifficultyAnalyzer.Instance,
+            MinijackPatternDifficultyAnalyzer.Instance,
         ]);
 
         driver.Add([
