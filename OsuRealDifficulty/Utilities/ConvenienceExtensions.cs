@@ -16,6 +16,18 @@ public static partial class ConvenienceExtensions
     {
         return source.Select(selector).ToArray();
     }
+
+    public static int BinarySearch<T>(
+        this T[] source, T value)
+    {
+        return Array.BinarySearch(source, value);
+    }
+
+    public static int BinarySearch<T>(
+        this T[] source, T value, IComparer<T> comparer)
+    {
+        return Array.BinarySearch(source, value, comparer);
+    }
 }
 
 // Low level

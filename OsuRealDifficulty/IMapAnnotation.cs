@@ -31,6 +31,15 @@ public interface IPattern : IMapAnnotation
     public int Length => OffsetEnd - OffsetStart;
 }
 
+public interface ITwoNotePattern : IPattern
+{
+    public int FirstOffset { get; }
+    public int SecondOffset { get; }
+
+    int IPattern.OffsetStart => FirstOffset;
+    int IPattern.OffsetEnd => SecondOffset;
+}
+
 public interface INotePattern : IPattern
 {
 

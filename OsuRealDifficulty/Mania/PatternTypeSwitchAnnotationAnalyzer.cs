@@ -1,6 +1,5 @@
 ﻿namespace OsuRealDifficulty.Mania;
 
-[ExecutionDependsOn<JackPatternAnalyzer>]
 public sealed class PatternTypeSwitchAnnotationAnalyzer
     : BaseSingleAnnotationFullAnalyzer<PatternTypeSwitchAnnotation>
 {

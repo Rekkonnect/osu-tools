@@ -15,4 +15,22 @@ public struct Chord
     {
         return $"{Notes.ToString(keys)} {Offset}";
     }
+
+    public static Chord WithOffset(int offset)
+    {
+        return new()
+        {
+            Offset = offset,
+        };
+    }
+
+    public sealed class AscendingOffsetComparer : IComparer<Chord>
+    {
+        public static AscendingOffsetComparer Instance { get; } = new();
+
+        public int Compare(Chord x, Chord y)
+        {
+            return x.Offset.CompareTo(y.Offset);
+        }
+    }
 }

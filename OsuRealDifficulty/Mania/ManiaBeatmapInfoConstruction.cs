@@ -11,11 +11,15 @@ public sealed class ManiaBeatmapInfoConstruction
     {
         var chordListInfo = GetChordListInfo(chordList);
 
+        var handOccupations = GetHandOccupations(
+            chordList, null);
+
         return new()
         {
             Beatmap = null!,
             ChordListInfo = chordListInfo,
             NormalizedChordListInfo = null!,
+            HandOccupations = handOccupations,
             TimingPointInfo = null!,
             ChordBeatSnappedPositions = null!,
             ChordSnappedPositions = null!,
@@ -29,11 +33,15 @@ public sealed class ManiaBeatmapInfoConstruction
         var chordListInfo = GetChordListInfo(chordList);
         var normalizedChordListInfo = GetChordListInfo(normalizedChordList);
 
+        var handOccupations = GetHandOccupations(
+            chordList, normalizedChordList);
+
         return new()
         {
             Beatmap = null!,
             ChordListInfo = chordListInfo,
             NormalizedChordListInfo = normalizedChordListInfo,
+            HandOccupations = handOccupations,
             TimingPointInfo = null!,
             ChordBeatSnappedPositions = null!,
             ChordSnappedPositions = null!,
@@ -44,6 +52,9 @@ public sealed class ManiaBeatmapInfoConstruction
     {
         var chordList = ChordListBuilding.BuildChordList(beatmap).Result;
         var normalizedChordList = OddKeyNormalization.NormalizeWithAlternateHands(chordList);
+
+        var handOccupations = GetHandOccupations(
+            chordList, normalizedChordList);
 
         var chordListInfo = GetChordListInfo(chordList);
         var normalizedChordListInfo = GetChordListInfo(normalizedChordList);
@@ -57,10 +68,34 @@ public sealed class ManiaBeatmapInfoConstruction
             Beatmap = beatmap,
             ChordListInfo = chordListInfo,
             NormalizedChordListInfo = normalizedChordListInfo,
+            HandOccupations = handOccupations,
             TimingPointInfo = timingPointInfo,
             ChordBeatSnappedPositions = chordBeatSnappedPositions,
             ChordSnappedPositions = chordSnappedPositions,
         };
+    }
+
+    private HandOccupationList? GetHandOccupations(
+        ChordList chordList,
+        ChordList? normalizedChordList)
+    {
+        if (normalizedChordList is null)
+        {
+            // We were not given a normalized form, but we don't
+            // want to opinionate on how to normalize the chord list
+            // If we cannot calculate the hand occupations due to the
+            // presence of a special key, we simply ignore that
+            if (chordList.IsOddKey)
+            {
+                return null;
+            }
+        }
+
+        var normalizedOrSourceChordList =
+            normalizedChordList ?? chordList;
+
+        return HandOccupationCalculation.GetHandOccupations(
+            normalizedOrSourceChordList);
     }
 
     private OrderedMapList<int, SnappedPosition> GetChordSnappedPositions(Beatmap beatmap)

@@ -29,7 +29,7 @@ public sealed class ChordAnnotationAnalyzer
         }
     }
 
-    protected override AnalysisDifficultyValue CalculateDifficultyResult(
+    public override AnalysisDifficultyValue CalculateDifficultyResult(
         BeatmapAnnotationAnalysisContext context)
     {
         var baseDifficultyResult = base.CalculateDifficultyResult(context);
