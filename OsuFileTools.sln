@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuFileTools", "OsuFileTool
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuParsers", "..\mrflashstudio\OsuParsers\OsuParsers\OsuParsers.csproj", "{0F3F4546-4D40-4853-A14F-783B7F3F990F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuRealDifficulty", "OsuRealDifficulty\OsuRealDifficulty.csproj", "{A56BCD93-810D-47DD-942E-DC53E8EB3458}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuRealDifficulty", "OsuRealDifficulty\OsuRealDifficulty.csproj", "{A56BCD93-810D-47DD-942E-DC53E8EB3458}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuTools.Common", "OsuTools.Common\OsuTools.Common.csproj", "{EAC56DC2-FABB-40B4-BB76-EDB40E5A277A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuTools.Common", "OsuTools.Common\OsuTools.Common.csproj", "{EAC56DC2-FABB-40B4-BB76-EDB40E5A277A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuRealDifficulty.Tests", "OsuRealDifficulty.Tests\OsuRealDifficulty.Tests.csproj", "{564DB7F0-ACE0-4321-BEBB-D13E89F39C58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuRealDifficulty.Tests", "OsuRealDifficulty.Tests\OsuRealDifficulty.Tests.csproj", "{564DB7F0-ACE0-4321-BEBB-D13E89F39C58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuRealDifficulty.UI.WinForms", "OsuRealDifficulty.UI.WinForms\OsuRealDifficulty.UI.WinForms.csproj", "{72AF93A8-CEA3-4B3C-835F-0EAFC50D6572}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{564DB7F0-ACE0-4321-BEBB-D13E89F39C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{564DB7F0-ACE0-4321-BEBB-D13E89F39C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{564DB7F0-ACE0-4321-BEBB-D13E89F39C58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72AF93A8-CEA3-4B3C-835F-0EAFC50D6572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72AF93A8-CEA3-4B3C-835F-0EAFC50D6572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72AF93A8-CEA3-4B3C-835F-0EAFC50D6572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72AF93A8-CEA3-4B3C-835F-0EAFC50D6572}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

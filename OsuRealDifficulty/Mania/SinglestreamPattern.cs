@@ -23,8 +23,8 @@ public record SinglestreamPattern(
     : INotePattern
 {
     public double NotesPerSecond => NoteCount / LengthSeconds;
-    public int Length => OffsetEnd - OffsetStart;
-    public double LengthSeconds => Length / 1000D;
+    public int TimeDistance => OffsetEnd - OffsetStart;
+    public double LengthSeconds => TimeDistance / 1000D;
     public double ColumnHitsPerSecond => NotesPerSecond / ColumnCount;
     public double AverageColumnDistance => (double)TotalColumnDistance / NoteCount;
 

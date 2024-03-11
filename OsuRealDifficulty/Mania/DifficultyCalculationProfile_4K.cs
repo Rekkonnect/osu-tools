@@ -51,7 +51,7 @@ public class DifficultyCalculationProfile_4K()
             Slow = 0.9,
             Stutter = 0.85,
             Burst = 1,
-            ParsingDensity = 1,
+            VisualDensity = 1,
         },
     };
 
@@ -101,7 +101,7 @@ public class DifficultyCalculationProfile_4K()
             Slow = 0.8,
             Stutter = 0.7,
             Burst = 1,
-            ParsingDensity = 0.1,
+            VisualDensity = 0.1,
         },
     };
 }

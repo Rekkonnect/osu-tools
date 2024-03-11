@@ -12,6 +12,9 @@ public sealed class JackPatternAnalyzer
 
         const int maxTimeDistance = 400;
 
+        // Annotate normal minijacks and anchors
+        // + hold info about the jackstream annotations
+        var jackstreamRanges = new CommittableRanges();
         int maxStartIndex = chords.Length - 1;
         for (int i = 0; i < maxStartIndex; i++)
         {
@@ -73,6 +76,11 @@ public sealed class JackPatternAnalyzer
                         // them in future iterations of the analysis
                         TrimPressColumns(columns);
                         context.AddAnnotation(annotation);
+
+                        // Also commit the ranges as they have been annotated
+                        int startIndex = i;
+                        int endIndex = i + length - 1;
+                        jackstreamRanges.Add(startIndex, endIndex);
                     }
 
                     IMapAnnotation? CreateAnnotation()
@@ -106,6 +114,128 @@ public sealed class JackPatternAnalyzer
                     }
                 }
             }
+        }
+
+        // Annotate jackstreams
+        jackstreamRanges.FinalizeCommits();
+        var committedJackstreamRanges = jackstreamRanges.CommittedRanges;
+        var jackstreamAnnotationBuilders
+            = new JackstreamAnnotationBuilder[committedJackstreamRanges.Count];
+
+        for (int i = 0; i < committedJackstreamRanges.Count; i++)
+        {
+            var committedRange = committedJackstreamRanges[i];
+            jackstreamAnnotationBuilders[i] = new(committedRange);
+        }
+
+        int currentJackstreamAnnotationIndex = 0;
+        foreach (var annotation in context.Annotations)
+        {
+            // We are traversing the beatmap in ascending offset order, therefore
+            // all our annotations will be in ascending offset order when enumerated
+            // The committed jackstream ranges are also in ascending offset order,
+            // which means we can only be off by an index of 1 at most
+
+            ref var currentJackstreamAnnotation
+                = ref jackstreamAnnotationBuilders[currentJackstreamAnnotationIndex];
+
+            if (annotation is not INotePattern pattern)
+            {
+                throw new UnreachableException("We encountered a non-pattern jack annotation");
+            }
+
+            int start = pattern.OffsetStart;
+            int end = pattern.OffsetEnd;
+            if (!currentJackstreamAnnotation.Range.Contains(start))
+            {
+                currentJackstreamAnnotationIndex++;
+                currentJackstreamAnnotation
+                    = ref jackstreamAnnotationBuilders[currentJackstreamAnnotationIndex];
+            }
+
+            switch (annotation)
+            {
+                case MinijackAnnotation minijack:
+                    currentJackstreamAnnotation.ColumnBits |= minijack.Columns.Data;
+                    currentJackstreamAnnotation.NoteCount |= minijack.NoteCount;
+                    break;
+
+                case AnchorPattern anchor:
+                    currentJackstreamAnnotation.ColumnBits |= anchor.Columns.Data;
+                    currentJackstreamAnnotation.NoteCount |= anchor.NoteCount;
+                    break;
+            }
+        }
+
+        for (int i = 0; i < jackstreamAnnotationBuilders.Length; i++)
+        {
+            var builder = jackstreamAnnotationBuilders[i];
+            var finalizedAnnotation = new JackstreamAnnotation(
+                builder.OffsetStart,
+                builder.OffsetEnd,
+                builder.NoteCount,
+                builder.ColumnVector);
+            context.AddAnnotation(finalizedAnnotation);
+        }
+    }
+
+    private struct JackstreamAnnotationBuilder(SimpleRange range)
+    {
+        public readonly SimpleRange Range = range;
+
+        public int NoteCount;
+        public int ColumnBits;
+
+        public readonly int OffsetStart => Range.Start;
+        public readonly int OffsetEnd => Range.End;
+
+        public readonly BitVector32 ColumnVector => new(ColumnBits);
+    }
+
+    private sealed class CommittableRanges
+    {
+        private readonly List<SimpleRange> _committed = [];
+
+        private int _firstIndex = -1;
+        private int _lastIndex = -1;
+
+        public IReadOnlyList<SimpleRange> CommittedRanges => _committed;
+
+        public void Add(int start, int end)
+        {
+            Debug.Assert(start >= 0 && end >= 0);
+            Debug.Assert(start <= end);
+
+            if (_firstIndex < 0)
+            {
+                _firstIndex = start;
+                _lastIndex = end;
+                return;
+            }
+
+            int startOffset = start - _firstIndex;
+            if (startOffset > 1)
+            {
+                CommitCurrent();
+            }
+            else
+            {
+                _lastIndex = end;
+            }
+        }
+
+        private void CommitCurrent()
+        {
+            if (_firstIndex >= 0)
+            {
+                var range = new SimpleRange(_firstIndex, _lastIndex);
+                _committed.Add(range);
+            }
+        }
+
+        public void FinalizeCommits()
+        {
+            CommitCurrent();
         }
     }
 }

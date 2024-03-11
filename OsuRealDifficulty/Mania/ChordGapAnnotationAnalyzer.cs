@@ -98,7 +98,7 @@ public sealed class ChordGapAnnotationAnalyzer
 
     private double CalculatePatternAbsoluteValue(ChordGapPatternAnnotation annotation)
     {
-        double offsetMultiplier = 100D / annotation.Length;
+        double offsetMultiplier = 100D / annotation.TimeDistance;
         double noteCount = annotation.GapSize;
         return noteCount.Pow(0.9) * offsetMultiplier;
     }

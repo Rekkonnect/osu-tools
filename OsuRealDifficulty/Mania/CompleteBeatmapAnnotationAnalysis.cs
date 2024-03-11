@@ -42,6 +42,7 @@ public static class CompleteBeatmapAnnotationAnalysis
         driver.Add([
             AnchorPatternDifficultyAnalyzer.Instance,
             MinijackPatternDifficultyAnalyzer.Instance,
+            ChordjackPatternDifficultyAnalyzer.Instance,
         ]);
 
         driver.Add([

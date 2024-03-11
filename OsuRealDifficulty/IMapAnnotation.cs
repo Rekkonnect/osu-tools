@@ -28,7 +28,7 @@ public interface IPattern : IMapAnnotation
     public int OffsetStart { get; }
     public int OffsetEnd { get; }
 
-    public int Length => OffsetEnd - OffsetStart;
+    public int TimeDistance => OffsetEnd - OffsetStart;
 }
 
 public interface ITwoNotePattern : IPattern

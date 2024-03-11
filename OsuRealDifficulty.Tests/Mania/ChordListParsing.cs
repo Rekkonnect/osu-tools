@@ -1,6 +1,7 @@
 ﻿using Garyon.Extensions;
 using OsuRealDifficulty.Mania;
 using System.Diagnostics;
+using System.Runtime.ExceptionServices;
 
 namespace OsuRealDifficulty.Tests.Mania;
 
@@ -53,6 +54,7 @@ public static class ChordListParsing
         var chords = new Chord[lineCount];
         int lastOffset = -1;
         int chordArrayIndex = 0;
+        bool? hasExplicitOffset = null;
         for (int lineIndex = lines.Length - 1; lineIndex >= 0; lineIndex--)
         {
             var line = lines[lineIndex];
@@ -79,6 +81,7 @@ public static class ChordListParsing
             }
 
             int chordOffset = lastOffset + 1;
+            bool hasParsableOffset = false;
             // Parse the optional offset
             if (line.Length > minExpectedWidth)
             {
@@ -104,12 +107,33 @@ public static class ChordListParsing
                 {
                     var span = line.AsSpan()[offsetStartIndex..];
                     bool parsed = span.TryParseFirstInt32(0, out var parsedOffset, out _);
+
                     if (parsed)
                     {
+                        if (parsedOffset <= chordOffset)
+                        {
+                            throw new FormatException($"""
+                                Offsets must be in increasing order from bottom to top.
+                                Line {lineIndex} with offset {parsedOffset} triggered this.
+                                """);
+                        }
+                        hasParsableOffset = true;
                         chordOffset = parsedOffset;
                     }
                 }
             }
+
+            if (hasExplicitOffset is not null)
+            {
+                if (hasParsableOffset != hasExplicitOffset)
+                {
+                    throw new FormatException($"""
+                        Offsets must either not be specified anywhere, or specified for all chords.
+                        Line {lineIndex} with offset {chordOffset} triggered this.
+                        """);
+                }
+            }
+            hasExplicitOffset = hasParsableOffset;
 
             var notes = new ChordNotes();
 

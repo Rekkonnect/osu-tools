@@ -4,15 +4,6 @@ public class AnalyzedDifficulty
 {
     public static AnalyzedDifficulty NewPending => new()
     {
-        Jack = new()
-        {
-            Minijack = CalculationResult.Pending,
-            Anchor = CalculationResult.Pending,
-            Jackstream = CalculationResult.Pending,
-            Chordjack = CalculationResult.Pending,
-            DoubleHandJack = CalculationResult.Pending,
-            Fieldjack = CalculationResult.Pending,
-        },
         Dexterity = new()
         {
             Dump = CalculationResult.Pending,
@@ -21,6 +12,15 @@ public class AnalyzedDifficulty
             Speed = CalculationResult.Pending,
             Trill = CalculationResult.Pending,
             ChordGap = CalculationResult.Pending,
+        },
+        Jack = new()
+        {
+            Minijack = CalculationResult.Pending,
+            Anchor = CalculationResult.Pending,
+            Jackstream = CalculationResult.Pending,
+            Chordjack = CalculationResult.Pending,
+            DoubleHandJack = CalculationResult.Pending,
+            Fieldjack = CalculationResult.Pending,
         },
         Stamina = new()
         {
@@ -48,7 +48,7 @@ public class AnalyzedDifficulty
             Slow = CalculationResult.Pending,
             Stutter = CalculationResult.Pending,
             Burst = CalculationResult.Pending,
-            ParsingDensity = CalculationResult.Pending,
+            VisualDensity = CalculationResult.Pending,
         },
     };
 
@@ -305,6 +305,6 @@ public class AnalyzedDifficulty
         /// per screen view. This is dynamically calculated based on the visual
         /// position of the notes according to the SVs at each section.
         /// </summary>
-        public required CalculationResult ParsingDensity;
+        public required CalculationResult VisualDensity;
     }
 }

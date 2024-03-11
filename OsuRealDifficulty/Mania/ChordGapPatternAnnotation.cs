@@ -5,5 +5,5 @@ public record ChordGapPatternAnnotation(int OffsetStart, int OffsetEnd, int GapS
 {
     public MapAnnotationType Type => MapAnnotationType.ChordGap;
 
-    public int Length => OffsetEnd - OffsetStart;
+    public int TimeDistance => OffsetEnd - OffsetStart;
 }

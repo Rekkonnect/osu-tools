@@ -102,7 +102,7 @@ public class CustomDifficultyCalculationProfile(
             AddWeighted(difficulty.Slow, weights.Slow, ref segmentSum);
             AddWeighted(difficulty.Fast, weights.Fast, ref segmentSum);
             AddWeighted(difficulty.Stutter, weights.Stutter, ref segmentSum);
-            AddWeighted(difficulty.ParsingDensity, weights.ParsingDensity, ref segmentSum);
+            AddWeighted(difficulty.VisualDensity, weights.VisualDensity, ref segmentSum);
             AddWeighted(difficulty.Burst, weights.Burst, ref segmentSum);
             NormalizeValue(ref segmentSum);
         }

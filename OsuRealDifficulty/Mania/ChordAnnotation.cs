@@ -9,6 +9,8 @@ public record ChordAnnotation(int Offset, int NoteCount)
 public record ChordjackAnnotation(
     int FirstOffset,
     int SecondOffset,
+    int FirstExtraNotes,
+    int SecondExtraNotes,
     BitVector32 PressColumns)
     : ITwoNotePattern
 {
@@ -17,7 +19,7 @@ public record ChordjackAnnotation(
     public int OffsetStart => FirstOffset;
     public int OffsetEnd => SecondOffset;
 
-    public int Length => OffsetEnd - OffsetStart;
+    public int TimeDistance => OffsetEnd - OffsetStart;
     public int ColumnCount => PressColumns.PopCount();
     public int NoteCount => ColumnCount * 2;
 }
@@ -50,4 +52,14 @@ public record AnchorPattern(
     public double AverageTimeDistance => (double)TotalTimeDistance / HitCount;
     public int ColumnCount => Columns.PopCount();
     public int NoteCount => ColumnCount * HitCount;
+}
+
+public record JackstreamAnnotation(
+    int OffsetStart,
+    int OffsetEnd,
+    int NoteCount,
+    BitVector32 Columns)
+    : IPattern
+{
+    public MapAnnotationType Type => MapAnnotationType.Jackstream;
 }
