@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Drawing.Text;
 using System.Globalization;
+using System.Runtime.InteropServices;
 
 namespace OsuRealDifficulty.UI.WinForms;
 
-internal sealed class ThemeFonts
+internal sealed partial class ThemeFonts
 {
     public const string MainFontName = "Aptos";
     public const int MainFontSize = 10;
@@ -72,7 +73,18 @@ internal sealed class ThemeFonts
 
         fixed (byte* resourceBytesPtr = resourceBytes)
         {
+            uint dummy = 0;
+            AddFontMemResourceEx((nint)resourceBytesPtr, (uint)resourceBytes.Length, 0, ref dummy);
             fonts.AddMemoryFont((nint)resourceBytesPtr, resourceBytes.Length);
         }
     }
+
+    // "Documentation":
+    // https://learn.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-addfontmemresourceex?redirectedfrom=MSDN
+    [LibraryImport("gdi32.dll")]
+    private static partial IntPtr AddFontMemResourceEx(
+        IntPtr pbFont,
+        uint cbFont,
+        IntPtr pdv,
+        ref uint pcFonts);
 }
