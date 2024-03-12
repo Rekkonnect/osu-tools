@@ -32,34 +32,32 @@ partial class MainForm
     {
         var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
         groupBox1 = new GroupBox();
-        jackDifficultyCategoryGroupBox = new GroupBox();
-        fieldjackLabel = new DifficultyResultLabel();
-        label14 = new Label();
-        doubleHandJackLabel = new DifficultyResultLabel();
-        label16 = new Label();
-        chordjackLabel = new DifficultyResultLabel();
-        label18 = new Label();
-        jackstreamLabel = new DifficultyResultLabel();
-        label20 = new Label();
-        anchorLabel = new DifficultyResultLabel();
-        label22 = new Label();
-        minijackLabel = new DifficultyResultLabel();
-        label24 = new Label();
-        dexterityDifficultyCategoryGroupBox = new GroupBox();
-        chordGapLabel = new DifficultyResultLabel();
-        label12 = new Label();
-        trillLabel = new DifficultyResultLabel();
-        label10 = new Label();
-        speedLabel = new DifficultyResultLabel();
-        label8 = new Label();
-        chordLabel = new DifficultyResultLabel();
-        label6 = new Label();
-        singlestreamLabel = new DifficultyResultLabel();
-        label4 = new Label();
-        dumpLabel = new DifficultyResultLabel();
-        label1 = new Label();
-        dexterityCategoryLabel = new CategoryDifficultyResultLabel();
-        jackCategoryLabel = new CategoryDifficultyResultLabel();
+        difficultyResultLabel17 = new DifficultyResultLabel();
+        label29 = new Label();
+        groupBox4 = new GroupBox();
+        difficultyResultLabel13 = new DifficultyResultLabel();
+        label25 = new Label();
+        difficultyResultLabel14 = new DifficultyResultLabel();
+        label26 = new Label();
+        categoryDifficultyResultLabel3 = new CategoryDifficultyResultLabel();
+        difficultyResultLabel1 = new DifficultyResultLabel();
+        label2 = new Label();
+        difficultyResultLabel2 = new DifficultyResultLabel();
+        label3 = new Label();
+        difficultyResultLabel3 = new DifficultyResultLabel();
+        label5 = new Label();
+        groupBox5 = new GroupBox();
+        difficultyResultLabel15 = new DifficultyResultLabel();
+        label27 = new Label();
+        difficultyResultLabel16 = new DifficultyResultLabel();
+        label28 = new Label();
+        categoryDifficultyResultLabel4 = new CategoryDifficultyResultLabel();
+        difficultyResultLabel7 = new DifficultyResultLabel();
+        label13 = new Label();
+        difficultyResultLabel8 = new DifficultyResultLabel();
+        label15 = new Label();
+        difficultyResultLabel9 = new DifficultyResultLabel();
+        label17 = new Label();
         groupBox2 = new GroupBox();
         categoryDifficultyResultLabel1 = new CategoryDifficultyResultLabel();
         difficultyResultLabel4 = new DifficultyResultLabel();
@@ -76,39 +74,41 @@ partial class MainForm
         label21 = new Label();
         difficultyResultLabel12 = new DifficultyResultLabel();
         label23 = new Label();
-        groupBox4 = new GroupBox();
-        categoryDifficultyResultLabel3 = new CategoryDifficultyResultLabel();
-        difficultyResultLabel1 = new DifficultyResultLabel();
-        label2 = new Label();
-        difficultyResultLabel2 = new DifficultyResultLabel();
-        label3 = new Label();
-        difficultyResultLabel3 = new DifficultyResultLabel();
-        label5 = new Label();
-        groupBox5 = new GroupBox();
-        categoryDifficultyResultLabel4 = new CategoryDifficultyResultLabel();
-        difficultyResultLabel7 = new DifficultyResultLabel();
-        label13 = new Label();
-        difficultyResultLabel8 = new DifficultyResultLabel();
-        label15 = new Label();
-        difficultyResultLabel9 = new DifficultyResultLabel();
-        label17 = new Label();
-        difficultyResultLabel13 = new DifficultyResultLabel();
-        label25 = new Label();
-        difficultyResultLabel14 = new DifficultyResultLabel();
-        label26 = new Label();
-        difficultyResultLabel15 = new DifficultyResultLabel();
-        label27 = new Label();
-        difficultyResultLabel16 = new DifficultyResultLabel();
-        label28 = new Label();
-        difficultyResultLabel17 = new DifficultyResultLabel();
-        label29 = new Label();
+        jackDifficultyCategoryGroupBox = new GroupBox();
+        jackCategoryLabel = new CategoryDifficultyResultLabel();
+        fieldjackLabel = new DifficultyResultLabel();
+        label14 = new Label();
+        doubleHandJackLabel = new DifficultyResultLabel();
+        label16 = new Label();
+        chordjackLabel = new DifficultyResultLabel();
+        label18 = new Label();
+        jackstreamLabel = new DifficultyResultLabel();
+        label20 = new Label();
+        anchorLabel = new DifficultyResultLabel();
+        label22 = new Label();
+        minijackLabel = new DifficultyResultLabel();
+        label24 = new Label();
+        dexterityDifficultyCategoryGroupBox = new GroupBox();
+        dexterityCategoryLabel = new CategoryDifficultyResultLabel();
+        chordGapLabel = new DifficultyResultLabel();
+        label12 = new Label();
+        trillLabel = new DifficultyResultLabel();
+        label10 = new Label();
+        speedLabel = new DifficultyResultLabel();
+        label8 = new Label();
+        chordLabel = new DifficultyResultLabel();
+        label6 = new Label();
+        singlestreamLabel = new DifficultyResultLabel();
+        label4 = new Label();
+        dumpLabel = new DifficultyResultLabel();
+        label1 = new Label();
         groupBox1.SuspendLayout();
-        jackDifficultyCategoryGroupBox.SuspendLayout();
-        dexterityDifficultyCategoryGroupBox.SuspendLayout();
-        groupBox2.SuspendLayout();
-        groupBox3.SuspendLayout();
         groupBox4.SuspendLayout();
         groupBox5.SuspendLayout();
+        groupBox2.SuspendLayout();
+        groupBox3.SuspendLayout();
+        jackDifficultyCategoryGroupBox.SuspendLayout();
+        dexterityDifficultyCategoryGroupBox.SuspendLayout();
         SuspendLayout();
         // 
         // groupBox1
@@ -131,326 +131,301 @@ partial class MainForm
         groupBox1.TabStop = false;
         groupBox1.Text = "analysis";
         // 
-        // jackDifficultyCategoryGroupBox
+        // difficultyResultLabel17
         // 
-        jackDifficultyCategoryGroupBox.BackColor = Color.FromArgb(30, 30, 30);
-        jackDifficultyCategoryGroupBox.Controls.Add(jackCategoryLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(fieldjackLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(label14);
-        jackDifficultyCategoryGroupBox.Controls.Add(doubleHandJackLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(label16);
-        jackDifficultyCategoryGroupBox.Controls.Add(chordjackLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(label18);
-        jackDifficultyCategoryGroupBox.Controls.Add(jackstreamLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(label20);
-        jackDifficultyCategoryGroupBox.Controls.Add(anchorLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(label22);
-        jackDifficultyCategoryGroupBox.Controls.Add(minijackLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(label24);
-        jackDifficultyCategoryGroupBox.Font = new Font("Aptos Display", 10F, FontStyle.Bold);
-        jackDifficultyCategoryGroupBox.ForeColor = SystemColors.ControlLight;
-        jackDifficultyCategoryGroupBox.Location = new Point(187, 17);
-        jackDifficultyCategoryGroupBox.Name = "jackDifficultyCategoryGroupBox";
-        jackDifficultyCategoryGroupBox.Size = new Size(175, 134);
-        jackDifficultyCategoryGroupBox.TabIndex = 1;
-        jackDifficultyCategoryGroupBox.TabStop = false;
-        jackDifficultyCategoryGroupBox.Text = "jack";
+        difficultyResultLabel17.AutoSize = true;
+        difficultyResultLabel17.DifficultyValue = -1D;
+        difficultyResultLabel17.Font = new Font("Aptos Display", 15F, FontStyle.Bold);
+        difficultyResultLabel17.Location = new Point(193, 381);
+        difficultyResultLabel17.Name = "difficultyResultLabel17";
+        difficultyResultLabel17.Size = new Size(27, 25);
+        difficultyResultLabel17.TabIndex = 19;
+        difficultyResultLabel17.Text = "...";
         // 
-        // fieldjackLabel
+        // label29
         // 
-        fieldjackLabel.AutoSize = true;
-        fieldjackLabel.DifficultyValue = 18.99D;
-        fieldjackLabel.Font = new Font("Aptos Display", 10F);
-        fieldjackLabel.Location = new Point(125, 92);
-        fieldjackLabel.Name = "fieldjackLabel";
-        fieldjackLabel.Size = new Size(39, 18);
-        fieldjackLabel.TabIndex = 24;
-        fieldjackLabel.Text = "18.99";
+        label29.AutoSize = true;
+        label29.Font = new Font("Aptos Display", 15F, FontStyle.Bold);
+        label29.Location = new Point(103, 381);
+        label29.Name = "label29";
+        label29.Size = new Size(72, 25);
+        label29.TabIndex = 18;
+        label29.Text = "overall";
         // 
-        // label14
+        // groupBox4
         // 
-        label14.AutoSize = true;
-        label14.Font = new Font("Aptos Display", 10F);
-        label14.Location = new Point(6, 92);
-        label14.Name = "label14";
-        label14.Size = new Size(55, 18);
-        label14.TabIndex = 23;
-        label14.Text = "fieldjack";
+        groupBox4.BackColor = Color.FromArgb(30, 30, 30);
+        groupBox4.Controls.Add(difficultyResultLabel13);
+        groupBox4.Controls.Add(label25);
+        groupBox4.Controls.Add(difficultyResultLabel14);
+        groupBox4.Controls.Add(label26);
+        groupBox4.Controls.Add(categoryDifficultyResultLabel3);
+        groupBox4.Controls.Add(difficultyResultLabel1);
+        groupBox4.Controls.Add(label2);
+        groupBox4.Controls.Add(difficultyResultLabel2);
+        groupBox4.Controls.Add(label3);
+        groupBox4.Controls.Add(difficultyResultLabel3);
+        groupBox4.Controls.Add(label5);
+        groupBox4.Font = new Font("Aptos Display", 10F, FontStyle.Bold);
+        groupBox4.ForeColor = SystemColors.ControlLight;
+        groupBox4.Location = new Point(6, 244);
+        groupBox4.Name = "groupBox4";
+        groupBox4.Size = new Size(175, 117);
+        groupBox4.TabIndex = 5;
+        groupBox4.TabStop = false;
+        groupBox4.Text = "long notes";
         // 
-        // doubleHandJackLabel
+        // difficultyResultLabel13
         // 
-        doubleHandJackLabel.AutoSize = true;
-        doubleHandJackLabel.DifficultyValue = 9.99D;
-        doubleHandJackLabel.Font = new Font("Aptos Display", 10F);
-        doubleHandJackLabel.Location = new Point(125, 110);
-        doubleHandJackLabel.Name = "doubleHandJackLabel";
-        doubleHandJackLabel.Size = new Size(32, 18);
-        doubleHandJackLabel.TabIndex = 22;
-        doubleHandJackLabel.Text = "9.99";
+        difficultyResultLabel13.AutoSize = true;
+        difficultyResultLabel13.DifficultyValue = 9.99D;
+        difficultyResultLabel13.Font = new Font("Aptos Display", 10F);
+        difficultyResultLabel13.Location = new Point(125, 92);
+        difficultyResultLabel13.Name = "difficultyResultLabel13";
+        difficultyResultLabel13.Size = new Size(32, 18);
+        difficultyResultLabel13.TabIndex = 29;
+        difficultyResultLabel13.Text = "9.99";
         // 
-        // label16
+        // label25
         // 
-        label16.AutoSize = true;
-        label16.Font = new Font("Aptos Display", 10F);
-        label16.Location = new Point(6, 110);
-        label16.Name = "label16";
-        label16.Size = new Size(103, 18);
-        label16.TabIndex = 21;
-        label16.Text = "double hand jack";
+        label25.AutoSize = true;
+        label25.Font = new Font("Aptos Display", 10F);
+        label25.Location = new Point(6, 92);
+        label25.Name = "label25";
+        label25.Size = new Size(41, 18);
+        label25.TabIndex = 28;
+        label25.Text = "shield";
         // 
-        // chordjackLabel
+        // difficultyResultLabel14
         // 
-        chordjackLabel.AutoSize = true;
-        chordjackLabel.DifficultyValue = 9.99D;
-        chordjackLabel.Font = new Font("Aptos Display", 10F);
-        chordjackLabel.Location = new Point(125, 74);
-        chordjackLabel.Name = "chordjackLabel";
-        chordjackLabel.Size = new Size(32, 18);
-        chordjackLabel.TabIndex = 20;
-        chordjackLabel.Text = "9.99";
+        difficultyResultLabel14.AutoSize = true;
+        difficultyResultLabel14.DifficultyValue = 9.99D;
+        difficultyResultLabel14.Font = new Font("Aptos Display", 10F);
+        difficultyResultLabel14.Location = new Point(125, 74);
+        difficultyResultLabel14.Name = "difficultyResultLabel14";
+        difficultyResultLabel14.Size = new Size(32, 18);
+        difficultyResultLabel14.TabIndex = 27;
+        difficultyResultLabel14.Text = "9.99";
         // 
-        // label18
+        // label26
         // 
-        label18.AutoSize = true;
-        label18.Font = new Font("Aptos Display", 10F);
-        label18.Location = new Point(6, 74);
-        label18.Name = "label18";
-        label18.Size = new Size(63, 18);
-        label18.TabIndex = 19;
-        label18.Text = "chordjack";
+        label26.AutoSize = true;
+        label26.Font = new Font("Aptos Display", 10F);
+        label26.Location = new Point(6, 74);
+        label26.Name = "label26";
+        label26.Size = new Size(52, 18);
+        label26.TabIndex = 26;
+        label26.Text = "rice mix";
         // 
-        // jackstreamLabel
+        // categoryDifficultyResultLabel3
         // 
-        jackstreamLabel.AutoSize = true;
-        jackstreamLabel.DifficultyValue = 9.99D;
-        jackstreamLabel.Font = new Font("Aptos Display", 10F);
-        jackstreamLabel.Location = new Point(125, 56);
-        jackstreamLabel.Name = "jackstreamLabel";
-        jackstreamLabel.Size = new Size(32, 18);
-        jackstreamLabel.TabIndex = 18;
-        jackstreamLabel.Text = "9.99";
+        categoryDifficultyResultLabel3.AutoSize = true;
+        categoryDifficultyResultLabel3.DifficultyValue = 10D;
+        categoryDifficultyResultLabel3.Location = new Point(125, 0);
+        categoryDifficultyResultLabel3.Name = "categoryDifficultyResultLabel3";
+        categoryDifficultyResultLabel3.Size = new Size(44, 18);
+        categoryDifficultyResultLabel3.TabIndex = 25;
+        categoryDifficultyResultLabel3.Text = "10.00";
         // 
-        // label20
+        // difficultyResultLabel1
         // 
-        label20.AutoSize = true;
-        label20.Font = new Font("Aptos Display", 10F);
-        label20.Location = new Point(6, 56);
-        label20.Name = "label20";
-        label20.Size = new Size(70, 18);
-        label20.TabIndex = 17;
-        label20.Text = "jackstream";
+        difficultyResultLabel1.AutoSize = true;
+        difficultyResultLabel1.DifficultyValue = 9.99D;
+        difficultyResultLabel1.Font = new Font("Aptos Display", 10F);
+        difficultyResultLabel1.Location = new Point(125, 56);
+        difficultyResultLabel1.Name = "difficultyResultLabel1";
+        difficultyResultLabel1.Size = new Size(32, 18);
+        difficultyResultLabel1.TabIndex = 18;
+        difficultyResultLabel1.Text = "9.99";
         // 
-        // anchorLabel
+        // label2
         // 
-        anchorLabel.AutoSize = true;
-        anchorLabel.DifficultyValue = 9.99D;
-        anchorLabel.Font = new Font("Aptos Display", 10F);
-        anchorLabel.Location = new Point(125, 38);
-        anchorLabel.Name = "anchorLabel";
-        anchorLabel.Size = new Size(32, 18);
-        anchorLabel.TabIndex = 16;
-        anchorLabel.Text = "9.99";
+        label2.AutoSize = true;
+        label2.Font = new Font("Aptos Display", 10F);
+        label2.Location = new Point(6, 56);
+        label2.Name = "label2";
+        label2.Size = new Size(42, 18);
+        label2.TabIndex = 17;
+        label2.Text = "rice ln";
         // 
-        // label22
+        // difficultyResultLabel2
         // 
-        label22.AutoSize = true;
-        label22.Font = new Font("Aptos Display", 10F);
-        label22.Location = new Point(6, 38);
-        label22.Name = "label22";
-        label22.Size = new Size(47, 18);
-        label22.TabIndex = 15;
-        label22.Text = "anchor";
+        difficultyResultLabel2.AutoSize = true;
+        difficultyResultLabel2.DifficultyValue = 9.99D;
+        difficultyResultLabel2.Font = new Font("Aptos Display", 10F);
+        difficultyResultLabel2.Location = new Point(125, 38);
+        difficultyResultLabel2.Name = "difficultyResultLabel2";
+        difficultyResultLabel2.Size = new Size(32, 18);
+        difficultyResultLabel2.TabIndex = 16;
+        difficultyResultLabel2.Text = "9.99";
         // 
-        // minijackLabel
+        // label3
         // 
-        minijackLabel.AutoSize = true;
-        minijackLabel.DifficultyValue = 12D;
-        minijackLabel.Font = new Font("Aptos Display", 10F);
-        minijackLabel.Location = new Point(125, 20);
-        minijackLabel.Name = "minijackLabel";
-        minijackLabel.Size = new Size(39, 18);
-        minijackLabel.TabIndex = 14;
-        minijackLabel.Text = "12.00";
+        label3.AutoSize = true;
+        label3.Font = new Font("Aptos Display", 10F);
+        label3.Location = new Point(6, 38);
+        label3.Name = "label3";
+        label3.Size = new Size(48, 18);
+        label3.TabIndex = 15;
+        label3.Text = "inverse";
         // 
-        // label24
+        // difficultyResultLabel3
         // 
-        label24.AutoSize = true;
-        label24.Font = new Font("Aptos Display", 10F);
-        label24.Location = new Point(6, 20);
-        label24.Name = "label24";
-        label24.Size = new Size(55, 18);
-        label24.TabIndex = 13;
-        label24.Text = "minijack";
+        difficultyResultLabel3.AutoSize = true;
+        difficultyResultLabel3.DifficultyValue = 12D;
+        difficultyResultLabel3.Font = new Font("Aptos Display", 10F);
+        difficultyResultLabel3.Location = new Point(125, 20);
+        difficultyResultLabel3.Name = "difficultyResultLabel3";
+        difficultyResultLabel3.Size = new Size(39, 18);
+        difficultyResultLabel3.TabIndex = 14;
+        difficultyResultLabel3.Text = "12.00";
         // 
-        // dexterityDifficultyCategoryGroupBox
+        // label5
         // 
-        dexterityDifficultyCategoryGroupBox.Controls.Add(dexterityCategoryLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(chordGapLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(label12);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(trillLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(label10);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(speedLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(label8);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(chordLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(label6);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(singlestreamLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(label4);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(dumpLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(label1);
-        dexterityDifficultyCategoryGroupBox.Font = new Font("Aptos Display", 10F, FontStyle.Bold);
-        dexterityDifficultyCategoryGroupBox.ForeColor = SystemColors.ControlLight;
-        dexterityDifficultyCategoryGroupBox.Location = new Point(6, 17);
-        dexterityDifficultyCategoryGroupBox.Name = "dexterityDifficultyCategoryGroupBox";
-        dexterityDifficultyCategoryGroupBox.Size = new Size(175, 134);
-        dexterityDifficultyCategoryGroupBox.TabIndex = 0;
-        dexterityDifficultyCategoryGroupBox.TabStop = false;
-        dexterityDifficultyCategoryGroupBox.Text = "dexterity";
+        label5.AutoSize = true;
+        label5.Font = new Font("Aptos Display", 10F);
+        label5.Location = new Point(6, 20);
+        label5.Name = "label5";
+        label5.Size = new Size(54, 18);
+        label5.TabIndex = 13;
+        label5.Text = "ln shield";
         // 
-        // chordGapLabel
+        // groupBox5
         // 
-        chordGapLabel.AutoSize = true;
-        chordGapLabel.DifficultyValue = 18.99D;
-        chordGapLabel.Font = new Font("Aptos Display", 10F);
-        chordGapLabel.Location = new Point(125, 110);
-        chordGapLabel.Name = "chordGapLabel";
-        chordGapLabel.Size = new Size(39, 18);
-        chordGapLabel.TabIndex = 12;
-        chordGapLabel.Text = "18.99";
+        groupBox5.Controls.Add(difficultyResultLabel15);
+        groupBox5.Controls.Add(label27);
+        groupBox5.Controls.Add(difficultyResultLabel16);
+        groupBox5.Controls.Add(label28);
+        groupBox5.Controls.Add(categoryDifficultyResultLabel4);
+        groupBox5.Controls.Add(difficultyResultLabel7);
+        groupBox5.Controls.Add(label13);
+        groupBox5.Controls.Add(difficultyResultLabel8);
+        groupBox5.Controls.Add(label15);
+        groupBox5.Controls.Add(difficultyResultLabel9);
+        groupBox5.Controls.Add(label17);
+        groupBox5.Font = new Font("Aptos Display", 10F, FontStyle.Bold);
+        groupBox5.ForeColor = SystemColors.ControlLight;
+        groupBox5.Location = new Point(187, 244);
+        groupBox5.Name = "groupBox5";
+        groupBox5.Size = new Size(175, 117);
+        groupBox5.TabIndex = 4;
+        groupBox5.TabStop = false;
+        groupBox5.Text = "scrolling";
         // 
-        // label12
+        // difficultyResultLabel15
         // 
-        label12.AutoSize = true;
-        label12.Font = new Font("Aptos Display", 10F);
-        label12.Location = new Point(6, 110);
-        label12.Name = "label12";
-        label12.Size = new Size(63, 18);
-        label12.TabIndex = 11;
-        label12.Text = "chord gap";
+        difficultyResultLabel15.AutoSize = true;
+        difficultyResultLabel15.DifficultyValue = 9.99D;
+        difficultyResultLabel15.Font = new Font("Aptos Display", 10F);
+        difficultyResultLabel15.Location = new Point(125, 92);
+        difficultyResultLabel15.Name = "difficultyResultLabel15";
+        difficultyResultLabel15.Size = new Size(32, 18);
+        difficultyResultLabel15.TabIndex = 17;
+        difficultyResultLabel15.Text = "9.99";
         // 
-        // trillLabel
+        // label27
         // 
-        trillLabel.AutoSize = true;
-        trillLabel.DifficultyValue = 9.99D;
-        trillLabel.Font = new Font("Aptos Display", 10F);
-        trillLabel.Location = new Point(125, 92);
-        trillLabel.Name = "trillLabel";
-        trillLabel.Size = new Size(32, 18);
-        trillLabel.TabIndex = 10;
-        trillLabel.Text = "9.99";
+        label27.AutoSize = true;
+        label27.Font = new Font("Aptos Display", 10F);
+        label27.Location = new Point(6, 92);
+        label27.Name = "label27";
+        label27.Size = new Size(83, 18);
+        label27.TabIndex = 16;
+        label27.Text = "visual density";
         // 
-        // label10
+        // difficultyResultLabel16
         // 
-        label10.AutoSize = true;
-        label10.Font = new Font("Aptos Display", 10F);
-        label10.Location = new Point(6, 92);
-        label10.Name = "label10";
-        label10.Size = new Size(25, 18);
-        label10.TabIndex = 9;
-        label10.Text = "trill";
+        difficultyResultLabel16.AutoSize = true;
+        difficultyResultLabel16.DifficultyValue = 9.99D;
+        difficultyResultLabel16.Font = new Font("Aptos Display", 10F);
+        difficultyResultLabel16.Location = new Point(125, 74);
+        difficultyResultLabel16.Name = "difficultyResultLabel16";
+        difficultyResultLabel16.Size = new Size(32, 18);
+        difficultyResultLabel16.TabIndex = 15;
+        difficultyResultLabel16.Text = "9.99";
         // 
-        // speedLabel
+        // label28
         // 
-        speedLabel.AutoSize = true;
-        speedLabel.DifficultyValue = 9.99D;
-        speedLabel.Font = new Font("Aptos Display", 10F);
-        speedLabel.Location = new Point(125, 74);
-        speedLabel.Name = "speedLabel";
-        speedLabel.Size = new Size(32, 18);
-        speedLabel.TabIndex = 8;
-        speedLabel.Text = "9.99";
+        label28.AutoSize = true;
+        label28.Font = new Font("Aptos Display", 10F);
+        label28.Location = new Point(6, 74);
+        label28.Name = "label28";
+        label28.Size = new Size(36, 18);
+        label28.TabIndex = 14;
+        label28.Text = "burst";
         // 
-        // label8
+        // categoryDifficultyResultLabel4
         // 
-        label8.AutoSize = true;
-        label8.Font = new Font("Aptos Display", 10F);
-        label8.Location = new Point(6, 74);
-        label8.Name = "label8";
-        label8.Size = new Size(42, 18);
-        label8.TabIndex = 7;
-        label8.Text = "speed";
+        categoryDifficultyResultLabel4.AutoSize = true;
+        categoryDifficultyResultLabel4.DifficultyValue = 10D;
+        categoryDifficultyResultLabel4.Location = new Point(125, 0);
+        categoryDifficultyResultLabel4.Name = "categoryDifficultyResultLabel4";
+        categoryDifficultyResultLabel4.Size = new Size(44, 18);
+        categoryDifficultyResultLabel4.TabIndex = 13;
+        categoryDifficultyResultLabel4.Text = "10.00";
         // 
-        // chordLabel
+        // difficultyResultLabel7
         // 
-        chordLabel.AutoSize = true;
-        chordLabel.DifficultyValue = 9.99D;
-        chordLabel.Font = new Font("Aptos Display", 10F);
-        chordLabel.Location = new Point(125, 56);
-        chordLabel.Name = "chordLabel";
-        chordLabel.Size = new Size(32, 18);
-        chordLabel.TabIndex = 6;
-        chordLabel.Text = "9.99";
+        difficultyResultLabel7.AutoSize = true;
+        difficultyResultLabel7.DifficultyValue = 9.99D;
+        difficultyResultLabel7.Font = new Font("Aptos Display", 10F);
+        difficultyResultLabel7.Location = new Point(125, 56);
+        difficultyResultLabel7.Name = "difficultyResultLabel7";
+        difficultyResultLabel7.Size = new Size(32, 18);
+        difficultyResultLabel7.TabIndex = 6;
+        difficultyResultLabel7.Text = "9.99";
         // 
-        // label6
+        // label13
         // 
-        label6.AutoSize = true;
-        label6.Font = new Font("Aptos Display", 10F);
-        label6.Location = new Point(6, 56);
-        label6.Name = "label6";
-        label6.Size = new Size(40, 18);
-        label6.TabIndex = 5;
-        label6.Text = "chord";
+        label13.AutoSize = true;
+        label13.Font = new Font("Aptos Display", 10F);
+        label13.Location = new Point(6, 56);
+        label13.Name = "label13";
+        label13.Size = new Size(44, 18);
+        label13.TabIndex = 5;
+        label13.Text = "stutter";
         // 
-        // singlestreamLabel
+        // difficultyResultLabel8
         // 
-        singlestreamLabel.AutoSize = true;
-        singlestreamLabel.DifficultyValue = 9.99D;
-        singlestreamLabel.Font = new Font("Aptos Display", 10F);
-        singlestreamLabel.Location = new Point(125, 38);
-        singlestreamLabel.Name = "singlestreamLabel";
-        singlestreamLabel.Size = new Size(32, 18);
-        singlestreamLabel.TabIndex = 4;
-        singlestreamLabel.Text = "9.99";
+        difficultyResultLabel8.AutoSize = true;
+        difficultyResultLabel8.DifficultyValue = 9.99D;
+        difficultyResultLabel8.Font = new Font("Aptos Display", 10F);
+        difficultyResultLabel8.Location = new Point(125, 38);
+        difficultyResultLabel8.Name = "difficultyResultLabel8";
+        difficultyResultLabel8.Size = new Size(32, 18);
+        difficultyResultLabel8.TabIndex = 4;
+        difficultyResultLabel8.Text = "9.99";
         // 
-        // label4
+        // label15
         // 
-        label4.AutoSize = true;
-        label4.Font = new Font("Aptos Display", 10F);
-        label4.Location = new Point(6, 38);
-        label4.Name = "label4";
-        label4.Size = new Size(79, 18);
-        label4.TabIndex = 3;
-        label4.Text = "singlestream";
+        label15.AutoSize = true;
+        label15.Font = new Font("Aptos Display", 10F);
+        label15.Location = new Point(6, 38);
+        label15.Name = "label15";
+        label15.Size = new Size(34, 18);
+        label15.TabIndex = 3;
+        label15.Text = "slow";
         // 
-        // dumpLabel
+        // difficultyResultLabel9
         // 
-        dumpLabel.AutoSize = true;
-        dumpLabel.DifficultyValue = 9.99D;
-        dumpLabel.Font = new Font("Aptos Display", 10F);
-        dumpLabel.Location = new Point(125, 20);
-        dumpLabel.Name = "dumpLabel";
-        dumpLabel.Size = new Size(32, 18);
-        dumpLabel.TabIndex = 2;
-        dumpLabel.Text = "9.99";
+        difficultyResultLabel9.AutoSize = true;
+        difficultyResultLabel9.DifficultyValue = 9.99D;
+        difficultyResultLabel9.Font = new Font("Aptos Display", 10F);
+        difficultyResultLabel9.Location = new Point(125, 20);
+        difficultyResultLabel9.Name = "difficultyResultLabel9";
+        difficultyResultLabel9.Size = new Size(32, 18);
+        difficultyResultLabel9.TabIndex = 2;
+        difficultyResultLabel9.Text = "9.99";
         // 
-        // label1
+        // label17
         // 
-        label1.AutoSize = true;
-        label1.Font = new Font("Aptos Display", 10F);
-        label1.Location = new Point(6, 20);
-        label1.Name = "label1";
-        label1.Size = new Size(40, 18);
-        label1.TabIndex = 1;
-        label1.Text = "dump";
-        // 
-        // dexterityCategoryLabel
-        // 
-        dexterityCategoryLabel.AutoSize = true;
-        dexterityCategoryLabel.DifficultyValue = 10D;
-        dexterityCategoryLabel.Location = new Point(125, 0);
-        dexterityCategoryLabel.Name = "dexterityCategoryLabel";
-        dexterityCategoryLabel.Size = new Size(44, 18);
-        dexterityCategoryLabel.TabIndex = 13;
-        dexterityCategoryLabel.Text = "10.00";
-        // 
-        // jackCategoryLabel
-        // 
-        jackCategoryLabel.AutoSize = true;
-        jackCategoryLabel.DifficultyValue = 10D;
-        jackCategoryLabel.Location = new Point(125, 0);
-        jackCategoryLabel.Name = "jackCategoryLabel";
-        jackCategoryLabel.Size = new Size(44, 18);
-        jackCategoryLabel.TabIndex = 25;
-        jackCategoryLabel.Text = "10.00";
+        label17.AutoSize = true;
+        label17.Font = new Font("Aptos Display", 10F);
+        label17.Location = new Point(6, 20);
+        label17.Name = "label17";
+        label17.Size = new Size(29, 18);
+        label17.TabIndex = 1;
+        label17.Text = "fast";
         // 
         // groupBox2
         // 
@@ -635,301 +610,326 @@ partial class MainForm
         label23.TabIndex = 1;
         label23.Text = "long burst";
         // 
-        // groupBox4
+        // jackDifficultyCategoryGroupBox
         // 
-        groupBox4.BackColor = Color.FromArgb(30, 30, 30);
-        groupBox4.Controls.Add(difficultyResultLabel13);
-        groupBox4.Controls.Add(label25);
-        groupBox4.Controls.Add(difficultyResultLabel14);
-        groupBox4.Controls.Add(label26);
-        groupBox4.Controls.Add(categoryDifficultyResultLabel3);
-        groupBox4.Controls.Add(difficultyResultLabel1);
-        groupBox4.Controls.Add(label2);
-        groupBox4.Controls.Add(difficultyResultLabel2);
-        groupBox4.Controls.Add(label3);
-        groupBox4.Controls.Add(difficultyResultLabel3);
-        groupBox4.Controls.Add(label5);
-        groupBox4.Font = new Font("Aptos Display", 10F, FontStyle.Bold);
-        groupBox4.ForeColor = SystemColors.ControlLight;
-        groupBox4.Location = new Point(6, 244);
-        groupBox4.Name = "groupBox4";
-        groupBox4.Size = new Size(175, 117);
-        groupBox4.TabIndex = 5;
-        groupBox4.TabStop = false;
-        groupBox4.Text = "long notes";
+        jackDifficultyCategoryGroupBox.BackColor = Color.FromArgb(30, 30, 30);
+        jackDifficultyCategoryGroupBox.Controls.Add(jackCategoryLabel);
+        jackDifficultyCategoryGroupBox.Controls.Add(fieldjackLabel);
+        jackDifficultyCategoryGroupBox.Controls.Add(label14);
+        jackDifficultyCategoryGroupBox.Controls.Add(doubleHandJackLabel);
+        jackDifficultyCategoryGroupBox.Controls.Add(label16);
+        jackDifficultyCategoryGroupBox.Controls.Add(chordjackLabel);
+        jackDifficultyCategoryGroupBox.Controls.Add(label18);
+        jackDifficultyCategoryGroupBox.Controls.Add(jackstreamLabel);
+        jackDifficultyCategoryGroupBox.Controls.Add(label20);
+        jackDifficultyCategoryGroupBox.Controls.Add(anchorLabel);
+        jackDifficultyCategoryGroupBox.Controls.Add(label22);
+        jackDifficultyCategoryGroupBox.Controls.Add(minijackLabel);
+        jackDifficultyCategoryGroupBox.Controls.Add(label24);
+        jackDifficultyCategoryGroupBox.Font = new Font("Aptos Display", 10F, FontStyle.Bold);
+        jackDifficultyCategoryGroupBox.ForeColor = SystemColors.ControlLight;
+        jackDifficultyCategoryGroupBox.Location = new Point(187, 17);
+        jackDifficultyCategoryGroupBox.Name = "jackDifficultyCategoryGroupBox";
+        jackDifficultyCategoryGroupBox.Size = new Size(175, 134);
+        jackDifficultyCategoryGroupBox.TabIndex = 1;
+        jackDifficultyCategoryGroupBox.TabStop = false;
+        jackDifficultyCategoryGroupBox.Text = "jack";
         // 
-        // categoryDifficultyResultLabel3
+        // jackCategoryLabel
         // 
-        categoryDifficultyResultLabel3.AutoSize = true;
-        categoryDifficultyResultLabel3.DifficultyValue = 10D;
-        categoryDifficultyResultLabel3.Location = new Point(125, 0);
-        categoryDifficultyResultLabel3.Name = "categoryDifficultyResultLabel3";
-        categoryDifficultyResultLabel3.Size = new Size(44, 18);
-        categoryDifficultyResultLabel3.TabIndex = 25;
-        categoryDifficultyResultLabel3.Text = "10.00";
+        jackCategoryLabel.AutoSize = true;
+        jackCategoryLabel.DifficultyValue = 10D;
+        jackCategoryLabel.Location = new Point(125, 0);
+        jackCategoryLabel.Name = "jackCategoryLabel";
+        jackCategoryLabel.Size = new Size(44, 18);
+        jackCategoryLabel.TabIndex = 25;
+        jackCategoryLabel.Text = "10.00";
         // 
-        // difficultyResultLabel1
+        // fieldjackLabel
         // 
-        difficultyResultLabel1.AutoSize = true;
-        difficultyResultLabel1.DifficultyValue = 9.99D;
-        difficultyResultLabel1.Font = new Font("Aptos Display", 10F);
-        difficultyResultLabel1.Location = new Point(125, 56);
-        difficultyResultLabel1.Name = "difficultyResultLabel1";
-        difficultyResultLabel1.Size = new Size(32, 18);
-        difficultyResultLabel1.TabIndex = 18;
-        difficultyResultLabel1.Text = "9.99";
+        fieldjackLabel.AutoSize = true;
+        fieldjackLabel.DifficultyValue = 18.99D;
+        fieldjackLabel.Font = new Font("Aptos Display", 10F);
+        fieldjackLabel.Location = new Point(125, 92);
+        fieldjackLabel.Name = "fieldjackLabel";
+        fieldjackLabel.Size = new Size(39, 18);
+        fieldjackLabel.TabIndex = 24;
+        fieldjackLabel.Text = "18.99";
         // 
-        // label2
+        // label14
         // 
-        label2.AutoSize = true;
-        label2.Font = new Font("Aptos Display", 10F);
-        label2.Location = new Point(6, 56);
-        label2.Name = "label2";
-        label2.Size = new Size(42, 18);
-        label2.TabIndex = 17;
-        label2.Text = "rice ln";
+        label14.AutoSize = true;
+        label14.Font = new Font("Aptos Display", 10F);
+        label14.Location = new Point(6, 92);
+        label14.Name = "label14";
+        label14.Size = new Size(55, 18);
+        label14.TabIndex = 23;
+        label14.Text = "fieldjack";
         // 
-        // difficultyResultLabel2
+        // doubleHandJackLabel
         // 
-        difficultyResultLabel2.AutoSize = true;
-        difficultyResultLabel2.DifficultyValue = 9.99D;
-        difficultyResultLabel2.Font = new Font("Aptos Display", 10F);
-        difficultyResultLabel2.Location = new Point(125, 38);
-        difficultyResultLabel2.Name = "difficultyResultLabel2";
-        difficultyResultLabel2.Size = new Size(32, 18);
-        difficultyResultLabel2.TabIndex = 16;
-        difficultyResultLabel2.Text = "9.99";
+        doubleHandJackLabel.AutoSize = true;
+        doubleHandJackLabel.DifficultyValue = 9.99D;
+        doubleHandJackLabel.Font = new Font("Aptos Display", 10F);
+        doubleHandJackLabel.Location = new Point(125, 110);
+        doubleHandJackLabel.Name = "doubleHandJackLabel";
+        doubleHandJackLabel.Size = new Size(32, 18);
+        doubleHandJackLabel.TabIndex = 22;
+        doubleHandJackLabel.Text = "9.99";
         // 
-        // label3
+        // label16
         // 
-        label3.AutoSize = true;
-        label3.Font = new Font("Aptos Display", 10F);
-        label3.Location = new Point(6, 38);
-        label3.Name = "label3";
-        label3.Size = new Size(48, 18);
-        label3.TabIndex = 15;
-        label3.Text = "inverse";
+        label16.AutoSize = true;
+        label16.Font = new Font("Aptos Display", 10F);
+        label16.Location = new Point(6, 110);
+        label16.Name = "label16";
+        label16.Size = new Size(103, 18);
+        label16.TabIndex = 21;
+        label16.Text = "double hand jack";
         // 
-        // difficultyResultLabel3
+        // chordjackLabel
         // 
-        difficultyResultLabel3.AutoSize = true;
-        difficultyResultLabel3.DifficultyValue = 12D;
-        difficultyResultLabel3.Font = new Font("Aptos Display", 10F);
-        difficultyResultLabel3.Location = new Point(125, 20);
-        difficultyResultLabel3.Name = "difficultyResultLabel3";
-        difficultyResultLabel3.Size = new Size(39, 18);
-        difficultyResultLabel3.TabIndex = 14;
-        difficultyResultLabel3.Text = "12.00";
+        chordjackLabel.AutoSize = true;
+        chordjackLabel.DifficultyValue = 9.99D;
+        chordjackLabel.Font = new Font("Aptos Display", 10F);
+        chordjackLabel.Location = new Point(125, 74);
+        chordjackLabel.Name = "chordjackLabel";
+        chordjackLabel.Size = new Size(32, 18);
+        chordjackLabel.TabIndex = 20;
+        chordjackLabel.Text = "9.99";
         // 
-        // label5
+        // label18
         // 
-        label5.AutoSize = true;
-        label5.Font = new Font("Aptos Display", 10F);
-        label5.Location = new Point(6, 20);
-        label5.Name = "label5";
-        label5.Size = new Size(54, 18);
-        label5.TabIndex = 13;
-        label5.Text = "ln shield";
+        label18.AutoSize = true;
+        label18.Font = new Font("Aptos Display", 10F);
+        label18.Location = new Point(6, 74);
+        label18.Name = "label18";
+        label18.Size = new Size(63, 18);
+        label18.TabIndex = 19;
+        label18.Text = "chordjack";
         // 
-        // groupBox5
+        // jackstreamLabel
         // 
-        groupBox5.Controls.Add(difficultyResultLabel15);
-        groupBox5.Controls.Add(label27);
-        groupBox5.Controls.Add(difficultyResultLabel16);
-        groupBox5.Controls.Add(label28);
-        groupBox5.Controls.Add(categoryDifficultyResultLabel4);
-        groupBox5.Controls.Add(difficultyResultLabel7);
-        groupBox5.Controls.Add(label13);
-        groupBox5.Controls.Add(difficultyResultLabel8);
-        groupBox5.Controls.Add(label15);
-        groupBox5.Controls.Add(difficultyResultLabel9);
-        groupBox5.Controls.Add(label17);
-        groupBox5.Font = new Font("Aptos Display", 10F, FontStyle.Bold);
-        groupBox5.ForeColor = SystemColors.ControlLight;
-        groupBox5.Location = new Point(187, 244);
-        groupBox5.Name = "groupBox5";
-        groupBox5.Size = new Size(175, 117);
-        groupBox5.TabIndex = 4;
-        groupBox5.TabStop = false;
-        groupBox5.Text = "scrolling";
+        jackstreamLabel.AutoSize = true;
+        jackstreamLabel.DifficultyValue = 9.99D;
+        jackstreamLabel.Font = new Font("Aptos Display", 10F);
+        jackstreamLabel.Location = new Point(125, 56);
+        jackstreamLabel.Name = "jackstreamLabel";
+        jackstreamLabel.Size = new Size(32, 18);
+        jackstreamLabel.TabIndex = 18;
+        jackstreamLabel.Text = "9.99";
         // 
-        // categoryDifficultyResultLabel4
+        // label20
         // 
-        categoryDifficultyResultLabel4.AutoSize = true;
-        categoryDifficultyResultLabel4.DifficultyValue = 10D;
-        categoryDifficultyResultLabel4.Location = new Point(125, 0);
-        categoryDifficultyResultLabel4.Name = "categoryDifficultyResultLabel4";
-        categoryDifficultyResultLabel4.Size = new Size(44, 18);
-        categoryDifficultyResultLabel4.TabIndex = 13;
-        categoryDifficultyResultLabel4.Text = "10.00";
+        label20.AutoSize = true;
+        label20.Font = new Font("Aptos Display", 10F);
+        label20.Location = new Point(6, 56);
+        label20.Name = "label20";
+        label20.Size = new Size(70, 18);
+        label20.TabIndex = 17;
+        label20.Text = "jackstream";
         // 
-        // difficultyResultLabel7
+        // anchorLabel
         // 
-        difficultyResultLabel7.AutoSize = true;
-        difficultyResultLabel7.DifficultyValue = 9.99D;
-        difficultyResultLabel7.Font = new Font("Aptos Display", 10F);
-        difficultyResultLabel7.Location = new Point(125, 56);
-        difficultyResultLabel7.Name = "difficultyResultLabel7";
-        difficultyResultLabel7.Size = new Size(32, 18);
-        difficultyResultLabel7.TabIndex = 6;
-        difficultyResultLabel7.Text = "9.99";
+        anchorLabel.AutoSize = true;
+        anchorLabel.DifficultyValue = 9.99D;
+        anchorLabel.Font = new Font("Aptos Display", 10F);
+        anchorLabel.Location = new Point(125, 38);
+        anchorLabel.Name = "anchorLabel";
+        anchorLabel.Size = new Size(32, 18);
+        anchorLabel.TabIndex = 16;
+        anchorLabel.Text = "9.99";
         // 
-        // label13
+        // label22
         // 
-        label13.AutoSize = true;
-        label13.Font = new Font("Aptos Display", 10F);
-        label13.Location = new Point(6, 56);
-        label13.Name = "label13";
-        label13.Size = new Size(44, 18);
-        label13.TabIndex = 5;
-        label13.Text = "stutter";
+        label22.AutoSize = true;
+        label22.Font = new Font("Aptos Display", 10F);
+        label22.Location = new Point(6, 38);
+        label22.Name = "label22";
+        label22.Size = new Size(47, 18);
+        label22.TabIndex = 15;
+        label22.Text = "anchor";
         // 
-        // difficultyResultLabel8
+        // minijackLabel
         // 
-        difficultyResultLabel8.AutoSize = true;
-        difficultyResultLabel8.DifficultyValue = 9.99D;
-        difficultyResultLabel8.Font = new Font("Aptos Display", 10F);
-        difficultyResultLabel8.Location = new Point(125, 38);
-        difficultyResultLabel8.Name = "difficultyResultLabel8";
-        difficultyResultLabel8.Size = new Size(32, 18);
-        difficultyResultLabel8.TabIndex = 4;
-        difficultyResultLabel8.Text = "9.99";
+        minijackLabel.AutoSize = true;
+        minijackLabel.DifficultyValue = 12D;
+        minijackLabel.Font = new Font("Aptos Display", 10F);
+        minijackLabel.Location = new Point(125, 20);
+        minijackLabel.Name = "minijackLabel";
+        minijackLabel.Size = new Size(39, 18);
+        minijackLabel.TabIndex = 14;
+        minijackLabel.Text = "12.00";
         // 
-        // label15
+        // label24
         // 
-        label15.AutoSize = true;
-        label15.Font = new Font("Aptos Display", 10F);
-        label15.Location = new Point(6, 38);
-        label15.Name = "label15";
-        label15.Size = new Size(34, 18);
-        label15.TabIndex = 3;
-        label15.Text = "slow";
+        label24.AutoSize = true;
+        label24.Font = new Font("Aptos Display", 10F);
+        label24.Location = new Point(6, 20);
+        label24.Name = "label24";
+        label24.Size = new Size(55, 18);
+        label24.TabIndex = 13;
+        label24.Text = "minijack";
         // 
-        // difficultyResultLabel9
+        // dexterityDifficultyCategoryGroupBox
         // 
-        difficultyResultLabel9.AutoSize = true;
-        difficultyResultLabel9.DifficultyValue = 9.99D;
-        difficultyResultLabel9.Font = new Font("Aptos Display", 10F);
-        difficultyResultLabel9.Location = new Point(125, 20);
-        difficultyResultLabel9.Name = "difficultyResultLabel9";
-        difficultyResultLabel9.Size = new Size(32, 18);
-        difficultyResultLabel9.TabIndex = 2;
-        difficultyResultLabel9.Text = "9.99";
+        dexterityDifficultyCategoryGroupBox.Controls.Add(dexterityCategoryLabel);
+        dexterityDifficultyCategoryGroupBox.Controls.Add(chordGapLabel);
+        dexterityDifficultyCategoryGroupBox.Controls.Add(label12);
+        dexterityDifficultyCategoryGroupBox.Controls.Add(trillLabel);
+        dexterityDifficultyCategoryGroupBox.Controls.Add(label10);
+        dexterityDifficultyCategoryGroupBox.Controls.Add(speedLabel);
+        dexterityDifficultyCategoryGroupBox.Controls.Add(label8);
+        dexterityDifficultyCategoryGroupBox.Controls.Add(chordLabel);
+        dexterityDifficultyCategoryGroupBox.Controls.Add(label6);
+        dexterityDifficultyCategoryGroupBox.Controls.Add(singlestreamLabel);
+        dexterityDifficultyCategoryGroupBox.Controls.Add(label4);
+        dexterityDifficultyCategoryGroupBox.Controls.Add(dumpLabel);
+        dexterityDifficultyCategoryGroupBox.Controls.Add(label1);
+        dexterityDifficultyCategoryGroupBox.Font = new Font("Aptos Display", 10F, FontStyle.Bold);
+        dexterityDifficultyCategoryGroupBox.ForeColor = SystemColors.ControlLight;
+        dexterityDifficultyCategoryGroupBox.Location = new Point(6, 17);
+        dexterityDifficultyCategoryGroupBox.Name = "dexterityDifficultyCategoryGroupBox";
+        dexterityDifficultyCategoryGroupBox.Size = new Size(175, 134);
+        dexterityDifficultyCategoryGroupBox.TabIndex = 0;
+        dexterityDifficultyCategoryGroupBox.TabStop = false;
+        dexterityDifficultyCategoryGroupBox.Text = "dexterity";
         // 
-        // label17
+        // dexterityCategoryLabel
         // 
-        label17.AutoSize = true;
-        label17.Font = new Font("Aptos Display", 10F);
-        label17.Location = new Point(6, 20);
-        label17.Name = "label17";
-        label17.Size = new Size(29, 18);
-        label17.TabIndex = 1;
-        label17.Text = "fast";
+        dexterityCategoryLabel.AutoSize = true;
+        dexterityCategoryLabel.DifficultyValue = 10D;
+        dexterityCategoryLabel.Location = new Point(125, 0);
+        dexterityCategoryLabel.Name = "dexterityCategoryLabel";
+        dexterityCategoryLabel.Size = new Size(44, 18);
+        dexterityCategoryLabel.TabIndex = 13;
+        dexterityCategoryLabel.Text = "10.00";
         // 
-        // difficultyResultLabel13
+        // chordGapLabel
         // 
-        difficultyResultLabel13.AutoSize = true;
-        difficultyResultLabel13.DifficultyValue = 9.99D;
-        difficultyResultLabel13.Font = new Font("Aptos Display", 10F);
-        difficultyResultLabel13.Location = new Point(125, 92);
-        difficultyResultLabel13.Name = "difficultyResultLabel13";
-        difficultyResultLabel13.Size = new Size(32, 18);
-        difficultyResultLabel13.TabIndex = 29;
-        difficultyResultLabel13.Text = "9.99";
+        chordGapLabel.AutoSize = true;
+        chordGapLabel.DifficultyValue = 18.99D;
+        chordGapLabel.Font = new Font("Aptos Display", 10F);
+        chordGapLabel.Location = new Point(125, 110);
+        chordGapLabel.Name = "chordGapLabel";
+        chordGapLabel.Size = new Size(39, 18);
+        chordGapLabel.TabIndex = 12;
+        chordGapLabel.Text = "18.99";
         // 
-        // label25
+        // label12
         // 
-        label25.AutoSize = true;
-        label25.Font = new Font("Aptos Display", 10F);
-        label25.Location = new Point(6, 92);
-        label25.Name = "label25";
-        label25.Size = new Size(41, 18);
-        label25.TabIndex = 28;
-        label25.Text = "shield";
+        label12.AutoSize = true;
+        label12.Font = new Font("Aptos Display", 10F);
+        label12.Location = new Point(6, 110);
+        label12.Name = "label12";
+        label12.Size = new Size(63, 18);
+        label12.TabIndex = 11;
+        label12.Text = "chord gap";
         // 
-        // difficultyResultLabel14
+        // trillLabel
         // 
-        difficultyResultLabel14.AutoSize = true;
-        difficultyResultLabel14.DifficultyValue = 9.99D;
-        difficultyResultLabel14.Font = new Font("Aptos Display", 10F);
-        difficultyResultLabel14.Location = new Point(125, 74);
-        difficultyResultLabel14.Name = "difficultyResultLabel14";
-        difficultyResultLabel14.Size = new Size(32, 18);
-        difficultyResultLabel14.TabIndex = 27;
-        difficultyResultLabel14.Text = "9.99";
+        trillLabel.AutoSize = true;
+        trillLabel.DifficultyValue = 9.99D;
+        trillLabel.Font = new Font("Aptos Display", 10F);
+        trillLabel.Location = new Point(125, 92);
+        trillLabel.Name = "trillLabel";
+        trillLabel.Size = new Size(32, 18);
+        trillLabel.TabIndex = 10;
+        trillLabel.Text = "9.99";
         // 
-        // label26
+        // label10
         // 
-        label26.AutoSize = true;
-        label26.Font = new Font("Aptos Display", 10F);
-        label26.Location = new Point(6, 74);
-        label26.Name = "label26";
-        label26.Size = new Size(52, 18);
-        label26.TabIndex = 26;
-        label26.Text = "rice mix";
+        label10.AutoSize = true;
+        label10.Font = new Font("Aptos Display", 10F);
+        label10.Location = new Point(6, 92);
+        label10.Name = "label10";
+        label10.Size = new Size(25, 18);
+        label10.TabIndex = 9;
+        label10.Text = "trill";
         // 
-        // difficultyResultLabel15
+        // speedLabel
         // 
-        difficultyResultLabel15.AutoSize = true;
-        difficultyResultLabel15.DifficultyValue = 9.99D;
-        difficultyResultLabel15.Font = new Font("Aptos Display", 10F);
-        difficultyResultLabel15.Location = new Point(125, 92);
-        difficultyResultLabel15.Name = "difficultyResultLabel15";
-        difficultyResultLabel15.Size = new Size(32, 18);
-        difficultyResultLabel15.TabIndex = 17;
-        difficultyResultLabel15.Text = "9.99";
+        speedLabel.AutoSize = true;
+        speedLabel.DifficultyValue = 9.99D;
+        speedLabel.Font = new Font("Aptos Display", 10F);
+        speedLabel.Location = new Point(125, 74);
+        speedLabel.Name = "speedLabel";
+        speedLabel.Size = new Size(32, 18);
+        speedLabel.TabIndex = 8;
+        speedLabel.Text = "9.99";
         // 
-        // label27
+        // label8
         // 
-        label27.AutoSize = true;
-        label27.Font = new Font("Aptos Display", 10F);
-        label27.Location = new Point(6, 92);
-        label27.Name = "label27";
-        label27.Size = new Size(83, 18);
-        label27.TabIndex = 16;
-        label27.Text = "visual density";
+        label8.AutoSize = true;
+        label8.Font = new Font("Aptos Display", 10F);
+        label8.Location = new Point(6, 74);
+        label8.Name = "label8";
+        label8.Size = new Size(42, 18);
+        label8.TabIndex = 7;
+        label8.Text = "speed";
         // 
-        // difficultyResultLabel16
+        // chordLabel
         // 
-        difficultyResultLabel16.AutoSize = true;
-        difficultyResultLabel16.DifficultyValue = 9.99D;
-        difficultyResultLabel16.Font = new Font("Aptos Display", 10F);
-        difficultyResultLabel16.Location = new Point(125, 74);
-        difficultyResultLabel16.Name = "difficultyResultLabel16";
-        difficultyResultLabel16.Size = new Size(32, 18);
-        difficultyResultLabel16.TabIndex = 15;
-        difficultyResultLabel16.Text = "9.99";
+        chordLabel.AutoSize = true;
+        chordLabel.DifficultyValue = 9.99D;
+        chordLabel.Font = new Font("Aptos Display", 10F);
+        chordLabel.Location = new Point(125, 56);
+        chordLabel.Name = "chordLabel";
+        chordLabel.Size = new Size(32, 18);
+        chordLabel.TabIndex = 6;
+        chordLabel.Text = "9.99";
         // 
-        // label28
+        // label6
         // 
-        label28.AutoSize = true;
-        label28.Font = new Font("Aptos Display", 10F);
-        label28.Location = new Point(6, 74);
-        label28.Name = "label28";
-        label28.Size = new Size(36, 18);
-        label28.TabIndex = 14;
-        label28.Text = "burst";
+        label6.AutoSize = true;
+        label6.Font = new Font("Aptos Display", 10F);
+        label6.Location = new Point(6, 56);
+        label6.Name = "label6";
+        label6.Size = new Size(40, 18);
+        label6.TabIndex = 5;
+        label6.Text = "chord";
         // 
-        // difficultyResultLabel17
+        // singlestreamLabel
         // 
-        difficultyResultLabel17.AutoSize = true;
-        difficultyResultLabel17.DifficultyValue = -1D;
-        difficultyResultLabel17.Font = new Font("Aptos Display", 15F, FontStyle.Bold);
-        difficultyResultLabel17.Location = new Point(193, 381);
-        difficultyResultLabel17.Name = "difficultyResultLabel17";
-        difficultyResultLabel17.Size = new Size(27, 25);
-        difficultyResultLabel17.TabIndex = 19;
-        difficultyResultLabel17.Text = "...";
+        singlestreamLabel.AutoSize = true;
+        singlestreamLabel.DifficultyValue = 9.99D;
+        singlestreamLabel.Font = new Font("Aptos Display", 10F);
+        singlestreamLabel.Location = new Point(125, 38);
+        singlestreamLabel.Name = "singlestreamLabel";
+        singlestreamLabel.Size = new Size(32, 18);
+        singlestreamLabel.TabIndex = 4;
+        singlestreamLabel.Text = "9.99";
         // 
-        // label29
+        // label4
         // 
-        label29.AutoSize = true;
-        label29.Font = new Font("Aptos Display", 15F, FontStyle.Bold);
-        label29.Location = new Point(103, 381);
-        label29.Name = "label29";
-        label29.Size = new Size(72, 25);
-        label29.TabIndex = 18;
-        label29.Text = "overall";
+        label4.AutoSize = true;
+        label4.Font = new Font("Aptos Display", 10F);
+        label4.Location = new Point(6, 38);
+        label4.Name = "label4";
+        label4.Size = new Size(79, 18);
+        label4.TabIndex = 3;
+        label4.Text = "singlestream";
+        // 
+        // dumpLabel
+        // 
+        dumpLabel.AutoSize = true;
+        dumpLabel.DifficultyValue = 9.99D;
+        dumpLabel.Font = new Font("Aptos Display", 10F);
+        dumpLabel.Location = new Point(125, 20);
+        dumpLabel.Name = "dumpLabel";
+        dumpLabel.Size = new Size(32, 18);
+        dumpLabel.TabIndex = 2;
+        dumpLabel.Text = "9.99";
+        // 
+        // label1
+        // 
+        label1.AutoSize = true;
+        label1.Font = new Font("Aptos Display", 10F);
+        label1.Location = new Point(6, 20);
+        label1.Name = "label1";
+        label1.Size = new Size(40, 18);
+        label1.TabIndex = 1;
+        label1.Text = "dump";
         // 
         // MainForm
         // 
@@ -944,20 +944,21 @@ partial class MainForm
         Margin = new Padding(4, 3, 4, 3);
         Name = "MainForm";
         Text = "osu! difficulty analyzer";
+        Load += MainForm_Load;
         groupBox1.ResumeLayout(false);
         groupBox1.PerformLayout();
-        jackDifficultyCategoryGroupBox.ResumeLayout(false);
-        jackDifficultyCategoryGroupBox.PerformLayout();
-        dexterityDifficultyCategoryGroupBox.ResumeLayout(false);
-        dexterityDifficultyCategoryGroupBox.PerformLayout();
-        groupBox2.ResumeLayout(false);
-        groupBox2.PerformLayout();
-        groupBox3.ResumeLayout(false);
-        groupBox3.PerformLayout();
         groupBox4.ResumeLayout(false);
         groupBox4.PerformLayout();
         groupBox5.ResumeLayout(false);
         groupBox5.PerformLayout();
+        groupBox2.ResumeLayout(false);
+        groupBox2.PerformLayout();
+        groupBox3.ResumeLayout(false);
+        groupBox3.PerformLayout();
+        jackDifficultyCategoryGroupBox.ResumeLayout(false);
+        jackDifficultyCategoryGroupBox.PerformLayout();
+        dexterityDifficultyCategoryGroupBox.ResumeLayout(false);
+        dexterityDifficultyCategoryGroupBox.PerformLayout();
         ResumeLayout(false);
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Drawing.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Drawing.Text;
 using System.Globalization;
 
 namespace OsuRealDifficulty.UI.WinForms;
@@ -11,16 +12,17 @@ internal sealed class ThemeFonts
 
     public static ThemeFonts Instance { get; } = new();
 
-    private readonly Lazy<PrivateFontCollection> _fonts
-        = new(LoadFontsFromResources);
-
-    public PrivateFontCollection Fonts => _fonts.Value;
+    public PrivateFontCollection Fonts { get; private set; }
+    public Font? MainFont { get; private set; }
+    public FontFamily? MainFontFamily { get; private set; }
 
     private ThemeFonts()
     {
+        LoadFontsFromResources();
     }
 
-    private static PrivateFontCollection LoadFontsFromResources()
+    [MemberNotNull(nameof(Fonts))]
+    private void LoadFontsFromResources()
     {
         var fonts = new PrivateFontCollection();
         var culture = FontResources.Culture ?? CultureInfo.CurrentUICulture;
@@ -32,7 +34,29 @@ internal sealed class ThemeFonts
             AddResourceFont(resource.Value!, fonts);
         }
 
-        return fonts;
+        Fonts = fonts;
+        MainFont = GetMainFont();
+    }
+
+    private Font? GetMainFont()
+    {
+        MainFontFamily = GetDefaultFontFamily();
+        if (MainFontFamily is null)
+        {
+            return null;
+        }
+
+        return new Font(MainFontFamily, MainFontSize, MainFontStyle);
+    }
+
+    private FontFamily? GetDefaultFontFamily()
+    {
+        var mainFamily = Fonts.Families
+            .FirstOrDefault(s => s.Name is MainFontName);
+        if (mainFamily is not null)
+            return mainFamily;
+
+        return Fonts.Families.FirstOrDefault();
     }
 
     private static unsafe void AddResourceFont(object resource, PrivateFontCollection fonts)

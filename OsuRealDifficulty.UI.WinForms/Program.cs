@@ -1,5 +1,3 @@
-using System.Drawing.Text;
-
 namespace OsuRealDifficulty.UI.WinForms;
 
 internal static class Program
@@ -20,31 +18,10 @@ internal static class Program
 
     private static void SetDefaultFont()
     {
-        var mainFont = GetMainFont();
+        var mainFont = ThemeFonts.Instance.MainFont;
         if (mainFont is not null)
         {
             Application.SetDefaultFont(mainFont);
         }
-    }
-
-    private static Font? GetMainFont()
-    {
-        var fonts = ThemeFonts.Instance.Fonts;
-        var family = GetDefaultFontFamily(fonts);
-        if (family is not null)
-        {
-            return new Font(family, ThemeFonts.MainFontSize, ThemeFonts.MainFontStyle);
-        }
-
-        return null;
-    }
-
-    private static FontFamily? GetDefaultFontFamily(PrivateFontCollection resourceFonts)
-    {
-        var aptosFamily = resourceFonts.Families.FirstOrDefault(s => s.Name is ThemeFonts.MainFontName);
-        if (aptosFamily is not null)
-            return aptosFamily;
-
-        return resourceFonts.Families.FirstOrDefault();
     }
 }
