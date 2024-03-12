@@ -7,7 +7,7 @@ namespace OsuRealDifficulty.UI.WinForms;
 
 internal sealed partial class ThemeFonts
 {
-    public const string MainFontName = "Aptos";
+    public const string MainFontName = "Aptos Display";
     public const int MainFontSize = 10;
     public const FontStyle MainFontStyle = FontStyle.Regular;
 
@@ -73,8 +73,12 @@ internal sealed partial class ThemeFonts
 
         fixed (byte* resourceBytesPtr = resourceBytes)
         {
-            uint dummy = 0;
-            AddFontMemResourceEx((nint)resourceBytesPtr, (uint)resourceBytes.Length, 0, ref dummy);
+            uint addedFonts = 0;
+            nint resultHandle = AddFontMemResourceEx(
+                (nint)resourceBytesPtr,
+                (uint)resourceBytes.Length,
+                0,
+                ref addedFonts);
             fonts.AddMemoryFont((nint)resourceBytesPtr, resourceBytes.Length);
         }
     }
