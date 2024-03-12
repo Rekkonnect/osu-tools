@@ -21,6 +21,6 @@ public sealed class PatternTypeSwitchAnnotationAnalyzer
     public override ref CalculationResult CalculationResultRef(
         AnalyzedDifficulty difficulty)
     {
-        return ref difficulty.Tech.PatternTypeSwitch;
+        return ref difficulty.Tech.PatternSwitch;
     }
 }

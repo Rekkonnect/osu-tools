@@ -143,9 +143,9 @@ public struct ChordNotes : IEquatable<ChordNotes>
         return _bits == other._bits;
     }
 
-    public override readonly bool Equals(object obj)
+    public override readonly bool Equals(object? obj)
     {
-        return obj is ChordNotes && Equals((ChordNotes)obj);
+        return obj is ChordNotes notes && Equals(notes);
     }
 
     public override readonly int GetHashCode()

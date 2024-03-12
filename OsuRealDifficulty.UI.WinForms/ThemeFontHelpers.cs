@@ -9,13 +9,13 @@ internal static class ThemeFontHelpers
         if (mainFontFamily is null)
             return;
 
-        control.SuspendLayout();
-
         bool usingIntended = IsUsingTargetFontFamily(control.Font, mainFontFamily);
         bool needsReplacement = !usingIntended
             && control.Font.OriginalFontName == mainFontFamily.Name;
+
         if (needsReplacement)
         {
+            control.SuspendLayout();
             control.Font = control.Font.WithFamily(mainFontFamily);
         }
 
@@ -24,7 +24,10 @@ internal static class ThemeFontHelpers
             RecursivelyReplaceFontFamilyWithMain(child, mainFontFamily);
         }
 
-        control.ResumeLayout();
+        if (needsReplacement)
+        {
+            control.ResumeLayout();
+        }
     }
 
     private static bool IsUsingTargetFontFamily(

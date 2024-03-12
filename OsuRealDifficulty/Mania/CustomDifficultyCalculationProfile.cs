@@ -30,7 +30,7 @@ public class CustomDifficultyCalculationProfile(
         AddWeightedJack(difficulty.Jack, weights.Jack);
         AddWeightedTech(difficulty.Tech, weights.Tech);
         AddWeightedStamina(difficulty.Stamina, weights.Stamina);
-        AddWeightedLN(difficulty.LN, weights.LN);
+        AddWeightedLongNotes(difficulty.LongNotes, weights.LongNotes);
         AddWeightedScrolling(difficulty.Scrolling, weights.Scrolling);
 
         NormalizeValue(ref overall.Overall);
@@ -42,11 +42,11 @@ public class CustomDifficultyCalculationProfile(
         {
             ref double segmentSum = ref overall.Dexterity;
             AddWeighted(difficulty.Speed, weights.Speed, ref segmentSum);
-            AddWeighted(difficulty.Singlestream, weights.Singlestream, ref segmentSum);
             AddWeighted(difficulty.Chord, weights.Chord, ref segmentSum);
             AddWeighted(difficulty.Dump, weights.Dump, ref segmentSum);
             AddWeighted(difficulty.Trill, weights.Trill, ref segmentSum);
             AddWeighted(difficulty.ChordGap, weights.ChordGap, ref segmentSum);
+            AddWeighted(difficulty.Singlestream, weights.Singlestream, ref segmentSum);
             NormalizeValue(ref segmentSum);
         }
         void AddWeightedJack(
@@ -54,12 +54,12 @@ public class CustomDifficultyCalculationProfile(
             AnalyzedDifficulty.JackRate weights)
         {
             ref double segmentSum = ref overall.Jack;
-            AddWeighted(difficulty.Fieldjack, weights.Fieldjack, ref segmentSum);
-            AddWeighted(difficulty.Jackstream, weights.Jackstream, ref segmentSum);
-            AddWeighted(difficulty.Chordjack, weights.Chordjack, ref segmentSum);
-            AddWeighted(difficulty.DoubleHandJack, weights.DoubleHandJack, ref segmentSum);
             AddWeighted(difficulty.Minijack, weights.Minijack, ref segmentSum);
+            AddWeighted(difficulty.Chordjack, weights.Chordjack, ref segmentSum);
             AddWeighted(difficulty.Anchor, weights.Anchor, ref segmentSum);
+            AddWeighted(difficulty.Jackstream, weights.Jackstream, ref segmentSum);
+            AddWeighted(difficulty.Fieldjack, weights.Fieldjack, ref segmentSum);
+            AddWeighted(difficulty.DoubleHandJack, weights.DoubleHandJack, ref segmentSum);
             NormalizeValue(ref segmentSum);
         }
         void AddWeightedTech(
@@ -67,9 +67,9 @@ public class CustomDifficultyCalculationProfile(
             AnalyzedDifficulty.TechRate weights)
         {
             ref double segmentSum = ref overall.Tech;
+            AddWeighted(difficulty.PatternSwitch, weights.PatternSwitch, ref segmentSum);
+            AddWeighted(difficulty.RhythmIrregularity, weights.RhythmIrregularity, ref segmentSum);
             AddWeighted(difficulty.Flam, weights.Flam, ref segmentSum);
-            AddWeighted(difficulty.PatternTypeSwitch, weights.PatternTypeSwitch, ref segmentSum);
-            AddWeighted(difficulty.RhythmicalIrregularity, weights.RhythmicalIrregularity, ref segmentSum);
             NormalizeValue(ref segmentSum);
         }
         void AddWeightedStamina(
@@ -78,20 +78,20 @@ public class CustomDifficultyCalculationProfile(
         {
             ref double segmentSum = ref overall.Stamina;
             AddWeighted(difficulty.LongBurst, weights.LongBurst, ref segmentSum);
-            AddWeighted(difficulty.SingleHandTrill, weights.SingleHandTrill, ref segmentSum);
             AddWeighted(difficulty.SteadyRateStream, weights.SteadyRateStream, ref segmentSum);
+            AddWeighted(difficulty.SingleHandTrill, weights.SingleHandTrill, ref segmentSum);
             NormalizeValue(ref segmentSum);
         }
-        void AddWeightedLN(
-            AnalyzedDifficulty.LNRate difficulty,
-            AnalyzedDifficulty.LNRate weights)
+        void AddWeightedLongNotes(
+            AnalyzedDifficulty.LongNotesRate difficulty,
+            AnalyzedDifficulty.LongNotesRate weights)
         {
-            ref double segmentSum = ref overall.LN;
-            AddWeighted(difficulty.LNShield, weights.LNShield, ref segmentSum);
-            AddWeighted(difficulty.RiceLN, weights.RiceLN, ref segmentSum);
+            ref double segmentSum = ref overall.LongNotes;
             AddWeighted(difficulty.RiceMix, weights.RiceMix, ref segmentSum);
-            AddWeighted(difficulty.Shield, weights.Shield, ref segmentSum);
+            AddWeighted(difficulty.RiceLN, weights.RiceLN, ref segmentSum);
             AddWeighted(difficulty.Inverse, weights.Inverse, ref segmentSum);
+            AddWeighted(difficulty.Shield, weights.Shield, ref segmentSum);
+            AddWeighted(difficulty.LNShield, weights.LNShield, ref segmentSum);
             NormalizeValue(ref segmentSum);
         }
         void AddWeightedScrolling(
@@ -101,9 +101,9 @@ public class CustomDifficultyCalculationProfile(
             ref double segmentSum = ref overall.Scrolling;
             AddWeighted(difficulty.Slow, weights.Slow, ref segmentSum);
             AddWeighted(difficulty.Fast, weights.Fast, ref segmentSum);
+            AddWeighted(difficulty.Burst, weights.Burst, ref segmentSum);
             AddWeighted(difficulty.Stutter, weights.Stutter, ref segmentSum);
             AddWeighted(difficulty.VisualDensity, weights.VisualDensity, ref segmentSum);
-            AddWeighted(difficulty.Burst, weights.Burst, ref segmentSum);
             NormalizeValue(ref segmentSum);
         }
 

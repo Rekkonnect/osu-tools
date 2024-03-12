@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <GitBuildInfoIsGeneric>false</GitBuildInfoIsGeneric>
+    <GitBuildInfoAssemblyType>ApplicationMetadata</GitBuildInfoAssemblyType>
+  </PropertyGroup>
+</Project>

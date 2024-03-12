@@ -7,6 +7,9 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <Version>0.1.1</Version>
+    <ProductVersion>$(Version)</ProductVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +32,14 @@
     <EmbeddedResource Include="Resources\Aptos Display Regular.ttf" />
     <EmbeddedResource Include="Resources\Aptos Italic.ttf" />
     <EmbeddedResource Include="Resources\Aptos Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Elskom.GitInformation" Version="1.0.1" />
+    <PackageReference Include="GitBuildInfo.SourceGenerator" IsImplicitlyDefined="true" Version="*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
