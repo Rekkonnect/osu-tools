@@ -8,4 +8,10 @@ public static class ControlExtensions
         listItems.Clear();
         listItems.AddRange(items);
     }
+
+    public static void SelectIndex(this ListView listView, int index, bool selected = true)
+    {
+        var listItems = listView.Items;
+        listItems[index].Selected = selected;
+    }
 }

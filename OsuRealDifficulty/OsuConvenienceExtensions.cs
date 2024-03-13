@@ -3,6 +3,7 @@ using OsuParsers.Beatmaps.Sections;
 using OsuParsers.Database.Objects;
 using OsuParsers.Decoders;
 using OsuParsers.Enums;
+using OsuRealDifficulty.Mania;
 
 namespace OsuRealDifficulty;
 
@@ -34,6 +35,11 @@ public static class OsuConvenienceExtensions
         return beatmap.CirclesCount
             + beatmap.SlidersCount
             + beatmap.SpinnersCount;
+    }
+
+    public static bool HasNoBeatmapSetValue(this DbBeatmap beatmap)
+    {
+        return beatmap.BeatmapSetId <= 0;
     }
 
     public static bool IsManiaWithKeyCount(this DbBeatmap beatmap, int maniaKeyCount)

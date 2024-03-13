@@ -3,14 +3,14 @@ using OsuParsers.Enums;
 using OsuRealDifficulty.Mania;
 using OsuRealDifficulty.UI.WinForms.Controls;
 using OsuRealDifficulty.UI.WinForms.Core;
-using System.Configuration;
-using System.Reflection;
 
 namespace OsuRealDifficulty.UI.WinForms;
 
 public partial class MainForm : Form
 {
     private CancellationTokenFactory _difficultyCalculationCancellationTokenFactory = new();
+
+    private BeatmapFilter _beatmapFilter = new();
 
     public MainForm()
     {
@@ -27,9 +27,15 @@ public partial class MainForm : Form
         ReloadMaps();
     }
 
+    private void MainForm_Shown(object sender, EventArgs e)
+    {
+        searchTextBox.Focus();
+    }
+
     private void ReloadMaps()
     {
-        beatmapGroupBox.Enabled = false;
+        beatmapSetListView.Items.Clear();
+        difficultyListView.Items.Clear();
 
         Invoke(HandleMapReloading);
     }
@@ -38,10 +44,8 @@ public partial class MainForm : Form
     {
         try
         {
-            beatmapSetListView.Items.Clear();
-            difficultyListView.Items.Clear();
-
             AppState.Instance.LoadDbBeatmapSetDatabase();
+            GC.Collect();
             var database = AppState.Instance.BeatmapSetDatabase!;
             var maniaSets = database.SetsWithRuleset(Ruleset.Mania);
             beatmapSetListView.SetBeatmapSets(maniaSets);
@@ -54,53 +58,126 @@ public partial class MainForm : Form
         {
 
         }
-
-        beatmapGroupBox.Enabled = true;
     }
 
     private void resetButton_Click(object sender, EventArgs e)
     {
         searchTextBox.Text = string.Empty;
+        searchTextBox.Focus();
     }
 
     private void titleFilterCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-
+        _beatmapFilter.Title = titleFilterCheckBox.Checked;
+        RunFilterFocusSearchBox();
     }
 
     private void artistFilterCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-
+        _beatmapFilter.Artist = artistFilterCheckBox.Checked;
+        RunFilterFocusSearchBox();
     }
 
     private void mapperFilterCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-
+        _beatmapFilter.Mapper = mapperFilterCheckBox.Checked;
+        RunFilterFocusSearchBox();
     }
 
     private void difficultyFilterCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-
+        _beatmapFilter.Difficulty = difficultyFilterCheckBox.Checked;
+        RunFilterFocusSearchBox();
     }
 
-    private void keyCountFilterCheckBox_CheckedChanged(object sender, EventArgs e)
+    private void sourceFilterCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-        keyCountFilterCheckBox.Enabled = keyCountFilterCheckBox.Checked;
+        _beatmapFilter.Source = sourceFilterCheckBox.Checked;
+        RunFilterFocusSearchBox();
+    }
+
+    private void tagsFilterCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+        _beatmapFilter.Tags = tagsFilterCheckBox.Checked;
+        RunFilterFocusSearchBox();
     }
 
     private void searchTextBox_TextChanged(object sender, EventArgs e)
     {
+        _beatmapFilter.Lexeme = searchTextBox.Text;
+        RunFilterFocusSearchBox();
+    }
 
+    private void keyCountFilterCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+        bool filter = keyCountFilterCheckBox.Checked;
+        keyCountFilterTextBox.Enabled = filter;
+        _beatmapFilter.FilterKeyCount = filter;
+        if (filter)
+        {
+            keyCountFilterTextBox.Focus();
+        }
+        else
+        {
+            searchTextBox.Focus();
+        }
+        RunFilter();
+    }
+
+    private void keyCountFilterTextBox_TextChanged(object sender, EventArgs e)
+    {
+        _beatmapFilter.KeyCount = keyCountFilterTextBox.KeyCount;
+        RunFilter();
+    }
+
+    private void RunFilterFocusSearchBox()
+    {
+        searchTextBox.Focus();
+        RunFilter();
+    }
+
+    private void RunFilter()
+    {
+        beatmapSetListView.Filter((item) => _beatmapFilter.Passes(item.BeatmapSet));
+        switch (beatmapSetListView.Items.Count)
+        {
+            case 1:
+                beatmapSetListView.SelectIndex(0);
+                break;
+
+            case 0:
+                difficultyListView.ClearBeatmaps();
+                break;
+        }
+
+        RunSelectedBeatmapSetFilter();
     }
 
     private void beatmapSetListView_SelectedIndexChanged(object sender, EventArgs e)
     {
         var set = GetSelectedBeatmapSet();
         if (set is null)
+        {
+            difficultyListView.ClearBeatmaps();
             return;
+        }
+
+        CancelCurrentCalculation();
 
         var maniaDifficulties = set.WithManiaRuleset();
         difficultyListView.SetBeatmaps(maniaDifficulties);
+        RunSelectedBeatmapSetFilter();
+    }
+
+    private void RunSelectedBeatmapSetFilter()
+    {
+        difficultyListView.Filter((item) => _beatmapFilter.PassesIgnoreLexeme(item.Beatmap));
+        switch (difficultyListView.Items.Count)
+        {
+            case 1:
+                difficultyListView.SelectIndex(0);
+                break;
+        }
     }
 
     private DbBeatmapSet? GetSelectedBeatmapSet()
@@ -120,7 +197,7 @@ public partial class MainForm : Form
             return null;
 
         var selectedItem = selectedItems[0] as BeatmapListViewItem;
-        return selectedItem!.Beatmap;
+        return selectedItem?.Beatmap;
     }
 
     private void beginCalculationButton_Click(object sender, EventArgs e)
@@ -141,11 +218,10 @@ public partial class MainForm : Form
 
     private void CalculateBeatmapDifficulty(DbBeatmap dbBeatmap)
     {
-        beatmapGroupBox.Enabled = false;
         beginCalculationButton.Enabled = false;
         cancelCalculationButton.Enabled = true;
 
-        Task.Run(() => HandleBeatmapCalculation(dbBeatmap));
+        Invoke(async () => await HandleBeatmapCalculation(dbBeatmap));
     }
 
     private async Task HandleBeatmapCalculation(DbBeatmap dbBeatmap)
@@ -185,17 +261,21 @@ public partial class MainForm : Form
 
     private void ResetCalculationEnablement()
     {
-        beatmapGroupBox.Enabled = true;
         beginCalculationButton.Enabled = true;
         cancelCalculationButton.Enabled = false;
     }
 
     private void cancelCalculationButton_Click(object sender, EventArgs e)
     {
-        _difficultyCalculationCancellationTokenFactory
-            .CurrentSource.Cancel();
+        CancelCurrentCalculation();
         // We do not want to handle anything else here;
         // the cancellation should propagate into refreshing the rest of the program
+    }
+
+    private void CancelCurrentCalculation()
+    {
+        _difficultyCalculationCancellationTokenFactory
+            .CurrentSource.Cancel();
     }
 
     private void settingsButton_Click(object sender, EventArgs e)
@@ -212,35 +292,9 @@ public partial class MainForm : Form
     {
 
     }
-}
 
-public sealed class CancellationTokenFactory
-{
-    private CancellationTokenSource? _currentSource;
-
-    public CancellationTokenSource CurrentSource
+    private void difficultyListView_SelectedIndexChanged(object sender, EventArgs e)
     {
-        get
-        {
-            if (_currentSource is null)
-            {
-                return CreateSource();
-            }
-
-            if (_currentSource.IsCancellationRequested)
-            {
-                return CreateSource();
-            }
-
-            return _currentSource;
-        }
-    }
-
-    public CancellationToken CurrentToken => CurrentSource.Token;
-
-    public CancellationTokenSource CreateSource()
-    {
-        _currentSource = new CancellationTokenSource();
-        return _currentSource;
+        CancelCurrentCalculation();
     }
 }

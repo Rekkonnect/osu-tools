@@ -4,6 +4,56 @@ public class AnalyzedDifficulty
 {
     #region instantiation
 
+    public static AnalyzedDifficulty NewZero => new()
+    {
+        Dexterity = new()
+        {
+            Speed = 0,
+            Chord = 0,
+            Dump = 0,
+            Trill = 0,
+            ChordGap = 0,
+            Singlestream = 0,
+        },
+        Jack = new()
+        {
+            Minijack = 0,
+            Chordjack = 0,
+            Anchor = 0,
+            Jackstream = 0,
+            Fieldjack = 0,
+            DoubleHandJack = 0,
+        },
+        Tech = new()
+        {
+            PatternSwitch = 0,
+            RhythmIrregularity = 0,
+            Flam = 0,
+        },
+        Stamina = new()
+        {
+            LongBurst = 0,
+            SteadyRateStream = 0,
+            SingleHandTrill = 0,
+        },
+        LongNotes = new()
+        {
+            RiceMix = 0,
+            RiceLN = 0,
+            Inverse = 0,
+            Shield = 0,
+            LNShield = 0,
+        },
+        Scrolling = new()
+        {
+            Slow = 0,
+            Fast = 0,
+            Burst = 0,
+            Stutter = 0,
+            VisualDensity = 0,
+        },
+    };
+
     public static AnalyzedDifficulty NewPending => new()
     {
         Dexterity = new()

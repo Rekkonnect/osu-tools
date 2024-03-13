@@ -30,25 +30,27 @@ partial class MainForm
     /// </summary>
     private void InitializeComponent()
     {
-        var listViewItem9 = new ListViewItem(new string[] { "Sakazuki", "BEMANI Sound Team HuMeR feat Fernweh", "Nicknem_" }, -1);
-        var listViewItem10 = new ListViewItem(new string[] { "SAtAN", "P*Light", "riunosk" }, -1);
-        var listViewItem11 = new ListViewItem(new string[] { "Aruel's HEAVENLY", "4", "8.8", "8.8", "1870", "1664", "206" }, -1);
-        var listViewItem12 = new ListViewItem(new string[] { "Ayase's EXHAUST", "4", "8", "8", "1162", "930", "232" }, -1);
-        var listViewItem13 = new ListViewItem("DenYi's ADVANCED");
-        var listViewItem14 = new ListViewItem("NOVICE");
-        var listViewItem15 = new ListViewItem("Ppass' MAXIMUM");
-        var listViewItem16 = new ListViewItem("REVERSED");
+        var listViewItem1 = new ListViewItem(new string[] { "Sakazuki", "BEMANI Sound Team HuMeR feat Fernweh", "Nicknem_" }, -1);
+        var listViewItem2 = new ListViewItem(new string[] { "SAtAN", "P*Light", "riunosk" }, -1);
+        var listViewItem3 = new ListViewItem(new string[] { "Aruel's HEAVENLY", "4", "8.8", "8.8", "1870", "1664", "206" }, -1);
+        var listViewItem4 = new ListViewItem(new string[] { "Ayase's EXHAUST", "4", "8", "8", "1162", "930", "232" }, -1);
+        var listViewItem5 = new ListViewItem("DenYi's ADVANCED");
+        var listViewItem6 = new ListViewItem("NOVICE");
+        var listViewItem7 = new ListViewItem("Ppass' MAXIMUM");
+        var listViewItem8 = new ListViewItem("REVERSED");
         var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
         difficultyResultDisplay = new AnalysisResultDisplay();
         beatmapGroupBox = new GroupBox();
         filterGroupBox = new GroupBox();
+        tagsFilterCheckBox = new CheckBox();
+        sourceFilterCheckBox = new CheckBox();
         resetButton = new Button();
         difficultyFilterCheckBox = new CheckBox();
         mapperFilterCheckBox = new CheckBox();
         artistFilterCheckBox = new CheckBox();
         titleFilterCheckBox = new CheckBox();
         searchTextBox = new TextBox();
-        keyCountFilterTextBox = new TextBox();
+        keyCountFilterTextBox = new KeyCountFilterTextBox();
         keyCountFilterCheckBox = new CheckBox();
         beatmapSetListView = new BeatmapSetListView();
         beatmapListViewTitleColumn = new ColumnHeader();
@@ -100,6 +102,8 @@ partial class MainForm
         // 
         // filterGroupBox
         // 
+        filterGroupBox.Controls.Add(tagsFilterCheckBox);
+        filterGroupBox.Controls.Add(sourceFilterCheckBox);
         filterGroupBox.Controls.Add(resetButton);
         filterGroupBox.Controls.Add(difficultyFilterCheckBox);
         filterGroupBox.Controls.Add(mapperFilterCheckBox);
@@ -116,6 +120,36 @@ partial class MainForm
         filterGroupBox.TabStop = false;
         filterGroupBox.Text = "filter";
         // 
+        // tagsFilterCheckBox
+        // 
+        tagsFilterCheckBox.AutoSize = true;
+        tagsFilterCheckBox.Checked = true;
+        tagsFilterCheckBox.CheckState = CheckState.Checked;
+        tagsFilterCheckBox.Font = new Font("Aptos Display", 10F);
+        tagsFilterCheckBox.ForeColor = SystemColors.ControlLight;
+        tagsFilterCheckBox.Location = new Point(87, 62);
+        tagsFilterCheckBox.Name = "tagsFilterCheckBox";
+        tagsFilterCheckBox.Size = new Size(50, 22);
+        tagsFilterCheckBox.TabIndex = 6;
+        tagsFilterCheckBox.Text = "tags";
+        tagsFilterCheckBox.UseVisualStyleBackColor = true;
+        tagsFilterCheckBox.CheckedChanged += tagsFilterCheckBox_CheckedChanged;
+        // 
+        // sourceFilterCheckBox
+        // 
+        sourceFilterCheckBox.AutoSize = true;
+        sourceFilterCheckBox.Checked = true;
+        sourceFilterCheckBox.CheckState = CheckState.Checked;
+        sourceFilterCheckBox.Font = new Font("Aptos Display", 10F);
+        sourceFilterCheckBox.ForeColor = SystemColors.ControlLight;
+        sourceFilterCheckBox.Location = new Point(87, 43);
+        sourceFilterCheckBox.Name = "sourceFilterCheckBox";
+        sourceFilterCheckBox.Size = new Size(65, 22);
+        sourceFilterCheckBox.TabIndex = 5;
+        sourceFilterCheckBox.Text = "source";
+        sourceFilterCheckBox.UseVisualStyleBackColor = true;
+        sourceFilterCheckBox.CheckedChanged += sourceFilterCheckBox_CheckedChanged;
+        // 
         // resetButton
         // 
         resetButton.BackColor = Color.FromArgb(40, 40, 40);
@@ -127,7 +161,7 @@ partial class MainForm
         resetButton.Location = new Point(439, 55);
         resetButton.Name = "resetButton";
         resetButton.Size = new Size(63, 30);
-        resetButton.TabIndex = 8;
+        resetButton.TabIndex = 9;
         resetButton.Text = "reset";
         resetButton.UseVisualStyleBackColor = false;
         resetButton.Click += resetButton_Click;
@@ -139,10 +173,10 @@ partial class MainForm
         difficultyFilterCheckBox.CheckState = CheckState.Checked;
         difficultyFilterCheckBox.Font = new Font("Aptos Display", 10F);
         difficultyFilterCheckBox.ForeColor = SystemColors.ControlLight;
-        difficultyFilterCheckBox.Location = new Point(6, 81);
+        difficultyFilterCheckBox.Location = new Point(87, 24);
         difficultyFilterCheckBox.Name = "difficultyFilterCheckBox";
         difficultyFilterCheckBox.Size = new Size(75, 22);
-        difficultyFilterCheckBox.TabIndex = 7;
+        difficultyFilterCheckBox.TabIndex = 4;
         difficultyFilterCheckBox.Text = "difficulty";
         difficultyFilterCheckBox.UseVisualStyleBackColor = true;
         difficultyFilterCheckBox.CheckedChanged += difficultyFilterCheckBox_CheckedChanged;
@@ -157,7 +191,7 @@ partial class MainForm
         mapperFilterCheckBox.Location = new Point(6, 62);
         mapperFilterCheckBox.Name = "mapperFilterCheckBox";
         mapperFilterCheckBox.Size = new Size(70, 22);
-        mapperFilterCheckBox.TabIndex = 6;
+        mapperFilterCheckBox.TabIndex = 3;
         mapperFilterCheckBox.Text = "mapper";
         mapperFilterCheckBox.UseVisualStyleBackColor = true;
         mapperFilterCheckBox.CheckedChanged += mapperFilterCheckBox_CheckedChanged;
@@ -172,7 +206,7 @@ partial class MainForm
         artistFilterCheckBox.Location = new Point(6, 43);
         artistFilterCheckBox.Name = "artistFilterCheckBox";
         artistFilterCheckBox.Size = new Size(55, 22);
-        artistFilterCheckBox.TabIndex = 5;
+        artistFilterCheckBox.TabIndex = 2;
         artistFilterCheckBox.Text = "artist";
         artistFilterCheckBox.UseVisualStyleBackColor = true;
         artistFilterCheckBox.CheckedChanged += artistFilterCheckBox_CheckedChanged;
@@ -187,7 +221,7 @@ partial class MainForm
         titleFilterCheckBox.Location = new Point(6, 24);
         titleFilterCheckBox.Name = "titleFilterCheckBox";
         titleFilterCheckBox.Size = new Size(48, 22);
-        titleFilterCheckBox.TabIndex = 4;
+        titleFilterCheckBox.TabIndex = 1;
         titleFilterCheckBox.Text = "title";
         titleFilterCheckBox.UseVisualStyleBackColor = true;
         titleFilterCheckBox.CheckedChanged += titleFilterCheckBox_CheckedChanged;
@@ -197,11 +231,11 @@ partial class MainForm
         searchTextBox.BackColor = Color.FromArgb(40, 40, 40);
         searchTextBox.Font = new Font("Aptos Display", 11F);
         searchTextBox.ForeColor = SystemColors.ControlLight;
-        searchTextBox.Location = new Point(67, 24);
+        searchTextBox.Location = new Point(168, 24);
         searchTextBox.Name = "searchTextBox";
         searchTextBox.PlaceholderText = "type to search";
-        searchTextBox.Size = new Size(435, 25);
-        searchTextBox.TabIndex = 1;
+        searchTextBox.Size = new Size(334, 25);
+        searchTextBox.TabIndex = 0;
         searchTextBox.TextChanged += searchTextBox_TextChanged;
         // 
         // keyCountFilterTextBox
@@ -209,23 +243,24 @@ partial class MainForm
         keyCountFilterTextBox.BackColor = Color.FromArgb(40, 40, 40);
         keyCountFilterTextBox.Enabled = false;
         keyCountFilterTextBox.ForeColor = SystemColors.ControlLight;
-        keyCountFilterTextBox.Location = new Point(252, 79);
+        keyCountFilterTextBox.Location = new Point(252, 60);
         keyCountFilterTextBox.MaxLength = 1;
         keyCountFilterTextBox.Name = "keyCountFilterTextBox";
         keyCountFilterTextBox.Size = new Size(30, 25);
-        keyCountFilterTextBox.TabIndex = 3;
+        keyCountFilterTextBox.TabIndex = 8;
         keyCountFilterTextBox.Text = "4";
         keyCountFilterTextBox.TextAlign = HorizontalAlignment.Center;
+        keyCountFilterTextBox.TextChanged += keyCountFilterTextBox_TextChanged;
         // 
         // keyCountFilterCheckBox
         // 
         keyCountFilterCheckBox.AutoSize = true;
         keyCountFilterCheckBox.Font = new Font("Aptos Display", 10F);
         keyCountFilterCheckBox.ForeColor = SystemColors.ControlLight;
-        keyCountFilterCheckBox.Location = new Point(168, 81);
+        keyCountFilterCheckBox.Location = new Point(168, 62);
         keyCountFilterCheckBox.Name = "keyCountFilterCheckBox";
         keyCountFilterCheckBox.Size = new Size(81, 22);
-        keyCountFilterCheckBox.TabIndex = 2;
+        keyCountFilterCheckBox.TabIndex = 7;
         keyCountFilterCheckBox.Text = "key count";
         keyCountFilterCheckBox.UseVisualStyleBackColor = true;
         keyCountFilterCheckBox.CheckedChanged += keyCountFilterCheckBox_CheckedChanged;
@@ -238,15 +273,15 @@ partial class MainForm
         beatmapSetListView.ForeColor = SystemColors.ControlLight;
         beatmapSetListView.FullRowSelect = true;
         beatmapSetListView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-        listViewItem9.StateImageIndex = 0;
-        listViewItem10.StateImageIndex = 0;
-        beatmapSetListView.Items.AddRange(new ListViewItem[] { listViewItem9, listViewItem10 });
+        listViewItem1.StateImageIndex = 0;
+        listViewItem2.StateImageIndex = 0;
+        beatmapSetListView.Items.AddRange(new ListViewItem[] { listViewItem1, listViewItem2 });
         beatmapSetListView.Location = new Point(6, 146);
         beatmapSetListView.Name = "beatmapSetListView";
         beatmapSetListView.ShowItemToolTips = true;
         beatmapSetListView.Size = new Size(508, 286);
         beatmapSetListView.Sorting = SortOrder.Ascending;
-        beatmapSetListView.TabIndex = 0;
+        beatmapSetListView.TabIndex = 20;
         beatmapSetListView.UseCompatibleStateImageBehavior = false;
         beatmapSetListView.View = View.Details;
         beatmapSetListView.SelectedIndexChanged += beatmapSetListView_SelectedIndexChanged;
@@ -254,7 +289,7 @@ partial class MainForm
         // beatmapListViewTitleColumn
         // 
         beatmapListViewTitleColumn.Text = "title";
-        beatmapListViewTitleColumn.Width = 250;
+        beatmapListViewTitleColumn.Width = 200;
         // 
         // beatmapListViewArtistColumn
         // 
@@ -264,7 +299,7 @@ partial class MainForm
         // beatmapListViewMapperColumn
         // 
         beatmapListViewMapperColumn.Text = "mapper";
-        beatmapListViewMapperColumn.Width = 75;
+        beatmapListViewMapperColumn.Width = 120;
         // 
         // operationsGroupBox
         // 
@@ -294,7 +329,7 @@ partial class MainForm
         showLogsButton.Location = new Point(6, 94);
         showLogsButton.Name = "showLogsButton";
         showLogsButton.Size = new Size(128, 46);
-        showLogsButton.TabIndex = 13;
+        showLogsButton.TabIndex = 42;
         showLogsButton.Text = "show logs";
         showLogsButton.UseVisualStyleBackColor = false;
         showLogsButton.Click += showLogsButton_Click;
@@ -311,7 +346,7 @@ partial class MainForm
         reloadBeatmapDatabaseButton.Location = new Point(234, 76);
         reloadBeatmapDatabaseButton.Name = "reloadBeatmapDatabaseButton";
         reloadBeatmapDatabaseButton.Size = new Size(128, 64);
-        reloadBeatmapDatabaseButton.TabIndex = 12;
+        reloadBeatmapDatabaseButton.TabIndex = 44;
         reloadBeatmapDatabaseButton.Text = "reload beatmap database";
         reloadBeatmapDatabaseButton.UseVisualStyleBackColor = false;
         reloadBeatmapDatabaseButton.Click += reloadBeatmapDatabaseButton_Click;
@@ -328,7 +363,7 @@ partial class MainForm
         settingsButton.Location = new Point(234, 24);
         settingsButton.Name = "settingsButton";
         settingsButton.Size = new Size(128, 46);
-        settingsButton.TabIndex = 11;
+        settingsButton.TabIndex = 43;
         settingsButton.Text = "settings";
         settingsButton.UseVisualStyleBackColor = false;
         settingsButton.Click += settingsButton_Click;
@@ -346,7 +381,7 @@ partial class MainForm
         cancelCalculationButton.Location = new Point(110, 24);
         cancelCalculationButton.Name = "cancelCalculationButton";
         cancelCalculationButton.Size = new Size(98, 55);
-        cancelCalculationButton.TabIndex = 10;
+        cancelCalculationButton.TabIndex = 41;
         cancelCalculationButton.Text = "cancel calculation";
         cancelCalculationButton.UseVisualStyleBackColor = false;
         cancelCalculationButton.Click += cancelCalculationButton_Click;
@@ -363,7 +398,7 @@ partial class MainForm
         beginCalculationButton.Location = new Point(6, 24);
         beginCalculationButton.Name = "beginCalculationButton";
         beginCalculationButton.Size = new Size(98, 55);
-        beginCalculationButton.TabIndex = 9;
+        beginCalculationButton.TabIndex = 40;
         beginCalculationButton.Text = "begin calculation";
         beginCalculationButton.UseVisualStyleBackColor = false;
         beginCalculationButton.Click += beginCalculationButton_Click;
@@ -376,28 +411,29 @@ partial class MainForm
         difficultyListView.ForeColor = SystemColors.ControlLight;
         difficultyListView.FullRowSelect = true;
         difficultyListView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-        listViewItem11.StateImageIndex = 0;
-        listViewItem12.StateImageIndex = 0;
-        difficultyListView.Items.AddRange(new ListViewItem[] { listViewItem11, listViewItem12, listViewItem13, listViewItem14, listViewItem15, listViewItem16 });
+        listViewItem3.StateImageIndex = 0;
+        listViewItem4.StateImageIndex = 0;
+        difficultyListView.Items.AddRange(new ListViewItem[] { listViewItem3, listViewItem4, listViewItem5, listViewItem6, listViewItem7, listViewItem8 });
         difficultyListView.Location = new Point(18, 450);
         difficultyListView.Name = "difficultyListView";
         difficultyListView.ShowItemToolTips = true;
         difficultyListView.Size = new Size(508, 184);
         difficultyListView.Sorting = SortOrder.Ascending;
-        difficultyListView.TabIndex = 5;
+        difficultyListView.TabIndex = 30;
         difficultyListView.UseCompatibleStateImageBehavior = false;
         difficultyListView.View = View.Details;
+        difficultyListView.SelectedIndexChanged += difficultyListView_SelectedIndexChanged;
         // 
         // columnHeader1
         // 
         columnHeader1.Text = "difficulty name";
-        columnHeader1.Width = 150;
+        columnHeader1.Width = 175;
         // 
         // columnHeader2
         // 
-        columnHeader2.Text = "key count";
+        columnHeader2.Text = "keys";
         columnHeader2.TextAlign = HorizontalAlignment.Center;
-        columnHeader2.Width = 75;
+        columnHeader2.Width = 50;
         // 
         // columnHeader3
         // 
@@ -445,6 +481,7 @@ partial class MainForm
         Name = "MainForm";
         Text = "osu!mania difficulty analyzer";
         Load += MainForm_Load;
+        Shown += MainForm_Shown;
         beatmapGroupBox.ResumeLayout(false);
         filterGroupBox.ResumeLayout(false);
         filterGroupBox.PerformLayout();
@@ -461,7 +498,7 @@ partial class MainForm
     private ColumnHeader beatmapListViewArtistColumn;
     private ColumnHeader beatmapListViewMapperColumn;
     private TextBox searchTextBox;
-    private TextBox keyCountFilterTextBox;
+    private KeyCountFilterTextBox keyCountFilterTextBox;
     private CheckBox keyCountFilterCheckBox;
     private GroupBox filterGroupBox;
     private CheckBox difficultyFilterCheckBox;
@@ -483,4 +520,6 @@ partial class MainForm
     private Button cancelCalculationButton;
     private Button beginCalculationButton;
     private Button showLogsButton;
+    private CheckBox tagsFilterCheckBox;
+    private CheckBox sourceFilterCheckBox;
 }

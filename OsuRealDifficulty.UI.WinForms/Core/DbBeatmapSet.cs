@@ -10,6 +10,13 @@ internal sealed class DbBeatmapSet
 
     public IReadOnlyList<DbBeatmap> Beatmaps => _beatmaps;
 
+    public string Title => Beatmaps[0].Title;
+    public string TitleUnicode => Beatmaps[0].TitleUnicode;
+    public string Artist => Beatmaps[0].Artist;
+    public string ArtistUnicode => Beatmaps[0].ArtistUnicode;
+    public string Source => Beatmaps[0].Source;
+    public string Tags => Beatmaps[0].Tags;
+
     public void AddBeatmap(DbBeatmap beatmap)
     {
         _beatmaps.Add(beatmap);

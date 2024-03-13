@@ -126,6 +126,18 @@ public sealed class ManiaBeatmapInfoConstruction
         Beatmap beatmap,
         EncapsulatedTimingPointList timingPoints)
     {
+        if (beatmap.HitObjects.Count is 0)
+        {
+            var firstEncapsulation = timingPoints.Encapsulations.FirstOrDefault();
+            if (firstEncapsulation is null)
+            {
+                // Assume 180 BPM as the default
+                return BeatLength.FromBpm(180);
+            }
+
+            return firstEncapsulation.Parent.BeatLength();
+        }
+
         int firstStartOffset = beatmap.HitObjects.Min(s => s.StartTime);
         int lastEndOffset = beatmap.HitObjects.Max(s => s.EndTime);
 

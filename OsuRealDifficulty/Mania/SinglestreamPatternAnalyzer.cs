@@ -96,9 +96,18 @@ public sealed class SinglestreamPatternAnalyzer
 
         // Column distance matters more for parsing difficulty
         var columnDistance = pattern.TotalColumnDistance;
+        // Column distance of 0 = jacks
+        // Jacks will represent this pattern
+        if (columnDistance is 0)
+            return 0;
+
+        var averageColumnDistance = pattern.AverageColumnDistance;
+
         var nps = pattern.NotesPerSecond;
-        var value = Math.Log(nps, 4) * Math.Pow(columnDistance, 1.3) / 3;
-        return value;
+        var npsMultiplier = nps / 15;
+        var averageColumnDistanceValue = Math.Pow(averageColumnDistance, 1.2);
+        var columnDistanceValue = Math.Log(columnDistance, 1.2) * npsMultiplier * averageColumnDistanceValue;
+        return columnDistanceValue / 12;
     }
 
     public override ref CalculationResult CalculationResultRef(

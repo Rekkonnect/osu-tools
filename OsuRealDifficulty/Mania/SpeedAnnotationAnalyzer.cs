@@ -1,5 +1,6 @@
 ﻿namespace OsuRealDifficulty.Mania;
 
+// TODO: Rename
 public sealed class SpeedAnnotationAnalyzer
     : IBeatmapDifficultyAnalyzer
 {
@@ -22,7 +23,7 @@ public sealed class SpeedAnnotationAnalyzer
             timeDifferences[i - 1] = chords[i].Offset - chords[i - 1].Offset;
         }
 
-        double timeDifferenceMean2 = SomeMath.Mean2(timeDifferences);
+        double timeDifferenceMean2 = SomeMath.Mean(timeDifferences);
         double assumedPlayTime = timeDifferenceMean2 * timeDifferences.Length;
         double assumedPlayTimeBonus = Math.Max(1, Math.Log(assumedPlayTime) / 4);
         double timeDifferenceMeanScore = Math.Pow(500 / timeDifferenceMean2, 1.25);

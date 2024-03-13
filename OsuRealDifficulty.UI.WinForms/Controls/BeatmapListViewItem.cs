@@ -9,13 +9,15 @@ internal sealed class BeatmapListViewItem : ListViewItem
 
     public BeatmapListViewItem(DbBeatmap beatmap)
     {
+        const string hpOdFormatter = "G2";
+
         Beatmap = beatmap;
 
         Text = beatmap.Difficulty;
 
         SubItems.Add(beatmap.ManiaKeyCount().ToString());
-        SubItems.Add(beatmap.HPDrain.ToString());
-        SubItems.Add(beatmap.OverallDifficulty.ToString());
+        SubItems.Add(beatmap.HPDrain.ToString(hpOdFormatter));
+        SubItems.Add(beatmap.OverallDifficulty.ToString(hpOdFormatter));
         SubItems.Add(beatmap.TotalObjectCount().ToString());
         SubItems.Add(beatmap.CirclesCount.ToString());
         SubItems.Add(beatmap.SlidersCount.ToString());

@@ -7,6 +7,7 @@ namespace OsuRealDifficulty.UI.WinForms.Core;
 internal sealed class DbBeatmapSetDatabase
 {
     private readonly Dictionary<int, DbBeatmapSet> _beatmapSets = new();
+    private readonly BeatmapSetIdDictionary _beatmapSetIdDictionary = new();
 
     public IEnumerable<DbBeatmapSet> BeatmapSets => _beatmapSets.Values;
     public IEnumerable<DbBeatmap> AllBeatmaps => BeatmapSets.SelectMany(s => s.Beatmaps);
@@ -25,9 +26,19 @@ internal sealed class DbBeatmapSetDatabase
         set.AddBeatmap(beatmap);
     }
 
+    private int GetOrInventBeatmapSetId(DbBeatmap beatmap)
+    {
+        if (beatmap.HasNoBeatmapSetValue())
+        {
+            return _beatmapSetIdDictionary.IdFor($"{beatmap.Title} - {beatmap.Artist}");
+        }
+
+        return beatmap.BeatmapSetId;
+    }
+
     private DbBeatmapSet GetBeatmapSetFor(DbBeatmap beatmap)
     {
-        int id = beatmap.BeatmapSetId;
+        int id = GetOrInventBeatmapSetId(beatmap);
         return GetBeatmapSetForId(id);
     }
 
@@ -62,5 +73,28 @@ internal sealed class DbBeatmapSetDatabase
     {
         return BeatmapSets
             .Where(s => s.ContainsManiaWithKeyCount(maniaKeyCount));
+    }
+
+    private sealed class BeatmapSetIdDictionary
+    {
+        private readonly Dictionary<string, int> _ids = new();
+
+        public int IdFor(string name)
+        {
+            bool found = _ids.TryGetValue(name, out var id);
+            if (found)
+            {
+                return id;
+            }
+
+            return Create(name);
+        }
+
+        private int Create(string name)
+        {
+            int nextId = -1000 - _ids.Count;
+            _ids[name] = nextId;
+            return nextId;
+        }
     }
 }
