@@ -32,16 +32,16 @@ public sealed class TrillPatternAnalyzer
                 var firstPatternInt = firstPattern.Data;
                 var secondPatternInt = secondPattern.Data;
 
+                // Find the common press columns (which are jacks)
+                var common = firstPatternInt & secondPatternInt;
+                firstPatternInt &= ~common;
+                secondPatternInt &= ~common;
+
                 if (firstPatternInt is 0)
                     return;
 
                 if (secondPatternInt is 0)
                     return;
-
-                // Find the common press columns (which are jacks)
-                var common = firstPatternInt & secondPatternInt;
-                firstPatternInt &= ~common;
-                secondPatternInt &= ~common;
 
                 var thirdPattern = pressColumns[i + 2];
                 var firstThirdCommon = firstPatternInt & thirdPattern.Data;
@@ -145,6 +145,11 @@ public sealed class TrillPatternAnalyzer
                     noteCount,
                     patternColumns);
 
+                if (trillPattern.NoteCount < minTrillLength)
+                {
+                    throw new UnreachableException("We have registered a trill with too small note count");
+                }
+
                 context.AddAnnotation(trillPattern);
                 BeatmapNotePatternAnalyzerHelpers.RemovePressColumns(
                     pressColumns,
@@ -168,7 +173,7 @@ public sealed class TrillPatternAnalyzer
         int columnCount = pattern.ColumnCount;
         var count = pattern.NoteCount;
         // TODO: Test this value
-        double intensity = 2D - (2D / (count - 2));
+        double intensity = 2D - (1.5D / (count - 2));
         var value = intensity * cps * Math.Sqrt(columnCount) / 3;
         return value;
     }

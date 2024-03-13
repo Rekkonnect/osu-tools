@@ -79,6 +79,13 @@ public sealed class BeatmapAnalyzerDriver(ManiaBeatmapInfo beatmapInfo)
     /// </summary>
     public ExceptionAction? ExceptionAction;
 
+    public readonly RefreshRequestChannel AnalyzerExecutionRequestChannel
+        = RefreshRequestChannel.Create(new UnboundedChannelOptions
+        {
+            SingleReader = false,
+            SingleWriter = false,
+        });
+
     public BeatmapAnalyzerDriver Add(IBeatmapAnalyzer analyzer)
     {
         return Add([analyzer]);
@@ -106,7 +113,7 @@ public sealed class BeatmapAnalyzerDriver(ManiaBeatmapInfo beatmapInfo)
                 annotationChannelOptions);
 
         var esotericDiagnosticChannel
-            = Channel.CreateUnbounded<EsotericDiagnosticBag>(annotationChannelOptions);
+            = new ChannelFactory<EsotericDiagnosticBag>(annotationChannelOptions);
 
         var finalEsotericDiagnosticBag = new EsotericDiagnosticBag();
 
@@ -133,7 +140,7 @@ public sealed class BeatmapAnalyzerDriver(ManiaBeatmapInfo beatmapInfo)
             await normalizedChordListChannelable.ConsumeAllFromChannel(
                 cancellationToken);
 
-            var pendingDiagnosticBags = esotericDiagnosticChannel.Reader.ReadAllAsync(
+            var pendingDiagnosticBags = esotericDiagnosticChannel.ConsumeReset(
                 cancellationToken);
             await foreach (var diagnosticBag in pendingDiagnosticBags)
             {
@@ -163,11 +170,13 @@ public sealed class BeatmapAnalyzerDriver(ManiaBeatmapInfo beatmapInfo)
                     await normalizedChordListChannelable.CollectionChannel.Writer.WriteAsync(
                         context.NormalizedChordListAnnotations, cancellationToken);
 
-                    await esotericDiagnosticChannel.Writer.WriteAsync(
+                    await esotericDiagnosticChannel.CurrentChannel.Writer.WriteAsync(
                         context.AnalyzerDiagnostics,
                         cancellationToken);
 
                     cancellationToken.ThrowIfCancellationRequested();
+
+                    await AnalyzerExecutionRequestChannel.WriteOne(cancellationToken);
                 }
                 catch (OperationCanceledException)
                 {
@@ -201,20 +210,44 @@ public sealed class BeatmapAnalyzerDriver(ManiaBeatmapInfo beatmapInfo)
     {
         public readonly TypeKeyedList<T> Values = new();
 
-        public readonly Channel<IEnumerable<T>> CollectionChannel
-            = Channel.CreateUnbounded<IEnumerable<T>>(
-                collectionChannelOptions);
+        private readonly ChannelFactory<IEnumerable<T>> _collectionChannelFactory
+            = new(collectionChannelOptions);
+
+        public Channel<IEnumerable<T>> CollectionChannel
+            => _collectionChannelFactory.CurrentChannel;
 
         public async Task ConsumeAllFromChannel(CancellationToken cancellationToken)
         {
-            var readCollections = CollectionChannel.Reader
-                .ReadAllAsync(cancellationToken);
+            var readCollections = _collectionChannelFactory.ConsumeReset(cancellationToken);
 
             await foreach (var readCollection in readCollections)
             {
                 Values.AddRange(readCollection);
                 cancellationToken.ThrowIfCancellationRequested();
             }
+        }
+    }
+
+    // I'm probably abusing channels here
+    private sealed class ChannelFactory<T>(UnboundedChannelOptions channelOptions)
+    {
+        private readonly UnboundedChannelOptions _channelOptions = channelOptions;
+
+        private Channel<T> _channel = Channel.CreateUnbounded<T>(channelOptions);
+
+        public Channel<T> CurrentChannel => _channel;
+
+        public IAsyncEnumerable<T> ConsumeReset(CancellationToken cancellationToken = default)
+        {
+            _channel.Writer.Complete();
+            var result = _channel.Reader.ReadAllAsync(cancellationToken);
+            RefreshChannel();
+            return result;
+        }
+
+        private void RefreshChannel()
+        {
+            _channel = Channel.CreateUnbounded<T>(_channelOptions);
         }
     }
 }

@@ -5,6 +5,8 @@ namespace OsuRealDifficulty.UI.WinForms.Controls;
 
 public partial class AnalysisResultDisplay : UserControl
 {
+    private CancellableTask? _refreshListenTask = null;
+
     private DifficultyCalculationProfile _calculationProfile;
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -147,5 +149,47 @@ public partial class AnalysisResultDisplay : UserControl
         double invalidResult = CalculationResult.Pending)
     {
         return valid ? result : invalidResult;
+    }
+
+    public void BeginListeningForRequests(
+        RefreshRequestChannel requestChannel,
+        CancellationTokenSource cancellationTokenSource)
+    {
+        var task = ListenAsync(requestChannel, cancellationTokenSource.Token);
+        _refreshListenTask = new(task, cancellationTokenSource);
+    }
+
+    public void StopListeningForRequests()
+    {
+        if (_refreshListenTask is null)
+        {
+            return;
+        }
+
+        try
+        {
+            // This might throw after being disposed the moment the calculation is over
+            _refreshListenTask.CancellationTokenSource.Cancel();
+        }
+        catch (Exception ex)
+        {
+            // log this somewhere
+        }
+        finally
+        {
+            _refreshListenTask = null;
+        }
+    }
+
+    private async Task ListenAsync(
+        RefreshRequestChannel requestChannel,
+        CancellationToken cancellationToken = default)
+    {
+        while (true)
+        {
+            const int refreshesPerSecond = 20;
+            await requestChannel.ConsumeAllRequests(cancellationToken);
+            await Task.Delay(1000 / refreshesPerSecond, cancellationToken);
+        }
     }
 }

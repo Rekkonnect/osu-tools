@@ -4,6 +4,9 @@ public class CustomDifficultyCalculationProfile(
     AnalyzedDifficulty starWeights, AnalyzedDifficulty instabilityWeights)
     : DifficultyCalculationProfile
 {
+    public AnalyzedDifficulty StarWeights { get; } = starWeights;
+    public AnalyzedDifficulty InstabilityWeights { get; } = instabilityWeights;
+
     public override EstimatedDifficultyStats Calculate(AnalyzedDifficulty difficulty)
     {
         return new(
@@ -13,11 +16,11 @@ public class CustomDifficultyCalculationProfile(
 
     private SegmentedOverallDifficulty CalculateStarRating(AnalyzedDifficulty difficulty)
     {
-        return CalculateWeights(difficulty, starWeights);
+        return CalculateWeights(difficulty, StarWeights);
     }
     private double CalculateInstabilityRating(AnalyzedDifficulty difficulty)
     {
-        return CalculateWeights(difficulty, instabilityWeights).Overall * 20;
+        return CalculateWeights(difficulty, InstabilityWeights).Overall * 20;
     }
 
     private static SegmentedOverallDifficulty CalculateWeights(

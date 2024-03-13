@@ -31,7 +31,7 @@ public interface IPattern : IMapAnnotation
     public int TimeDistance => OffsetEnd - OffsetStart;
 }
 
-public interface ITwoNotePattern : IPattern
+public interface ITwoNotePattern : INotePattern
 {
     public int FirstOffset { get; }
     public int SecondOffset { get; }

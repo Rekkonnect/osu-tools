@@ -3,7 +3,7 @@
 public class DifficultyCalculationProfile_4K()
     : CustomDifficultyCalculationProfile(StarWeights, InstabilityWeights)
 {
-    public static DifficultyCalculationProfile_4K Instance { get; } = new();
+    public static DifficultyCalculationProfile_4K Instance { get; }
 
     public static readonly AnalyzedDifficulty StarWeights = new()
     {
@@ -104,4 +104,9 @@ public class DifficultyCalculationProfile_4K()
             VisualDensity = 0.1,
         },
     };
+
+    static DifficultyCalculationProfile_4K()
+    {
+        Instance = new();
+    }
 }

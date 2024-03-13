@@ -123,11 +123,10 @@ partial class AnalysisResultDisplay
         outerGroupBox.Controls.Add(jackDifficultyCategoryGroupBox);
         outerGroupBox.Controls.Add(dexterityDifficultyCategoryGroupBox);
         outerGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        outerGroupBox.ForeColor = SystemColors.ControlLight;
+        outerGroupBox.ForeColor = Color.Silver;
         outerGroupBox.Location = new Point(0, 0);
-        outerGroupBox.Margin = new Padding(4, 3, 4, 3);
         outerGroupBox.Name = "outerGroupBox";
-        outerGroupBox.Padding = new Padding(4, 3, 4, 3);
+        outerGroupBox.Padding = new Padding(6);
         outerGroupBox.Size = new Size(368, 450);
         outerGroupBox.TabIndex = 2;
         outerGroupBox.TabStop = false;
@@ -140,13 +139,14 @@ partial class AnalysisResultDisplay
         groupBox1.Controls.Add(instabilityLabel);
         groupBox1.Controls.Add(label29);
         groupBox1.Controls.Add(overallLabel);
+        groupBox1.Dock = DockStyle.Bottom;
         groupBox1.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        groupBox1.ForeColor = SystemColors.ControlLight;
-        groupBox1.Location = new Point(6, 369);
-        groupBox1.Margin = new Padding(4, 3, 4, 3);
+        groupBox1.ForeColor = Color.Silver;
+        groupBox1.Location = new Point(6, 372);
+        groupBox1.Margin = new Padding(6);
         groupBox1.Name = "groupBox1";
         groupBox1.Padding = new Padding(4, 3, 4, 3);
-        groupBox1.Size = new Size(356, 75);
+        groupBox1.Size = new Size(356, 72);
         groupBox1.TabIndex = 20;
         groupBox1.TabStop = false;
         groupBox1.Text = "overall";
@@ -155,7 +155,8 @@ partial class AnalysisResultDisplay
         // 
         label30.AutoSize = true;
         label30.Font = new Font("Aptos Display", 15F, FontStyle.Bold);
-        label30.Location = new Point(184, 21);
+        label30.ForeColor = Color.Silver;
+        label30.Location = new Point(182, 18);
         label30.Margin = new Padding(4, 0, 4, 0);
         label30.Name = "label30";
         label30.Size = new Size(99, 25);
@@ -167,7 +168,8 @@ partial class AnalysisResultDisplay
         instabilityLabel.AutoSize = true;
         instabilityLabel.DifficultyValue = 117.56D;
         instabilityLabel.Font = new Font("Aptos Display", 15F, FontStyle.Bold);
-        instabilityLabel.Location = new Point(273, 43);
+        instabilityLabel.ForeColor = Color.Silver;
+        instabilityLabel.Location = new Point(271, 40);
         instabilityLabel.Margin = new Padding(4, 0, 4, 0);
         instabilityLabel.Name = "instabilityLabel";
         instabilityLabel.Size = new Size(72, 25);
@@ -178,7 +180,8 @@ partial class AnalysisResultDisplay
         // 
         label29.AutoSize = true;
         label29.Font = new Font("Aptos Display", 15F, FontStyle.Bold);
-        label29.Location = new Point(12, 21);
+        label29.ForeColor = Color.Silver;
+        label29.Location = new Point(10, 18);
         label29.Margin = new Padding(4, 0, 4, 0);
         label29.Name = "label29";
         label29.Size = new Size(89, 25);
@@ -190,7 +193,8 @@ partial class AnalysisResultDisplay
         overallLabel.AutoSize = true;
         overallLabel.DifficultyValue = 321.456D;
         overallLabel.Font = new Font("Aptos Display", 15F, FontStyle.Bold);
-        overallLabel.Location = new Point(92, 43);
+        overallLabel.ForeColor = Color.Silver;
+        overallLabel.Location = new Point(90, 40);
         overallLabel.Margin = new Padding(4, 0, 4, 0);
         overallLabel.Name = "overallLabel";
         overallLabel.Size = new Size(72, 25);
@@ -212,11 +216,9 @@ partial class AnalysisResultDisplay
         groupBox4.Controls.Add(lnShieldLabel);
         groupBox4.Controls.Add(label5);
         groupBox4.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        groupBox4.ForeColor = SystemColors.ControlLight;
+        groupBox4.ForeColor = Color.Silver;
         groupBox4.Location = new Point(6, 247);
-        groupBox4.Margin = new Padding(4, 3, 4, 3);
         groupBox4.Name = "groupBox4";
-        groupBox4.Padding = new Padding(4, 3, 4, 3);
         groupBox4.Size = new Size(175, 116);
         groupBox4.TabIndex = 5;
         groupBox4.TabStop = false;
@@ -227,7 +229,8 @@ partial class AnalysisResultDisplay
         shieldLabel.AutoSize = true;
         shieldLabel.DifficultyValue = 9.99D;
         shieldLabel.Font = new Font("Aptos Display", 10F);
-        shieldLabel.Location = new Point(125, 74);
+        shieldLabel.ForeColor = Color.Silver;
+        shieldLabel.Location = new Point(124, 74);
         shieldLabel.Margin = new Padding(4, 0, 4, 0);
         shieldLabel.Name = "shieldLabel";
         shieldLabel.Size = new Size(32, 18);
@@ -238,7 +241,8 @@ partial class AnalysisResultDisplay
         // 
         label25.AutoSize = true;
         label25.Font = new Font("Aptos Display", 10F);
-        label25.Location = new Point(6, 74);
+        label25.ForeColor = Color.Silver;
+        label25.Location = new Point(5, 74);
         label25.Margin = new Padding(4, 0, 4, 0);
         label25.Name = "label25";
         label25.Size = new Size(41, 18);
@@ -250,7 +254,8 @@ partial class AnalysisResultDisplay
         riceMixLabel.AutoSize = true;
         riceMixLabel.DifficultyValue = 9.99D;
         riceMixLabel.Font = new Font("Aptos Display", 10F);
-        riceMixLabel.Location = new Point(125, 20);
+        riceMixLabel.ForeColor = Color.Silver;
+        riceMixLabel.Location = new Point(124, 20);
         riceMixLabel.Margin = new Padding(4, 0, 4, 0);
         riceMixLabel.Name = "riceMixLabel";
         riceMixLabel.Size = new Size(32, 18);
@@ -261,7 +266,8 @@ partial class AnalysisResultDisplay
         // 
         label26.AutoSize = true;
         label26.Font = new Font("Aptos Display", 10F);
-        label26.Location = new Point(6, 20);
+        label26.ForeColor = Color.Silver;
+        label26.Location = new Point(5, 20);
         label26.Margin = new Padding(4, 0, 4, 0);
         label26.Name = "label26";
         label26.Size = new Size(52, 18);
@@ -272,7 +278,8 @@ partial class AnalysisResultDisplay
         // 
         longNotesCategoryLabel.AutoSize = true;
         longNotesCategoryLabel.DifficultyValue = 10D;
-        longNotesCategoryLabel.Location = new Point(125, 0);
+        longNotesCategoryLabel.ForeColor = Color.Silver;
+        longNotesCategoryLabel.Location = new Point(124, 0);
         longNotesCategoryLabel.Margin = new Padding(4, 0, 4, 0);
         longNotesCategoryLabel.Name = "longNotesCategoryLabel";
         longNotesCategoryLabel.Size = new Size(45, 19);
@@ -284,7 +291,8 @@ partial class AnalysisResultDisplay
         riceLnLabel.AutoSize = true;
         riceLnLabel.DifficultyValue = 9.99D;
         riceLnLabel.Font = new Font("Aptos Display", 10F);
-        riceLnLabel.Location = new Point(125, 38);
+        riceLnLabel.ForeColor = Color.Silver;
+        riceLnLabel.Location = new Point(124, 38);
         riceLnLabel.Margin = new Padding(4, 0, 4, 0);
         riceLnLabel.Name = "riceLnLabel";
         riceLnLabel.Size = new Size(32, 18);
@@ -295,7 +303,8 @@ partial class AnalysisResultDisplay
         // 
         label2.AutoSize = true;
         label2.Font = new Font("Aptos Display", 10F);
-        label2.Location = new Point(6, 38);
+        label2.ForeColor = Color.Silver;
+        label2.Location = new Point(5, 38);
         label2.Margin = new Padding(4, 0, 4, 0);
         label2.Name = "label2";
         label2.Size = new Size(42, 18);
@@ -307,7 +316,8 @@ partial class AnalysisResultDisplay
         inverseLabel.AutoSize = true;
         inverseLabel.DifficultyValue = 9.99D;
         inverseLabel.Font = new Font("Aptos Display", 10F);
-        inverseLabel.Location = new Point(125, 56);
+        inverseLabel.ForeColor = Color.Silver;
+        inverseLabel.Location = new Point(124, 56);
         inverseLabel.Margin = new Padding(4, 0, 4, 0);
         inverseLabel.Name = "inverseLabel";
         inverseLabel.Size = new Size(32, 18);
@@ -318,7 +328,8 @@ partial class AnalysisResultDisplay
         // 
         label3.AutoSize = true;
         label3.Font = new Font("Aptos Display", 10F);
-        label3.Location = new Point(6, 56);
+        label3.ForeColor = Color.Silver;
+        label3.Location = new Point(5, 56);
         label3.Margin = new Padding(4, 0, 4, 0);
         label3.Name = "label3";
         label3.Size = new Size(48, 18);
@@ -330,7 +341,8 @@ partial class AnalysisResultDisplay
         lnShieldLabel.AutoSize = true;
         lnShieldLabel.DifficultyValue = 12D;
         lnShieldLabel.Font = new Font("Aptos Display", 10F);
-        lnShieldLabel.Location = new Point(125, 92);
+        lnShieldLabel.ForeColor = Color.Silver;
+        lnShieldLabel.Location = new Point(124, 92);
         lnShieldLabel.Margin = new Padding(4, 0, 4, 0);
         lnShieldLabel.Name = "lnShieldLabel";
         lnShieldLabel.Size = new Size(39, 18);
@@ -341,7 +353,8 @@ partial class AnalysisResultDisplay
         // 
         label5.AutoSize = true;
         label5.Font = new Font("Aptos Display", 10F);
-        label5.Location = new Point(6, 92);
+        label5.ForeColor = Color.Silver;
+        label5.Location = new Point(5, 92);
         label5.Margin = new Padding(4, 0, 4, 0);
         label5.Name = "label5";
         label5.Size = new Size(54, 18);
@@ -362,11 +375,9 @@ partial class AnalysisResultDisplay
         groupBox5.Controls.Add(fastLabel);
         groupBox5.Controls.Add(label17);
         groupBox5.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        groupBox5.ForeColor = SystemColors.ControlLight;
+        groupBox5.ForeColor = Color.Silver;
         groupBox5.Location = new Point(187, 247);
-        groupBox5.Margin = new Padding(4, 3, 4, 3);
         groupBox5.Name = "groupBox5";
-        groupBox5.Padding = new Padding(4, 3, 4, 3);
         groupBox5.Size = new Size(175, 116);
         groupBox5.TabIndex = 4;
         groupBox5.TabStop = false;
@@ -377,7 +388,8 @@ partial class AnalysisResultDisplay
         visualDensityLabel.AutoSize = true;
         visualDensityLabel.DifficultyValue = 17.3D;
         visualDensityLabel.Font = new Font("Aptos Display", 10F);
-        visualDensityLabel.Location = new Point(125, 92);
+        visualDensityLabel.ForeColor = Color.Silver;
+        visualDensityLabel.Location = new Point(124, 92);
         visualDensityLabel.Margin = new Padding(4, 0, 4, 0);
         visualDensityLabel.Name = "visualDensityLabel";
         visualDensityLabel.Size = new Size(39, 18);
@@ -388,7 +400,8 @@ partial class AnalysisResultDisplay
         // 
         label27.AutoSize = true;
         label27.Font = new Font("Aptos Display", 10F);
-        label27.Location = new Point(6, 92);
+        label27.ForeColor = Color.Silver;
+        label27.Location = new Point(5, 92);
         label27.Margin = new Padding(4, 0, 4, 0);
         label27.Name = "label27";
         label27.Size = new Size(83, 18);
@@ -400,7 +413,8 @@ partial class AnalysisResultDisplay
         burstLabel.AutoSize = true;
         burstLabel.DifficultyValue = 9.99D;
         burstLabel.Font = new Font("Aptos Display", 10F);
-        burstLabel.Location = new Point(125, 56);
+        burstLabel.ForeColor = Color.Silver;
+        burstLabel.Location = new Point(124, 56);
         burstLabel.Margin = new Padding(4, 0, 4, 0);
         burstLabel.Name = "burstLabel";
         burstLabel.Size = new Size(32, 18);
@@ -411,7 +425,8 @@ partial class AnalysisResultDisplay
         // 
         label28.AutoSize = true;
         label28.Font = new Font("Aptos Display", 10F);
-        label28.Location = new Point(6, 56);
+        label28.ForeColor = Color.Silver;
+        label28.Location = new Point(5, 56);
         label28.Margin = new Padding(4, 0, 4, 0);
         label28.Name = "label28";
         label28.Size = new Size(36, 18);
@@ -422,7 +437,8 @@ partial class AnalysisResultDisplay
         // 
         scrollingCategoryLabel.AutoSize = true;
         scrollingCategoryLabel.DifficultyValue = 10D;
-        scrollingCategoryLabel.Location = new Point(125, 0);
+        scrollingCategoryLabel.ForeColor = Color.Silver;
+        scrollingCategoryLabel.Location = new Point(124, 0);
         scrollingCategoryLabel.Margin = new Padding(4, 0, 4, 0);
         scrollingCategoryLabel.Name = "scrollingCategoryLabel";
         scrollingCategoryLabel.Size = new Size(45, 19);
@@ -434,7 +450,8 @@ partial class AnalysisResultDisplay
         stutterLabel.AutoSize = true;
         stutterLabel.DifficultyValue = 9.99D;
         stutterLabel.Font = new Font("Aptos Display", 10F);
-        stutterLabel.Location = new Point(125, 74);
+        stutterLabel.ForeColor = Color.Silver;
+        stutterLabel.Location = new Point(124, 74);
         stutterLabel.Margin = new Padding(4, 0, 4, 0);
         stutterLabel.Name = "stutterLabel";
         stutterLabel.Size = new Size(32, 18);
@@ -445,7 +462,8 @@ partial class AnalysisResultDisplay
         // 
         label13.AutoSize = true;
         label13.Font = new Font("Aptos Display", 10F);
-        label13.Location = new Point(6, 74);
+        label13.ForeColor = Color.Silver;
+        label13.Location = new Point(5, 74);
         label13.Margin = new Padding(4, 0, 4, 0);
         label13.Name = "label13";
         label13.Size = new Size(44, 18);
@@ -457,7 +475,8 @@ partial class AnalysisResultDisplay
         slowLabel.AutoSize = true;
         slowLabel.DifficultyValue = 9.99D;
         slowLabel.Font = new Font("Aptos Display", 10F);
-        slowLabel.Location = new Point(125, 20);
+        slowLabel.ForeColor = Color.Silver;
+        slowLabel.Location = new Point(124, 20);
         slowLabel.Margin = new Padding(4, 0, 4, 0);
         slowLabel.Name = "slowLabel";
         slowLabel.Size = new Size(32, 18);
@@ -468,7 +487,8 @@ partial class AnalysisResultDisplay
         // 
         label15.AutoSize = true;
         label15.Font = new Font("Aptos Display", 10F);
-        label15.Location = new Point(6, 20);
+        label15.ForeColor = Color.Silver;
+        label15.Location = new Point(5, 20);
         label15.Margin = new Padding(4, 0, 4, 0);
         label15.Name = "label15";
         label15.Size = new Size(34, 18);
@@ -480,7 +500,8 @@ partial class AnalysisResultDisplay
         fastLabel.AutoSize = true;
         fastLabel.DifficultyValue = 9.99D;
         fastLabel.Font = new Font("Aptos Display", 10F);
-        fastLabel.Location = new Point(125, 38);
+        fastLabel.ForeColor = Color.Silver;
+        fastLabel.Location = new Point(124, 38);
         fastLabel.Margin = new Padding(4, 0, 4, 0);
         fastLabel.Name = "fastLabel";
         fastLabel.Size = new Size(32, 18);
@@ -491,7 +512,8 @@ partial class AnalysisResultDisplay
         // 
         label17.AutoSize = true;
         label17.Font = new Font("Aptos Display", 10F);
-        label17.Location = new Point(6, 38);
+        label17.ForeColor = Color.Silver;
+        label17.Location = new Point(5, 38);
         label17.Margin = new Padding(4, 0, 4, 0);
         label17.Name = "label17";
         label17.Size = new Size(29, 18);
@@ -509,11 +531,9 @@ partial class AnalysisResultDisplay
         groupBox2.Controls.Add(flamLabel);
         groupBox2.Controls.Add(label11);
         groupBox2.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        groupBox2.ForeColor = SystemColors.ControlLight;
+        groupBox2.ForeColor = Color.Silver;
         groupBox2.Location = new Point(6, 160);
-        groupBox2.Margin = new Padding(4, 3, 4, 3);
         groupBox2.Name = "groupBox2";
-        groupBox2.Padding = new Padding(4, 3, 4, 3);
         groupBox2.Size = new Size(175, 81);
         groupBox2.TabIndex = 3;
         groupBox2.TabStop = false;
@@ -523,7 +543,8 @@ partial class AnalysisResultDisplay
         // 
         techCategoryLabel.AutoSize = true;
         techCategoryLabel.DifficultyValue = 10D;
-        techCategoryLabel.Location = new Point(125, 0);
+        techCategoryLabel.ForeColor = Color.Silver;
+        techCategoryLabel.Location = new Point(124, 0);
         techCategoryLabel.Margin = new Padding(4, 0, 4, 0);
         techCategoryLabel.Name = "techCategoryLabel";
         techCategoryLabel.Size = new Size(45, 19);
@@ -535,7 +556,8 @@ partial class AnalysisResultDisplay
         rhythmIrregularityLabel.AutoSize = true;
         rhythmIrregularityLabel.DifficultyValue = 9.99D;
         rhythmIrregularityLabel.Font = new Font("Aptos Display", 10F);
-        rhythmIrregularityLabel.Location = new Point(125, 38);
+        rhythmIrregularityLabel.ForeColor = Color.Silver;
+        rhythmIrregularityLabel.Location = new Point(124, 38);
         rhythmIrregularityLabel.Margin = new Padding(4, 0, 4, 0);
         rhythmIrregularityLabel.Name = "rhythmIrregularityLabel";
         rhythmIrregularityLabel.Size = new Size(32, 18);
@@ -546,7 +568,8 @@ partial class AnalysisResultDisplay
         // 
         label7.AutoSize = true;
         label7.Font = new Font("Aptos Display", 10F);
-        label7.Location = new Point(6, 38);
+        label7.ForeColor = Color.Silver;
+        label7.Location = new Point(5, 38);
         label7.Margin = new Padding(4, 0, 4, 0);
         label7.Name = "label7";
         label7.Size = new Size(108, 18);
@@ -558,7 +581,8 @@ partial class AnalysisResultDisplay
         patternSwitchLabel.AutoSize = true;
         patternSwitchLabel.DifficultyValue = 9.99D;
         patternSwitchLabel.Font = new Font("Aptos Display", 10F);
-        patternSwitchLabel.Location = new Point(125, 20);
+        patternSwitchLabel.ForeColor = Color.Silver;
+        patternSwitchLabel.Location = new Point(124, 20);
         patternSwitchLabel.Margin = new Padding(4, 0, 4, 0);
         patternSwitchLabel.Name = "patternSwitchLabel";
         patternSwitchLabel.Size = new Size(32, 18);
@@ -569,7 +593,8 @@ partial class AnalysisResultDisplay
         // 
         label9.AutoSize = true;
         label9.Font = new Font("Aptos Display", 10F);
-        label9.Location = new Point(6, 20);
+        label9.ForeColor = Color.Silver;
+        label9.Location = new Point(5, 20);
         label9.Margin = new Padding(4, 0, 4, 0);
         label9.Name = "label9";
         label9.Size = new Size(88, 18);
@@ -581,7 +606,8 @@ partial class AnalysisResultDisplay
         flamLabel.AutoSize = true;
         flamLabel.DifficultyValue = 12D;
         flamLabel.Font = new Font("Aptos Display", 10F);
-        flamLabel.Location = new Point(125, 56);
+        flamLabel.ForeColor = Color.Silver;
+        flamLabel.Location = new Point(124, 56);
         flamLabel.Margin = new Padding(4, 0, 4, 0);
         flamLabel.Name = "flamLabel";
         flamLabel.Size = new Size(39, 18);
@@ -592,7 +618,8 @@ partial class AnalysisResultDisplay
         // 
         label11.AutoSize = true;
         label11.Font = new Font("Aptos Display", 10F);
-        label11.Location = new Point(6, 56);
+        label11.ForeColor = Color.Silver;
+        label11.Location = new Point(5, 56);
         label11.Margin = new Padding(4, 0, 4, 0);
         label11.Name = "label11";
         label11.Size = new Size(33, 18);
@@ -609,11 +636,9 @@ partial class AnalysisResultDisplay
         groupBox3.Controls.Add(longBurstLabel);
         groupBox3.Controls.Add(label23);
         groupBox3.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        groupBox3.ForeColor = SystemColors.ControlLight;
+        groupBox3.ForeColor = Color.Silver;
         groupBox3.Location = new Point(187, 160);
-        groupBox3.Margin = new Padding(4, 3, 4, 3);
         groupBox3.Name = "groupBox3";
-        groupBox3.Padding = new Padding(4, 3, 4, 3);
         groupBox3.Size = new Size(175, 81);
         groupBox3.TabIndex = 2;
         groupBox3.TabStop = false;
@@ -623,7 +648,8 @@ partial class AnalysisResultDisplay
         // 
         staminaCategoryLabel.AutoSize = true;
         staminaCategoryLabel.DifficultyValue = 10D;
-        staminaCategoryLabel.Location = new Point(125, 0);
+        staminaCategoryLabel.ForeColor = Color.Silver;
+        staminaCategoryLabel.Location = new Point(124, 0);
         staminaCategoryLabel.Margin = new Padding(4, 0, 4, 0);
         staminaCategoryLabel.Name = "staminaCategoryLabel";
         staminaCategoryLabel.Size = new Size(45, 19);
@@ -635,7 +661,8 @@ partial class AnalysisResultDisplay
         steadyRateStreamLabel.AutoSize = true;
         steadyRateStreamLabel.DifficultyValue = 9.99D;
         steadyRateStreamLabel.Font = new Font("Aptos Display", 10F);
-        steadyRateStreamLabel.Location = new Point(125, 38);
+        steadyRateStreamLabel.ForeColor = Color.Silver;
+        steadyRateStreamLabel.Location = new Point(124, 38);
         steadyRateStreamLabel.Margin = new Padding(4, 0, 4, 0);
         steadyRateStreamLabel.Name = "steadyRateStreamLabel";
         steadyRateStreamLabel.Size = new Size(32, 18);
@@ -646,7 +673,8 @@ partial class AnalysisResultDisplay
         // 
         label19.AutoSize = true;
         label19.Font = new Font("Aptos Display", 10F);
-        label19.Location = new Point(6, 38);
+        label19.ForeColor = Color.Silver;
+        label19.Location = new Point(5, 38);
         label19.Margin = new Padding(4, 0, 4, 0);
         label19.Name = "label19";
         label19.Size = new Size(112, 18);
@@ -658,7 +686,8 @@ partial class AnalysisResultDisplay
         singleHandTrillLabel.AutoSize = true;
         singleHandTrillLabel.DifficultyValue = 9.99D;
         singleHandTrillLabel.Font = new Font("Aptos Display", 10F);
-        singleHandTrillLabel.Location = new Point(125, 56);
+        singleHandTrillLabel.ForeColor = Color.Silver;
+        singleHandTrillLabel.Location = new Point(124, 56);
         singleHandTrillLabel.Margin = new Padding(4, 0, 4, 0);
         singleHandTrillLabel.Name = "singleHandTrillLabel";
         singleHandTrillLabel.Size = new Size(32, 18);
@@ -669,7 +698,8 @@ partial class AnalysisResultDisplay
         // 
         label21.AutoSize = true;
         label21.Font = new Font("Aptos Display", 10F);
-        label21.Location = new Point(6, 56);
+        label21.ForeColor = Color.Silver;
+        label21.Location = new Point(5, 56);
         label21.Margin = new Padding(4, 0, 4, 0);
         label21.Name = "label21";
         label21.Size = new Size(91, 18);
@@ -681,7 +711,8 @@ partial class AnalysisResultDisplay
         longBurstLabel.AutoSize = true;
         longBurstLabel.DifficultyValue = 9.99D;
         longBurstLabel.Font = new Font("Aptos Display", 10F);
-        longBurstLabel.Location = new Point(125, 20);
+        longBurstLabel.ForeColor = Color.Silver;
+        longBurstLabel.Location = new Point(124, 20);
         longBurstLabel.Margin = new Padding(4, 0, 4, 0);
         longBurstLabel.Name = "longBurstLabel";
         longBurstLabel.Size = new Size(32, 18);
@@ -692,7 +723,8 @@ partial class AnalysisResultDisplay
         // 
         label23.AutoSize = true;
         label23.Font = new Font("Aptos Display", 10F);
-        label23.Location = new Point(6, 20);
+        label23.ForeColor = Color.Silver;
+        label23.Location = new Point(5, 20);
         label23.Margin = new Padding(4, 0, 4, 0);
         label23.Name = "label23";
         label23.Size = new Size(62, 18);
@@ -716,11 +748,9 @@ partial class AnalysisResultDisplay
         jackDifficultyCategoryGroupBox.Controls.Add(minijackLabel);
         jackDifficultyCategoryGroupBox.Controls.Add(label24);
         jackDifficultyCategoryGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        jackDifficultyCategoryGroupBox.ForeColor = SystemColors.ControlLight;
+        jackDifficultyCategoryGroupBox.ForeColor = Color.Silver;
         jackDifficultyCategoryGroupBox.Location = new Point(187, 19);
-        jackDifficultyCategoryGroupBox.Margin = new Padding(4, 3, 4, 3);
         jackDifficultyCategoryGroupBox.Name = "jackDifficultyCategoryGroupBox";
-        jackDifficultyCategoryGroupBox.Padding = new Padding(4, 3, 4, 3);
         jackDifficultyCategoryGroupBox.Size = new Size(175, 135);
         jackDifficultyCategoryGroupBox.TabIndex = 1;
         jackDifficultyCategoryGroupBox.TabStop = false;
@@ -730,7 +760,8 @@ partial class AnalysisResultDisplay
         // 
         jackCategoryLabel.AutoSize = true;
         jackCategoryLabel.DifficultyValue = 10D;
-        jackCategoryLabel.Location = new Point(125, 0);
+        jackCategoryLabel.ForeColor = Color.Silver;
+        jackCategoryLabel.Location = new Point(124, 0);
         jackCategoryLabel.Margin = new Padding(4, 0, 4, 0);
         jackCategoryLabel.Name = "jackCategoryLabel";
         jackCategoryLabel.Size = new Size(45, 19);
@@ -742,7 +773,8 @@ partial class AnalysisResultDisplay
         fieldjackLabel.AutoSize = true;
         fieldjackLabel.DifficultyValue = 18.99D;
         fieldjackLabel.Font = new Font("Aptos Display", 10F);
-        fieldjackLabel.Location = new Point(125, 92);
+        fieldjackLabel.ForeColor = Color.Silver;
+        fieldjackLabel.Location = new Point(124, 92);
         fieldjackLabel.Margin = new Padding(4, 0, 4, 0);
         fieldjackLabel.Name = "fieldjackLabel";
         fieldjackLabel.Size = new Size(39, 18);
@@ -753,7 +785,8 @@ partial class AnalysisResultDisplay
         // 
         label14.AutoSize = true;
         label14.Font = new Font("Aptos Display", 10F);
-        label14.Location = new Point(6, 92);
+        label14.ForeColor = Color.Silver;
+        label14.Location = new Point(5, 92);
         label14.Margin = new Padding(4, 0, 4, 0);
         label14.Name = "label14";
         label14.Size = new Size(55, 18);
@@ -765,7 +798,8 @@ partial class AnalysisResultDisplay
         doubleHandJackLabel.AutoSize = true;
         doubleHandJackLabel.DifficultyValue = 9.99D;
         doubleHandJackLabel.Font = new Font("Aptos Display", 10F);
-        doubleHandJackLabel.Location = new Point(125, 110);
+        doubleHandJackLabel.ForeColor = Color.Silver;
+        doubleHandJackLabel.Location = new Point(124, 110);
         doubleHandJackLabel.Margin = new Padding(4, 0, 4, 0);
         doubleHandJackLabel.Name = "doubleHandJackLabel";
         doubleHandJackLabel.Size = new Size(32, 18);
@@ -776,7 +810,8 @@ partial class AnalysisResultDisplay
         // 
         label16.AutoSize = true;
         label16.Font = new Font("Aptos Display", 10F);
-        label16.Location = new Point(6, 110);
+        label16.ForeColor = Color.Silver;
+        label16.Location = new Point(5, 110);
         label16.Margin = new Padding(4, 0, 4, 0);
         label16.Name = "label16";
         label16.Size = new Size(103, 18);
@@ -788,7 +823,8 @@ partial class AnalysisResultDisplay
         chordjackLabel.AutoSize = true;
         chordjackLabel.DifficultyValue = 9.99D;
         chordjackLabel.Font = new Font("Aptos Display", 10F);
-        chordjackLabel.Location = new Point(125, 38);
+        chordjackLabel.ForeColor = Color.Silver;
+        chordjackLabel.Location = new Point(124, 38);
         chordjackLabel.Margin = new Padding(4, 0, 4, 0);
         chordjackLabel.Name = "chordjackLabel";
         chordjackLabel.Size = new Size(32, 18);
@@ -799,7 +835,8 @@ partial class AnalysisResultDisplay
         // 
         label18.AutoSize = true;
         label18.Font = new Font("Aptos Display", 10F);
-        label18.Location = new Point(6, 38);
+        label18.ForeColor = Color.Silver;
+        label18.Location = new Point(5, 38);
         label18.Margin = new Padding(4, 0, 4, 0);
         label18.Name = "label18";
         label18.Size = new Size(63, 18);
@@ -811,7 +848,8 @@ partial class AnalysisResultDisplay
         jackstreamLabel.AutoSize = true;
         jackstreamLabel.DifficultyValue = 9.99D;
         jackstreamLabel.Font = new Font("Aptos Display", 10F);
-        jackstreamLabel.Location = new Point(125, 74);
+        jackstreamLabel.ForeColor = Color.Silver;
+        jackstreamLabel.Location = new Point(124, 74);
         jackstreamLabel.Margin = new Padding(4, 0, 4, 0);
         jackstreamLabel.Name = "jackstreamLabel";
         jackstreamLabel.Size = new Size(32, 18);
@@ -822,7 +860,8 @@ partial class AnalysisResultDisplay
         // 
         label20.AutoSize = true;
         label20.Font = new Font("Aptos Display", 10F);
-        label20.Location = new Point(6, 74);
+        label20.ForeColor = Color.Silver;
+        label20.Location = new Point(5, 74);
         label20.Margin = new Padding(4, 0, 4, 0);
         label20.Name = "label20";
         label20.Size = new Size(70, 18);
@@ -834,7 +873,8 @@ partial class AnalysisResultDisplay
         anchorLabel.AutoSize = true;
         anchorLabel.DifficultyValue = 9.99D;
         anchorLabel.Font = new Font("Aptos Display", 10F);
-        anchorLabel.Location = new Point(125, 56);
+        anchorLabel.ForeColor = Color.Silver;
+        anchorLabel.Location = new Point(124, 56);
         anchorLabel.Margin = new Padding(4, 0, 4, 0);
         anchorLabel.Name = "anchorLabel";
         anchorLabel.Size = new Size(32, 18);
@@ -845,7 +885,8 @@ partial class AnalysisResultDisplay
         // 
         label22.AutoSize = true;
         label22.Font = new Font("Aptos Display", 10F);
-        label22.Location = new Point(6, 56);
+        label22.ForeColor = Color.Silver;
+        label22.Location = new Point(5, 56);
         label22.Margin = new Padding(4, 0, 4, 0);
         label22.Name = "label22";
         label22.Size = new Size(47, 18);
@@ -857,7 +898,8 @@ partial class AnalysisResultDisplay
         minijackLabel.AutoSize = true;
         minijackLabel.DifficultyValue = 12D;
         minijackLabel.Font = new Font("Aptos Display", 10F);
-        minijackLabel.Location = new Point(125, 20);
+        minijackLabel.ForeColor = Color.Silver;
+        minijackLabel.Location = new Point(124, 20);
         minijackLabel.Margin = new Padding(4, 0, 4, 0);
         minijackLabel.Name = "minijackLabel";
         minijackLabel.Size = new Size(39, 18);
@@ -868,7 +910,8 @@ partial class AnalysisResultDisplay
         // 
         label24.AutoSize = true;
         label24.Font = new Font("Aptos Display", 10F);
-        label24.Location = new Point(6, 20);
+        label24.ForeColor = Color.Silver;
+        label24.Location = new Point(5, 20);
         label24.Margin = new Padding(4, 0, 4, 0);
         label24.Name = "label24";
         label24.Size = new Size(55, 18);
@@ -891,11 +934,9 @@ partial class AnalysisResultDisplay
         dexterityDifficultyCategoryGroupBox.Controls.Add(dumpLabel);
         dexterityDifficultyCategoryGroupBox.Controls.Add(label1);
         dexterityDifficultyCategoryGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        dexterityDifficultyCategoryGroupBox.ForeColor = SystemColors.ControlLight;
+        dexterityDifficultyCategoryGroupBox.ForeColor = Color.Silver;
         dexterityDifficultyCategoryGroupBox.Location = new Point(6, 19);
-        dexterityDifficultyCategoryGroupBox.Margin = new Padding(4, 3, 4, 3);
         dexterityDifficultyCategoryGroupBox.Name = "dexterityDifficultyCategoryGroupBox";
-        dexterityDifficultyCategoryGroupBox.Padding = new Padding(4, 3, 4, 3);
         dexterityDifficultyCategoryGroupBox.Size = new Size(175, 135);
         dexterityDifficultyCategoryGroupBox.TabIndex = 0;
         dexterityDifficultyCategoryGroupBox.TabStop = false;
@@ -905,7 +946,8 @@ partial class AnalysisResultDisplay
         // 
         dexterityCategoryLabel.AutoSize = true;
         dexterityCategoryLabel.DifficultyValue = 10D;
-        dexterityCategoryLabel.Location = new Point(125, 0);
+        dexterityCategoryLabel.ForeColor = Color.Silver;
+        dexterityCategoryLabel.Location = new Point(124, 0);
         dexterityCategoryLabel.Margin = new Padding(4, 0, 4, 0);
         dexterityCategoryLabel.Name = "dexterityCategoryLabel";
         dexterityCategoryLabel.Size = new Size(45, 19);
@@ -917,7 +959,8 @@ partial class AnalysisResultDisplay
         chordGapLabel.AutoSize = true;
         chordGapLabel.DifficultyValue = 18.99D;
         chordGapLabel.Font = new Font("Aptos Display", 10F);
-        chordGapLabel.Location = new Point(125, 92);
+        chordGapLabel.ForeColor = Color.Silver;
+        chordGapLabel.Location = new Point(124, 92);
         chordGapLabel.Margin = new Padding(4, 0, 4, 0);
         chordGapLabel.Name = "chordGapLabel";
         chordGapLabel.Size = new Size(39, 18);
@@ -928,7 +971,8 @@ partial class AnalysisResultDisplay
         // 
         label12.AutoSize = true;
         label12.Font = new Font("Aptos Display", 10F);
-        label12.Location = new Point(6, 92);
+        label12.ForeColor = Color.Silver;
+        label12.Location = new Point(5, 92);
         label12.Margin = new Padding(4, 0, 4, 0);
         label12.Name = "label12";
         label12.Size = new Size(63, 18);
@@ -940,7 +984,8 @@ partial class AnalysisResultDisplay
         trillLabel.AutoSize = true;
         trillLabel.DifficultyValue = 9.99D;
         trillLabel.Font = new Font("Aptos Display", 10F);
-        trillLabel.Location = new Point(125, 74);
+        trillLabel.ForeColor = Color.Silver;
+        trillLabel.Location = new Point(124, 74);
         trillLabel.Margin = new Padding(4, 0, 4, 0);
         trillLabel.Name = "trillLabel";
         trillLabel.Size = new Size(32, 18);
@@ -951,7 +996,8 @@ partial class AnalysisResultDisplay
         // 
         label10.AutoSize = true;
         label10.Font = new Font("Aptos Display", 10F);
-        label10.Location = new Point(6, 74);
+        label10.ForeColor = Color.Silver;
+        label10.Location = new Point(5, 74);
         label10.Margin = new Padding(4, 0, 4, 0);
         label10.Name = "label10";
         label10.Size = new Size(25, 18);
@@ -963,7 +1009,8 @@ partial class AnalysisResultDisplay
         speedLabel.AutoSize = true;
         speedLabel.DifficultyValue = 9.99D;
         speedLabel.Font = new Font("Aptos Display", 10F);
-        speedLabel.Location = new Point(125, 20);
+        speedLabel.ForeColor = Color.Silver;
+        speedLabel.Location = new Point(124, 20);
         speedLabel.Margin = new Padding(4, 0, 4, 0);
         speedLabel.Name = "speedLabel";
         speedLabel.Size = new Size(32, 18);
@@ -974,7 +1021,8 @@ partial class AnalysisResultDisplay
         // 
         label8.AutoSize = true;
         label8.Font = new Font("Aptos Display", 10F);
-        label8.Location = new Point(6, 20);
+        label8.ForeColor = Color.Silver;
+        label8.Location = new Point(5, 20);
         label8.Margin = new Padding(4, 0, 4, 0);
         label8.Name = "label8";
         label8.Size = new Size(42, 18);
@@ -986,7 +1034,8 @@ partial class AnalysisResultDisplay
         chordLabel.AutoSize = true;
         chordLabel.DifficultyValue = 9.99D;
         chordLabel.Font = new Font("Aptos Display", 10F);
-        chordLabel.Location = new Point(125, 38);
+        chordLabel.ForeColor = Color.Silver;
+        chordLabel.Location = new Point(124, 38);
         chordLabel.Margin = new Padding(4, 0, 4, 0);
         chordLabel.Name = "chordLabel";
         chordLabel.Size = new Size(32, 18);
@@ -997,7 +1046,8 @@ partial class AnalysisResultDisplay
         // 
         label6.AutoSize = true;
         label6.Font = new Font("Aptos Display", 10F);
-        label6.Location = new Point(6, 38);
+        label6.ForeColor = Color.Silver;
+        label6.Location = new Point(5, 38);
         label6.Margin = new Padding(4, 0, 4, 0);
         label6.Name = "label6";
         label6.Size = new Size(40, 18);
@@ -1009,7 +1059,8 @@ partial class AnalysisResultDisplay
         singlestreamLabel.AutoSize = true;
         singlestreamLabel.DifficultyValue = 9.99D;
         singlestreamLabel.Font = new Font("Aptos Display", 10F);
-        singlestreamLabel.Location = new Point(125, 110);
+        singlestreamLabel.ForeColor = Color.Silver;
+        singlestreamLabel.Location = new Point(124, 110);
         singlestreamLabel.Margin = new Padding(4, 0, 4, 0);
         singlestreamLabel.Name = "singlestreamLabel";
         singlestreamLabel.Size = new Size(32, 18);
@@ -1020,7 +1071,8 @@ partial class AnalysisResultDisplay
         // 
         label4.AutoSize = true;
         label4.Font = new Font("Aptos Display", 10F);
-        label4.Location = new Point(6, 110);
+        label4.ForeColor = Color.Silver;
+        label4.Location = new Point(5, 110);
         label4.Margin = new Padding(4, 0, 4, 0);
         label4.Name = "label4";
         label4.Size = new Size(79, 18);
@@ -1032,7 +1084,8 @@ partial class AnalysisResultDisplay
         dumpLabel.AutoSize = true;
         dumpLabel.DifficultyValue = 9.99D;
         dumpLabel.Font = new Font("Aptos Display", 10F);
-        dumpLabel.Location = new Point(125, 56);
+        dumpLabel.ForeColor = Color.Silver;
+        dumpLabel.Location = new Point(124, 56);
         dumpLabel.Margin = new Padding(4, 0, 4, 0);
         dumpLabel.Name = "dumpLabel";
         dumpLabel.Size = new Size(32, 18);
@@ -1043,7 +1096,8 @@ partial class AnalysisResultDisplay
         // 
         label1.AutoSize = true;
         label1.Font = new Font("Aptos Display", 10F);
-        label1.Location = new Point(6, 56);
+        label1.ForeColor = Color.Silver;
+        label1.Location = new Point(5, 56);
         label1.Margin = new Padding(4, 0, 4, 0);
         label1.Name = "label1";
         label1.Size = new Size(40, 18);
@@ -1056,9 +1110,9 @@ partial class AnalysisResultDisplay
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.FromArgb(30, 30, 30);
         Controls.Add(outerGroupBox);
+        DoubleBuffered = true;
         Font = new Font("Aptos Display", 10F);
         ForeColor = SystemColors.ControlLight;
-        Margin = new Padding(4, 3, 4, 3);
         Name = "AnalysisResultDisplay";
         Size = new Size(368, 450);
         outerGroupBox.ResumeLayout(false);

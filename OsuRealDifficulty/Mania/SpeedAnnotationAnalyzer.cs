@@ -33,14 +33,16 @@ public sealed class SpeedAnnotationAnalyzer
         for (int i = 0; i < timeDifferences.Length; i++)
         {
             double ratio = timeDifferences[i] / timeDifferenceMean2;
-            if (ratio < 1)
+            if (ratio > 1)
                 continue;
 
             double bonusMultiplier = Math.Pow(1.05, ratio);
             burstBonus += bonusMultiplier * timeDifferenceMeanScore;
         }
 
-        return mainDifficulty + burstBonus;
+        var absoluteValue = mainDifficulty + burstBonus / 32;
+        var normalizedValue = new AnalysisDifficultyValue(absoluteValue).NormalizedValue;
+        return normalizedValue;
     }
 
     public ref CalculationResult CalculationResultRef(AnalyzedDifficulty difficulty)

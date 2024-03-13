@@ -110,7 +110,7 @@ public static class ChordListParsing
 
                     if (parsed)
                     {
-                        if (parsedOffset <= chordOffset)
+                        if (parsedOffset < chordOffset)
                         {
                             throw new FormatException($"""
                                 Offsets must be in increasing order from bottom to top.

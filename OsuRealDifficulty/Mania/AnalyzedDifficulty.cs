@@ -2,6 +2,8 @@
 
 public class AnalyzedDifficulty
 {
+    #region instantiation
+
     public static AnalyzedDifficulty NewPending => new()
     {
         Dexterity = new()
@@ -52,6 +54,58 @@ public class AnalyzedDifficulty
         },
     };
 
+    public static AnalyzedDifficulty NewUnknown => new()
+    {
+        Dexterity = new()
+        {
+            Speed = CalculationResult.Unknown,
+            Chord = CalculationResult.Unknown,
+            Dump = CalculationResult.Unknown,
+            Trill = CalculationResult.Unknown,
+            ChordGap = CalculationResult.Unknown,
+            Singlestream = CalculationResult.Unknown,
+        },
+        Jack = new()
+        {
+            Minijack = CalculationResult.Unknown,
+            Chordjack = CalculationResult.Unknown,
+            Anchor = CalculationResult.Unknown,
+            Jackstream = CalculationResult.Unknown,
+            Fieldjack = CalculationResult.Unknown,
+            DoubleHandJack = CalculationResult.Unknown,
+        },
+        Tech = new()
+        {
+            PatternSwitch = CalculationResult.Unknown,
+            RhythmIrregularity = CalculationResult.Unknown,
+            Flam = CalculationResult.Unknown,
+        },
+        Stamina = new()
+        {
+            LongBurst = CalculationResult.Unknown,
+            SteadyRateStream = CalculationResult.Unknown,
+            SingleHandTrill = CalculationResult.Unknown,
+        },
+        LongNotes = new()
+        {
+            RiceMix = CalculationResult.Unknown,
+            RiceLN = CalculationResult.Unknown,
+            Inverse = CalculationResult.Unknown,
+            Shield = CalculationResult.Unknown,
+            LNShield = CalculationResult.Unknown,
+        },
+        Scrolling = new()
+        {
+            Slow = CalculationResult.Unknown,
+            Fast = CalculationResult.Unknown,
+            Burst = CalculationResult.Unknown,
+            Stutter = CalculationResult.Unknown,
+            VisualDensity = CalculationResult.Unknown,
+        },
+    };
+
+    #endregion
+
     public required DexterityRate Dexterity;
     public required JackRate Jack;
     public required TechRate Tech;
@@ -67,6 +121,8 @@ public class AnalyzedDifficulty
         && LongNotes.AreAllValid
         && Scrolling.AreAllValid
         ;
+
+    #region difficulty rates
 
     public interface IDifficultyRate
     {
@@ -478,4 +534,6 @@ public class AnalyzedDifficulty
                 out erroneousResult);
         }
     }
+
+    #endregion
 }

@@ -23,8 +23,9 @@ public static class SomeMath
             result += values[i].Square();
         }
 
+        result /= values.Length;
         result = Math.Pow(result, 1 / 2D);
-        return result / values.Length;
+        return result;
     }
     public static double Mean(ReadOnlySpan<double> values, double strength)
     {

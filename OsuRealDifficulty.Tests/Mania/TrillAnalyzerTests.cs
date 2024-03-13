@@ -401,6 +401,19 @@ public class TrillAnalyzerTests : FullBeatmapAnalyzerTests<TrillPatternAnalyzer>
         AssertAnalysis(map, annotations);
     }
 
+    [Test]
+    public void JackOfSecondPattern()
+    {
+        const string map = """
+            |  - | 800
+            |   -| 500
+            |- --| 200
+            """;
+
+        var annotations = new MapAnnotationList();
+        AssertAnalysis(map, annotations);
+    }
+
     #endregion
 
     #region Difficulty

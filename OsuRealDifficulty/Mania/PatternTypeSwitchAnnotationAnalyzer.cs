@@ -9,7 +9,7 @@ public sealed class PatternTypeSwitchAnnotationAnalyzer
 
     public override void AnalyzeAnnotations(BeatmapAnnotationAnalysisContext context)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     protected override double CalculatePatternAbsoluteValue(
