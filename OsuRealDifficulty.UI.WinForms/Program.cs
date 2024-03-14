@@ -1,17 +1,20 @@
+using OsuRealDifficulty.UI.WinForms.Logging;
+using Serilog;
+
 namespace OsuRealDifficulty.UI.WinForms;
 
 internal static class Program
 {
     /// <summary>
-    ///  The main entry point for the application.
+    /// The main entry point for the application.
     /// </summary>
     [STAThread]
     internal static void Main()
     {
-        // To customize application configuration such as set high DPI settings or default font,
-        // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
         SetDefaultFont();
+
+        SetupSerilog();
 
         Application.Run(new MainForm());
     }
@@ -23,5 +26,16 @@ internal static class Program
         {
             Application.SetDefaultFont(mainFont);
         }
+    }
+
+    private static void SetupSerilog()
+    {
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.File(
+                "logs/mania-diff-winforms.txt",
+                rollingInterval: RollingInterval.Hour)
+            .WriteTo.InMemoryString()
+            .CreateLogger();
     }
 }

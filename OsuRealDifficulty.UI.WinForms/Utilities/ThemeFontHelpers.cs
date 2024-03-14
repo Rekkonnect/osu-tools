@@ -1,4 +1,4 @@
-﻿namespace OsuRealDifficulty.UI.WinForms;
+﻿namespace OsuRealDifficulty.UI.WinForms.Utilities;
 
 internal static class ThemeFontHelpers
 {
@@ -21,7 +21,7 @@ internal static class ThemeFontHelpers
 
         foreach (Control child in control.Controls)
         {
-            RecursivelyReplaceFontFamilyWithMain(child, mainFontFamily);
+            child.RecursivelyReplaceFontFamilyWithMain(mainFontFamily);
         }
 
         if (needsReplacement)

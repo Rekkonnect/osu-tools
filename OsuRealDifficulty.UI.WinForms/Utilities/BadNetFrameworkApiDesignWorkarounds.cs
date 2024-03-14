@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Resources;
 
-namespace OsuRealDifficulty.UI.WinForms;
+namespace OsuRealDifficulty.UI.WinForms.Utilities;
 
 public static class BadNetFrameworkApiDesignWorkarounds
 {

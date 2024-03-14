@@ -3,14 +3,17 @@ using OsuParsers.Enums;
 using OsuRealDifficulty.Mania;
 using OsuRealDifficulty.UI.WinForms.Controls;
 using OsuRealDifficulty.UI.WinForms.Core;
+using OsuRealDifficulty.UI.WinForms.Utilities;
+using Serilog;
 
 namespace OsuRealDifficulty.UI.WinForms;
 
 public partial class MainForm : Form
 {
-    private CancellationTokenFactory _difficultyCalculationCancellationTokenFactory = new();
+    private readonly CancellationTokenFactory _difficultyCalculationCancellationTokenFactory
+        = new();
 
-    private BeatmapFilter _beatmapFilter = new();
+    private readonly BeatmapFilter _beatmapFilter = new();
 
     public MainForm()
     {
@@ -52,11 +55,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            // Log it somewhere
-        }
-        finally
-        {
-
+            Log.Logger.Error(ex, "Beatmap reloading threw");
         }
     }
 
@@ -249,11 +248,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            // Log it somewhere
-        }
-        finally
-        {
-
+            Log.Logger.Error(ex, "Beatmap calculation threw");
         }
 
         Invoke(ResetCalculationEnablement);

@@ -13,10 +13,10 @@ internal sealed class BeatmapFilter
     public bool Source { get; set; } = true;
     public bool Tags { get; set; } = true;
 
-    public string Lexeme { get; set; } = string.Empty;
-
     public bool FilterKeyCount { get; set; } = false;
     public int KeyCount { get; set; } = 4;
+
+    public string Lexeme { get; set; } = string.Empty;
 
     internal bool Passes(DbBeatmapSet set)
     {

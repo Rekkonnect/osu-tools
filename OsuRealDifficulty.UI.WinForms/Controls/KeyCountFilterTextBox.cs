@@ -1,4 +1,6 @@
-﻿namespace OsuRealDifficulty.UI.WinForms;
+﻿using OsuRealDifficulty.UI.WinForms.Utilities;
+
+namespace OsuRealDifficulty.UI.WinForms.Controls;
 
 public sealed class KeyCountFilterTextBox : TextBox
 {

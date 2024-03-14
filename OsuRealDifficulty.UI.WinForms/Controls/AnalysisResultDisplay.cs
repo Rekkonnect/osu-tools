@@ -1,4 +1,5 @@
 ﻿using OsuRealDifficulty.Mania;
+using Serilog;
 using System.ComponentModel;
 
 namespace OsuRealDifficulty.UI.WinForms.Controls;
@@ -171,9 +172,17 @@ public partial class AnalysisResultDisplay : UserControl
             // This might throw after being disposed the moment the calculation is over
             _refreshListenTask.CancellationTokenSource.Cancel();
         }
+        catch (OperationCanceledException cancellation)
+        {
+            Log.Logger.Information(
+                cancellation,
+                $"{nameof(StopListeningForRequests)} caught a cancellation");
+        }
         catch (Exception ex)
         {
-            // log this somewhere
+            Log.Logger.Error(
+                ex,
+                $"{nameof(StopListeningForRequests)} caught a non-cancellation exception");
         }
         finally
         {

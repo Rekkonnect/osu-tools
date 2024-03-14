@@ -2,6 +2,7 @@
 using System.Drawing.Text;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using OsuRealDifficulty.UI.WinForms.Utilities;
 
 namespace OsuRealDifficulty.UI.WinForms;
 

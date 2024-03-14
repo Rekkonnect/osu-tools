@@ -1,4 +1,6 @@
-﻿namespace OsuRealDifficulty.UI.WinForms.Controls;
+﻿using OsuRealDifficulty.UI.WinForms.Utilities;
+
+namespace OsuRealDifficulty.UI.WinForms.Controls;
 
 public class CategoryDifficultyResultLabel : BaseDifficultyResultLabel
 {

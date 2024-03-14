@@ -1,5 +1,6 @@
 ﻿using Garyon.Extensions;
 using OsuRealDifficulty.UI.WinForms.Core;
+using OsuRealDifficulty.UI.WinForms.Utilities;
 using System.ComponentModel;
 
 namespace OsuRealDifficulty.UI.WinForms.Controls;

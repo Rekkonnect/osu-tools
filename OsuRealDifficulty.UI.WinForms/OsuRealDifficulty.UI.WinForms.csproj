@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
-    <Version>0.1.4</Version>
+    <Version>0.1.5</Version>
     <ProductVersion>$(Version)</ProductVersion>
   </PropertyGroup>
 
@@ -40,6 +40,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="Serilog.Exceptions" Version="8.4.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.InMemory" Version="0.11.0" />
+    <PackageReference Include="Serilog.Sinks.PeriodicBatching" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>

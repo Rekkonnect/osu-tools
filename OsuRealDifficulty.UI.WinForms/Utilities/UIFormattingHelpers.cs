@@ -1,4 +1,4 @@
-﻿namespace OsuRealDifficulty.UI.WinForms;
+﻿namespace OsuRealDifficulty.UI.WinForms.Utilities;
 
 internal static class UIFormattingHelpers
 {
