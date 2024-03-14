@@ -157,7 +157,8 @@ public sealed class BeatmapAnalyzerDriver(ManiaBeatmapInfo beatmapInfo)
         return this;
     }
 
-    public override async Task Execute(CancellationToken cancellationToken = default)
+    public override async Task<DriverExecutionResults> Execute(
+        CancellationToken cancellationToken = default)
     {
         var annotationChannelOptions = new UnboundedChannelOptions
         {
@@ -265,6 +266,16 @@ public sealed class BeatmapAnalyzerDriver(ManiaBeatmapInfo beatmapInfo)
         }
 
         ReplacePendingValuesWith(CalculationResult.Unknown);
+
+        return new()
+        {
+            Diagnostics = finalEsotericDiagnosticBag,
+        };
+    }
+
+    public class DriverExecutionResults
+    {
+        public required EsotericDiagnosticBag Diagnostics { get; init; }
     }
 
     private sealed class ChannelableValueCollectionList<T>(

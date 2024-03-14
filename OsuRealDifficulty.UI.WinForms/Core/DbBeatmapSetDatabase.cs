@@ -9,6 +9,8 @@ internal sealed class DbBeatmapSetDatabase
     private readonly Dictionary<int, DbBeatmapSet> _beatmapSets = new();
     private readonly BeatmapSetIdDictionary _beatmapSetIdDictionary = new();
 
+    public int Count => _beatmapSets.Count;
+
     public IEnumerable<DbBeatmapSet> BeatmapSets => _beatmapSets.Values;
     public IEnumerable<DbBeatmap> AllBeatmaps => BeatmapSets.SelectMany(s => s.Beatmaps);
 

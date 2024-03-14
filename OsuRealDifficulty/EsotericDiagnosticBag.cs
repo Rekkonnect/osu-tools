@@ -30,16 +30,16 @@ public sealed class EsotericDiagnosticBag
             Add(diagnostic);
         }
     }
+}
 
-    public sealed class EsotericDiagnostic(
-        string message,
-        [CallerLineNumber] int callerLine = 0,
-        [CallerFilePath] string callerFile = "",
-        [CallerMemberName] string callerName = "")
-    {
-        public string Message { get; } = message;
-        public int CallerLine { get; } = callerLine;
-        public string CallerFile { get; } = callerFile;
-        public string CallerName { get; } = callerName;
-    }
+public sealed class EsotericDiagnostic(
+    string message,
+    [CallerLineNumber] int callerLine = 0,
+    [CallerFilePath] string callerFile = "",
+    [CallerMemberName] string callerName = "")
+{
+    public string Message { get; } = message;
+    public int CallerLine { get; } = callerLine;
+    public string CallerFile { get; } = callerFile;
+    public string CallerName { get; } = callerName;
 }

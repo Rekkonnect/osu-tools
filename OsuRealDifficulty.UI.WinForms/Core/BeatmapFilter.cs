@@ -47,8 +47,6 @@ internal sealed class BeatmapFilter
             {
                 if (PassesShort(beatmap, lexemeWord))
                     goto continueOuter;
-
-                return false;
             }
 
             return false;

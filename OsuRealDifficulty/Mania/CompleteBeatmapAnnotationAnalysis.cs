@@ -46,7 +46,7 @@ public static class CompleteBeatmapAnnotationAnalysis
         ]);
 
         driver.Add([
-            PatternTypeSwitchAnnotationAnalyzer.Instance,
+            PatternSwitchAnnotationAnalyzer.Instance,
         ]);
     }
 }

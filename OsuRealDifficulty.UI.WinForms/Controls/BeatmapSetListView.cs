@@ -12,6 +12,9 @@ internal sealed class BeatmapSetListView : ListView
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public IEnumerable<DbBeatmapSet> BeatmapSets { get; private set; } = [];
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public int BeatmapSetCount => _originalItems?.Length ?? BeatmapSets.Count();
+
     public BeatmapSetListView()
     {
         DoubleBuffered = true;

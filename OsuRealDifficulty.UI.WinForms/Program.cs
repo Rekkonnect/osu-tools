@@ -35,7 +35,22 @@ internal static class Program
             .WriteTo.File(
                 "logs/mania-diff-winforms.txt",
                 rollingInterval: RollingInterval.Hour)
-            .WriteTo.InMemoryString()
+            .WriteTo.BatchedInMemoryString()
             .CreateLogger();
+
+        Application.ApplicationExit += LogApplicationExit;
+        Application.ApplicationExit += CloseAndFlushBeforeExiting;
+
+        Log.Information("Serilog was setup -- Application is starting");
+    }
+
+    private static void LogApplicationExit(object? sender, EventArgs e)
+    {
+        Log.Information($"{nameof(Application.ApplicationExit)} invoked");
+    }
+
+    private static void CloseAndFlushBeforeExiting(object? sender, EventArgs e)
+    {
+        Log.CloseAndFlush();
     }
 }

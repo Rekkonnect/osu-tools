@@ -37,6 +37,8 @@ public partial class MainForm : Form
 
     private void ReloadMaps()
     {
+        Log.Information("Requested loading the entire database");
+
         beatmapSetListView.Items.Clear();
         difficultyListView.Items.Clear();
 
@@ -47,11 +49,19 @@ public partial class MainForm : Form
     {
         try
         {
+            var start = DateTime.Now;
             AppState.Instance.LoadDbBeatmapSetDatabase();
             GC.Collect();
             var database = AppState.Instance.BeatmapSetDatabase!;
-            var maniaSets = database.SetsWithRuleset(Ruleset.Mania);
+            var maniaSets = database.SetsWithRuleset(Ruleset.Mania)
+                .ToList();
             beatmapSetListView.SetBeatmapSets(maniaSets);
+            var end = DateTime.Now;
+            var duration = end - start;
+            Log.Information(
+                "Loaded the entire database with {ManiaBeatmapSets} mania beatmap sets over {Time}ms",
+                maniaSets.Count,
+                duration.TotalMilliseconds);
         }
         catch (Exception ex)
         {
@@ -137,7 +147,15 @@ public partial class MainForm : Form
 
     private void RunFilter()
     {
+        var start = DateTime.Now;
         beatmapSetListView.Filter((item) => _beatmapFilter.Passes(item.BeatmapSet));
+        var end = DateTime.Now;
+        var filterTime = end - start;
+        Log.Debug(
+            "Filtered through {BeatmapSetCount} beatmap sets over {Time}ms",
+            beatmapSetListView.BeatmapSetCount,
+            filterTime.TotalMilliseconds);
+
         switch (beatmapSetListView.Items.Count)
         {
             case 1:
@@ -231,6 +249,7 @@ public partial class MainForm : Form
             var beatmap = dbBeatmap.Read(songs);
 
             var driver = CompleteBeatmapAnnotationAnalysis.NewDriver(beatmap);
+            driver.ExceptionAction += AnalysisExceptionHandling;
             var source = _difficultyCalculationCancellationTokenFactory
                 .CurrentSource;
 
@@ -242,9 +261,14 @@ public partial class MainForm : Form
             difficultyResultDisplay.BeginListeningForRequests(
                 driver.AnalyzerExecutionRequestChannel,
                 source);
-            await driver.Execute(source.Token);
+            var executionResult = await driver.Execute(source.Token);
             difficultyResultDisplay.RefreshDisplay();
             difficultyResultDisplay.StopListeningForRequests();
+
+            foreach (var diagnostic in executionResult.Diagnostics.Diagnostics)
+            {
+                LogEsotericDiagnostic(diagnostic);
+            }
         }
         catch (Exception ex)
         {
@@ -252,6 +276,25 @@ public partial class MainForm : Form
         }
 
         Invoke(ResetCalculationEnablement);
+    }
+
+    private static void LogEsotericDiagnostic(EsotericDiagnostic diagnostic)
+    {
+        Log.Warning($$"""
+            Esoteric diagnostic reported during analysis
+            {{{nameof(diagnostic.Message)}}}
+            Called by {{{nameof(diagnostic.CallerName)}}}
+            Called at {{{nameof(diagnostic.CallerFile)}}} : Line {{{nameof(diagnostic.CallerLine)}}}
+            """,
+            diagnostic.Message,
+            diagnostic.CallerName,
+            diagnostic.CallerFile,
+            diagnostic.CallerLine);
+    }
+
+    private void AnalysisExceptionHandling(Exception ex)
+    {
+        Log.Error(ex, "Exception thrown during analysis");
     }
 
     private void ResetCalculationEnablement()
@@ -281,6 +324,7 @@ public partial class MainForm : Form
     private void reloadBeatmapDatabaseButton_Click(object sender, EventArgs e)
     {
         ReloadMaps();
+        RunFilter();
     }
 
     private void showLogsButton_Click(object sender, EventArgs e)

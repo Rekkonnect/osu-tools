@@ -16,7 +16,7 @@ public enum MapAnnotationType
 
     // Tech
     RhythmicalIrregularity,
-    PatternTypeSwitch,
+    PatternSwitch,
     Flam,
 
     // Jack

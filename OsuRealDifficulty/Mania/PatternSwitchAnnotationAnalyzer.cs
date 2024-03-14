@@ -1,19 +1,19 @@
 ﻿namespace OsuRealDifficulty.Mania;
 
-public sealed class PatternTypeSwitchAnnotationAnalyzer
-    : BaseSingleAnnotationFullAnalyzer<PatternTypeSwitchAnnotation>
+public sealed class PatternSwitchAnnotationAnalyzer
+    : BaseSingleAnnotationFullAnalyzer<PatternSwitchAnnotation>
 {
-    public static PatternTypeSwitchAnnotationAnalyzer Instance { get; } = new();
+    public static PatternSwitchAnnotationAnalyzer Instance { get; } = new();
 
     protected override double SourceChordListWeight => 0.6;
 
     public override void AnalyzeAnnotations(BeatmapAnnotationAnalysisContext context)
     {
-        //throw new NotImplementedException();
+        context.AnalyzerDiagnostics.Add(new("Reporting that this analyzer is not yet done"));
     }
 
     protected override double CalculatePatternAbsoluteValue(
-        PatternTypeSwitchAnnotation pattern)
+        PatternSwitchAnnotation pattern)
     {
         return 0;
     }
