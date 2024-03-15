@@ -237,6 +237,7 @@ partial class MainForm
         searchTextBox.Size = new Size(334, 25);
         searchTextBox.TabIndex = 0;
         searchTextBox.TextChanged += searchTextBox_TextChanged;
+        searchTextBox.KeyDown += searchTextBox_KeyDown;
         // 
         // keyCountFilterTextBox
         // 
@@ -277,6 +278,7 @@ partial class MainForm
         listViewItem2.StateImageIndex = 0;
         beatmapSetListView.Items.AddRange(new ListViewItem[] { listViewItem1, listViewItem2 });
         beatmapSetListView.Location = new Point(6, 146);
+        beatmapSetListView.MultiSelect = false;
         beatmapSetListView.Name = "beatmapSetListView";
         beatmapSetListView.ShowItemToolTips = true;
         beatmapSetListView.Size = new Size(508, 286);
@@ -415,6 +417,7 @@ partial class MainForm
         listViewItem4.StateImageIndex = 0;
         difficultyListView.Items.AddRange(new ListViewItem[] { listViewItem3, listViewItem4, listViewItem5, listViewItem6, listViewItem7, listViewItem8 });
         difficultyListView.Location = new Point(18, 450);
+        difficultyListView.MultiSelect = false;
         difficultyListView.Name = "difficultyListView";
         difficultyListView.ShowItemToolTips = true;
         difficultyListView.Size = new Size(508, 184);

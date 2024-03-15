@@ -7,7 +7,7 @@ public class CustomDifficultyCalculationProfile(
     public AnalyzedDifficulty StarWeights { get; } = starWeights;
     public AnalyzedDifficulty InstabilityWeights { get; } = instabilityWeights;
 
-    public override EstimatedDifficultyStats Calculate(AnalyzedDifficulty difficulty)
+    public override DifficultyStatsOverview Calculate(AnalyzedDifficulty difficulty)
     {
         return new(
             CalculateStarRating(difficulty),
@@ -43,7 +43,7 @@ public class CustomDifficultyCalculationProfile(
             AnalyzedDifficulty.DexterityRate difficulty,
             AnalyzedDifficulty.DexterityRate weights)
         {
-            ref double segmentSum = ref overall.Dexterity;
+            ref CalculationResult segmentSum = ref overall.Dexterity;
             AddWeighted(difficulty.Speed, weights.Speed, ref segmentSum);
             AddWeighted(difficulty.Chord, weights.Chord, ref segmentSum);
             AddWeighted(difficulty.Dump, weights.Dump, ref segmentSum);
@@ -56,7 +56,7 @@ public class CustomDifficultyCalculationProfile(
             AnalyzedDifficulty.JackRate difficulty,
             AnalyzedDifficulty.JackRate weights)
         {
-            ref double segmentSum = ref overall.Jack;
+            ref CalculationResult segmentSum = ref overall.Jack;
             AddWeighted(difficulty.Minijack, weights.Minijack, ref segmentSum);
             AddWeighted(difficulty.Chordjack, weights.Chordjack, ref segmentSum);
             AddWeighted(difficulty.Anchor, weights.Anchor, ref segmentSum);
@@ -69,7 +69,7 @@ public class CustomDifficultyCalculationProfile(
             AnalyzedDifficulty.TechRate difficulty,
             AnalyzedDifficulty.TechRate weights)
         {
-            ref double segmentSum = ref overall.Tech;
+            ref CalculationResult segmentSum = ref overall.Tech;
             AddWeighted(difficulty.PatternSwitch, weights.PatternSwitch, ref segmentSum);
             AddWeighted(difficulty.RhythmIrregularity, weights.RhythmIrregularity, ref segmentSum);
             AddWeighted(difficulty.Flam, weights.Flam, ref segmentSum);
@@ -79,7 +79,7 @@ public class CustomDifficultyCalculationProfile(
             AnalyzedDifficulty.StaminaRate difficulty,
             AnalyzedDifficulty.StaminaRate weights)
         {
-            ref double segmentSum = ref overall.Stamina;
+            ref CalculationResult segmentSum = ref overall.Stamina;
             AddWeighted(difficulty.LongBurst, weights.LongBurst, ref segmentSum);
             AddWeighted(difficulty.SteadyRateStream, weights.SteadyRateStream, ref segmentSum);
             AddWeighted(difficulty.SingleHandTrill, weights.SingleHandTrill, ref segmentSum);
@@ -89,7 +89,7 @@ public class CustomDifficultyCalculationProfile(
             AnalyzedDifficulty.LongNotesRate difficulty,
             AnalyzedDifficulty.LongNotesRate weights)
         {
-            ref double segmentSum = ref overall.LongNotes;
+            ref CalculationResult segmentSum = ref overall.LongNotes;
             AddWeighted(difficulty.RiceMix, weights.RiceMix, ref segmentSum);
             AddWeighted(difficulty.RiceLN, weights.RiceLN, ref segmentSum);
             AddWeighted(difficulty.Inverse, weights.Inverse, ref segmentSum);
@@ -101,7 +101,7 @@ public class CustomDifficultyCalculationProfile(
             AnalyzedDifficulty.ScrollingRate difficulty,
             AnalyzedDifficulty.ScrollingRate weights)
         {
-            ref double segmentSum = ref overall.Scrolling;
+            ref CalculationResult segmentSum = ref overall.Scrolling;
             AddWeighted(difficulty.Slow, weights.Slow, ref segmentSum);
             AddWeighted(difficulty.Fast, weights.Fast, ref segmentSum);
             AddWeighted(difficulty.Burst, weights.Burst, ref segmentSum);
@@ -110,7 +110,7 @@ public class CustomDifficultyCalculationProfile(
             NormalizeValue(ref segmentSum);
         }
 
-        void AddWeighted(double value, double weight, ref double segmentSum)
+        void AddWeighted(double value, double weight, ref CalculationResult segmentSum)
         {
             // TODO: Test applying the weight after the powering of the value
             var weightedValue = value * weight;
@@ -119,7 +119,7 @@ public class CustomDifficultyCalculationProfile(
             segmentSum += poweredValue;
         }
 
-        static void NormalizeValue(ref double value)
+        static void NormalizeValue(ref CalculationResult value)
         {
             value = AnalyzedDifficultyFacts.NormalizeValue(value);
         }

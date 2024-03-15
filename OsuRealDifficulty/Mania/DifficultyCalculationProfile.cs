@@ -2,5 +2,11 @@
 
 public abstract class DifficultyCalculationProfile
 {
-    public abstract EstimatedDifficultyStats Calculate(AnalyzedDifficulty difficulty);
+    public abstract DifficultyStatsOverview Calculate(AnalyzedDifficulty difficulty);
+
+    public FullDifficultyCalculationResult CalculateFullResult(AnalyzedDifficulty difficulty)
+    {
+        var overview = Calculate(difficulty);
+        return new(overview, difficulty);
+    }
 }

@@ -18,6 +18,15 @@ internal sealed class BeatmapFilter
 
     public string Lexeme { get; set; } = string.Empty;
 
+    public bool HasAnyFilter
+    {
+        get
+        {
+            return FilterKeyCount is true
+                || !string.IsNullOrEmpty(Lexeme);
+        }
+    }
+
     internal bool Passes(DbBeatmapSet set)
     {
         foreach (var lexemeWord in EnumerateWords(Lexeme))

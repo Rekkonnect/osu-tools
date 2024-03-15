@@ -65,5 +65,23 @@ public static class OsuConvenienceExtensions
         return BeatmapDecoder.Decode(file.FullName);
     }
 
+    public static string RomanizedOrUnicodeTitle(this DbBeatmap beatmap)
+    {
+        return beatmap.Title.DefaultIfWhiteSpace(beatmap.TitleUnicode);
+    }
+
+    public static string RomanizedOrUnicodeArtist(this DbBeatmap beatmap)
+    {
+        return beatmap.Artist.DefaultIfWhiteSpace(beatmap.ArtistUnicode);
+    }
+
+    public static string DefaultIfWhiteSpace(this string s, string @default)
+    {
+        if (string.IsNullOrWhiteSpace(s))
+            return @default;
+
+        return s;
+    }
+
     #endregion
 }

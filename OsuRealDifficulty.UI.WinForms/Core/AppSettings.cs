@@ -1,16 +1,58 @@
-﻿namespace OsuRealDifficulty.UI.WinForms.Core;
+﻿using System.Text.Json.Serialization;
+
+namespace OsuRealDifficulty.UI.WinForms.Core;
 
 internal sealed class AppSettings
 {
-    public static AppSettings Instance { get; } = new();
+    public static AppSettings Instance { get; set; } = new();
 
-    public DirectoryInfo? BaseOsuDataDirectory { get; set; }
-    public DirectoryInfo? BaseSongsDirectory { get; set; }
+    public bool AnalyzeAllOnStartup = false;
+    public bool AnalyzeAllOnDatabaseRefresh = false;
+    public bool AnalyzeOnSelection = true;
+    public bool InvalidateAllCachedCalculationsOnRefresh = true;
 
+    public string? BaseOsuDataDirectoryString
+    {
+        get => BaseOsuDataDirectory?.FullName;
+        set
+        {
+            if (value is null)
+            {
+                BaseOsuDataDirectory = null;
+            }
+            else
+            {
+                BaseOsuDataDirectory = new(value);
+            }
+        }
+    }
+    public string? BaseSongsDirectoryString
+    {
+        get => BaseSongsDirectory?.FullName;
+        set
+        {
+            if (value is null)
+            {
+                BaseSongsDirectory = null;
+            }
+            else
+            {
+                BaseSongsDirectory = new(value);
+            }
+        }
+    }
+
+    [JsonIgnore]
+    public DirectoryInfo? BaseOsuDataDirectory;
+    [JsonIgnore]
+    public DirectoryInfo? BaseSongsDirectory;
+
+    [JsonIgnore]
     public DirectoryInfo EffectiveBaseOsuDataDirectory
         => BaseOsuDataDirectory
         ?? GetDefaultOsuDataDirectory();
 
+    [JsonIgnore]
     public DirectoryInfo EffectiveBaseSongsDirectory
         => BaseSongsDirectory
         ?? GetDefaultEffectiveSongsDirectory();

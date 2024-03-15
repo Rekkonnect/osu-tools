@@ -29,12 +29,12 @@ partial class AnalysisResultDisplay
     private void InitializeComponent()
     {
         outerGroupBox = new GroupBox();
-        groupBox1 = new GroupBox();
+        overallGroupBox = new GroupBox();
         label30 = new Label();
         instabilityLabel = new DifficultyResultLabel();
         label29 = new Label();
         overallLabel = new DifficultyResultLabel();
-        groupBox4 = new GroupBox();
+        longNotesGroupBox = new GroupBox();
         shieldLabel = new DifficultyResultLabel();
         label25 = new Label();
         riceMixLabel = new DifficultyResultLabel();
@@ -46,7 +46,7 @@ partial class AnalysisResultDisplay
         label3 = new Label();
         lnShieldLabel = new DifficultyResultLabel();
         label5 = new Label();
-        groupBox5 = new GroupBox();
+        scrollingGroupBox = new GroupBox();
         visualDensityLabel = new DifficultyResultLabel();
         label27 = new Label();
         burstLabel = new DifficultyResultLabel();
@@ -58,7 +58,7 @@ partial class AnalysisResultDisplay
         label15 = new Label();
         fastLabel = new DifficultyResultLabel();
         label17 = new Label();
-        groupBox2 = new GroupBox();
+        techGroupBox = new GroupBox();
         techCategoryLabel = new CategoryDifficultyResultLabel();
         rhythmIrregularityLabel = new DifficultyResultLabel();
         label7 = new Label();
@@ -66,7 +66,7 @@ partial class AnalysisResultDisplay
         label9 = new Label();
         flamLabel = new DifficultyResultLabel();
         label11 = new Label();
-        groupBox3 = new GroupBox();
+        staminaGroupBox = new GroupBox();
         staminaCategoryLabel = new CategoryDifficultyResultLabel();
         steadyRateStreamLabel = new DifficultyResultLabel();
         label19 = new Label();
@@ -74,7 +74,7 @@ partial class AnalysisResultDisplay
         label21 = new Label();
         longBurstLabel = new DifficultyResultLabel();
         label23 = new Label();
-        jackDifficultyCategoryGroupBox = new GroupBox();
+        jackGroupBox = new GroupBox();
         jackCategoryLabel = new CategoryDifficultyResultLabel();
         fieldjackLabel = new DifficultyResultLabel();
         label14 = new Label();
@@ -88,7 +88,7 @@ partial class AnalysisResultDisplay
         label22 = new Label();
         minijackLabel = new DifficultyResultLabel();
         label24 = new Label();
-        dexterityDifficultyCategoryGroupBox = new GroupBox();
+        dexterityGroupBox = new GroupBox();
         dexterityCategoryLabel = new CategoryDifficultyResultLabel();
         chordGapLabel = new DifficultyResultLabel();
         label12 = new Label();
@@ -102,26 +102,28 @@ partial class AnalysisResultDisplay
         label4 = new Label();
         dumpLabel = new DifficultyResultLabel();
         label1 = new Label();
+        warningLabel = new Label();
         outerGroupBox.SuspendLayout();
-        groupBox1.SuspendLayout();
-        groupBox4.SuspendLayout();
-        groupBox5.SuspendLayout();
-        groupBox2.SuspendLayout();
-        groupBox3.SuspendLayout();
-        jackDifficultyCategoryGroupBox.SuspendLayout();
-        dexterityDifficultyCategoryGroupBox.SuspendLayout();
+        overallGroupBox.SuspendLayout();
+        longNotesGroupBox.SuspendLayout();
+        scrollingGroupBox.SuspendLayout();
+        techGroupBox.SuspendLayout();
+        staminaGroupBox.SuspendLayout();
+        jackGroupBox.SuspendLayout();
+        dexterityGroupBox.SuspendLayout();
         SuspendLayout();
         // 
         // outerGroupBox
         // 
         outerGroupBox.BackColor = Color.FromArgb(30, 30, 30);
-        outerGroupBox.Controls.Add(groupBox1);
-        outerGroupBox.Controls.Add(groupBox4);
-        outerGroupBox.Controls.Add(groupBox5);
-        outerGroupBox.Controls.Add(groupBox2);
-        outerGroupBox.Controls.Add(groupBox3);
-        outerGroupBox.Controls.Add(jackDifficultyCategoryGroupBox);
-        outerGroupBox.Controls.Add(dexterityDifficultyCategoryGroupBox);
+        outerGroupBox.Controls.Add(overallGroupBox);
+        outerGroupBox.Controls.Add(longNotesGroupBox);
+        outerGroupBox.Controls.Add(scrollingGroupBox);
+        outerGroupBox.Controls.Add(techGroupBox);
+        outerGroupBox.Controls.Add(staminaGroupBox);
+        outerGroupBox.Controls.Add(jackGroupBox);
+        outerGroupBox.Controls.Add(dexterityGroupBox);
+        outerGroupBox.Controls.Add(warningLabel);
         outerGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
         outerGroupBox.ForeColor = Color.Silver;
         outerGroupBox.Location = new Point(0, 0);
@@ -132,24 +134,24 @@ partial class AnalysisResultDisplay
         outerGroupBox.TabStop = false;
         outerGroupBox.Text = "analysis name";
         // 
-        // groupBox1
+        // overallGroupBox
         // 
-        groupBox1.BackColor = Color.FromArgb(30, 30, 30);
-        groupBox1.Controls.Add(label30);
-        groupBox1.Controls.Add(instabilityLabel);
-        groupBox1.Controls.Add(label29);
-        groupBox1.Controls.Add(overallLabel);
-        groupBox1.Dock = DockStyle.Bottom;
-        groupBox1.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        groupBox1.ForeColor = Color.Silver;
-        groupBox1.Location = new Point(6, 372);
-        groupBox1.Margin = new Padding(6);
-        groupBox1.Name = "groupBox1";
-        groupBox1.Padding = new Padding(4, 3, 4, 3);
-        groupBox1.Size = new Size(356, 72);
-        groupBox1.TabIndex = 20;
-        groupBox1.TabStop = false;
-        groupBox1.Text = "overall";
+        overallGroupBox.BackColor = Color.FromArgb(30, 30, 30);
+        overallGroupBox.Controls.Add(label30);
+        overallGroupBox.Controls.Add(instabilityLabel);
+        overallGroupBox.Controls.Add(label29);
+        overallGroupBox.Controls.Add(overallLabel);
+        overallGroupBox.Dock = DockStyle.Bottom;
+        overallGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
+        overallGroupBox.ForeColor = Color.Silver;
+        overallGroupBox.Location = new Point(6, 372);
+        overallGroupBox.Margin = new Padding(6);
+        overallGroupBox.Name = "overallGroupBox";
+        overallGroupBox.Padding = new Padding(4, 3, 4, 3);
+        overallGroupBox.Size = new Size(356, 72);
+        overallGroupBox.TabIndex = 20;
+        overallGroupBox.TabStop = false;
+        overallGroupBox.Text = "overall";
         // 
         // label30
         // 
@@ -201,28 +203,28 @@ partial class AnalysisResultDisplay
         overallLabel.TabIndex = 19;
         overallLabel.Text = "321.46";
         // 
-        // groupBox4
+        // longNotesGroupBox
         // 
-        groupBox4.BackColor = Color.FromArgb(30, 30, 30);
-        groupBox4.Controls.Add(shieldLabel);
-        groupBox4.Controls.Add(label25);
-        groupBox4.Controls.Add(riceMixLabel);
-        groupBox4.Controls.Add(label26);
-        groupBox4.Controls.Add(longNotesCategoryLabel);
-        groupBox4.Controls.Add(riceLnLabel);
-        groupBox4.Controls.Add(label2);
-        groupBox4.Controls.Add(inverseLabel);
-        groupBox4.Controls.Add(label3);
-        groupBox4.Controls.Add(lnShieldLabel);
-        groupBox4.Controls.Add(label5);
-        groupBox4.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        groupBox4.ForeColor = Color.Silver;
-        groupBox4.Location = new Point(6, 247);
-        groupBox4.Name = "groupBox4";
-        groupBox4.Size = new Size(175, 116);
-        groupBox4.TabIndex = 5;
-        groupBox4.TabStop = false;
-        groupBox4.Text = "long notes";
+        longNotesGroupBox.BackColor = Color.FromArgb(30, 30, 30);
+        longNotesGroupBox.Controls.Add(shieldLabel);
+        longNotesGroupBox.Controls.Add(label25);
+        longNotesGroupBox.Controls.Add(riceMixLabel);
+        longNotesGroupBox.Controls.Add(label26);
+        longNotesGroupBox.Controls.Add(longNotesCategoryLabel);
+        longNotesGroupBox.Controls.Add(riceLnLabel);
+        longNotesGroupBox.Controls.Add(label2);
+        longNotesGroupBox.Controls.Add(inverseLabel);
+        longNotesGroupBox.Controls.Add(label3);
+        longNotesGroupBox.Controls.Add(lnShieldLabel);
+        longNotesGroupBox.Controls.Add(label5);
+        longNotesGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
+        longNotesGroupBox.ForeColor = Color.Silver;
+        longNotesGroupBox.Location = new Point(6, 247);
+        longNotesGroupBox.Name = "longNotesGroupBox";
+        longNotesGroupBox.Size = new Size(175, 116);
+        longNotesGroupBox.TabIndex = 5;
+        longNotesGroupBox.TabStop = false;
+        longNotesGroupBox.Text = "long notes";
         // 
         // shieldLabel
         // 
@@ -361,27 +363,27 @@ partial class AnalysisResultDisplay
         label5.TabIndex = 13;
         label5.Text = "ln shield";
         // 
-        // groupBox5
+        // scrollingGroupBox
         // 
-        groupBox5.Controls.Add(visualDensityLabel);
-        groupBox5.Controls.Add(label27);
-        groupBox5.Controls.Add(burstLabel);
-        groupBox5.Controls.Add(label28);
-        groupBox5.Controls.Add(scrollingCategoryLabel);
-        groupBox5.Controls.Add(stutterLabel);
-        groupBox5.Controls.Add(label13);
-        groupBox5.Controls.Add(slowLabel);
-        groupBox5.Controls.Add(label15);
-        groupBox5.Controls.Add(fastLabel);
-        groupBox5.Controls.Add(label17);
-        groupBox5.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        groupBox5.ForeColor = Color.Silver;
-        groupBox5.Location = new Point(187, 247);
-        groupBox5.Name = "groupBox5";
-        groupBox5.Size = new Size(175, 116);
-        groupBox5.TabIndex = 4;
-        groupBox5.TabStop = false;
-        groupBox5.Text = "scrolling";
+        scrollingGroupBox.Controls.Add(visualDensityLabel);
+        scrollingGroupBox.Controls.Add(label27);
+        scrollingGroupBox.Controls.Add(burstLabel);
+        scrollingGroupBox.Controls.Add(label28);
+        scrollingGroupBox.Controls.Add(scrollingCategoryLabel);
+        scrollingGroupBox.Controls.Add(stutterLabel);
+        scrollingGroupBox.Controls.Add(label13);
+        scrollingGroupBox.Controls.Add(slowLabel);
+        scrollingGroupBox.Controls.Add(label15);
+        scrollingGroupBox.Controls.Add(fastLabel);
+        scrollingGroupBox.Controls.Add(label17);
+        scrollingGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
+        scrollingGroupBox.ForeColor = Color.Silver;
+        scrollingGroupBox.Location = new Point(187, 247);
+        scrollingGroupBox.Name = "scrollingGroupBox";
+        scrollingGroupBox.Size = new Size(175, 116);
+        scrollingGroupBox.TabIndex = 4;
+        scrollingGroupBox.TabStop = false;
+        scrollingGroupBox.Text = "scrolling";
         // 
         // visualDensityLabel
         // 
@@ -520,24 +522,24 @@ partial class AnalysisResultDisplay
         label17.TabIndex = 1;
         label17.Text = "fast";
         // 
-        // groupBox2
+        // techGroupBox
         // 
-        groupBox2.BackColor = Color.FromArgb(30, 30, 30);
-        groupBox2.Controls.Add(techCategoryLabel);
-        groupBox2.Controls.Add(rhythmIrregularityLabel);
-        groupBox2.Controls.Add(label7);
-        groupBox2.Controls.Add(patternSwitchLabel);
-        groupBox2.Controls.Add(label9);
-        groupBox2.Controls.Add(flamLabel);
-        groupBox2.Controls.Add(label11);
-        groupBox2.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        groupBox2.ForeColor = Color.Silver;
-        groupBox2.Location = new Point(6, 160);
-        groupBox2.Name = "groupBox2";
-        groupBox2.Size = new Size(175, 81);
-        groupBox2.TabIndex = 3;
-        groupBox2.TabStop = false;
-        groupBox2.Text = "tech";
+        techGroupBox.BackColor = Color.FromArgb(30, 30, 30);
+        techGroupBox.Controls.Add(techCategoryLabel);
+        techGroupBox.Controls.Add(rhythmIrregularityLabel);
+        techGroupBox.Controls.Add(label7);
+        techGroupBox.Controls.Add(patternSwitchLabel);
+        techGroupBox.Controls.Add(label9);
+        techGroupBox.Controls.Add(flamLabel);
+        techGroupBox.Controls.Add(label11);
+        techGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
+        techGroupBox.ForeColor = Color.Silver;
+        techGroupBox.Location = new Point(6, 160);
+        techGroupBox.Name = "techGroupBox";
+        techGroupBox.Size = new Size(175, 81);
+        techGroupBox.TabIndex = 3;
+        techGroupBox.TabStop = false;
+        techGroupBox.Text = "tech";
         // 
         // techCategoryLabel
         // 
@@ -626,23 +628,23 @@ partial class AnalysisResultDisplay
         label11.TabIndex = 13;
         label11.Text = "flam";
         // 
-        // groupBox3
+        // staminaGroupBox
         // 
-        groupBox3.Controls.Add(staminaCategoryLabel);
-        groupBox3.Controls.Add(steadyRateStreamLabel);
-        groupBox3.Controls.Add(label19);
-        groupBox3.Controls.Add(singleHandTrillLabel);
-        groupBox3.Controls.Add(label21);
-        groupBox3.Controls.Add(longBurstLabel);
-        groupBox3.Controls.Add(label23);
-        groupBox3.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        groupBox3.ForeColor = Color.Silver;
-        groupBox3.Location = new Point(187, 160);
-        groupBox3.Name = "groupBox3";
-        groupBox3.Size = new Size(175, 81);
-        groupBox3.TabIndex = 2;
-        groupBox3.TabStop = false;
-        groupBox3.Text = "stamina";
+        staminaGroupBox.Controls.Add(staminaCategoryLabel);
+        staminaGroupBox.Controls.Add(steadyRateStreamLabel);
+        staminaGroupBox.Controls.Add(label19);
+        staminaGroupBox.Controls.Add(singleHandTrillLabel);
+        staminaGroupBox.Controls.Add(label21);
+        staminaGroupBox.Controls.Add(longBurstLabel);
+        staminaGroupBox.Controls.Add(label23);
+        staminaGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
+        staminaGroupBox.ForeColor = Color.Silver;
+        staminaGroupBox.Location = new Point(187, 160);
+        staminaGroupBox.Name = "staminaGroupBox";
+        staminaGroupBox.Size = new Size(175, 81);
+        staminaGroupBox.TabIndex = 2;
+        staminaGroupBox.TabStop = false;
+        staminaGroupBox.Text = "stamina";
         // 
         // staminaCategoryLabel
         // 
@@ -731,30 +733,30 @@ partial class AnalysisResultDisplay
         label23.TabIndex = 1;
         label23.Text = "long burst";
         // 
-        // jackDifficultyCategoryGroupBox
+        // jackGroupBox
         // 
-        jackDifficultyCategoryGroupBox.BackColor = Color.FromArgb(30, 30, 30);
-        jackDifficultyCategoryGroupBox.Controls.Add(jackCategoryLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(fieldjackLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(label14);
-        jackDifficultyCategoryGroupBox.Controls.Add(doubleHandJackLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(label16);
-        jackDifficultyCategoryGroupBox.Controls.Add(chordjackLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(label18);
-        jackDifficultyCategoryGroupBox.Controls.Add(jackstreamLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(label20);
-        jackDifficultyCategoryGroupBox.Controls.Add(anchorLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(label22);
-        jackDifficultyCategoryGroupBox.Controls.Add(minijackLabel);
-        jackDifficultyCategoryGroupBox.Controls.Add(label24);
-        jackDifficultyCategoryGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        jackDifficultyCategoryGroupBox.ForeColor = Color.Silver;
-        jackDifficultyCategoryGroupBox.Location = new Point(187, 19);
-        jackDifficultyCategoryGroupBox.Name = "jackDifficultyCategoryGroupBox";
-        jackDifficultyCategoryGroupBox.Size = new Size(175, 135);
-        jackDifficultyCategoryGroupBox.TabIndex = 1;
-        jackDifficultyCategoryGroupBox.TabStop = false;
-        jackDifficultyCategoryGroupBox.Text = "jack";
+        jackGroupBox.BackColor = Color.FromArgb(30, 30, 30);
+        jackGroupBox.Controls.Add(jackCategoryLabel);
+        jackGroupBox.Controls.Add(fieldjackLabel);
+        jackGroupBox.Controls.Add(label14);
+        jackGroupBox.Controls.Add(doubleHandJackLabel);
+        jackGroupBox.Controls.Add(label16);
+        jackGroupBox.Controls.Add(chordjackLabel);
+        jackGroupBox.Controls.Add(label18);
+        jackGroupBox.Controls.Add(jackstreamLabel);
+        jackGroupBox.Controls.Add(label20);
+        jackGroupBox.Controls.Add(anchorLabel);
+        jackGroupBox.Controls.Add(label22);
+        jackGroupBox.Controls.Add(minijackLabel);
+        jackGroupBox.Controls.Add(label24);
+        jackGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
+        jackGroupBox.ForeColor = Color.Silver;
+        jackGroupBox.Location = new Point(187, 19);
+        jackGroupBox.Name = "jackGroupBox";
+        jackGroupBox.Size = new Size(175, 135);
+        jackGroupBox.TabIndex = 1;
+        jackGroupBox.TabStop = false;
+        jackGroupBox.Text = "jack";
         // 
         // jackCategoryLabel
         // 
@@ -918,29 +920,29 @@ partial class AnalysisResultDisplay
         label24.TabIndex = 13;
         label24.Text = "minijack";
         // 
-        // dexterityDifficultyCategoryGroupBox
+        // dexterityGroupBox
         // 
-        dexterityDifficultyCategoryGroupBox.Controls.Add(dexterityCategoryLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(chordGapLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(label12);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(trillLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(label10);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(speedLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(label8);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(chordLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(label6);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(singlestreamLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(label4);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(dumpLabel);
-        dexterityDifficultyCategoryGroupBox.Controls.Add(label1);
-        dexterityDifficultyCategoryGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
-        dexterityDifficultyCategoryGroupBox.ForeColor = Color.Silver;
-        dexterityDifficultyCategoryGroupBox.Location = new Point(6, 19);
-        dexterityDifficultyCategoryGroupBox.Name = "dexterityDifficultyCategoryGroupBox";
-        dexterityDifficultyCategoryGroupBox.Size = new Size(175, 135);
-        dexterityDifficultyCategoryGroupBox.TabIndex = 0;
-        dexterityDifficultyCategoryGroupBox.TabStop = false;
-        dexterityDifficultyCategoryGroupBox.Text = "dexterity";
+        dexterityGroupBox.Controls.Add(dexterityCategoryLabel);
+        dexterityGroupBox.Controls.Add(chordGapLabel);
+        dexterityGroupBox.Controls.Add(label12);
+        dexterityGroupBox.Controls.Add(trillLabel);
+        dexterityGroupBox.Controls.Add(label10);
+        dexterityGroupBox.Controls.Add(speedLabel);
+        dexterityGroupBox.Controls.Add(label8);
+        dexterityGroupBox.Controls.Add(chordLabel);
+        dexterityGroupBox.Controls.Add(label6);
+        dexterityGroupBox.Controls.Add(singlestreamLabel);
+        dexterityGroupBox.Controls.Add(label4);
+        dexterityGroupBox.Controls.Add(dumpLabel);
+        dexterityGroupBox.Controls.Add(label1);
+        dexterityGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
+        dexterityGroupBox.ForeColor = Color.Silver;
+        dexterityGroupBox.Location = new Point(6, 19);
+        dexterityGroupBox.Name = "dexterityGroupBox";
+        dexterityGroupBox.Size = new Size(175, 135);
+        dexterityGroupBox.TabIndex = 0;
+        dexterityGroupBox.TabStop = false;
+        dexterityGroupBox.Text = "dexterity";
         // 
         // dexterityCategoryLabel
         // 
@@ -1104,6 +1106,17 @@ partial class AnalysisResultDisplay
         label1.TabIndex = 1;
         label1.Text = "dump";
         // 
+        // warningLabel
+        // 
+        warningLabel.Dock = DockStyle.Fill;
+        warningLabel.Location = new Point(6, 24);
+        warningLabel.Name = "warningLabel";
+        warningLabel.Size = new Size(356, 420);
+        warningLabel.TabIndex = 21;
+        warningLabel.Text = "please select a beatmap\r\nto view its difficulty";
+        warningLabel.TextAlign = ContentAlignment.MiddleCenter;
+        warningLabel.Visible = false;
+        // 
         // AnalysisResultDisplay
         // 
         AutoScaleDimensions = new SizeF(7F, 17F);
@@ -1116,20 +1129,20 @@ partial class AnalysisResultDisplay
         Name = "AnalysisResultDisplay";
         Size = new Size(368, 450);
         outerGroupBox.ResumeLayout(false);
-        groupBox1.ResumeLayout(false);
-        groupBox1.PerformLayout();
-        groupBox4.ResumeLayout(false);
-        groupBox4.PerformLayout();
-        groupBox5.ResumeLayout(false);
-        groupBox5.PerformLayout();
-        groupBox2.ResumeLayout(false);
-        groupBox2.PerformLayout();
-        groupBox3.ResumeLayout(false);
-        groupBox3.PerformLayout();
-        jackDifficultyCategoryGroupBox.ResumeLayout(false);
-        jackDifficultyCategoryGroupBox.PerformLayout();
-        dexterityDifficultyCategoryGroupBox.ResumeLayout(false);
-        dexterityDifficultyCategoryGroupBox.PerformLayout();
+        overallGroupBox.ResumeLayout(false);
+        overallGroupBox.PerformLayout();
+        longNotesGroupBox.ResumeLayout(false);
+        longNotesGroupBox.PerformLayout();
+        scrollingGroupBox.ResumeLayout(false);
+        scrollingGroupBox.PerformLayout();
+        techGroupBox.ResumeLayout(false);
+        techGroupBox.PerformLayout();
+        staminaGroupBox.ResumeLayout(false);
+        staminaGroupBox.PerformLayout();
+        jackGroupBox.ResumeLayout(false);
+        jackGroupBox.PerformLayout();
+        dexterityGroupBox.ResumeLayout(false);
+        dexterityGroupBox.PerformLayout();
         ResumeLayout(false);
     }
 
@@ -1138,7 +1151,7 @@ partial class AnalysisResultDisplay
     private GroupBox outerGroupBox;
     private DifficultyResultLabel overallLabel;
     private Label label29;
-    private GroupBox groupBox4;
+    private GroupBox longNotesGroupBox;
     private DifficultyResultLabel shieldLabel;
     private Label label25;
     private DifficultyResultLabel riceMixLabel;
@@ -1150,7 +1163,7 @@ partial class AnalysisResultDisplay
     private Label label3;
     private DifficultyResultLabel lnShieldLabel;
     private Label label5;
-    private GroupBox groupBox5;
+    private GroupBox scrollingGroupBox;
     private DifficultyResultLabel visualDensityLabel;
     private Label label27;
     private DifficultyResultLabel burstLabel;
@@ -1162,7 +1175,7 @@ partial class AnalysisResultDisplay
     private Label label15;
     private DifficultyResultLabel fastLabel;
     private Label label17;
-    private GroupBox groupBox2;
+    private GroupBox techGroupBox;
     private CategoryDifficultyResultLabel techCategoryLabel;
     private DifficultyResultLabel rhythmIrregularityLabel;
     private Label label7;
@@ -1170,7 +1183,7 @@ partial class AnalysisResultDisplay
     private Label label9;
     private DifficultyResultLabel flamLabel;
     private Label label11;
-    private GroupBox groupBox3;
+    private GroupBox staminaGroupBox;
     private CategoryDifficultyResultLabel staminaCategoryLabel;
     private DifficultyResultLabel steadyRateStreamLabel;
     private Label label19;
@@ -1178,7 +1191,7 @@ partial class AnalysisResultDisplay
     private Label label21;
     private DifficultyResultLabel longBurstLabel;
     private Label label23;
-    private GroupBox jackDifficultyCategoryGroupBox;
+    private GroupBox jackGroupBox;
     private CategoryDifficultyResultLabel jackCategoryLabel;
     private DifficultyResultLabel fieldjackLabel;
     private Label label14;
@@ -1192,7 +1205,7 @@ partial class AnalysisResultDisplay
     private Label label22;
     private DifficultyResultLabel minijackLabel;
     private Label label24;
-    private GroupBox dexterityDifficultyCategoryGroupBox;
+    private GroupBox dexterityGroupBox;
     private CategoryDifficultyResultLabel dexterityCategoryLabel;
     private DifficultyResultLabel chordGapLabel;
     private Label label12;
@@ -1206,7 +1219,8 @@ partial class AnalysisResultDisplay
     private Label label4;
     private DifficultyResultLabel dumpLabel;
     private Label label1;
-    private GroupBox groupBox1;
+    private GroupBox overallGroupBox;
     private Label label30;
     private DifficultyResultLabel instabilityLabel;
+    private Label warningLabel;
 }

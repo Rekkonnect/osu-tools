@@ -1,4 +1,6 @@
-﻿using OsuRealDifficulty.Mania;
+﻿using OsuParsers.Database.Objects;
+using OsuRealDifficulty.Mania;
+using OsuRealDifficulty.UI.WinForms.Utilities;
 using Serilog;
 using System.ComponentModel;
 
@@ -9,6 +11,10 @@ public partial class AnalysisResultDisplay : UserControl
     private CancellableTask? _refreshListenTask = null;
 
     private DifficultyCalculationProfile _calculationProfile;
+
+    // TODO: This control should have no logic about how to display
+    // the analyzed difficulty; it should all derive from a
+    // FullDifficultyCalculationResult instance
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public AnalyzedDifficulty AnalyzedDifficulty { get; set; }
@@ -26,6 +32,9 @@ public partial class AnalysisResultDisplay : UserControl
             RefreshDisplay();
         }
     }
+
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public DbBeatmap? SelectedBeatmap { get; set; }
 
     public string Caption
     {
@@ -56,6 +65,39 @@ public partial class AnalysisResultDisplay : UserControl
     }
 
     public void RefreshDisplay()
+    {
+        using var _ = this.LayoutSuspension();
+        RefreshAnalysisDisplay();
+        RefreshBeatmapSelection();
+    }
+
+    private void RefreshBeatmapSelection()
+    {
+        var hasBeatmap = SelectedBeatmap is not null;
+
+        warningLabel.Visible = !hasBeatmap;
+        var groupBoxes = AnalysisGroupBoxes();
+        foreach (var box in groupBoxes)
+        {
+            box.Visible = hasBeatmap;
+        }
+    }
+
+    private IEnumerable<GroupBox> AnalysisGroupBoxes()
+    {
+        return
+        [
+            dexterityGroupBox,
+            jackGroupBox,
+            techGroupBox,
+            staminaGroupBox,
+            longNotesGroupBox,
+            scrollingGroupBox,
+            overallGroupBox,
+        ];
+    }
+
+    private void RefreshAnalysisDisplay()
     {
         var difficulty = AnalyzedDifficulty;
 
@@ -103,7 +145,7 @@ public partial class AnalysisResultDisplay : UserControl
         RefreshOverallDisplays(stats);
     }
 
-    private void RefreshOverallDisplays(EstimatedDifficultyStats stats)
+    private void RefreshOverallDisplays(DifficultyStatsOverview stats)
     {
         var difficulty = AnalyzedDifficulty;
         var segmented = stats.OverallDifficulty;

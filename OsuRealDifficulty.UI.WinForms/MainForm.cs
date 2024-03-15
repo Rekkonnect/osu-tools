@@ -1,10 +1,10 @@
 using OsuParsers.Database.Objects;
-using OsuParsers.Enums;
 using OsuRealDifficulty.Mania;
 using OsuRealDifficulty.UI.WinForms.Controls;
 using OsuRealDifficulty.UI.WinForms.Core;
 using OsuRealDifficulty.UI.WinForms.Utilities;
 using Serilog;
+using Serilog.Events;
 
 namespace OsuRealDifficulty.UI.WinForms;
 
@@ -15,9 +15,76 @@ public partial class MainForm : Form
 
     private readonly BeatmapFilter _beatmapFilter = new();
 
+    private volatile Task? _backgroundBeatmapCalculationTask = null;
+
     public MainForm()
     {
         InitializeComponent();
+    }
+
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+    {
+        bool handled = HandleKeyDownShortcut(keyData);
+        if (handled)
+        {
+            Log.Information(
+                "Handled shortcut {Shortcut}",
+                keyData);
+            return true;
+        }
+
+        return base.ProcessCmdKey(ref msg, keyData);
+    }
+
+    private bool HandleKeyDownShortcut(Keys pressedKeys)
+    {
+        switch (pressedKeys)
+        {
+            // focus on text filter
+            case Keys.Control | Keys.F:
+                searchTextBox.Focus();
+                return true;
+
+            // show logs
+            case Keys.Control | Keys.L:
+                return true;
+
+            // show settings
+            case Keys.Control | Keys.S:
+            case Keys.Control | Keys.O:
+                ShowSettings();
+                return true;
+
+            // clear filters
+            case Keys.Control | Keys.Alt | Keys.R:
+            case Keys.Control | Keys.Alt | Keys.C:
+                return true;
+
+            // filter by keys
+            case Keys.Control | Keys.K:
+                keyCountFilterCheckBox.Checked = true;
+                keyCountFilterTextBox.Focus();
+                return true;
+
+            // refresh all beatmaps
+            case Keys.Control | Keys.Shift | Keys.R:
+            {
+                var reloadResult = MessageBox.Show(
+                    "you pressed CTRL + SHIFT + R; do you want to reload the entire beatmap database?",
+                    "reload database",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                if (reloadResult is DialogResult.Yes)
+                {
+                    ReloadMaps();
+                }
+                return true;
+            }
+
+            // TODO more shortcuts
+        }
+
+        return false;
     }
 
     private void MainForm_Load(object sender, EventArgs e)
@@ -50,17 +117,15 @@ public partial class MainForm : Form
         try
         {
             var start = DateTime.Now;
-            AppState.Instance.LoadDbBeatmapSetDatabase();
+            AppStateManager.Instance.LoadDbBeatmapSetDatabase();
             GC.Collect();
-            var database = AppState.Instance.BeatmapSetDatabase!;
-            var maniaSets = database.SetsWithRuleset(Ruleset.Mania)
-                .ToList();
-            beatmapSetListView.SetBeatmapSets(maniaSets);
+            var database = AppState.Instance.ManiaBeatmapSetDatabase!;
+            beatmapSetListView.SetBeatmapSets(database.BeatmapSets);
             var end = DateTime.Now;
             var duration = end - start;
             Log.Information(
                 "Loaded the entire database with {ManiaBeatmapSets} mania beatmap sets over {Time}ms",
-                maniaSets.Count,
+                database.BeatmapSetCount,
                 duration.TotalMilliseconds);
         }
         catch (Exception ex)
@@ -117,6 +182,17 @@ public partial class MainForm : Form
         RunFilterFocusSearchBox();
     }
 
+    private void searchTextBox_KeyDown(object sender, KeyEventArgs e)
+    {
+        // Convenience shortcuts:
+        switch (e.KeyCode)
+        {
+            case Keys.Down:
+                beatmapSetListView.Focus();
+                break;
+        }
+    }
+
     private void keyCountFilterCheckBox_CheckedChanged(object sender, EventArgs e)
     {
         bool filter = keyCountFilterCheckBox.Checked;
@@ -147,6 +223,8 @@ public partial class MainForm : Form
 
     private void RunFilter()
     {
+        var previouslySelectedSet = GetSelectedBeatmapSet();
+
         var start = DateTime.Now;
         beatmapSetListView.Filter((item) => _beatmapFilter.Passes(item.BeatmapSet));
         var end = DateTime.Now;
@@ -155,6 +233,24 @@ public partial class MainForm : Form
             "Filtered through {BeatmapSetCount} beatmap sets over {Time}ms",
             beatmapSetListView.BeatmapSetCount,
             filterTime.TotalMilliseconds);
+
+        if (previouslySelectedSet is not null)
+        {
+            if (_beatmapFilter.Passes(previouslySelectedSet))
+            {
+                start = DateTime.Now;
+
+                // Rediscover the set in the list to select it again
+                beatmapSetListView.SelectBeatmapSet(previouslySelectedSet);
+
+                end = DateTime.Now;
+                filterTime = end - start;
+                Log.Debug(
+                    "Rediscovered selected beatmap set {BeatmapSetTitle} over {Time}ms",
+                    previouslySelectedSet.Title,
+                    filterTime.TotalMilliseconds);
+            }
+        }
 
         switch (beatmapSetListView.Items.Count)
         {
@@ -167,11 +263,15 @@ public partial class MainForm : Form
                 break;
         }
 
+        beatmapSetListView.EnsureFirstSelectedVisible();
+
         RunSelectedBeatmapSetFilter();
     }
 
     private void beatmapSetListView_SelectedIndexChanged(object sender, EventArgs e)
     {
+        RefreshViewForCurrentSelectedBeatmap();
+
         var set = GetSelectedBeatmapSet();
         if (set is null)
         {
@@ -241,10 +341,19 @@ public partial class MainForm : Form
         Invoke(async () => await HandleBeatmapCalculation(dbBeatmap));
     }
 
+    // TODO: FIGURE HOW TO AVOID COPY-PASTE
+
     private async Task HandleBeatmapCalculation(DbBeatmap dbBeatmap)
     {
         try
         {
+            const string initiationTemplate
+                = $"Initiated beatmap analysis for {_beatmapLogInformationTemplate}";
+            LogBeatmap(
+                LogEventLevel.Information,
+                dbBeatmap,
+                initiationTemplate);
+
             var songs = AppSettings.Instance.EffectiveBaseSongsDirectory;
             var beatmap = dbBeatmap.Read(songs);
 
@@ -269,6 +378,18 @@ public partial class MainForm : Form
             {
                 LogEsotericDiagnostic(diagnostic);
             }
+
+            var fullResult = calculationProfile.CalculateFullResult(
+                driver.AnalyzedDifficulty);
+            AppState.Instance.CalculationCache.SetForBeatmap(
+                dbBeatmap, fullResult);
+
+            const string analysisCompleteTemplate
+                = $"Successfully completed beatmap analysis for {_beatmapLogInformationTemplate}";
+            LogBeatmap(
+                LogEventLevel.Information,
+                dbBeatmap,
+                initiationTemplate);
         }
         catch (Exception ex)
         {
@@ -276,6 +397,89 @@ public partial class MainForm : Form
         }
 
         Invoke(ResetCalculationEnablement);
+    }
+
+    private void TryExecuteCalculationForAllBeatmaps()
+    {
+        if (_backgroundBeatmapCalculationTask is not null)
+            return;
+
+        _backgroundBeatmapCalculationTask = ExecuteCalculationForAllBeatmapsAsync();
+    }
+
+    private async Task ExecuteCalculationForAllBeatmapsAsync()
+    {
+        var songs = AppSettings.Instance.EffectiveBaseSongsDirectory;
+        foreach (var dbBeatmap in AppState.Instance.BeatmapSetDatabase!.AllBeatmaps)
+        {
+            try
+            {
+                const string initiationTemplate
+                    = $"Initiated beatmap analysis for {_beatmapLogInformationTemplate}";
+                LogBeatmap(
+                    LogEventLevel.Information,
+                    dbBeatmap,
+                    initiationTemplate);
+
+                var beatmap = dbBeatmap.Read(songs);
+
+                var driver = CompleteBeatmapAnnotationAnalysis.NewDriver(beatmap);
+                driver.ExceptionAction += AnalysisExceptionHandling;
+                var source = _difficultyCalculationCancellationTokenFactory
+                    .CurrentSource;
+
+                int keys = beatmap.ManiaKeyCount();
+                var executionResult = await driver.Execute(source.Token);
+
+                foreach (var diagnostic in executionResult.Diagnostics.Diagnostics)
+                {
+                    LogEsotericDiagnostic(diagnostic);
+                }
+
+                const string analysisCompleteTemplate
+                    = $"Successfully completed beatmap analysis for {_beatmapLogInformationTemplate}";
+                LogBeatmap(
+                    LogEventLevel.Information,
+                    dbBeatmap,
+                    initiationTemplate);
+
+                var calculationProfile = AppState.Instance.CalculationProfiles
+                    .ProfileForKeys(keys);
+                var fullResult = calculationProfile.CalculateFullResult(
+                    driver.AnalyzedDifficulty);
+                AppState.Instance.CalculationCache.SetForBeatmap(
+                    dbBeatmap, fullResult);
+            }
+            catch (Exception ex)
+            {
+                const string errorTemplate
+                    = $"Beatmap calculation for {_beatmapLogInformationTemplate} threw";
+                LogBeatmap(
+                    LogEventLevel.Error,
+                    dbBeatmap,
+                    errorTemplate);
+                Log.Logger.Error(ex, "Beatmap calculation threw");
+            }
+        }
+
+        _backgroundBeatmapCalculationTask = null;
+    }
+
+    private const string _beatmapLogInformationTemplate
+        = "{Artist} - {Title} by {Mapper} [{Difficulty}]";
+
+    private static void LogBeatmap(
+        LogEventLevel level,
+        DbBeatmap beatmap,
+        string template)
+    {
+        Log.Logger.Write(
+            level,
+            template,
+            beatmap.RomanizedOrUnicodeArtist(),
+            beatmap.RomanizedOrUnicodeTitle(),
+            beatmap.Creator,
+            beatmap.Difficulty);
     }
 
     private static void LogEsotericDiagnostic(EsotericDiagnostic diagnostic)
@@ -318,13 +522,23 @@ public partial class MainForm : Form
 
     private void settingsButton_Click(object sender, EventArgs e)
     {
+        ShowSettings();
+    }
 
+    private void ShowSettings()
+    {
+        // TODO
     }
 
     private void reloadBeatmapDatabaseButton_Click(object sender, EventArgs e)
     {
         ReloadMaps();
-        RunFilter();
+
+        // Do not unnecessarily run filters right after a reload
+        if (_beatmapFilter.HasAnyFilter)
+        {
+            RunFilter();
+        }
     }
 
     private void showLogsButton_Click(object sender, EventArgs e)
@@ -335,5 +549,17 @@ public partial class MainForm : Form
     private void difficultyListView_SelectedIndexChanged(object sender, EventArgs e)
     {
         CancelCurrentCalculation();
+        RefreshViewForCurrentSelectedBeatmap();
+    }
+
+    private void RefreshViewForCurrentSelectedBeatmap()
+    {
+        var beatmap = GetSelectedBeatmap();
+        difficultyResultDisplay.SelectedBeatmap = beatmap;
+        var cachedDifficulty = AppState.Instance.CalculationCache
+            .GetForBeatmap(beatmap);
+        difficultyResultDisplay.AnalyzedDifficulty = cachedDifficulty?.AnalyzedDifficulty
+            ?? AnalyzedDifficulty.NewPending;
+        difficultyResultDisplay.RefreshDisplay();
     }
 }

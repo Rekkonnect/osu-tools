@@ -8,11 +8,10 @@ internal sealed class AppState
         = OsuDatabaseManager.Instance;
 
     public DbBeatmapSetDatabase? BeatmapSetDatabase { get; set; }
+    public DbBeatmapSetDatabase? ManiaBeatmapSetDatabase { get; set; }
     public DifficultyCalculationProfiles CalculationProfiles { get; set; }
         = DifficultyCalculationProfiles.Default;
 
-    public void LoadDbBeatmapSetDatabase()
-    {
-        BeatmapSetDatabase = OsuDatabaseManager.ReadEntireDbBeatmapSetDatabase();
-    }
+    public BeatmapDifficultyCalculationCache CalculationCache { get; }
+        = new();
 }

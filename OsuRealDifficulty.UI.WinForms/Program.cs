@@ -1,3 +1,4 @@
+using OsuRealDifficulty.UI.WinForms.Core;
 using OsuRealDifficulty.UI.WinForms.Logging;
 using Serilog;
 
@@ -15,6 +16,7 @@ internal static class Program
         SetDefaultFont();
 
         SetupSerilog();
+        SetupAppSettings();
 
         Application.Run(new MainForm());
     }
@@ -34,14 +36,14 @@ internal static class Program
             .MinimumLevel.Debug()
             .WriteTo.File(
                 "logs/mania-diff-winforms.txt",
-                rollingInterval: RollingInterval.Hour)
+                rollingInterval: RollingInterval.Day)
             .WriteTo.BatchedInMemoryString()
             .CreateLogger();
 
         Application.ApplicationExit += LogApplicationExit;
         Application.ApplicationExit += CloseAndFlushBeforeExiting;
 
-        Log.Information("Serilog was setup -- Application is starting");
+        Log.Information("---- Application is starting -- Serilog was setup");
     }
 
     private static void LogApplicationExit(object? sender, EventArgs e)
@@ -52,5 +54,17 @@ internal static class Program
     private static void CloseAndFlushBeforeExiting(object? sender, EventArgs e)
     {
         Log.CloseAndFlush();
+    }
+
+    private static void SetupAppSettings()
+    {
+        AppSettingsManager.Instance.InitializeSettingsInstance();
+
+        Application.ApplicationExit += WriteSettings;
+    }
+
+    private static void WriteSettings(object? sender, EventArgs e)
+    {
+        AppSettingsManager.Instance.Save(AppSettings.Instance);
     }
 }

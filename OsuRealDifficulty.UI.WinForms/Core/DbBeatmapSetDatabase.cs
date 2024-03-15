@@ -9,7 +9,7 @@ internal sealed class DbBeatmapSetDatabase
     private readonly Dictionary<int, DbBeatmapSet> _beatmapSets = new();
     private readonly BeatmapSetIdDictionary _beatmapSetIdDictionary = new();
 
-    public int Count => _beatmapSets.Count;
+    public int BeatmapSetCount => _beatmapSets.Count;
 
     public IEnumerable<DbBeatmapSet> BeatmapSets => _beatmapSets.Values;
     public IEnumerable<DbBeatmap> AllBeatmaps => BeatmapSets.SelectMany(s => s.Beatmaps);
@@ -26,6 +26,26 @@ internal sealed class DbBeatmapSetDatabase
     {
         var set = GetBeatmapSetFor(beatmap);
         set.AddBeatmap(beatmap);
+    }
+
+    public DbBeatmapSetDatabase Filter(Predicate<DbBeatmap> beatmapFilter)
+    {
+        var database = new DbBeatmapSetDatabase();
+        database._beatmapSetIdDictionary.CopyFrom(_beatmapSetIdDictionary);
+        foreach (var entry in _beatmapSets)
+        {
+            var sourceSet = entry.Value;
+            var newSet = new DbBeatmapSet(entry.Key);
+            var filteredBeatmaps = sourceSet.Beatmaps.WherePredicate(beatmapFilter);
+            newSet.AddRange(filteredBeatmaps);
+
+            // Do not add empty beatmap sets
+            if (newSet.Beatmaps.Count > 0)
+            {
+                database._beatmapSets[entry.Key] = newSet;
+            }
+        }
+        return database;
     }
 
     private int GetOrInventBeatmapSetId(DbBeatmap beatmap)
@@ -49,7 +69,7 @@ internal sealed class DbBeatmapSetDatabase
         bool found = _beatmapSets.TryGetValue(id, out var set);
         if (!found)
         {
-            set = new();
+            set = new(id);
             _beatmapSets[id] = set;
         }
         return set!;
@@ -80,6 +100,18 @@ internal sealed class DbBeatmapSetDatabase
     private sealed class BeatmapSetIdDictionary
     {
         private readonly Dictionary<string, int> _ids = new();
+
+        public void CopyFrom(BeatmapSetIdDictionary other)
+        {
+            _ids.AddRange(other._ids);
+        }
+
+        public BeatmapSetIdDictionary Clone()
+        {
+            var result = new BeatmapSetIdDictionary();
+            result.CopyFrom(this);
+            return result;
+        }
 
         public int IdFor(string name)
         {

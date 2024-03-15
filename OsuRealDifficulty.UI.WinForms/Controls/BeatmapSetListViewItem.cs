@@ -10,11 +10,9 @@ internal sealed class BeatmapSetListViewItem : ListViewItem
     {
         BeatmapSet = set;
 
-        var commonDataBeatmap = set.Beatmaps[0];
+        Text = set.RomanizedOrUnicodeTitle;
 
-        Text = commonDataBeatmap.Title;
-
-        SubItems.Add(commonDataBeatmap.Artist);
-        SubItems.Add(commonDataBeatmap.Creator);
+        SubItems.Add(set.RomanizedOrUnicodeArtist);
+        SubItems.Add(set.Creator);
     }
 }

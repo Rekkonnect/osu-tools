@@ -2,12 +2,24 @@
 
 public struct SegmentedOverallDifficulty
 {
-    public double Overall;
+    public static SegmentedOverallDifficulty NewPending => new()
+    {
+        Overall = CalculationResult.Pending,
 
-    public double Dexterity;
-    public double Jack;
-    public double Tech;
-    public double Stamina;
-    public double LongNotes;
-    public double Scrolling;
+        Dexterity = CalculationResult.Pending,
+        Jack = CalculationResult.Pending,
+        Tech = CalculationResult.Pending,
+        Stamina = CalculationResult.Pending,
+        LongNotes = CalculationResult.Pending,
+        Scrolling = CalculationResult.Pending,
+    };
+
+    public CalculationResult Overall;
+
+    public CalculationResult Dexterity;
+    public CalculationResult Jack;
+    public CalculationResult Tech;
+    public CalculationResult Stamina;
+    public CalculationResult LongNotes;
+    public CalculationResult Scrolling;
 }
