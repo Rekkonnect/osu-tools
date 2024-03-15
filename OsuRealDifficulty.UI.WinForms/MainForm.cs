@@ -15,6 +15,9 @@ public partial class MainForm : Form
 
     private readonly BeatmapFilter _beatmapFilter = new();
 
+    private DbBeatmapSet? _selectedBeatmapSet;
+    private DbBeatmap? _selectedBeatmap;
+
     private volatile Task? _backgroundBeatmapCalculationTask = null;
 
     public MainForm()
@@ -261,6 +264,13 @@ public partial class MainForm : Form
             case 0:
                 difficultyListView.ClearBeatmaps();
                 break;
+
+            default:
+                if (beatmapSetListView.SelectedIndices.Count is 0)
+                {
+                    difficultyListView.ClearBeatmaps();
+                }
+                break;
         }
 
         beatmapSetListView.EnsureFirstSelectedVisible();
@@ -270,9 +280,17 @@ public partial class MainForm : Form
 
     private void beatmapSetListView_SelectedIndexChanged(object sender, EventArgs e)
     {
+        var set = GetSelectedBeatmapSet();
+
+        // nothing has changed
+        if (set?.SetId == _selectedBeatmapSet?.SetId)
+        {
+            return;
+        }
+        _selectedBeatmapSet = set;
+
         RefreshViewForCurrentSelectedBeatmap();
 
-        var set = GetSelectedBeatmapSet();
         if (set is null)
         {
             difficultyListView.ClearBeatmaps();
@@ -548,6 +566,14 @@ public partial class MainForm : Form
 
     private void difficultyListView_SelectedIndexChanged(object sender, EventArgs e)
     {
+        var beatmap = GetSelectedBeatmap();
+        // nothing has changed
+        if (beatmap?.Difficulty == _selectedBeatmap?.Difficulty)
+        {
+            return;
+        }
+        _selectedBeatmap = beatmap;
+
         CancelCurrentCalculation();
         RefreshViewForCurrentSelectedBeatmap();
     }

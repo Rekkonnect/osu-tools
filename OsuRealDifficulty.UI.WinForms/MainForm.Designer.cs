@@ -315,7 +315,7 @@ partial class MainForm
         operationsGroupBox.Location = new Point(538, 12);
         operationsGroupBox.Name = "operationsGroupBox";
         operationsGroupBox.Size = new Size(368, 172);
-        operationsGroupBox.TabIndex = 5;
+        operationsGroupBox.TabIndex = 40;
         operationsGroupBox.TabStop = false;
         operationsGroupBox.Text = "operations";
         // 
