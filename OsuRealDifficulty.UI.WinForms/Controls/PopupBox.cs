@@ -6,6 +6,8 @@ public partial class PopupBox : UserControl
 {
     private FadingContainer? _fadingContainer;
 
+    public FadingContainer? FadingContainer => _fadingContainer;
+
     public string Title
     {
         get
@@ -53,6 +55,8 @@ public partial class PopupBox : UserControl
         }
     }
 
+    public bool Concluded { get; private set; }
+
     public DialogResult DialogResult { get; private set; }
         = DialogResult.None;
 
@@ -94,8 +98,27 @@ public partial class PopupBox : UserControl
 
     public void Show(Control ownerControl)
     {
+        if (buttonLayoutPanel.Controls.Count is 0)
+        {
+            throw new InvalidOperationException("The popup must contain at least one button before showing.");
+        }
+
         Render(ownerControl);
         _fadingContainer = ShowFade(ownerControl);
+        buttonLayoutPanel.Controls[^1].Focus();
+    }
+
+    public void Show(Control ownerControl, FadingContainer fadingContainer)
+    {
+        if (buttonLayoutPanel.Controls.Count is 0)
+        {
+            throw new InvalidOperationException("The popup must contain at least one button before showing.");
+        }
+
+        Render(ownerControl);
+        _fadingContainer = fadingContainer;
+        fadingContainer.SwapDisplayTopControl(this);
+        buttonLayoutPanel.Controls[^1].Focus();
     }
 
     private void Render(Control ownerControl)
@@ -113,6 +136,7 @@ public partial class PopupBox : UserControl
 
     public void Conclude(DialogResult result)
     {
+        Concluded = true;
         DialogResult = result;
         HideFade();
         InformResultSelected(result);
@@ -156,7 +180,6 @@ public partial class PopupBox : UserControl
         {
             CoveredControl = faded,
             TopControl = this,
-            BackColor = BackColor,
         };
         fadingContainer.Fading.FadeRate = 0.7;
         fadingContainer.DisplayFade();

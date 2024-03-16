@@ -4,12 +4,12 @@ namespace OsuRealDifficulty.UI.WinForms.Controls;
 
 public class FadingControl : Control
 {
+    private ControlledBackgroundPaintingPanel _overlayPanel;
+
     public double FadeRate = 0.5;
     public Color FillColor;
 
     public int Alpha => (int)(255 * Math.Clamp(FadeRate, 0, 1));
-
-    private Panel _overlayPanel;
 
     public FadingControl()
     {
@@ -22,12 +22,12 @@ public class FadingControl : Control
         Dock = DockStyle.Fill;
         BringToFront();
 
-        _overlayPanel = new Panel
+        _overlayPanel = new()
         {
             Dock = DockStyle.Fill,
             BackColor = Color.Black,
             Visible = false,
-            Parent = this
+            Parent = this,
         };
         _overlayPanel.BringToFront();
     }

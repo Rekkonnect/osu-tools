@@ -4,14 +4,24 @@ public class PopupBoxManager(Control owner)
 {
     public Control Owner { get; } = owner;
 
+    private FadingContainer? _currentContainer;
     private PopupBox? _currentShown;
 
     public void Show(PopupBox box)
     {
-        HideCurrent();
+        RefreshShownState();
+
+        if (_currentShown is not null)
+        {
+            box.Show(Owner, _currentContainer!);
+        }
+        else
+        {
+            box.Show(Owner);
+            _currentContainer = box.FadingContainer;
+        }
 
         _currentShown = box;
-        box.Show(Owner);
     }
 
     public void HideCurrent()
@@ -22,5 +32,16 @@ public class PopupBoxManager(Control owner)
         }
 
         _currentShown.Conclude(DialogResult.None);
+        _currentShown = null;
+        _currentContainer = null;
+    }
+
+    private void RefreshShownState()
+    {
+        if (_currentShown is { Concluded: true })
+        {
+            _currentShown = null;
+            _currentContainer = null;
+        }
     }
 }

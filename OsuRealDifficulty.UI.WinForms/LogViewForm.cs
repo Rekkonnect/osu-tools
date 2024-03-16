@@ -40,15 +40,14 @@ public partial class LogViewForm : Form
         OpenLogs();
     }
 
-    private static void OpenLogs()
+    private void OpenLogs()
     {
         Task.Run(OpenLogsCore);
     }
 
-    private static void OpenLogsCore()
+    private void OpenLogsCore()
     {
-        var directory = new DirectoryInfo("logs");
-        FileExplorerUtilities.StartExplorerAtRoot(directory.FullName);
+        FileExplorerUtilitiesEx.StartExplorerAtRelativeRoot("logs");
     }
 
     private void RefreshLog()

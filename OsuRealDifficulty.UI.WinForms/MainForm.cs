@@ -456,7 +456,7 @@ public partial class MainForm : Form
             LogBeatmap(
                 LogEventLevel.Information,
                 dbBeatmap,
-                initiationTemplate);
+                analysisCompleteTemplate);
         }
         catch (Exception ex)
         {

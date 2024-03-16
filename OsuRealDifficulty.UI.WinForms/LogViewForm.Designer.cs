@@ -29,13 +29,15 @@ partial class LogViewForm
     private void InitializeComponent()
     {
         contentPanel = new Panel();
-        contentTextBox = new TextBox();
         openLogFolderButton = new Button();
+        contentTextBox = new TextBox();
+        label1 = new Label();
         contentPanel.SuspendLayout();
         SuspendLayout();
         // 
         // contentPanel
         // 
+        contentPanel.Controls.Add(label1);
         contentPanel.Controls.Add(openLogFolderButton);
         contentPanel.Controls.Add(contentTextBox);
         contentPanel.Dock = DockStyle.Fill;
@@ -44,22 +46,6 @@ partial class LogViewForm
         contentPanel.Padding = new Padding(3);
         contentPanel.Size = new Size(800, 288);
         contentPanel.TabIndex = 0;
-        // 
-        // contentTextBox
-        // 
-        contentTextBox.BackColor = Color.FromArgb(40, 40, 40);
-        contentTextBox.Dock = DockStyle.Top;
-        contentTextBox.Font = new Font("Consolas", 9F);
-        contentTextBox.ForeColor = SystemColors.ControlLight;
-        contentTextBox.Location = new Point(3, 3);
-        contentTextBox.MaxLength = 99999999;
-        contentTextBox.Multiline = true;
-        contentTextBox.Name = "contentTextBox";
-        contentTextBox.PlaceholderText = "nothing noteworthy here";
-        contentTextBox.ReadOnly = true;
-        contentTextBox.ScrollBars = ScrollBars.Vertical;
-        contentTextBox.Size = new Size(794, 233);
-        contentTextBox.TabIndex = 1;
         // 
         // openLogFolderButton
         // 
@@ -77,6 +63,33 @@ partial class LogViewForm
         openLogFolderButton.Text = "open log folder";
         openLogFolderButton.UseVisualStyleBackColor = false;
         openLogFolderButton.Click += openLogFolderButton_Click;
+        // 
+        // contentTextBox
+        // 
+        contentTextBox.BackColor = Color.FromArgb(40, 40, 40);
+        contentTextBox.Dock = DockStyle.Top;
+        contentTextBox.Font = new Font("Consolas", 9F);
+        contentTextBox.ForeColor = SystemColors.ControlLight;
+        contentTextBox.Location = new Point(3, 3);
+        contentTextBox.MaxLength = 99999999;
+        contentTextBox.Multiline = true;
+        contentTextBox.Name = "contentTextBox";
+        contentTextBox.PlaceholderText = "nothing noteworthy here";
+        contentTextBox.ReadOnly = true;
+        contentTextBox.ScrollBars = ScrollBars.Vertical;
+        contentTextBox.Size = new Size(794, 233);
+        contentTextBox.TabIndex = 1;
+        // 
+        // label1
+        // 
+        label1.AutoSize = true;
+        label1.ForeColor = Color.Silver;
+        label1.Location = new Point(188, 242);
+        label1.Name = "label1";
+        label1.Size = new Size(425, 36);
+        label1.TabIndex = 46;
+        label1.Text = "keeping the logs view open will cause frequent stutters,\r\nmake sure to close this view before performing database-wide calculations";
+        label1.TextAlign = ContentAlignment.MiddleCenter;
         // 
         // LogViewForm
         // 
@@ -99,4 +112,5 @@ partial class LogViewForm
     private Panel contentPanel;
     private TextBox contentTextBox;
     private Button openLogFolderButton;
+    private Label label1;
 }
