@@ -15,14 +15,20 @@ public partial class MainForm : Form
 
     private readonly BeatmapFilter _beatmapFilter = new();
 
-    private DbBeatmapSet? _selectedBeatmapSet;
-    private DbBeatmap? _selectedBeatmap;
+    private readonly CurrentBeatmapSelection _beatmapSelection = new();
 
     private volatile Task? _backgroundBeatmapCalculationTask = null;
 
     public MainForm()
     {
         InitializeComponent();
+        SetupEvents();
+    }
+
+    private void SetupEvents()
+    {
+        _beatmapSelection.BeatmapSetChanged += SelectedBeatmapSetChanged;
+        _beatmapSelection.BeatmapChanged += SelectedBeatmapChanged;
     }
 
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -98,6 +104,11 @@ public partial class MainForm : Form
         this.RecursivelyReplaceFontFamilyWithMain(fontFamily);
 
         ReloadMaps();
+
+        if (AppSettings.Instance.AnalyzeAllOnStartup)
+        {
+            TryExecuteCalculationForAllBeatmaps();
+        }
     }
 
     private void MainForm_Shown(object sender, EventArgs e)
@@ -278,30 +289,11 @@ public partial class MainForm : Form
         RunSelectedBeatmapSetFilter();
     }
 
-    private void beatmapSetListView_SelectedIndexChanged(object sender, EventArgs e)
+    private void beatmapSetListView_ItemSelectionChanged(
+        object sender, ListViewItemSelectionChangedEventArgs e)
     {
         var set = GetSelectedBeatmapSet();
-
-        // nothing has changed
-        if (set?.SetId == _selectedBeatmapSet?.SetId)
-        {
-            return;
-        }
-        _selectedBeatmapSet = set;
-
-        RefreshViewForCurrentSelectedBeatmap();
-
-        if (set is null)
-        {
-            difficultyListView.ClearBeatmaps();
-            return;
-        }
-
-        CancelCurrentCalculation();
-
-        var maniaDifficulties = set.WithManiaRuleset();
-        difficultyListView.SetBeatmaps(maniaDifficulties);
-        RunSelectedBeatmapSetFilter();
+        _beatmapSelection.BeatmapSet = set;
     }
 
     private void RunSelectedBeatmapSetFilter()
@@ -311,6 +303,9 @@ public partial class MainForm : Form
         {
             case 1:
                 difficultyListView.SelectIndex(0);
+                break;
+            default:
+                difficultyListView.SelectedIndices.Clear();
                 break;
         }
     }
@@ -337,7 +332,7 @@ public partial class MainForm : Form
 
     private void beginCalculationButton_Click(object sender, EventArgs e)
     {
-        var beatmap = GetSelectedBeatmap();
+        var beatmap = _beatmapSelection.Beatmap;
         if (beatmap is null)
         {
             MessageBox.Show(
@@ -356,12 +351,10 @@ public partial class MainForm : Form
         beginCalculationButton.Enabled = false;
         cancelCalculationButton.Enabled = true;
 
-        Invoke(async () => await HandleBeatmapCalculation(dbBeatmap));
+        Invoke(async () => await HandleBeatmapCalculation(dbBeatmap, true));
     }
 
-    // TODO: FIGURE HOW TO AVOID COPY-PASTE
-
-    private async Task HandleBeatmapCalculation(DbBeatmap dbBeatmap)
+    private async Task HandleBeatmapCalculation(DbBeatmap dbBeatmap, bool listenToAnalysis)
     {
         try
         {
@@ -376,31 +369,40 @@ public partial class MainForm : Form
             var beatmap = dbBeatmap.Read(songs);
 
             var driver = CompleteBeatmapAnnotationAnalysis.NewDriver(beatmap);
+            int keys = beatmap.ManiaKeyCount();
+            var calculationProfile = AppState.Instance.CalculationProfiles
+                .ProfileForKeys(keys);
+            driver.DifficultyCalculationProfile = calculationProfile;
             driver.ExceptionAction += AnalysisExceptionHandling;
             var source = _difficultyCalculationCancellationTokenFactory
                 .CurrentSource;
 
-            int keys = beatmap.ManiaKeyCount();
-            var calculationProfile = AppState.Instance.CalculationProfiles
-                .ProfileForKeys(keys);
-            difficultyResultDisplay.CalculationProfile = calculationProfile;
-            difficultyResultDisplay.AnalyzedDifficulty = driver.AnalyzedDifficulty;
-            difficultyResultDisplay.BeginListeningForRequests(
-                driver.AnalyzerExecutionRequestChannel,
-                source);
+            if (listenToAnalysis)
+            {
+                difficultyResultDisplay.DifficultyCalculationResult
+                    = driver.FullDifficultyCalculationResult;
+                difficultyResultDisplay.BeginListeningForRequests(
+                    driver.AnalyzerExecutionRequestChannel,
+                    source);
+            }
+
             var executionResult = await driver.Execute(source.Token);
-            difficultyResultDisplay.RefreshDisplay();
-            difficultyResultDisplay.StopListeningForRequests();
+            var finalResult = driver.FullDifficultyCalculationResult;
+
+            if (listenToAnalysis)
+            {
+                difficultyResultDisplay.DifficultyCalculationResult = finalResult;
+                difficultyResultDisplay.RefreshDisplay();
+                difficultyResultDisplay.StopListeningForRequests();
+            }
 
             foreach (var diagnostic in executionResult.Diagnostics.Diagnostics)
             {
                 LogEsotericDiagnostic(diagnostic);
             }
 
-            var fullResult = calculationProfile.CalculateFullResult(
-                driver.AnalyzedDifficulty);
             AppState.Instance.CalculationCache.SetForBeatmap(
-                dbBeatmap, fullResult);
+                dbBeatmap, finalResult);
 
             const string analysisCompleteTemplate
                 = $"Successfully completed beatmap analysis for {_beatmapLogInformationTemplate}";
@@ -422,51 +424,22 @@ public partial class MainForm : Form
         if (_backgroundBeatmapCalculationTask is not null)
             return;
 
+        beginCalculateAllBeatmapsButton.Enabled = false;
         _backgroundBeatmapCalculationTask = ExecuteCalculationForAllBeatmapsAsync();
     }
 
     private async Task ExecuteCalculationForAllBeatmapsAsync()
     {
+        // PROBLEM: this causes tons of GC collections, effectively
+        // killing the performance of the application, and vastly
+        // underutilizing the CPU
+
         var songs = AppSettings.Instance.EffectiveBaseSongsDirectory;
-        foreach (var dbBeatmap in AppState.Instance.BeatmapSetDatabase!.AllBeatmaps)
+        foreach (var dbBeatmap in AppState.Instance.ManiaBeatmapSetDatabase!.AllBeatmaps)
         {
             try
             {
-                const string initiationTemplate
-                    = $"Initiated beatmap analysis for {_beatmapLogInformationTemplate}";
-                LogBeatmap(
-                    LogEventLevel.Information,
-                    dbBeatmap,
-                    initiationTemplate);
-
-                var beatmap = dbBeatmap.Read(songs);
-
-                var driver = CompleteBeatmapAnnotationAnalysis.NewDriver(beatmap);
-                driver.ExceptionAction += AnalysisExceptionHandling;
-                var source = _difficultyCalculationCancellationTokenFactory
-                    .CurrentSource;
-
-                int keys = beatmap.ManiaKeyCount();
-                var executionResult = await driver.Execute(source.Token);
-
-                foreach (var diagnostic in executionResult.Diagnostics.Diagnostics)
-                {
-                    LogEsotericDiagnostic(diagnostic);
-                }
-
-                const string analysisCompleteTemplate
-                    = $"Successfully completed beatmap analysis for {_beatmapLogInformationTemplate}";
-                LogBeatmap(
-                    LogEventLevel.Information,
-                    dbBeatmap,
-                    initiationTemplate);
-
-                var calculationProfile = AppState.Instance.CalculationProfiles
-                    .ProfileForKeys(keys);
-                var fullResult = calculationProfile.CalculateFullResult(
-                    driver.AnalyzedDifficulty);
-                AppState.Instance.CalculationCache.SetForBeatmap(
-                    dbBeatmap, fullResult);
+                await HandleBeatmapCalculation(dbBeatmap, false);
             }
             catch (Exception ex)
             {
@@ -481,6 +454,7 @@ public partial class MainForm : Form
         }
 
         _backgroundBeatmapCalculationTask = null;
+        Invoke(() => beginCalculateAllBeatmapsButton.Enabled = true);
     }
 
     private const string _beatmapLogInformationTemplate
@@ -564,28 +538,127 @@ public partial class MainForm : Form
 
     }
 
-    private void difficultyListView_SelectedIndexChanged(object sender, EventArgs e)
+    private void difficultyListView_ItemSelectionChanged(
+        object sender, ListViewItemSelectionChangedEventArgs e)
     {
+        // ISSUE: this triggers twice per selection,
+        // once for the deselection of the previous item
+        // and another one time for the selection of the current item
+        // this does not matter much since we don't perform any intensive
+        // operations other than retrieving the cache for a null beatmap
+
         var beatmap = GetSelectedBeatmap();
-        // nothing has changed
-        if (beatmap?.Difficulty == _selectedBeatmap?.Difficulty)
+        _beatmapSelection.Beatmap = beatmap;
+    }
+
+    private void SelectedBeatmapSetChanged(DbBeatmapSet? set)
+    {
+        RefreshViewForCurrentSelectedBeatmap();
+
+        if (set is null)
         {
+            difficultyListView.ClearBeatmaps();
             return;
         }
-        _selectedBeatmap = beatmap;
 
+        CancelCurrentCalculation();
+
+        var maniaDifficulties = set.WithManiaRuleset();
+        difficultyListView.SetBeatmaps(maniaDifficulties);
+        RunSelectedBeatmapSetFilter();
+    }
+
+    private void SelectedBeatmapChanged(DbBeatmap? beatmap)
+    {
         CancelCurrentCalculation();
         RefreshViewForCurrentSelectedBeatmap();
     }
 
     private void RefreshViewForCurrentSelectedBeatmap()
     {
-        var beatmap = GetSelectedBeatmap();
+        var beatmap = _beatmapSelection.Beatmap;
         difficultyResultDisplay.SelectedBeatmap = beatmap;
         var cachedDifficulty = AppState.Instance.CalculationCache
             .GetForBeatmap(beatmap);
-        difficultyResultDisplay.AnalyzedDifficulty = cachedDifficulty?.AnalyzedDifficulty
-            ?? AnalyzedDifficulty.NewPending;
-        difficultyResultDisplay.RefreshDisplay();
+        difficultyResultDisplay.RefreshDisplay(
+            cachedDifficulty);
+    }
+
+    private void beginCalculateAllBeatmapsButton_Click(object sender, EventArgs e)
+    {
+        TryExecuteCalculationForAllBeatmaps();
+    }
+
+    private class CurrentBeatmapSelection
+    {
+        private DbBeatmapSet? _beatmapSet;
+        private DbBeatmap? _beatmap;
+
+        public DbBeatmapSet? BeatmapSet
+        {
+            get
+            {
+                return _beatmapSet;
+            }
+            set
+            {
+                if (AreBeatmapSetsEqual(_beatmapSet, value))
+                    return;
+
+                _beatmapSet = value;
+                BeatmapSetChanged?.Invoke(value);
+            }
+        }
+
+        public DbBeatmap? Beatmap
+        {
+            get
+            {
+                return _beatmap;
+            }
+            set
+            {
+                if (AreBeatmapsEqual(_beatmap, value))
+                    return;
+
+                _beatmap = value;
+                BeatmapChanged?.Invoke(value);
+            }
+        }
+
+        public event Action<DbBeatmapSet?>? BeatmapSetChanged;
+        public event Action<DbBeatmap?>? BeatmapChanged;
+
+        private static bool AreBeatmapSetsEqual(DbBeatmapSet? x, DbBeatmapSet? y)
+        {
+            return x?.SetId == y?.SetId;
+        }
+        private static bool AreBeatmapsEqual(DbBeatmap? x, DbBeatmap? y)
+        {
+            var definitelyEqual = AreDefinitelyEqual(x, y);
+            if (definitelyEqual is not null)
+            {
+                return definitelyEqual.Value;
+            }
+
+            // enough checks -- we don't have to overdo it
+            return x!.BeatmapId == y!.BeatmapId
+                && x.Difficulty == y.Difficulty
+                && x.BeatmapSetId == y.BeatmapSetId;
+        }
+
+        private static bool? AreDefinitelyEqual(object? x, object? y)
+        {
+            bool xn = x is null;
+            bool yn = y is null;
+
+            if (xn && yn)
+                return true;
+
+            if (xn ^ yn)
+                return false;
+
+            return null;
+        }
     }
 }

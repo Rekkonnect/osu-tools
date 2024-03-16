@@ -141,7 +141,6 @@ partial class AnalysisResultDisplay
         overallGroupBox.Controls.Add(instabilityLabel);
         overallGroupBox.Controls.Add(label29);
         overallGroupBox.Controls.Add(overallLabel);
-        overallGroupBox.Dock = DockStyle.Bottom;
         overallGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
         overallGroupBox.ForeColor = Color.Silver;
         overallGroupBox.Location = new Point(6, 372);

@@ -27,6 +27,7 @@ internal sealed class BeatmapListView : ListView
     public void SetBeatmaps(IEnumerable<DbBeatmap> beatmaps)
     {
         Beatmaps = beatmaps;
+        SelectedItems.Clear();
 
         var beatmapListViewItems = beatmaps
             .Select(s => new BeatmapListViewItem(s))

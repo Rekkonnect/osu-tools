@@ -1,12 +1,15 @@
 ﻿namespace OsuRealDifficulty.Mania;
 
-public record DifficultyStatsOverview(
-    SegmentedOverallDifficulty OverallDifficulty,
-    CalculationResult InstabilityRate)
+public class DifficultyStatsOverview(
+    SegmentedOverallDifficulty overallDifficulty,
+    CalculationResult instabilityRate)
 {
     public static DifficultyStatsOverview NewPending => new(
         SegmentedOverallDifficulty.NewPending,
         CalculationResult.Pending);
+
+    public SegmentedOverallDifficulty OverallDifficulty = overallDifficulty;
+    public CalculationResult InstabilityRate = instabilityRate;
 
     public CalculationResult StarRate => OverallDifficulty.Overall;
 }

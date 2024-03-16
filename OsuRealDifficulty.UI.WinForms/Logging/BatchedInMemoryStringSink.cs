@@ -14,7 +14,7 @@ public class BatchedInMemoryStringSink(InMemoryStringSink sink)
         var builder = new StringBuilder();
         foreach (var @event in batch)
         {
-            builder.Append(@event.RenderMessage());
+            builder.AppendLine(@event.RenderMessage());
         }
         _sink.EmitStringBuilder(builder);
         return Task.CompletedTask;

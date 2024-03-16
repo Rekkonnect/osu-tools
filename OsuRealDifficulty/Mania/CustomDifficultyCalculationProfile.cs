@@ -110,13 +110,26 @@ public class CustomDifficultyCalculationProfile(
             NormalizeValue(ref segmentSum);
         }
 
-        void AddWeighted(double value, double weight, ref CalculationResult segmentSum)
+        void AddWeighted(
+            CalculationResult value,
+            CalculationResult weight,
+            ref CalculationResult segmentSum)
         {
+            if (!value.IsValid)
+            {
+                segmentSum = CalculationResult.Unknown;
+                return;
+            }
+
             // TODO: Test applying the weight after the powering of the value
             var weightedValue = value * weight;
             var poweredValue = AnalyzedDifficultyFacts.AbsoluteValue(weightedValue);
             overall.Overall += poweredValue;
-            segmentSum += poweredValue;
+
+            if (segmentSum.IsValid)
+            {
+                segmentSum += poweredValue;
+            }
         }
 
         static void NormalizeValue(ref CalculationResult value)

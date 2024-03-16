@@ -8,30 +8,16 @@ namespace OsuRealDifficulty.UI.WinForms.Controls;
 
 public partial class AnalysisResultDisplay : UserControl
 {
+    private bool _pendingRefreshDisplay = false;
+
     private CancellableTask? _refreshListenTask = null;
 
-    private DifficultyCalculationProfile _calculationProfile;
-
-    // TODO: This control should have no logic about how to display
-    // the analyzed difficulty; it should all derive from a
-    // FullDifficultyCalculationResult instance
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public AnalyzedDifficulty AnalyzedDifficulty
+        => DifficultyCalculationResult.AnalyzedDifficulty;
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public AnalyzedDifficulty AnalyzedDifficulty { get; set; }
-
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public DifficultyCalculationProfile CalculationProfile
-    {
-        get
-        {
-            return _calculationProfile;
-        }
-        set
-        {
-            _calculationProfile = value;
-            RefreshDisplay();
-        }
-    }
+    public FullDifficultyCalculationResult DifficultyCalculationResult { get; set; }
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public DbBeatmap? SelectedBeatmap { get; set; }
@@ -52,53 +38,81 @@ public partial class AnalysisResultDisplay : UserControl
     {
         InitializeComponent();
 
-        // Initialize a default profile and a pending analyzed difficulty
-        // before the definite assignment
-        AnalyzedDifficulty = AnalyzedDifficulty.NewPending;
-        var pending = AnalyzedDifficulty.NewPending;
-        _calculationProfile = new CustomDifficultyCalculationProfile(pending, pending);
+        // initialize a pending full result before the definite assignment
+        DifficultyCalculationResult = FullDifficultyCalculationResult.NewPending;
 
         if (!DesignMode)
         {
-            CalculationProfile = _calculationProfile;
+            RefreshDisplay();
         }
+
+        BringWarningLabelToFront();
+    }
+
+    private void BringWarningLabelToFront()
+    {
+        // we don't want the label to hide the groups under it in
+        // design mode
+
+        // and this design choice was made to avoid manually toggling
+        // the visibility of all the other groups, which is susceptible
+        // to flickering
+        if (DesignMode)
+            return;
+
+        warningLabel.BringToFront();
+    }
+
+    public void RefreshDisplay(FullDifficultyCalculationResult? newResult)
+    {
+        if (newResult is not null)
+        {
+            DifficultyCalculationResult = newResult;
+        }
+        RefreshDisplay();
     }
 
     public void RefreshDisplay()
+    {
+        _pendingRefreshDisplay = true;
+        Invalidate();
+    }
+
+    private void PerformRefreshDisplay()
     {
         using var _ = this.LayoutSuspension();
         RefreshAnalysisDisplay();
         RefreshBeatmapSelection();
     }
 
-    private void RefreshBeatmapSelection()
+    protected override void OnInvalidated(InvalidateEventArgs e)
     {
-        var hasBeatmap = SelectedBeatmap is not null;
+        HandlePendingInvalidatedEvents();
+        base.OnInvalidated(e);
+    }
 
-        warningLabel.Visible = !hasBeatmap;
-        var groupBoxes = AnalysisGroupBoxes();
-        foreach (var box in groupBoxes)
+    private void HandlePendingInvalidatedEvents()
+    {
+        if (_pendingRefreshDisplay)
         {
-            box.Visible = hasBeatmap;
+            _pendingRefreshDisplay = false;
+            PerformRefreshDisplay();
         }
     }
 
-    private IEnumerable<GroupBox> AnalysisGroupBoxes()
+    private void RefreshBeatmapSelection()
     {
-        return
-        [
-            dexterityGroupBox,
-            jackGroupBox,
-            techGroupBox,
-            staminaGroupBox,
-            longNotesGroupBox,
-            scrollingGroupBox,
-            overallGroupBox,
-        ];
+        var hasBeatmap = SelectedBeatmap is not null;
+        warningLabel.Visible = !hasBeatmap;
     }
 
     private void RefreshAnalysisDisplay()
     {
+        var hasBeatmap = SelectedBeatmap is not null;
+        // do not refresh the display if there is no beatmap
+        if (!hasBeatmap)
+            return;
+
         var difficulty = AnalyzedDifficulty;
 
         // dexterity
@@ -141,11 +155,26 @@ public partial class AnalysisResultDisplay : UserControl
         stutterLabel.CalculationResult = difficulty.Scrolling.Stutter;
         visualDensityLabel.CalculationResult = difficulty.Scrolling.VisualDensity;
 
-        var stats = CalculationProfile.Calculate(difficulty);
-        RefreshOverallDisplays(stats);
+        var stats = DifficultyCalculationResult.Overview;
+        RefreshOverviewDisplays(stats);
     }
 
-    private void RefreshOverallDisplays(DifficultyStatsOverview stats)
+    private void RefreshOverviewDisplays(DifficultyStatsOverview stats)
+    {
+        var segmented = stats.OverallDifficulty;
+
+        dexterityCategoryLabel.CalculationResult = segmented.Dexterity;
+        jackCategoryLabel.CalculationResult = segmented.Jack;
+        techCategoryLabel.CalculationResult = segmented.Tech;
+        staminaCategoryLabel.CalculationResult = segmented.Stamina;
+        longNotesCategoryLabel.CalculationResult = segmented.LongNotes;
+        scrollingCategoryLabel.CalculationResult = segmented.Scrolling;
+
+        overallLabel.CalculationResult = segmented.Overall;
+        instabilityLabel.CalculationResult = stats.InstabilityRate;
+    }
+
+    private void RefreshOverviewDisplays_Old(DifficultyStatsOverview stats)
     {
         var difficulty = AnalyzedDifficulty;
         var segmented = stats.OverallDifficulty;

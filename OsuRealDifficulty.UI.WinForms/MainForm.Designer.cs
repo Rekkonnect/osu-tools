@@ -57,6 +57,7 @@ partial class MainForm
         beatmapListViewArtistColumn = new ColumnHeader();
         beatmapListViewMapperColumn = new ColumnHeader();
         operationsGroupBox = new GroupBox();
+        beginCalculateAllBeatmapsButton = new Button();
         showLogsButton = new Button();
         reloadBeatmapDatabaseButton = new Button();
         settingsButton = new Button();
@@ -115,7 +116,7 @@ partial class MainForm
         filterGroupBox.ForeColor = Color.Silver;
         filterGroupBox.Location = new Point(6, 24);
         filterGroupBox.Name = "filterGroupBox";
-        filterGroupBox.Size = new Size(508, 116);
+        filterGroupBox.Size = new Size(508, 94);
         filterGroupBox.TabIndex = 4;
         filterGroupBox.TabStop = false;
         filterGroupBox.Text = "filter";
@@ -277,7 +278,7 @@ partial class MainForm
         listViewItem1.StateImageIndex = 0;
         listViewItem2.StateImageIndex = 0;
         beatmapSetListView.Items.AddRange(new ListViewItem[] { listViewItem1, listViewItem2 });
-        beatmapSetListView.Location = new Point(6, 146);
+        beatmapSetListView.Location = new Point(6, 124);
         beatmapSetListView.MultiSelect = false;
         beatmapSetListView.Name = "beatmapSetListView";
         beatmapSetListView.ShowItemToolTips = true;
@@ -286,7 +287,7 @@ partial class MainForm
         beatmapSetListView.TabIndex = 20;
         beatmapSetListView.UseCompatibleStateImageBehavior = false;
         beatmapSetListView.View = View.Details;
-        beatmapSetListView.SelectedIndexChanged += beatmapSetListView_SelectedIndexChanged;
+        beatmapSetListView.ItemSelectionChanged += beatmapSetListView_ItemSelectionChanged;
         // 
         // beatmapListViewTitleColumn
         // 
@@ -305,6 +306,7 @@ partial class MainForm
         // 
         // operationsGroupBox
         // 
+        operationsGroupBox.Controls.Add(beginCalculateAllBeatmapsButton);
         operationsGroupBox.Controls.Add(showLogsButton);
         operationsGroupBox.Controls.Add(reloadBeatmapDatabaseButton);
         operationsGroupBox.Controls.Add(settingsButton);
@@ -319,6 +321,23 @@ partial class MainForm
         operationsGroupBox.TabStop = false;
         operationsGroupBox.Text = "operations";
         // 
+        // beginCalculateAllBeatmapsButton
+        // 
+        beginCalculateAllBeatmapsButton.BackColor = Color.FromArgb(40, 40, 40);
+        beginCalculateAllBeatmapsButton.FlatAppearance.BorderColor = Color.Silver;
+        beginCalculateAllBeatmapsButton.FlatAppearance.MouseDownBackColor = Color.Gray;
+        beginCalculateAllBeatmapsButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(72, 72, 72);
+        beginCalculateAllBeatmapsButton.FlatStyle = FlatStyle.Flat;
+        beginCalculateAllBeatmapsButton.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
+        beginCalculateAllBeatmapsButton.ForeColor = Color.FromArgb(218, 218, 192);
+        beginCalculateAllBeatmapsButton.Location = new Point(135, 86);
+        beginCalculateAllBeatmapsButton.Name = "beginCalculateAllBeatmapsButton";
+        beginCalculateAllBeatmapsButton.Size = new Size(123, 55);
+        beginCalculateAllBeatmapsButton.TabIndex = 45;
+        beginCalculateAllBeatmapsButton.Text = "begin calculate\r\nall beatmaps";
+        beginCalculateAllBeatmapsButton.UseVisualStyleBackColor = false;
+        beginCalculateAllBeatmapsButton.Click += beginCalculateAllBeatmapsButton_Click;
+        // 
         // showLogsButton
         // 
         showLogsButton.BackColor = Color.FromArgb(40, 40, 40);
@@ -328,11 +347,11 @@ partial class MainForm
         showLogsButton.FlatStyle = FlatStyle.Flat;
         showLogsButton.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
         showLogsButton.ForeColor = Color.FromArgb(192, 192, 218);
-        showLogsButton.Location = new Point(6, 94);
+        showLogsButton.Location = new Point(264, 86);
         showLogsButton.Name = "showLogsButton";
-        showLogsButton.Size = new Size(128, 46);
+        showLogsButton.Size = new Size(98, 55);
         showLogsButton.TabIndex = 42;
-        showLogsButton.Text = "show logs";
+        showLogsButton.Text = "logs";
         showLogsButton.UseVisualStyleBackColor = false;
         showLogsButton.Click += showLogsButton_Click;
         // 
@@ -345,9 +364,9 @@ partial class MainForm
         reloadBeatmapDatabaseButton.FlatStyle = FlatStyle.Flat;
         reloadBeatmapDatabaseButton.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
         reloadBeatmapDatabaseButton.ForeColor = Color.FromArgb(218, 218, 192);
-        reloadBeatmapDatabaseButton.Location = new Point(234, 76);
+        reloadBeatmapDatabaseButton.Location = new Point(6, 86);
         reloadBeatmapDatabaseButton.Name = "reloadBeatmapDatabaseButton";
-        reloadBeatmapDatabaseButton.Size = new Size(128, 64);
+        reloadBeatmapDatabaseButton.Size = new Size(123, 55);
         reloadBeatmapDatabaseButton.TabIndex = 44;
         reloadBeatmapDatabaseButton.Text = "reload beatmap database";
         reloadBeatmapDatabaseButton.UseVisualStyleBackColor = false;
@@ -362,9 +381,9 @@ partial class MainForm
         settingsButton.FlatStyle = FlatStyle.Flat;
         settingsButton.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
         settingsButton.ForeColor = Color.FromArgb(192, 192, 218);
-        settingsButton.Location = new Point(234, 24);
+        settingsButton.Location = new Point(264, 24);
         settingsButton.Name = "settingsButton";
-        settingsButton.Size = new Size(128, 46);
+        settingsButton.Size = new Size(98, 56);
         settingsButton.TabIndex = 43;
         settingsButton.Text = "settings";
         settingsButton.UseVisualStyleBackColor = false;
@@ -380,9 +399,9 @@ partial class MainForm
         cancelCalculationButton.FlatStyle = FlatStyle.Flat;
         cancelCalculationButton.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
         cancelCalculationButton.ForeColor = Color.FromArgb(218, 192, 192);
-        cancelCalculationButton.Location = new Point(110, 24);
+        cancelCalculationButton.Location = new Point(135, 24);
         cancelCalculationButton.Name = "cancelCalculationButton";
-        cancelCalculationButton.Size = new Size(98, 55);
+        cancelCalculationButton.Size = new Size(123, 55);
         cancelCalculationButton.TabIndex = 41;
         cancelCalculationButton.Text = "cancel calculation";
         cancelCalculationButton.UseVisualStyleBackColor = false;
@@ -399,7 +418,7 @@ partial class MainForm
         beginCalculationButton.ForeColor = Color.FromArgb(192, 218, 192);
         beginCalculationButton.Location = new Point(6, 24);
         beginCalculationButton.Name = "beginCalculationButton";
-        beginCalculationButton.Size = new Size(98, 55);
+        beginCalculationButton.Size = new Size(123, 55);
         beginCalculationButton.TabIndex = 40;
         beginCalculationButton.Text = "begin calculation";
         beginCalculationButton.UseVisualStyleBackColor = false;
@@ -416,16 +435,16 @@ partial class MainForm
         listViewItem3.StateImageIndex = 0;
         listViewItem4.StateImageIndex = 0;
         difficultyListView.Items.AddRange(new ListViewItem[] { listViewItem3, listViewItem4, listViewItem5, listViewItem6, listViewItem7, listViewItem8 });
-        difficultyListView.Location = new Point(18, 450);
+        difficultyListView.Location = new Point(18, 428);
         difficultyListView.MultiSelect = false;
         difficultyListView.Name = "difficultyListView";
         difficultyListView.ShowItemToolTips = true;
-        difficultyListView.Size = new Size(508, 184);
+        difficultyListView.Size = new Size(508, 206);
         difficultyListView.Sorting = SortOrder.Ascending;
         difficultyListView.TabIndex = 30;
         difficultyListView.UseCompatibleStateImageBehavior = false;
         difficultyListView.View = View.Details;
-        difficultyListView.SelectedIndexChanged += difficultyListView_SelectedIndexChanged;
+        difficultyListView.ItemSelectionChanged += difficultyListView_ItemSelectionChanged;
         // 
         // columnHeader1
         // 
@@ -525,4 +544,5 @@ partial class MainForm
     private Button showLogsButton;
     private CheckBox tagsFilterCheckBox;
     private CheckBox sourceFilterCheckBox;
+    private Button beginCalculateAllBeatmapsButton;
 }
