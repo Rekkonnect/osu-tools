@@ -15,6 +15,8 @@ public class InMemoryStringSink : ILogEventSink
 
     public int MaxStringLength = DefaultMaxStringLength;
 
+    public string LogString => _logString;
+
     public void Emit(LogEvent logEvent)
     {
         var message = logEvent.RenderMessage();

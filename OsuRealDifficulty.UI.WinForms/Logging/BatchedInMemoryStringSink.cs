@@ -1,20 +1,24 @@
 ﻿using Serilog.Events;
+using Serilog.Formatting.Display;
 using Serilog.Sinks.PeriodicBatching;
-using System.Text;
 
 namespace OsuRealDifficulty.UI.WinForms.Logging;
 
-public class BatchedInMemoryStringSink(InMemoryStringSink sink)
+public class BatchedInMemoryStringSink(
+    MessageTemplateTextFormatter formatter,
+    InMemoryStringSink sink)
     : IBatchedLogEventSink
 {
+    private readonly MessageTemplateTextFormatter _formatter = formatter;
     private readonly InMemoryStringSink _sink = sink;
 
     public Task EmitBatchAsync(IEnumerable<LogEvent> batch)
     {
-        var builder = new StringBuilder();
+        var writer = new StringWriter();
+        var builder = writer.GetStringBuilder();
         foreach (var @event in batch)
         {
-            builder.AppendLine(@event.RenderMessage());
+            _formatter.Format(@event, writer);
         }
         _sink.EmitStringBuilder(builder);
         return Task.CompletedTask;

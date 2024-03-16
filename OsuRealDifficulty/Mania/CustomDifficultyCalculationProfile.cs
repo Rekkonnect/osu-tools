@@ -20,7 +20,7 @@ public class CustomDifficultyCalculationProfile(
     }
     private double CalculateInstabilityRating(AnalyzedDifficulty difficulty)
     {
-        return CalculateWeights(difficulty, InstabilityWeights).Overall * 20;
+        return CalculateWeights(difficulty, InstabilityWeights).Overall * 10;
     }
 
     private static SegmentedOverallDifficulty CalculateWeights(

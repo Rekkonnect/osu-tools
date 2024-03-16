@@ -174,47 +174,6 @@ public partial class AnalysisResultDisplay : UserControl
         instabilityLabel.CalculationResult = stats.InstabilityRate;
     }
 
-    private void RefreshOverviewDisplays_Old(DifficultyStatsOverview stats)
-    {
-        var difficulty = AnalyzedDifficulty;
-        var segmented = stats.OverallDifficulty;
-
-        dexterityCategoryLabel.CalculationResult = ConditionallyInvalid(
-            segmented.Dexterity,
-            difficulty.Dexterity.AreAllValid);
-
-        jackCategoryLabel.CalculationResult = ConditionallyInvalid(
-            segmented.Jack,
-            difficulty.Jack.AreAllValid);
-
-        techCategoryLabel.CalculationResult = ConditionallyInvalid(
-            segmented.Tech,
-            difficulty.Tech.AreAllValid);
-
-        staminaCategoryLabel.CalculationResult = ConditionallyInvalid(
-            segmented.Stamina,
-            difficulty.Stamina.AreAllValid);
-
-        longNotesCategoryLabel.CalculationResult = ConditionallyInvalid(
-            segmented.LongNotes,
-            difficulty.LongNotes.AreAllValid);
-
-        scrollingCategoryLabel.CalculationResult = ConditionallyInvalid(
-            segmented.Scrolling,
-            difficulty.Scrolling.AreAllValid);
-
-        var allValid = difficulty.AreAllValid;
-        // This currently displays "..." regardless of whether the results are actually
-        // pending, or another error has occurred
-        overallLabel.CalculationResult = ConditionallyInvalid(
-            segmented.Overall,
-            allValid);
-
-        instabilityLabel.CalculationResult = ConditionallyInvalid(
-            stats.InstabilityRate,
-            allValid);
-    }
-
     private static CalculationResult ConditionallyInvalid(
         double result,
         bool valid,

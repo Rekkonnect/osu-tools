@@ -5,6 +5,7 @@ using OsuRealDifficulty.UI.WinForms.Core;
 using OsuRealDifficulty.UI.WinForms.Utilities;
 using Serilog;
 using Serilog.Events;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OsuRealDifficulty.UI.WinForms;
 
@@ -18,6 +19,7 @@ public partial class MainForm : Form
     private readonly BackgroundCalculationInformation _backgroundCalculationInformation
         = new();
 
+    private PopupBoxManager _popupBoxManager;
     private volatile Task? _backgroundBeatmapCalculationTask = null;
 
     public MainForm()
@@ -26,6 +28,7 @@ public partial class MainForm : Form
         SetupEvents();
     }
 
+    [MemberNotNull(nameof(_popupBoxManager))]
     private void SetupEvents()
     {
         _beatmapSelection.BeatmapSetChanged += SelectedBeatmapSetChanged;
@@ -33,6 +36,8 @@ public partial class MainForm : Form
 
         backgroundCalculationReporter.BindToBackgroundCalculationInformation(
             _backgroundCalculationInformation);
+
+        _popupBoxManager = new(this);
     }
 
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -60,6 +65,7 @@ public partial class MainForm : Form
 
             // show logs
             case Keys.Control | Keys.L:
+                ShowLogs();
                 return true;
 
             // show settings
@@ -71,6 +77,7 @@ public partial class MainForm : Form
             // clear filters
             case Keys.Control | Keys.Alt | Keys.R:
             case Keys.Control | Keys.Alt | Keys.C:
+                ClearFilter();
                 return true;
 
             // filter by keys
@@ -95,8 +102,22 @@ public partial class MainForm : Form
                 popup.AddButton(DialogResult.Yes, "yes");
                 popup.AddButton(DialogResult.No, "no");
                 popup.YesSelected += ReloadMaps;
-                popup.Show(this);
+                _popupBoxManager.Show(popup);
 
+                return true;
+            }
+
+            // calculate selected beatmap
+            case Keys.Control | Keys.M:
+            {
+                CalculateSelectedBeatmap();
+                return true;
+            }
+
+            // calculate all beatmaps
+            case Keys.Control | Keys.Shift | Keys.M:
+            {
+                TryExecuteCalculationForAllBeatmaps();
                 return true;
             }
 
@@ -159,6 +180,11 @@ public partial class MainForm : Form
     }
 
     private void resetButton_Click(object sender, EventArgs e)
+    {
+        ClearFilter();
+    }
+
+    private void ClearFilter()
     {
         searchTextBox.Text = string.Empty;
         searchTextBox.Focus();
@@ -342,6 +368,11 @@ public partial class MainForm : Form
 
     private void beginCalculationButton_Click(object sender, EventArgs e)
     {
+        CalculateSelectedBeatmap();
+    }
+
+    private void CalculateSelectedBeatmap()
+    {
         var beatmap = _beatmapSelection.Beatmap;
         if (beatmap is null)
         {
@@ -355,7 +386,7 @@ public partial class MainForm : Form
                 MessageIcon = MessageBoxIcon.Error,
             };
             popup.AddButton(DialogResult.OK, "ok");
-            popup.Show(this);
+            _popupBoxManager.Show(popup);
             return;
         }
 
@@ -457,7 +488,7 @@ public partial class MainForm : Form
         var popup = new PopupBox
         {
             Title =
-                "initiate background calculation for all beatmaps",
+                "background calculation of all beatmaps",
             Message = """
                 calculating all beatmaps in the background will severely
                 degrade performance of the application until it's done
@@ -469,7 +500,7 @@ public partial class MainForm : Form
         popup.AddButton(DialogResult.No, "no");
 
         popup.ResultSelected += HandleConfirmedBackgroundCalculation;
-        popup.Show(this);
+        _popupBoxManager.Show(popup);
     }
 
     private async Task ExecuteCalculationForAllBeatmapsAsync()
@@ -595,7 +626,12 @@ public partial class MainForm : Form
 
     private void showLogsButton_Click(object sender, EventArgs e)
     {
+        ShowLogs();
+    }
 
+    private void ShowLogs()
+    {
+        LogViewForm.Open();
     }
 
     private void difficultyListView_ItemSelectionChanged(

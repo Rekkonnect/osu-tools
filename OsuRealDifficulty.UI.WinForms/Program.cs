@@ -36,7 +36,8 @@ internal static class Program
             .MinimumLevel.Debug()
             .WriteTo.File(
                 "logs/mania-diff-winforms.txt",
-                rollingInterval: RollingInterval.Day)
+                rollingInterval: RollingInterval.Day,
+                outputTemplate: LoggerExtensionsEx.DefaultOutputTemplate)
             .WriteTo.BatchedInMemoryString()
             .CreateLogger();
 

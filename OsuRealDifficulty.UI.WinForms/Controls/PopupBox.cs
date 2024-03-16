@@ -76,7 +76,7 @@ public partial class PopupBox : UserControl
             - button.Margin.Vertical;
 
         button.Font = button.Font
-            .WithSize(11)
+            .WithSize(12)
             .WithStyle(FontStyle.Bold);
 
         buttonLayoutPanel.Controls.Add(button);
@@ -108,6 +108,11 @@ public partial class PopupBox : UserControl
     {
         var button = sender as Button;
         var result = button!.DialogResult;
+        Conclude(result);
+    }
+
+    public void Conclude(DialogResult result)
+    {
         DialogResult = result;
         HideFade();
         InformResultSelected(result);

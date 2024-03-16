@@ -29,4 +29,17 @@ public static class ControlExtensions
     {
         return new(control);
     }
+
+    public static void SetTextScrollToEnd(this TextBox textBox, string text)
+    {
+        textBox.Text = text;
+        textBox.Select(text.Length - 1, 0);
+        textBox.ScrollToCaret();
+    }
+
+    public static void ScrollToEnd(this TextBox textBox)
+    {
+        textBox.Select(textBox.TextLength - 1, 0);
+        textBox.ScrollToCaret();
+    }
 }

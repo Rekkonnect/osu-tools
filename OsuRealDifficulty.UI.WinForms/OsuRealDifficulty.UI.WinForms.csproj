@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
-    <Version>0.1.5</Version>
+    <Version>0.2.0</Version>
     <ProductVersion>$(Version)</ProductVersion>
   </PropertyGroup>
 

@@ -36,7 +36,7 @@ partial class PopupBox
         // 
         // messageLabel
         // 
-        messageLabel.Font = new Font("Aptos Display", 10F);
+        messageLabel.Font = new Font("Aptos Display", 11F);
         messageLabel.ForeColor = Color.Silver;
         messageLabel.ImageAlign = ContentAlignment.TopCenter;
         messageLabel.Location = new Point(0, 103);
@@ -50,11 +50,11 @@ partial class PopupBox
         // 
         titleLabel.BackColor = Color.FromArgb(75, 75, 75);
         titleLabel.Dock = DockStyle.Top;
-        titleLabel.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
+        titleLabel.Font = new Font("Aptos Display", 13F, FontStyle.Bold);
         titleLabel.ForeColor = SystemColors.ControlLight;
         titleLabel.Location = new Point(0, 0);
         titleLabel.Name = "titleLabel";
-        titleLabel.Size = new Size(428, 30);
+        titleLabel.Size = new Size(428, 35);
         titleLabel.TabIndex = 53;
         titleLabel.Text = "example title";
         titleLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -73,9 +73,9 @@ partial class PopupBox
         // 
         imageLabel.Font = new Font("Aptos Display", 10F);
         imageLabel.ForeColor = Color.Silver;
-        imageLabel.Location = new Point(0, 30);
+        imageLabel.Location = new Point(0, 35);
         imageLabel.Name = "imageLabel";
-        imageLabel.Size = new Size(428, 73);
+        imageLabel.Size = new Size(428, 68);
         imageLabel.TabIndex = 55;
         imageLabel.TextAlign = ContentAlignment.MiddleCenter;
         // 
