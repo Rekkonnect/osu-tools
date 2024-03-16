@@ -30,14 +30,14 @@ partial class MainForm
     /// </summary>
     private void InitializeComponent()
     {
-        var listViewItem1 = new ListViewItem(new string[] { "Sakazuki", "BEMANI Sound Team HuMeR feat Fernweh", "Nicknem_" }, -1);
-        var listViewItem2 = new ListViewItem(new string[] { "SAtAN", "P*Light", "riunosk" }, -1);
-        var listViewItem3 = new ListViewItem(new string[] { "Aruel's HEAVENLY", "4", "8.8", "8.8", "1870", "1664", "206" }, -1);
-        var listViewItem4 = new ListViewItem(new string[] { "Ayase's EXHAUST", "4", "8", "8", "1162", "930", "232" }, -1);
-        var listViewItem5 = new ListViewItem("DenYi's ADVANCED");
-        var listViewItem6 = new ListViewItem("NOVICE");
-        var listViewItem7 = new ListViewItem("Ppass' MAXIMUM");
-        var listViewItem8 = new ListViewItem("REVERSED");
+        var listViewItem1 = new ListViewItem(new string[] { "Aruel's HEAVENLY", "4", "8.8", "8.8", "1870", "1664", "206" }, -1);
+        var listViewItem2 = new ListViewItem(new string[] { "Ayase's EXHAUST", "4", "8", "8", "1162", "930", "232" }, -1);
+        var listViewItem3 = new ListViewItem("DenYi's ADVANCED");
+        var listViewItem4 = new ListViewItem("NOVICE");
+        var listViewItem5 = new ListViewItem("Ppass' MAXIMUM");
+        var listViewItem6 = new ListViewItem("REVERSED");
+        var listViewItem7 = new ListViewItem(new string[] { "Sakazuki", "BEMANI Sound Team HuMeR feat Fernweh", "Nicknem_" }, -1);
+        var listViewItem8 = new ListViewItem(new string[] { "SAtAN", "P*Light", "riunosk" }, -1);
         var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
         difficultyResultDisplay = new AnalysisResultDisplay();
         beatmapGroupBox = new GroupBox();
@@ -52,6 +52,14 @@ partial class MainForm
         searchTextBox = new TextBox();
         keyCountFilterTextBox = new KeyCountFilterTextBox();
         keyCountFilterCheckBox = new CheckBox();
+        difficultyListView = new BeatmapListView();
+        columnHeader1 = new ColumnHeader();
+        columnHeader2 = new ColumnHeader();
+        columnHeader3 = new ColumnHeader();
+        columnHeader4 = new ColumnHeader();
+        columnHeader5 = new ColumnHeader();
+        columnHeader6 = new ColumnHeader();
+        columnHeader7 = new ColumnHeader();
         beatmapSetListView = new BeatmapSetListView();
         beatmapListViewTitleColumn = new ColumnHeader();
         beatmapListViewArtistColumn = new ColumnHeader();
@@ -64,17 +72,11 @@ partial class MainForm
         settingsButton = new Button();
         cancelCalculationButton = new Button();
         beginCalculationButton = new Button();
-        difficultyListView = new BeatmapListView();
-        columnHeader1 = new ColumnHeader();
-        columnHeader2 = new ColumnHeader();
-        columnHeader3 = new ColumnHeader();
-        columnHeader4 = new ColumnHeader();
-        columnHeader5 = new ColumnHeader();
-        columnHeader6 = new ColumnHeader();
-        columnHeader7 = new ColumnHeader();
+        contentPanel = new Panel();
         beatmapGroupBox.SuspendLayout();
         filterGroupBox.SuspendLayout();
         operationsGroupBox.SuspendLayout();
+        contentPanel.SuspendLayout();
         SuspendLayout();
         // 
         // difficultyResultDisplay
@@ -92,11 +94,13 @@ partial class MainForm
         // beatmapGroupBox
         // 
         beatmapGroupBox.Controls.Add(filterGroupBox);
+        beatmapGroupBox.Controls.Add(difficultyListView);
         beatmapGroupBox.Controls.Add(beatmapSetListView);
         beatmapGroupBox.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
         beatmapGroupBox.ForeColor = Color.Silver;
         beatmapGroupBox.Location = new Point(12, 12);
         beatmapGroupBox.Name = "beatmapGroupBox";
+        beatmapGroupBox.Padding = new Padding(6);
         beatmapGroupBox.Size = new Size(520, 695);
         beatmapGroupBox.TabIndex = 1;
         beatmapGroupBox.TabStop = false;
@@ -268,6 +272,66 @@ partial class MainForm
         keyCountFilterCheckBox.UseVisualStyleBackColor = true;
         keyCountFilterCheckBox.CheckedChanged += keyCountFilterCheckBox_CheckedChanged;
         // 
+        // difficultyListView
+        // 
+        difficultyListView.BackColor = Color.FromArgb(40, 40, 40);
+        difficultyListView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
+        difficultyListView.Font = new Font("Aptos Display", 11F);
+        difficultyListView.ForeColor = SystemColors.ControlLight;
+        difficultyListView.FullRowSelect = true;
+        difficultyListView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+        listViewItem1.StateImageIndex = 0;
+        listViewItem2.StateImageIndex = 0;
+        difficultyListView.Items.AddRange(new ListViewItem[] { listViewItem1, listViewItem2, listViewItem3, listViewItem4, listViewItem5, listViewItem6 });
+        difficultyListView.Location = new Point(6, 461);
+        difficultyListView.MultiSelect = false;
+        difficultyListView.Name = "difficultyListView";
+        difficultyListView.ShowItemToolTips = true;
+        difficultyListView.Size = new Size(508, 228);
+        difficultyListView.Sorting = SortOrder.Ascending;
+        difficultyListView.TabIndex = 30;
+        difficultyListView.UseCompatibleStateImageBehavior = false;
+        difficultyListView.View = View.Details;
+        difficultyListView.ItemSelectionChanged += difficultyListView_ItemSelectionChanged;
+        // 
+        // columnHeader1
+        // 
+        columnHeader1.Text = "difficulty name";
+        columnHeader1.Width = 175;
+        // 
+        // columnHeader2
+        // 
+        columnHeader2.Text = "keys";
+        columnHeader2.TextAlign = HorizontalAlignment.Center;
+        columnHeader2.Width = 50;
+        // 
+        // columnHeader3
+        // 
+        columnHeader3.Text = "hp";
+        columnHeader3.TextAlign = HorizontalAlignment.Center;
+        columnHeader3.Width = 35;
+        // 
+        // columnHeader4
+        // 
+        columnHeader4.Text = "od";
+        columnHeader4.TextAlign = HorizontalAlignment.Center;
+        columnHeader4.Width = 35;
+        // 
+        // columnHeader5
+        // 
+        columnHeader5.Text = "objects";
+        columnHeader5.TextAlign = HorizontalAlignment.Center;
+        // 
+        // columnHeader6
+        // 
+        columnHeader6.Text = "rice";
+        columnHeader6.TextAlign = HorizontalAlignment.Center;
+        // 
+        // columnHeader7
+        // 
+        columnHeader7.Text = "holds";
+        columnHeader7.TextAlign = HorizontalAlignment.Center;
+        // 
         // beatmapSetListView
         // 
         beatmapSetListView.BackColor = Color.FromArgb(40, 40, 40);
@@ -276,9 +340,9 @@ partial class MainForm
         beatmapSetListView.ForeColor = SystemColors.ControlLight;
         beatmapSetListView.FullRowSelect = true;
         beatmapSetListView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-        listViewItem1.StateImageIndex = 0;
-        listViewItem2.StateImageIndex = 0;
-        beatmapSetListView.Items.AddRange(new ListViewItem[] { listViewItem1, listViewItem2 });
+        listViewItem7.StateImageIndex = 0;
+        listViewItem8.StateImageIndex = 0;
+        beatmapSetListView.Items.AddRange(new ListViewItem[] { listViewItem7, listViewItem8 });
         beatmapSetListView.Location = new Point(6, 124);
         beatmapSetListView.MultiSelect = false;
         beatmapSetListView.Name = "beatmapSetListView";
@@ -435,75 +499,24 @@ partial class MainForm
         beginCalculationButton.UseVisualStyleBackColor = false;
         beginCalculationButton.Click += beginCalculationButton_Click;
         // 
-        // difficultyListView
+        // contentPanel
         // 
-        difficultyListView.BackColor = Color.FromArgb(40, 40, 40);
-        difficultyListView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
-        difficultyListView.Font = new Font("Aptos Display", 11F);
-        difficultyListView.ForeColor = SystemColors.ControlLight;
-        difficultyListView.FullRowSelect = true;
-        difficultyListView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-        listViewItem3.StateImageIndex = 0;
-        listViewItem4.StateImageIndex = 0;
-        difficultyListView.Items.AddRange(new ListViewItem[] { listViewItem3, listViewItem4, listViewItem5, listViewItem6, listViewItem7, listViewItem8 });
-        difficultyListView.Location = new Point(18, 473);
-        difficultyListView.MultiSelect = false;
-        difficultyListView.Name = "difficultyListView";
-        difficultyListView.ShowItemToolTips = true;
-        difficultyListView.Size = new Size(508, 228);
-        difficultyListView.Sorting = SortOrder.Ascending;
-        difficultyListView.TabIndex = 30;
-        difficultyListView.UseCompatibleStateImageBehavior = false;
-        difficultyListView.View = View.Details;
-        difficultyListView.ItemSelectionChanged += difficultyListView_ItemSelectionChanged;
-        // 
-        // columnHeader1
-        // 
-        columnHeader1.Text = "difficulty name";
-        columnHeader1.Width = 175;
-        // 
-        // columnHeader2
-        // 
-        columnHeader2.Text = "keys";
-        columnHeader2.TextAlign = HorizontalAlignment.Center;
-        columnHeader2.Width = 50;
-        // 
-        // columnHeader3
-        // 
-        columnHeader3.Text = "hp";
-        columnHeader3.TextAlign = HorizontalAlignment.Center;
-        columnHeader3.Width = 35;
-        // 
-        // columnHeader4
-        // 
-        columnHeader4.Text = "od";
-        columnHeader4.TextAlign = HorizontalAlignment.Center;
-        columnHeader4.Width = 35;
-        // 
-        // columnHeader5
-        // 
-        columnHeader5.Text = "objects";
-        columnHeader5.TextAlign = HorizontalAlignment.Center;
-        // 
-        // columnHeader6
-        // 
-        columnHeader6.Text = "rice";
-        columnHeader6.TextAlign = HorizontalAlignment.Center;
-        // 
-        // columnHeader7
-        // 
-        columnHeader7.Text = "holds";
-        columnHeader7.TextAlign = HorizontalAlignment.Center;
+        contentPanel.Controls.Add(beatmapGroupBox);
+        contentPanel.Controls.Add(operationsGroupBox);
+        contentPanel.Controls.Add(difficultyResultDisplay);
+        contentPanel.Dock = DockStyle.Fill;
+        contentPanel.Location = new Point(0, 0);
+        contentPanel.Name = "contentPanel";
+        contentPanel.Padding = new Padding(3);
+        contentPanel.Size = new Size(918, 719);
+        contentPanel.TabIndex = 41;
         // 
         // MainForm
         // 
         AutoScaleMode = AutoScaleMode.None;
         BackColor = Color.FromArgb(30, 30, 30);
         ClientSize = new Size(918, 719);
-        Controls.Add(difficultyListView);
-        Controls.Add(operationsGroupBox);
-        Controls.Add(beatmapGroupBox);
-        Controls.Add(difficultyResultDisplay);
+        Controls.Add(contentPanel);
         DoubleBuffered = true;
         Font = new Font("Aptos Display", 10F);
         ForeColor = SystemColors.ControlLight;
@@ -519,6 +532,7 @@ partial class MainForm
         filterGroupBox.ResumeLayout(false);
         filterGroupBox.PerformLayout();
         operationsGroupBox.ResumeLayout(false);
+        contentPanel.ResumeLayout(false);
         ResumeLayout(false);
     }
 
@@ -557,4 +571,5 @@ partial class MainForm
     private CheckBox sourceFilterCheckBox;
     private Button beginCalculateAllBeatmapsButton;
     private BackgroundCalculationReporter backgroundCalculationReporter;
+    private Panel contentPanel;
 }

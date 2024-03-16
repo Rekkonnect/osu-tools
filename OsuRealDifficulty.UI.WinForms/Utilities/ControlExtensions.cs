@@ -1,6 +1,4 @@
-﻿using OsuRealDifficulty.UI.WinForms.Controls;
-
-namespace OsuRealDifficulty.UI.WinForms.Utilities;
+﻿namespace OsuRealDifficulty.UI.WinForms.Utilities;
 
 public static class ControlExtensions
 {

@@ -1,4 +1,4 @@
-﻿namespace OsuRealDifficulty.UI.WinForms.Controls;
+﻿namespace OsuRealDifficulty.UI.WinForms.Utilities;
 
 public readonly struct LayoutSuspension
     : IDisposable

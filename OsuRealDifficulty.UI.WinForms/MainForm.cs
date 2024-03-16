@@ -82,15 +82,21 @@ public partial class MainForm : Form
             // refresh all beatmaps
             case Keys.Control | Keys.Shift | Keys.R:
             {
-                var reloadResult = MessageBox.Show(
-                    "you pressed CTRL + SHIFT + R; do you want to reload the entire beatmap database?",
-                    "reload database",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-                if (reloadResult is DialogResult.Yes)
+                var popup = new PopupBox
                 {
-                    ReloadMaps();
-                }
+                    Title =
+                        "reload database",
+                    Message = """
+                        you pressed CTRL + SHIFT + R
+                        do you want to reload the entire beatmap database?
+                        """,
+                    MessageIcon = MessageBoxIcon.Question,
+                };
+                popup.AddButton(DialogResult.Yes, "yes");
+                popup.AddButton(DialogResult.No, "no");
+                popup.YesSelected += ReloadMaps;
+                popup.Show(this);
+
                 return true;
             }
 
@@ -339,11 +345,17 @@ public partial class MainForm : Form
         var beatmap = _beatmapSelection.Beatmap;
         if (beatmap is null)
         {
-            MessageBox.Show(
-                "please select a beatmap from the bottom list view",
-                "no beatmap selected",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
+            var popup = new PopupBox
+            {
+                Title =
+                    "no beatmap selected",
+                Message = """
+                    please select a beatmap from the bottom list view
+                    """,
+                MessageIcon = MessageBoxIcon.Error,
+            };
+            popup.AddButton(DialogResult.OK, "ok");
+            popup.Show(this);
             return;
         }
 
@@ -428,26 +440,36 @@ public partial class MainForm : Form
         if (_backgroundBeatmapCalculationTask is not null)
             return;
 
-        var confirmed = RequestExecuteCalculationForAllBeatmaps();
-        if (!confirmed)
+        RequestExecuteCalculationForAllBeatmaps();
+    }
+
+    private void HandleConfirmedBackgroundCalculation(DialogResult result)
+    {
+        if (result is not DialogResult.Yes)
             return;
 
         beginCalculateAllBeatmapsButton.Enabled = false;
         _backgroundBeatmapCalculationTask = ExecuteCalculationForAllBeatmapsAsync();
     }
 
-    private bool RequestExecuteCalculationForAllBeatmaps()
+    private void RequestExecuteCalculationForAllBeatmaps()
     {
-        var result = MessageBox.Show(
-            """
-            calculating all beatmaps in the background will severely degrade
-            performance of the application until the process is done
-            continue?
-            """,
-            "initiate background calculation for all beatmaps",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Warning);
-        return result is DialogResult.Yes;
+        var popup = new PopupBox
+        {
+            Title =
+                "initiate background calculation for all beatmaps",
+            Message = """
+                calculating all beatmaps in the background will severely
+                degrade performance of the application until it's done
+                continue?
+                """,
+            MessageIcon = MessageBoxIcon.Warning,
+        };
+        popup.AddButton(DialogResult.Yes, "yes");
+        popup.AddButton(DialogResult.No, "no");
+
+        popup.ResultSelected += HandleConfirmedBackgroundCalculation;
+        popup.Show(this);
     }
 
     private async Task ExecuteCalculationForAllBeatmapsAsync()
