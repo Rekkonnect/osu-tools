@@ -57,6 +57,7 @@ partial class MainForm
         beatmapListViewArtistColumn = new ColumnHeader();
         beatmapListViewMapperColumn = new ColumnHeader();
         operationsGroupBox = new GroupBox();
+        backgroundCalculationReporter = new BackgroundCalculationReporter();
         beginCalculateAllBeatmapsButton = new Button();
         showLogsButton = new Button();
         reloadBeatmapDatabaseButton = new Button();
@@ -83,7 +84,7 @@ partial class MainForm
         difficultyResultDisplay.Caption = "difficulty";
         difficultyResultDisplay.Font = new Font("Aptos Display", 10F);
         difficultyResultDisplay.ForeColor = SystemColors.ControlLight;
-        difficultyResultDisplay.Location = new Point(538, 190);
+        difficultyResultDisplay.Location = new Point(538, 257);
         difficultyResultDisplay.Name = "difficultyResultDisplay";
         difficultyResultDisplay.Size = new Size(368, 450);
         difficultyResultDisplay.TabIndex = 0;
@@ -96,7 +97,7 @@ partial class MainForm
         beatmapGroupBox.ForeColor = Color.Silver;
         beatmapGroupBox.Location = new Point(12, 12);
         beatmapGroupBox.Name = "beatmapGroupBox";
-        beatmapGroupBox.Size = new Size(520, 628);
+        beatmapGroupBox.Size = new Size(520, 695);
         beatmapGroupBox.TabIndex = 1;
         beatmapGroupBox.TabStop = false;
         beatmapGroupBox.Text = "beatmap";
@@ -282,7 +283,7 @@ partial class MainForm
         beatmapSetListView.MultiSelect = false;
         beatmapSetListView.Name = "beatmapSetListView";
         beatmapSetListView.ShowItemToolTips = true;
-        beatmapSetListView.Size = new Size(508, 286);
+        beatmapSetListView.Size = new Size(508, 331);
         beatmapSetListView.Sorting = SortOrder.Ascending;
         beatmapSetListView.TabIndex = 20;
         beatmapSetListView.UseCompatibleStateImageBehavior = false;
@@ -306,6 +307,7 @@ partial class MainForm
         // 
         // operationsGroupBox
         // 
+        operationsGroupBox.Controls.Add(backgroundCalculationReporter);
         operationsGroupBox.Controls.Add(beginCalculateAllBeatmapsButton);
         operationsGroupBox.Controls.Add(showLogsButton);
         operationsGroupBox.Controls.Add(reloadBeatmapDatabaseButton);
@@ -316,10 +318,19 @@ partial class MainForm
         operationsGroupBox.ForeColor = Color.Silver;
         operationsGroupBox.Location = new Point(538, 12);
         operationsGroupBox.Name = "operationsGroupBox";
-        operationsGroupBox.Size = new Size(368, 172);
+        operationsGroupBox.Size = new Size(368, 239);
         operationsGroupBox.TabIndex = 40;
         operationsGroupBox.TabStop = false;
         operationsGroupBox.Text = "operations";
+        // 
+        // backgroundCalculationReporter
+        // 
+        backgroundCalculationReporter.BackColor = Color.Transparent;
+        backgroundCalculationReporter.Font = new Font("Aptos Display", 10F);
+        backgroundCalculationReporter.Location = new Point(6, 179);
+        backgroundCalculationReporter.Name = "backgroundCalculationReporter";
+        backgroundCalculationReporter.Size = new Size(356, 54);
+        backgroundCalculationReporter.TabIndex = 46;
         // 
         // beginCalculateAllBeatmapsButton
         // 
@@ -435,11 +446,11 @@ partial class MainForm
         listViewItem3.StateImageIndex = 0;
         listViewItem4.StateImageIndex = 0;
         difficultyListView.Items.AddRange(new ListViewItem[] { listViewItem3, listViewItem4, listViewItem5, listViewItem6, listViewItem7, listViewItem8 });
-        difficultyListView.Location = new Point(18, 428);
+        difficultyListView.Location = new Point(18, 473);
         difficultyListView.MultiSelect = false;
         difficultyListView.Name = "difficultyListView";
         difficultyListView.ShowItemToolTips = true;
-        difficultyListView.Size = new Size(508, 206);
+        difficultyListView.Size = new Size(508, 228);
         difficultyListView.Sorting = SortOrder.Ascending;
         difficultyListView.TabIndex = 30;
         difficultyListView.UseCompatibleStateImageBehavior = false;
@@ -488,7 +499,7 @@ partial class MainForm
         // 
         AutoScaleMode = AutoScaleMode.None;
         BackColor = Color.FromArgb(30, 30, 30);
-        ClientSize = new Size(918, 652);
+        ClientSize = new Size(918, 719);
         Controls.Add(difficultyListView);
         Controls.Add(operationsGroupBox);
         Controls.Add(beatmapGroupBox);
@@ -545,4 +556,5 @@ partial class MainForm
     private CheckBox tagsFilterCheckBox;
     private CheckBox sourceFilterCheckBox;
     private Button beginCalculateAllBeatmapsButton;
+    private BackgroundCalculationReporter backgroundCalculationReporter;
 }

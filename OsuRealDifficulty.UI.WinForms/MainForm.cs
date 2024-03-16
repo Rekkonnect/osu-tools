@@ -14,8 +14,9 @@ public partial class MainForm : Form
         = new();
 
     private readonly BeatmapFilter _beatmapFilter = new();
-
     private readonly CurrentBeatmapSelection _beatmapSelection = new();
+    private readonly BackgroundCalculationInformation _backgroundCalculationInformation
+        = new();
 
     private volatile Task? _backgroundBeatmapCalculationTask = null;
 
@@ -29,6 +30,9 @@ public partial class MainForm : Form
     {
         _beatmapSelection.BeatmapSetChanged += SelectedBeatmapSetChanged;
         _beatmapSelection.BeatmapChanged += SelectedBeatmapChanged;
+
+        backgroundCalculationReporter.BindToBackgroundCalculationInformation(
+            _backgroundCalculationInformation);
     }
 
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -424,8 +428,26 @@ public partial class MainForm : Form
         if (_backgroundBeatmapCalculationTask is not null)
             return;
 
+        var confirmed = RequestExecuteCalculationForAllBeatmaps();
+        if (!confirmed)
+            return;
+
         beginCalculateAllBeatmapsButton.Enabled = false;
         _backgroundBeatmapCalculationTask = ExecuteCalculationForAllBeatmapsAsync();
+    }
+
+    private bool RequestExecuteCalculationForAllBeatmaps()
+    {
+        var result = MessageBox.Show(
+            """
+            calculating all beatmaps in the background will severely degrade
+            performance of the application until the process is done
+            continue?
+            """,
+            "initiate background calculation for all beatmaps",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning);
+        return result is DialogResult.Yes;
     }
 
     private async Task ExecuteCalculationForAllBeatmapsAsync()
@@ -433,9 +455,22 @@ public partial class MainForm : Form
         // PROBLEM: this causes tons of GC collections, effectively
         // killing the performance of the application, and vastly
         // underutilizing the CPU
+        // this happens because parsing the beatmaps themselves
+        // allocates tons of objects, both from the parsing library
+        // and the annotation analysis
+        // the only solution to this problem is to run a separate
+        // process to perform the calculation, in order to outsource
+        // the GC overhead, and communicate the results in real-time
+        // via some clever inter-process mechanism
+        // this is not a massive concern for now, as long as the
+        // application doesn't completely freeze and doesn't hog
+        // tons of resources
 
         var songs = AppSettings.Instance.EffectiveBaseSongsDirectory;
-        foreach (var dbBeatmap in AppState.Instance.ManiaBeatmapSetDatabase!.AllBeatmaps)
+        var allBeatmaps = AppState.Instance
+            .ManiaBeatmapSetDatabase!.AllBeatmaps.ToArray();
+        _backgroundCalculationInformation.Initiate(allBeatmaps.Length);
+        foreach (var dbBeatmap in allBeatmaps)
         {
             try
             {
@@ -451,8 +486,11 @@ public partial class MainForm : Form
                     errorTemplate);
                 Log.Logger.Error(ex, "Beatmap calculation threw");
             }
+
+            _backgroundCalculationInformation.RegisterCalculationComplete();
         }
 
+        _backgroundCalculationInformation.FinishCalculation();
         _backgroundBeatmapCalculationTask = null;
         Invoke(() => beginCalculateAllBeatmapsButton.Enabled = true);
     }
