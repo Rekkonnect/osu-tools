@@ -25,10 +25,10 @@ public sealed class AnchorPatternDifficultyAnalyzer
     {
         double averageTimeDistance = anchor.AverageTimeDistance;
         double distanceMultiplier = Math.Pow(200 / averageTimeDistance, 1.6);
-        double hitCountMultiplier = Math.Log(anchor.HitCount - 1, 2);
-        double columnBase = anchor.ColumnCount;
-        double columnCountMultiplier = Math.Pow(columnBase, 0.97);
-        return distanceMultiplier * columnCountMultiplier * hitCountMultiplier;
+        double hitCountMultiplier = Math.Pow(Math.Log(anchor.HitCount - 1, 5), 0.7 + distanceMultiplier);
+        double columnBase = anchor.ColumnCount + 1;
+        double columnCountMultiplier = Math.Pow(columnBase, 0.62);
+        return distanceMultiplier * columnCountMultiplier * hitCountMultiplier / 2;
     }
 
     public override ref CalculationResult CalculationResultRef(

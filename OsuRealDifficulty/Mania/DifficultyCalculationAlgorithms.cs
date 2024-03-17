@@ -15,6 +15,7 @@ public static class DifficultyCalculationAlgorithms
                 return AnalysisDifficultyValue.NormalizedZero;
 
             var values = annotations.Select(valueCalculator)
+                .Where(s => s > 0)
                 .ToArray();
 
             return SmallDoubleMeans(values);
@@ -29,10 +30,6 @@ public static class DifficultyCalculationAlgorithms
                 return AnalysisDifficultyValue.NormalizedZero;
 
             double valueSum = values.Sum();
-            foreach (var value in values)
-            {
-                valueSum += value;
-            }
 
             double mean2 = SomeMath.Mean2(values);
             double[] deviations = new double[count];
@@ -45,6 +42,12 @@ public static class DifficultyCalculationAlgorithms
             var ceiling = mean2 * 10 * deviationValue;
             var valueSumValue = valueSum * deviationMean;
             var absoluteValue = Math.Min(ceiling, valueSumValue);
+            double populationMultiplier = Math.Log(count, 20);
+            if (populationMultiplier > 1)
+            {
+                populationMultiplier = Math.Log(populationMultiplier + 1, 2);
+            }
+            absoluteValue *= populationMultiplier;
             return new(absoluteValue);
         }
     }

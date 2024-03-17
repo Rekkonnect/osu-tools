@@ -398,7 +398,7 @@ public partial class MainForm : Form
                 Title =
                     "no beatmap selected",
                 Message = """
-                    please select a beatmap from the bottom list view
+                    please select a beatmap from the lists
                     """,
                 MessageIcon = MessageBoxIcon.Error,
             };
@@ -431,6 +431,13 @@ public partial class MainForm : Form
 
             var songs = AppSettings.Instance.EffectiveBaseSongsDirectory;
             var beatmap = dbBeatmap.Read(songs);
+
+            const string readTemplate
+                = $"Read the file of the beatmap {_beatmapLogInformationTemplate}";
+            LogBeatmap(
+                LogEventLevel.Information,
+                dbBeatmap,
+                readTemplate);
 
             var driver = CompleteBeatmapAnnotationAnalysis.NewDriver(beatmap);
             int keys = beatmap.ManiaKeyCount();

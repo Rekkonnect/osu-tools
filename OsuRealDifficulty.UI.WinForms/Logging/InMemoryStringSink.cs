@@ -11,7 +11,7 @@ public class InMemoryStringSink : ILogEventSink
 
     private string _logString = string.Empty;
 
-    public const int DefaultMaxStringLength = 2 * 1024 * 1024;
+    public const int DefaultMaxStringLength = 256 * 1024;
 
     public int MaxStringLength = DefaultMaxStringLength;
 

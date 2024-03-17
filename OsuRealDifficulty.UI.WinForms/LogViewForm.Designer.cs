@@ -32,11 +32,13 @@ partial class LogViewForm
         label1 = new Label();
         openLogFolderButton = new Button();
         contentTextBox = new TextBox();
+        clearLogViewButton = new Button();
         contentPanel.SuspendLayout();
         SuspendLayout();
         // 
         // contentPanel
         // 
+        contentPanel.Controls.Add(clearLogViewButton);
         contentPanel.Controls.Add(label1);
         contentPanel.Controls.Add(openLogFolderButton);
         contentPanel.Controls.Add(contentTextBox);
@@ -91,6 +93,23 @@ partial class LogViewForm
         contentTextBox.Size = new Size(794, 233);
         contentTextBox.TabIndex = 1;
         // 
+        // clearLogViewButton
+        // 
+        clearLogViewButton.BackColor = Color.FromArgb(40, 40, 40);
+        clearLogViewButton.FlatAppearance.BorderColor = Color.Silver;
+        clearLogViewButton.FlatAppearance.MouseDownBackColor = Color.Gray;
+        clearLogViewButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(72, 72, 72);
+        clearLogViewButton.FlatStyle = FlatStyle.Flat;
+        clearLogViewButton.Font = new Font("Aptos Display", 11F, FontStyle.Bold);
+        clearLogViewButton.ForeColor = Color.FromArgb(218, 192, 192);
+        clearLogViewButton.Location = new Point(643, 242);
+        clearLogViewButton.Name = "clearLogViewButton";
+        clearLogViewButton.Size = new Size(151, 40);
+        clearLogViewButton.TabIndex = 47;
+        clearLogViewButton.Text = "clear log view";
+        clearLogViewButton.UseVisualStyleBackColor = false;
+        clearLogViewButton.Click += clearLogViewButton_Click;
+        // 
         // LogViewForm
         // 
         AutoScaleDimensions = new SizeF(7F, 17F);
@@ -113,4 +132,5 @@ partial class LogViewForm
     private TextBox contentTextBox;
     private Button openLogFolderButton;
     private Label label1;
+    private Button clearLogViewButton;
 }

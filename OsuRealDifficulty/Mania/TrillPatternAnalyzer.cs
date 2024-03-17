@@ -172,13 +172,8 @@ public sealed class TrillPatternAnalyzer
         var cpsPowered = Math.Pow(pattern.ColumnHitsPerSecond, 1.32);
         var cpsValue = cpsPowered / 3;
         int columnCount = pattern.ColumnCount;
-        var intensityDenominator = pattern.NotesPerColumn * 3;
-        if (intensityDenominator < 2)
-        {
-            intensityDenominator = 2;
-        }
-        double intensity = 2D - (1.5D / (intensityDenominator - 1));
-        var value = intensity * cpsValue * Math.Cbrt(columnCount) / 6;
+        double intensity = Math.Pow(Math.Log(pattern.NotesPerColumn, 1.5), 0.6 + cpsValue / 5);
+        var value = intensity * cpsValue * Math.Cbrt(columnCount) / 8;
         return value;
     }
 

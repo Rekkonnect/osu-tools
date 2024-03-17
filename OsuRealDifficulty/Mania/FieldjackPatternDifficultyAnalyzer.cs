@@ -88,8 +88,8 @@ public sealed class FieldjackPatternDifficultyAnalyzer
         if (gap is 0)
             gapValue = 0.5;
 
-        double timeMultiplier = 300D / pattern.TimeDistance;
-        double columnValue = pattern.ColumnCount * 1.2;
+        double timeMultiplier = Math.Pow(225D / pattern.TimeDistance, 2);
+        double columnValue = Math.Log(pattern.ColumnCount, 8) + 1;
         double jackValue = gapValue * columnValue * timeMultiplier;
         double firstNotesValue = pattern.FirstNoteCount * 0.1;
         double secondNotesValue = pattern.SecondNoteCount * 0.2;
@@ -100,9 +100,9 @@ public sealed class FieldjackPatternDifficultyAnalyzer
         }
 
         double notesValueMultiplier = firstNotesValue + secondNotesValue + 1;
-        double notesValuePowered = notesValueMultiplier.Pow(1.015);
+        double notesValuePowered = notesValueMultiplier.Pow(1.15);
         double totalValue = jackValue * notesValuePowered;
-        return totalValue / 6;
+        return totalValue / 2;
     }
 
     public override ref CalculationResult CalculationResultRef(

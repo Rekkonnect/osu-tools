@@ -22,7 +22,7 @@ public record TrillPattern(int OffsetStart, int OffsetEnd, int NoteCount, BitVec
 {
     public int ColumnCount => Columns.Data.PopCount();
 
-    public double NotesPerColumn => NoteCount / ColumnCount;
+    public double NotesPerColumn => NoteCount / (double)ColumnCount;
     public double NotesPerSecond => NoteCount / LengthSeconds;
     public int TimeDistance => OffsetEnd - OffsetStart;
     public double LengthSeconds => TimeDistance / 1000D;

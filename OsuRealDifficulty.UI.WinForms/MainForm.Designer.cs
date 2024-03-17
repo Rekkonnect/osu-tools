@@ -73,6 +73,8 @@ partial class MainForm
         cancelCalculationButton = new Button();
         beginCalculationButton = new Button();
         contentPanel = new Panel();
+        label1 = new Label();
+        label2 = new Label();
         beatmapGroupBox.SuspendLayout();
         filterGroupBox.SuspendLayout();
         operationsGroupBox.SuspendLayout();
@@ -93,6 +95,8 @@ partial class MainForm
         // 
         // beatmapGroupBox
         // 
+        beatmapGroupBox.Controls.Add(label2);
+        beatmapGroupBox.Controls.Add(label1);
         beatmapGroupBox.Controls.Add(filterGroupBox);
         beatmapGroupBox.Controls.Add(difficultyListView);
         beatmapGroupBox.Controls.Add(beatmapSetListView);
@@ -119,7 +123,7 @@ partial class MainForm
         filterGroupBox.Controls.Add(keyCountFilterTextBox);
         filterGroupBox.Controls.Add(keyCountFilterCheckBox);
         filterGroupBox.ForeColor = Color.Silver;
-        filterGroupBox.Location = new Point(6, 24);
+        filterGroupBox.Location = new Point(6, 18);
         filterGroupBox.Name = "filterGroupBox";
         filterGroupBox.Size = new Size(508, 94);
         filterGroupBox.TabIndex = 4;
@@ -283,11 +287,11 @@ partial class MainForm
         listViewItem1.StateImageIndex = 0;
         listViewItem2.StateImageIndex = 0;
         difficultyListView.Items.AddRange(new ListViewItem[] { listViewItem1, listViewItem2, listViewItem3, listViewItem4, listViewItem5, listViewItem6 });
-        difficultyListView.Location = new Point(6, 461);
+        difficultyListView.Location = new Point(6, 478);
         difficultyListView.MultiSelect = false;
         difficultyListView.Name = "difficultyListView";
         difficultyListView.ShowItemToolTips = true;
-        difficultyListView.Size = new Size(508, 228);
+        difficultyListView.Size = new Size(508, 211);
         difficultyListView.Sorting = SortOrder.Ascending;
         difficultyListView.TabIndex = 30;
         difficultyListView.UseCompatibleStateImageBehavior = false;
@@ -343,11 +347,11 @@ partial class MainForm
         listViewItem7.StateImageIndex = 0;
         listViewItem8.StateImageIndex = 0;
         beatmapSetListView.Items.AddRange(new ListViewItem[] { listViewItem7, listViewItem8 });
-        beatmapSetListView.Location = new Point(6, 124);
+        beatmapSetListView.Location = new Point(6, 141);
         beatmapSetListView.MultiSelect = false;
         beatmapSetListView.Name = "beatmapSetListView";
         beatmapSetListView.ShowItemToolTips = true;
-        beatmapSetListView.Size = new Size(508, 331);
+        beatmapSetListView.Size = new Size(508, 308);
         beatmapSetListView.Sorting = SortOrder.Ascending;
         beatmapSetListView.TabIndex = 20;
         beatmapSetListView.UseCompatibleStateImageBehavior = false;
@@ -512,6 +516,25 @@ partial class MainForm
         contentPanel.Size = new Size(918, 719);
         contentPanel.TabIndex = 41;
         // 
+        // label1
+        // 
+        label1.ImageAlign = ContentAlignment.BottomCenter;
+        label1.Location = new Point(6, 115);
+        label1.Name = "label1";
+        label1.Size = new Size(508, 23);
+        label1.TabIndex = 31;
+        label1.Text = "beatmap set";
+        label1.TextAlign = ContentAlignment.BottomCenter;
+        // 
+        // label2
+        // 
+        label2.Location = new Point(6, 452);
+        label2.Name = "label2";
+        label2.Size = new Size(508, 23);
+        label2.TabIndex = 32;
+        label2.Text = "difficulty";
+        label2.TextAlign = ContentAlignment.BottomCenter;
+        // 
         // MainForm
         // 
         AutoScaleMode = AutoScaleMode.None;
@@ -573,4 +596,6 @@ partial class MainForm
     private Button beginCalculateAllBeatmapsButton;
     private BackgroundCalculationReporter backgroundCalculationReporter;
     private Panel contentPanel;
+    private Label label2;
+    private Label label1;
 }

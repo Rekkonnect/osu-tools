@@ -37,7 +37,7 @@ public class CustomDifficultyCalculationProfile(
         AddWeightedScrolling(difficulty.Scrolling, weights.Scrolling);
 
         // TEMPORARY -- REMOVE THIS ONCE ALL ANALYZERS ARE IMPLEMENTED
-        overall.Overall *= 2;
+        overall.Overall *= 0.87;
 
         NormalizeValue(ref overall.Overall);
         return overall;
@@ -125,8 +125,8 @@ public class CustomDifficultyCalculationProfile(
             }
 
             // TODO: Test applying the weight after the powering of the value
-            var weightedValue = value * weight;
-            var poweredValue = AnalyzedDifficultyFacts.AbsoluteValue(weightedValue);
+            var weightedValue = AnalyzedDifficultyFacts.AbsoluteValue(value) * weight;
+            var poweredValue = weightedValue;
             overall.Overall += poweredValue;
 
             if (segmentSum.IsValid)

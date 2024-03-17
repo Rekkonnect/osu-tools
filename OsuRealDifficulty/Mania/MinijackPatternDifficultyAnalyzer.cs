@@ -22,10 +22,10 @@ public sealed class MinijackPatternDifficultyAnalyzer
     private double AbsoluteValueForMinijack(MinijackAnnotation minijack)
     {
         double timeDistance = minijack.TimeDistance;
-        double distanceMultiplier = Math.Pow(200 / timeDistance, 3.35);
-        double columnBase = minijack.ColumnCount * 0.92;
-        double columnCountMultiplier = Math.Pow(columnBase, 0.92);
-        return distanceMultiplier * columnCountMultiplier;
+        double distanceMultiplier = Math.Pow(200 / timeDistance, 1.6);
+        double columnBase = 1 + minijack.ColumnCount * 0.3;
+        double columnCountMultiplier = Math.Pow(columnBase, 0.87);
+        return distanceMultiplier * columnCountMultiplier / 4;
     }
 
     public override ref CalculationResult CalculationResultRef(

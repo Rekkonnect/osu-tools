@@ -1,4 +1,6 @@
-﻿namespace OsuRealDifficulty.UI.WinForms.Utilities;
+﻿using static System.Net.Mime.MediaTypeNames;
+
+namespace OsuRealDifficulty.UI.WinForms.Utilities;
 
 public static class ControlExtensions
 {
@@ -33,13 +35,20 @@ public static class ControlExtensions
     public static void SetTextScrollToEnd(this TextBox textBox, string text)
     {
         textBox.Text = text;
+        if (text.Length is 0)
+            return;
+
         textBox.Select(text.Length - 1, 0);
         textBox.ScrollToCaret();
     }
 
     public static void ScrollToEnd(this TextBox textBox)
     {
-        textBox.Select(textBox.TextLength - 1, 0);
+        int length = textBox.TextLength;
+        if (length is 0)
+            return;
+
+        textBox.Select(length - 1, 0);
         textBox.ScrollToCaret();
     }
 }

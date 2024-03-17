@@ -3,7 +3,6 @@ using OsuParsers.Beatmaps.Sections;
 using OsuParsers.Database.Objects;
 using OsuParsers.Decoders;
 using OsuParsers.Enums;
-using OsuRealDifficulty.Mania;
 
 namespace OsuRealDifficulty;
 

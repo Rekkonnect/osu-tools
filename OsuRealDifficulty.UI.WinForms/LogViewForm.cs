@@ -39,6 +39,17 @@ public partial class LogViewForm : Form
         OpenLogs();
     }
 
+    private void clearLogViewButton_Click(object sender, EventArgs e)
+    {
+        ClearLogs();
+    }
+
+    private void ClearLogs()
+    {
+        InMemoryStringSink.Instance.Clear();
+        RefreshLog();
+    }
+
     private void OpenLogs()
     {
         Task.Run(OpenLogsCore);
