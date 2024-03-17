@@ -7,8 +7,8 @@ public interface IReadOnlyTypeKeyedList<T>
     public IReadOnlyList<T> this[Type type] { get; }
 
     public IReadOnlyList<TA> OfType<TA>()
-        where TA : T;
+        where TA : class, T;
 
     public IEnumerable<TA> OfBaseType<TA>()
-        where TA : T;
+        where TA : class, T;
 }

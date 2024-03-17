@@ -28,14 +28,14 @@ public sealed class TypeKeyedList<T>
     }
 
     public IList<TA> OfType<TA>()
-        where TA : T
+        where TA : class, T
     {
-        return this[typeof(TA)] as IList<TA>
+        return this[typeof(TA)]?.UpcastList<T, TA>()
             ?? [];
     }
 
     public IEnumerable<TA> OfBaseType<TA>()
-        where TA : T
+        where TA : class, T
     {
         var queriedType = typeof(TA);
         var result = Enumerable.Empty<TA>();

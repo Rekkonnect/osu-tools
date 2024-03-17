@@ -16,19 +16,20 @@ internal static class JackAnalysisHelpers
     {
         var chordOffsets = GetChordOffsetsWithJackAnnotations(context);
         var indexRanges = chordOffsets.Select(
-            offset => PressColumnIndexRangeFromOffsetRange(
+            offset => NonEmptyPressColumnIndexRangeFromOffsetRange(
                 context,
                 offset));
         return indexRanges.ToList();
     }
 
-    private static SimpleRange PressColumnIndexRangeFromOffsetRange(
+    private static SimpleRange NonEmptyPressColumnIndexRangeFromOffsetRange(
         BeatmapAnnotationAnalysisContext context,
         SimpleRange offsetRange)
     {
         var (start, end) = offsetRange;
-        int startIndex = PressColumnIndexFromOffset(context, start);
-        int endIndex = PressColumnIndexFromOffset(context, end);
+        var pressColumns = context.AffectedChordList.NonEmptyPressColumns;
+        int startIndex = PressColumnIndexFromOffset(start, pressColumns);
+        int endIndex = PressColumnIndexFromOffset(end, pressColumns);
         return new(startIndex, endIndex);
     }
 
@@ -36,6 +37,13 @@ internal static class JackAnalysisHelpers
         BeatmapAnnotationAnalysisContext context, int offset)
     {
         var pressColumns = context.AffectedChordList.PressColumns;
+        return PressColumnIndexFromOffset(offset, pressColumns);
+    }
+
+    private static int PressColumnIndexFromOffset(
+        int offset,
+        ChordPressColumnsList pressColumns)
+    {
         var target = ChordPressColumns.EmptyForOffset(offset);
         return pressColumns.BinarySearch(
             target,

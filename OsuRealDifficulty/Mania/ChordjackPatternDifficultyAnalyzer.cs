@@ -16,7 +16,7 @@ public sealed class ChordjackPatternDifficultyAnalyzer
             .GetPressColumnIndicesWithJackAnnotations(
                 context);
 
-        var pressColumns = context.AffectedChordList.PressColumns;
+        var pressColumns = context.AffectedChordList.NonEmptyPressColumns;
         foreach (var range in pressColumnIndices)
         {
             AnalyzeRange();
@@ -77,7 +77,7 @@ public sealed class ChordjackPatternDifficultyAnalyzer
         double jackValue = gapValue * columnValue * timeMultiplier;
         double firstExtraNotesValue = pattern.FirstExtraNotes * 0.4;
         double secondExtraNotesValue = pattern.SecondExtraNotes * 0.6;
-        double extraNotesValue = firstExtraNotesValue + secondExtraNotesValue;
+        double extraNotesValue = firstExtraNotesValue + secondExtraNotesValue + 1;
         double extraValue = extraNotesValue.Pow(1.04);
         double totalValue = jackValue * extraValue;
         // Our numbers have gone overboard, let's trim down some of that power

@@ -75,7 +75,7 @@ public partial class BackgroundCalculationReporter : UserControl
         backgroundCalculationProgressBar.Maximum = _information.TotalBeatmaps;
         backgroundCalculationProgressBar.Value = _information.ProcessedBeatmaps;
 
-        executionTimeLabel.Text = $"{_information.CurrentElapsedTime.TotalSeconds:N2}s";
+        executionTimeLabel.Text = $"{_information.EffectiveExecutionTime.TotalSeconds:N2}s";
     }
 
     private static string GetTextForRunningState(

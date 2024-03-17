@@ -10,6 +10,16 @@ public class BackgroundCalculationInformation
 
     public TimeSpan ExecutionTime => EndTime - StartTime;
     public TimeSpan CurrentElapsedTime => DateTime.Now - StartTime;
+    public TimeSpan EffectiveExecutionTime
+    {
+        get
+        {
+            if (IsRunning)
+                return CurrentElapsedTime;
+
+            return ExecutionTime;
+        }
+    }
 
     public event CalculationEventHandler? InitiationChanged;
     public event CalculationEventHandler? ProcessedBeatmapsChanged;

@@ -169,12 +169,16 @@ public sealed class TrillPatternAnalyzer
 
     protected override double CalculatePatternAbsoluteValue(TrillPattern pattern)
     {
-        var cps = pattern.ColumnHitsPerSecond;
+        var cpsPowered = Math.Pow(pattern.ColumnHitsPerSecond, 1.32);
+        var cpsValue = cpsPowered / 10;
         int columnCount = pattern.ColumnCount;
-        var count = pattern.NoteCount;
-        // TODO: Test this value
-        double intensity = 2D - (1.5D / (count - 2));
-        var value = intensity * cps * Math.Sqrt(columnCount) / 3;
+        var intensityDenominator = pattern.NotesPerColumn * 3;
+        if (intensityDenominator < 2)
+        {
+            intensityDenominator = 2;
+        }
+        double intensity = 2D - (1.5D / (intensityDenominator - 1));
+        var value = intensity * cpsValue * Math.Cbrt(columnCount) / 17;
         return value;
     }
 
