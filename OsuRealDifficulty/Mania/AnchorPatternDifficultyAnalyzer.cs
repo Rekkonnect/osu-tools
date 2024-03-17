@@ -12,24 +12,21 @@ public sealed class AnchorPatternDifficultyAnalyzer
     public override AnalysisDifficultyValue CalculateDifficultyResult(
         BeatmapAnnotationAnalysisContext context)
     {
-        var anchors = context.CommittedAnnotations.OfType<AnchorPattern>();
-        double absoluteValue = 0;
+        var annotations = context.CommittedAnnotations
+            .OfType<AnchorPattern>()
+            .ToList();
 
-        foreach (var anchor in anchors)
-        {
-            var anchorValue = AbsoluteValueForMinijack(anchor);
-            absoluteValue += anchorValue;
-        }
-
-        return new(absoluteValue);
+        return DifficultyCalculationAlgorithms.Aggregation.SmallDoubleMeans(
+            annotations,
+            AbsoluteValueForAnchor);
     }
 
-    private double AbsoluteValueForMinijack(AnchorPattern minijack)
+    private double AbsoluteValueForAnchor(AnchorPattern anchor)
     {
-        double averageTimeDistance = minijack.AverageTimeDistance;
+        double averageTimeDistance = anchor.AverageTimeDistance;
         double distanceMultiplier = Math.Pow(200 / averageTimeDistance, 1.6);
-        double hitCountMultiplier = Math.Log(minijack.HitCount - 2, 2);
-        double columnBase = minijack.ColumnCount;
+        double hitCountMultiplier = Math.Log(anchor.HitCount - 1, 2);
+        double columnBase = anchor.ColumnCount;
         double columnCountMultiplier = Math.Pow(columnBase, 0.97);
         return distanceMultiplier * columnCountMultiplier * hitCountMultiplier;
     }

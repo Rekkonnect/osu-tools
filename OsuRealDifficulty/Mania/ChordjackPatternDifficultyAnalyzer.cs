@@ -72,6 +72,9 @@ public sealed class ChordjackPatternDifficultyAnalyzer
     {
         int gap = pattern.PressColumns.Data.GapBits();
         double gapValue = gap * 1.06;
+        if (gap is 0)
+            gapValue = 0.5;
+
         double timeMultiplier = 300D / pattern.TimeDistance;
         double columnValue = pattern.ColumnCount * 1.2;
         double jackValue = gapValue * columnValue * timeMultiplier;

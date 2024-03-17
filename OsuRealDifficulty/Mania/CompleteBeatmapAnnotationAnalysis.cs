@@ -33,7 +33,7 @@ public static class CompleteBeatmapAnnotationAnalysis
 
         driver.Add([
             ChordAnnotationAnalyzer.Instance,
-            SpeedAnnotationAnalyzer.Instance,
+            SpeedDifficultyAnalyzer.Instance,
             SinglestreamPatternAnalyzer.Instance,
             TrillPatternAnalyzer.Instance,
             JackPatternAnalyzer.Instance,
@@ -43,10 +43,11 @@ public static class CompleteBeatmapAnnotationAnalysis
             AnchorPatternDifficultyAnalyzer.Instance,
             MinijackPatternDifficultyAnalyzer.Instance,
             ChordjackPatternDifficultyAnalyzer.Instance,
+            FieldjackPatternDifficultyAnalyzer.Instance,
         ]);
 
-        driver.Add([
-            PatternSwitchAnnotationAnalyzer.Instance,
-        ]);
+        //driver.Add([
+        //    PatternSwitchAnnotationAnalyzer.Instance,
+        //]);
     }
 }

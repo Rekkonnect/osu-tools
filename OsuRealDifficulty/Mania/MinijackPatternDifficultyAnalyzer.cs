@@ -10,23 +10,19 @@ public sealed class MinijackPatternDifficultyAnalyzer
     public override AnalysisDifficultyValue CalculateDifficultyResult(
         BeatmapAnnotationAnalysisContext context)
     {
-        var minijacks = context.CommittedAnnotations.OfType<MinijackAnnotation>();
-        double absoluteValue = 0;
+        var annotations = context.CommittedAnnotations
+            .OfType<MinijackAnnotation>()
+            .ToList();
 
-        foreach (var minijack in minijacks)
-        {
-            var minijackValue = AbsoluteValueForMinijack(minijack);
-            absoluteValue += minijackValue;
-        }
-
-        return new(absoluteValue);
+        return DifficultyCalculationAlgorithms.Aggregation.SmallDoubleMeans(
+            annotations,
+            AbsoluteValueForMinijack);
     }
 
     private double AbsoluteValueForMinijack(MinijackAnnotation minijack)
     {
-        // Slow jacks are worth little, while fast jacks are worth a lot more
         double timeDistance = minijack.TimeDistance;
-        double distanceMultiplier = Math.Pow(250 / timeDistance, 1.6);
+        double distanceMultiplier = Math.Pow(200 / timeDistance, 3.35);
         double columnBase = minijack.ColumnCount * 0.92;
         double columnCountMultiplier = Math.Pow(columnBase, 0.92);
         return distanceMultiplier * columnCountMultiplier;

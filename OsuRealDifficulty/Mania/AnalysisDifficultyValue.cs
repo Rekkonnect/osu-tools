@@ -2,6 +2,8 @@
 
 public record struct AnalysisDifficultyValue(double AbsoluteValue)
 {
+    public static AnalysisDifficultyValue NormalizedZero => FromNormalizedValue(0);
+
     public readonly double NormalizedValue
         => AnalyzedDifficultyFacts.NormalizeValue(AbsoluteValue);
 

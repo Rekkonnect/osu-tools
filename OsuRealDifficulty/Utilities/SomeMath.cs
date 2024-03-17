@@ -41,8 +41,9 @@ public static class SomeMath
             result += values[i].Pow(strength);
         }
 
+        result /= values.Length;
         result = Math.Pow(result, 1 / strength);
-        return result / values.Length;
+        return result;
     }
 
     public static double Pow(this double value, double exponent)

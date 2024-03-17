@@ -1,10 +1,9 @@
 ﻿namespace OsuRealDifficulty.Mania;
 
-// TODO: Rename
-public sealed class SpeedAnnotationAnalyzer
+public sealed class SpeedDifficultyAnalyzer
     : IBeatmapDifficultyAnalyzer
 {
-    public static SpeedAnnotationAnalyzer Instance { get; } = new();
+    public static SpeedDifficultyAnalyzer Instance { get; } = new();
 
     public double CalculateDifficultyResult(CompleteBeatmapAnnotationAnalysisContext context)
     {
@@ -26,11 +25,11 @@ public sealed class SpeedAnnotationAnalyzer
         double timeDifferenceMean2 = SomeMath.Mean(timeDifferences);
         double assumedPlayTime = timeDifferenceMean2 * timeDifferences.Length;
         double assumedPlayTimeBonus = Math.Max(1, Math.Log(assumedPlayTime) / 4);
-        double timeDifferenceMeanScore = Math.Pow(500 / timeDifferenceMean2, 1.25);
+        double timeDifferenceMeanScore = Math.Pow(200 / timeDifferenceMean2, 4);
         double mainDifficulty = timeDifferenceMeanScore * notesPerChord * assumedPlayTimeBonus;
 
         // Burst bonus
-        double burstBonus = 0;
+        var burstBonuses = new List<double>();
         for (int i = 0; i < timeDifferences.Length; i++)
         {
             double ratio = timeDifferences[i] / timeDifferenceMean2;
@@ -38,10 +37,14 @@ public sealed class SpeedAnnotationAnalyzer
                 continue;
 
             double bonusMultiplier = Math.Pow(1.05, ratio);
-            burstBonus += bonusMultiplier * timeDifferenceMeanScore;
+            var localBonus = bonusMultiplier * timeDifferenceMeanScore;
+            burstBonuses.Add(localBonus);
         }
 
-        var absoluteValue = mainDifficulty + burstBonus / 32;
+        var burstBonusesArray = burstBonuses.ToArray();
+        var burstBonus = DifficultyCalculationAlgorithms.Aggregation
+            .SmallDoubleMeans(burstBonusesArray);
+        var absoluteValue = (mainDifficulty + burstBonus.AbsoluteValue) / 3;
         var normalizedValue = new AnalysisDifficultyValue(absoluteValue).NormalizedValue;
         return normalizedValue;
     }

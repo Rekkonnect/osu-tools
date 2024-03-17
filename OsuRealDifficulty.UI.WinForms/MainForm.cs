@@ -6,6 +6,7 @@ using OsuRealDifficulty.UI.WinForms.Utilities;
 using Serilog;
 using Serilog.Events;
 using System.Diagnostics.CodeAnalysis;
+using System.DirectoryServices.ActiveDirectory;
 
 namespace OsuRealDifficulty.UI.WinForms;
 
@@ -20,6 +21,7 @@ public partial class MainForm : Form
         = new();
 
     private PopupBoxManager _popupBoxManager;
+    private bool _hasRunAllBeatmaps = false;
     private volatile Task? _backgroundBeatmapCalculationTask = null;
 
     public MainForm()
@@ -61,6 +63,7 @@ public partial class MainForm : Form
             // focus on text filter
             case Keys.Control | Keys.F:
                 searchTextBox.Focus();
+                searchTextBox.SelectAll();
                 return true;
 
             // show logs
@@ -234,12 +237,26 @@ public partial class MainForm : Form
 
     private void searchTextBox_KeyDown(object sender, KeyEventArgs e)
     {
-        // Convenience shortcuts:
+        // convenience shortcuts
         switch (e.KeyCode)
         {
             case Keys.Down:
-                beatmapSetListView.Focus();
+                FocusBeatmapSetListViewSelectFirstIfNone();
                 break;
+
+            case Keys.Escape:
+                searchTextBox.Text = string.Empty;
+                break;
+        }
+    }
+
+    private void FocusBeatmapSetListViewSelectFirstIfNone()
+    {
+        beatmapSetListView.Focus();
+        int selectedCount = beatmapSetListView.SelectedItems.Count;
+        if (selectedCount is 0 && beatmapSetListView.Items.Count > 0)
+        {
+            beatmapSetListView.SelectedIndices.Add(0);
         }
     }
 
@@ -485,14 +502,21 @@ public partial class MainForm : Form
 
     private void RequestExecuteCalculationForAllBeatmaps()
     {
+        string coldFirstRunNote = string.Empty;
+        if (!_hasRunAllBeatmaps)
+        {
+            coldFirstRunNote = "note: the first run of all beatmaps may be vastly slower";
+        }
         var popup = new PopupBox
         {
             Title =
                 "background calculation of all beatmaps",
-            Message = """
+            Message = $"""
                 calculating all beatmaps in the background will severely
                 degrade performance of the application until it's done
                 continue?
+
+                {coldFirstRunNote}
                 """,
             MessageIcon = MessageBoxIcon.Warning,
         };
@@ -545,6 +569,7 @@ public partial class MainForm : Form
 
         _backgroundCalculationInformation.FinishCalculation();
         _backgroundBeatmapCalculationTask = null;
+        _hasRunAllBeatmaps = true;
         Invoke(() => beginCalculateAllBeatmapsButton.Enabled = true);
     }
 

@@ -31,6 +31,15 @@ public sealed class BeatmapAnalyzerDriver(ManiaBeatmapInfo beatmapInfo)
     public override async Task<DriverExecutionResults> Execute(
         CancellationToken cancellationToken = default)
     {
+        const int maxChordCount = 1_000_000;
+        if (beatmapInfo.ChordList.Chords.Length > maxChordCount)
+        {
+            throw new BeatmapTooLargeException(
+                beatmapInfo.Beatmap,
+                $"Maximum allowed chord list length is {maxChordCount}."
+                );
+        }
+
         var annotationChannelOptions = new UnboundedChannelOptions
         {
             SingleWriter = false,
@@ -129,9 +138,15 @@ public sealed class BeatmapAnalyzerDriver(ManiaBeatmapInfo beatmapInfo)
                             CalculationResult.Error);
                     }
 
-                    // Do not await the invocation of the exception action,
+#pragma warning disable CA2016 // Forward the 'CancellationToken' parameter to methods
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+
+                    // do not await the invocation of the exception action,
                     // this could be blocking our entire application
-                    ExceptionAction?.BeginInvoke(ex, null, null);
+                    Task.Run(() => ExceptionAction?.Invoke(ex));
+
+#pragma warning restore CA2016 // Forward the 'CancellationToken' parameter to methods
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
             }
         }

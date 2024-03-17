@@ -6,10 +6,10 @@ public class AnalyzedDifficultyFacts
 
     public static double NormalizeValue(double absoluteValue)
     {
-        return Math.Log(absoluteValue, LogBase);
+        return Math.Log(absoluteValue + 1, LogBase);
     }
     public static double AbsoluteValue(double normalizedValue)
     {
-        return Math.Pow(LogBase, normalizedValue);
+        return Math.Pow(LogBase, normalizedValue) - 1;
     }
 }

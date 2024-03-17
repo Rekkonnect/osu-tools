@@ -170,7 +170,7 @@ public sealed class TrillPatternAnalyzer
     protected override double CalculatePatternAbsoluteValue(TrillPattern pattern)
     {
         var cpsPowered = Math.Pow(pattern.ColumnHitsPerSecond, 1.32);
-        var cpsValue = cpsPowered / 10;
+        var cpsValue = cpsPowered / 3;
         int columnCount = pattern.ColumnCount;
         var intensityDenominator = pattern.NotesPerColumn * 3;
         if (intensityDenominator < 2)
@@ -178,7 +178,7 @@ public sealed class TrillPatternAnalyzer
             intensityDenominator = 2;
         }
         double intensity = 2D - (1.5D / (intensityDenominator - 1));
-        var value = intensity * cpsValue * Math.Cbrt(columnCount) / 17;
+        var value = intensity * cpsValue * Math.Cbrt(columnCount) / 6;
         return value;
     }
 

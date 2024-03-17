@@ -63,3 +63,28 @@ public record JackstreamAnnotation(
 {
     public MapAnnotationType Type => MapAnnotationType.Jackstream;
 }
+
+public record FieldjackAnnotation(
+    int FirstOffset,
+    int SecondOffset,
+    int FirstNoteCount,
+    int SecondNoteCount,
+    BitVector32 PressColumns)
+    : ITwoNotePattern
+{
+    public MapAnnotationType Type => MapAnnotationType.Fieldjack;
+
+    public int OffsetStart => FirstOffset;
+    public int OffsetEnd => SecondOffset;
+
+    public int JackLength => Math.Min(FirstNoteCount, SecondNoteCount);
+    public int FieldLength => Math.Max(FirstNoteCount, SecondNoteCount);
+
+    public bool IsFieldBased => FirstNoteCount > SecondNoteCount;
+    public bool AreBothFieldPresses => FirstNoteCount == SecondNoteCount;
+
+    public int TimeDistance => OffsetEnd - OffsetStart;
+    public int ColumnCount => PressColumns.PopCount();
+    public int JackedNoteCount => ColumnCount * 2;
+    public int TotalNoteCount => FirstNoteCount + SecondNoteCount;
+}

@@ -450,6 +450,7 @@ partial class MainForm
         // settingsButton
         // 
         settingsButton.BackColor = Color.FromArgb(40, 40, 40);
+        settingsButton.Enabled = false;
         settingsButton.FlatAppearance.BorderColor = Color.Silver;
         settingsButton.FlatAppearance.MouseDownBackColor = Color.Gray;
         settingsButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(72, 72, 72);

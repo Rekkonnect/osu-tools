@@ -36,6 +36,9 @@ public class CustomDifficultyCalculationProfile(
         AddWeightedLongNotes(difficulty.LongNotes, weights.LongNotes);
         AddWeightedScrolling(difficulty.Scrolling, weights.Scrolling);
 
+        // TEMPORARY -- REMOVE THIS ONCE ALL ANALYZERS ARE IMPLEMENTED
+        overall.Overall *= 2;
+
         NormalizeValue(ref overall.Overall);
         return overall;
 

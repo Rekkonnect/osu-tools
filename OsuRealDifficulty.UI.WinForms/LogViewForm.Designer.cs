@@ -29,9 +29,9 @@ partial class LogViewForm
     private void InitializeComponent()
     {
         contentPanel = new Panel();
+        label1 = new Label();
         openLogFolderButton = new Button();
         contentTextBox = new TextBox();
-        label1 = new Label();
         contentPanel.SuspendLayout();
         SuspendLayout();
         // 
@@ -46,6 +46,17 @@ partial class LogViewForm
         contentPanel.Padding = new Padding(3);
         contentPanel.Size = new Size(800, 288);
         contentPanel.TabIndex = 0;
+        // 
+        // label1
+        // 
+        label1.AutoSize = true;
+        label1.ForeColor = Color.Silver;
+        label1.Location = new Point(188, 242);
+        label1.Name = "label1";
+        label1.Size = new Size(425, 36);
+        label1.TabIndex = 46;
+        label1.Text = "keeping the logs view open may cause frequent stutters,\r\nmake sure to close this view before performing database-wide calculations";
+        label1.TextAlign = ContentAlignment.MiddleCenter;
         // 
         // openLogFolderButton
         // 
@@ -79,17 +90,6 @@ partial class LogViewForm
         contentTextBox.ScrollBars = ScrollBars.Vertical;
         contentTextBox.Size = new Size(794, 233);
         contentTextBox.TabIndex = 1;
-        // 
-        // label1
-        // 
-        label1.AutoSize = true;
-        label1.ForeColor = Color.Silver;
-        label1.Location = new Point(188, 242);
-        label1.Name = "label1";
-        label1.Size = new Size(425, 36);
-        label1.TabIndex = 46;
-        label1.Text = "keeping the logs view open will cause frequent stutters,\r\nmake sure to close this view before performing database-wide calculations";
-        label1.TextAlign = ContentAlignment.MiddleCenter;
         // 
         // LogViewForm
         // 

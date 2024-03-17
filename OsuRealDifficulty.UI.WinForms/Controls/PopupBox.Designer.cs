@@ -41,9 +41,9 @@ partial class PopupBox
         messageLabel.ImageAlign = ContentAlignment.TopCenter;
         messageLabel.Location = new Point(0, 103);
         messageLabel.Name = "messageLabel";
-        messageLabel.Size = new Size(428, 72);
+        messageLabel.Size = new Size(428, 113);
         messageLabel.TabIndex = 52;
-        messageLabel.Text = "example message\r\nspanning over multiple lines";
+        messageLabel.Text = "example message\r\nspanning over multiple lines\r\nsupporting many lines\r\nup to 4 at least\r\nsometimes maybe 5";
         messageLabel.TextAlign = ContentAlignment.TopCenter;
         // 
         // titleLabel
@@ -63,7 +63,7 @@ partial class PopupBox
         // 
         buttonLayoutPanel.Anchor = AnchorStyles.None;
         buttonLayoutPanel.BackColor = Color.Transparent;
-        buttonLayoutPanel.Location = new Point(0, 178);
+        buttonLayoutPanel.Location = new Point(0, 219);
         buttonLayoutPanel.Name = "buttonLayoutPanel";
         buttonLayoutPanel.Padding = new Padding(0, 0, 0, 6);
         buttonLayoutPanel.Size = new Size(428, 44);
@@ -89,7 +89,7 @@ partial class PopupBox
         Controls.Add(messageLabel);
         Font = new Font("Aptos Display", 10F);
         Name = "PopupBox";
-        Size = new Size(428, 222);
+        Size = new Size(428, 266);
         ResumeLayout(false);
     }
 

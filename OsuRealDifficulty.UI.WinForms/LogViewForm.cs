@@ -1,5 +1,4 @@
-﻿using Garyon.Functions.Windows;
-using OsuRealDifficulty.UI.WinForms.Logging;
+﻿using OsuRealDifficulty.UI.WinForms.Logging;
 using OsuRealDifficulty.UI.WinForms.Utilities;
 
 namespace OsuRealDifficulty.UI.WinForms;

@@ -15,18 +15,13 @@ public abstract class BaseSingleAnnotationFullAnalyzer<TPattern>
     public virtual AnalysisDifficultyValue CalculateDifficultyResult(
         BeatmapAnnotationAnalysisContext context)
     {
-        var annotations = context.Annotations;
+        var annotations = context.Annotations
+            .OfType<TPattern>()
+            .ToList();
 
-        double absoluteValue = 0;
-        foreach (var annotation in annotations)
-        {
-            if (annotation is not TPattern pattern)
-                continue;
-
-            absoluteValue += CalculatePatternAbsoluteValue(pattern);
-        }
-
-        return new(absoluteValue);
+        return DifficultyCalculationAlgorithms.Aggregation.SmallDoubleMeans(
+            annotations,
+            CalculatePatternAbsoluteValue);
     }
 
     protected abstract double CalculatePatternAbsoluteValue(TPattern pattern);
