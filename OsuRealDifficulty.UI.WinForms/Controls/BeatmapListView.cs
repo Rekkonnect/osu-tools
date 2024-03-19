@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace OsuRealDifficulty.UI.WinForms.Controls;
 
-internal sealed class BeatmapListView : ListView
+internal sealed class BeatmapListView : SingleItemSelectionChangedListView
 {
     private ListViewItem[]? _originalItems;
 

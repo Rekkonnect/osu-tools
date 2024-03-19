@@ -40,7 +40,7 @@ internal static class JackAnalysisHelpers
         return PressColumnIndexFromOffset(offset, pressColumns);
     }
 
-    private static int PressColumnIndexFromOffset(
+    public static int PressColumnIndexFromOffset(
         int offset,
         ChordPressColumnsList pressColumns)
     {

@@ -28,5 +28,7 @@ public class DifficultyResultLabel : BaseDifficultyResultLabel
         }
 
         Text = UIFormattingHelpers.FormatDifficultyValue(_difficultyValue);
+
+        AdjustForeColor();
     }
 }

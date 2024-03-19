@@ -39,7 +39,6 @@ public class FadingControl : Control
 
     public void SetFading(bool enable)
     {
-        // Show or hide the overlay panel based on fading status
         _overlayPanel.Visible = enable;
         _overlayPanel.BackColor = Color.FromArgb(Alpha, FillColor);
     }

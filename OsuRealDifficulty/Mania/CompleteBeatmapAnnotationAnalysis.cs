@@ -44,6 +44,7 @@ public static class CompleteBeatmapAnnotationAnalysis
             MinijackPatternDifficultyAnalyzer.Instance,
             ChordjackPatternDifficultyAnalyzer.Instance,
             FieldjackPatternDifficultyAnalyzer.Instance,
+            JackstreamPatternDifficultyAnalyzer.Instance,
         ]);
 
         //driver.Add([

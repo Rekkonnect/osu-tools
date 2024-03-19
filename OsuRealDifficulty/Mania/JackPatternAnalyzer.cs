@@ -146,7 +146,11 @@ public sealed class JackPatternAnalyzer
 
             int start = pattern.OffsetStart;
             int end = pattern.OffsetEnd;
-            if (!currentJackstreamAnnotation.Range.Contains(start))
+
+            int startIndex = JackAnalysisHelpers.PressColumnIndexFromOffset(
+                start, chordPressColumns);
+
+            while (!currentJackstreamAnnotation.Range.Contains(startIndex))
             {
                 currentJackstreamAnnotationIndex++;
                 currentJackstreamAnnotation
@@ -156,13 +160,13 @@ public sealed class JackPatternAnalyzer
             switch (annotation)
             {
                 case MinijackAnnotation minijack:
+                    currentJackstreamAnnotation.NoteCount += minijack.NoteCount;
                     currentJackstreamAnnotation.ColumnBits |= minijack.Columns.Data;
-                    currentJackstreamAnnotation.NoteCount |= minijack.NoteCount;
                     break;
 
                 case AnchorPattern anchor:
+                    currentJackstreamAnnotation.NoteCount += anchor.NoteCount;
                     currentJackstreamAnnotation.ColumnBits |= anchor.Columns.Data;
-                    currentJackstreamAnnotation.NoteCount |= anchor.NoteCount;
                     break;
             }
         }
@@ -170,9 +174,12 @@ public sealed class JackPatternAnalyzer
         for (int i = 0; i < jackstreamAnnotationBuilders.Length; i++)
         {
             var builder = jackstreamAnnotationBuilders[i];
+            int offsetStart = chordPressColumns[builder.OffsetStart].Offset;
+            int offsetEnd = chordPressColumns[builder.OffsetEnd].Offset;
             var finalizedAnnotation = new JackstreamAnnotation(
-                builder.OffsetStart,
-                builder.OffsetEnd,
+                offsetStart,
+                offsetEnd,
+                builder.Range.Length,
                 builder.NoteCount,
                 builder.ColumnVector);
             context.AddAnnotation(finalizedAnnotation);
@@ -213,10 +220,12 @@ public sealed class JackPatternAnalyzer
                 return;
             }
 
-            int startOffset = start - _firstIndex;
+            int startOffset = start - _lastIndex;
             if (startOffset > 1)
             {
                 CommitCurrent();
+                _firstIndex = start;
+                _lastIndex = end;
             }
             else
             {
@@ -230,6 +239,8 @@ public sealed class JackPatternAnalyzer
             {
                 var range = new SimpleRange(_firstIndex, _lastIndex);
                 _committed.Add(range);
+                _firstIndex = -1;
+                _lastIndex = -1;
             }
         }
 

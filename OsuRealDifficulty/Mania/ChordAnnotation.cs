@@ -1,9 +1,14 @@
 ﻿namespace OsuRealDifficulty.Mania;
 
-public record ChordAnnotation(int Offset, int NoteCount)
+public record ChordAnnotation(
+    int Offset,
+    BitVector32 Columns)
     : ISinglePointAnnotation
 {
     public MapAnnotationType Type => MapAnnotationType.Chord;
+
+    public int NoteCount => Columns.Data.PopCount();
+    public int ColumnGaps => Columns.Data.GapBits();
 }
 
 public record ChordjackAnnotation(
@@ -57,11 +62,16 @@ public record AnchorPattern(
 public record JackstreamAnnotation(
     int OffsetStart,
     int OffsetEnd,
+    int HitCount,
     int NoteCount,
     BitVector32 Columns)
     : IPattern
 {
     public MapAnnotationType Type => MapAnnotationType.Jackstream;
+
+    public int TotalTimeDistance => OffsetEnd - OffsetStart;
+    public double AverageTimeDistance => (double)TotalTimeDistance / HitCount;
+    public int ColumnCount => Columns.PopCount();
 }
 
 public record FieldjackAnnotation(

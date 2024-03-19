@@ -58,10 +58,12 @@ public static class OsuConvenienceExtensions
     {
         return new(beatmap.FullPath(baseOsuDirectoryInfo));
     }
-    public static Beatmap Read(this DbBeatmap beatmap, DirectoryInfo baseOsuDirectoryInfo)
+    public static Beatmap? Read(this DbBeatmap beatmap, DirectoryInfo baseOsuDirectoryInfo)
     {
         var file = beatmap.FileInfo(baseOsuDirectoryInfo);
-        return BeatmapDecoder.Decode(file.FullName);
+        if (!file.Exists)
+            return null;
+        return BeatmapDecoder.Decode(file);
     }
 
     public static string RomanizedOrUnicodeTitle(this DbBeatmap beatmap)

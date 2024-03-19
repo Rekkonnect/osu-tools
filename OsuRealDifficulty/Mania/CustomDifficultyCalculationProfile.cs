@@ -20,7 +20,7 @@ public class CustomDifficultyCalculationProfile(
     }
     private double CalculateInstabilityRating(AnalyzedDifficulty difficulty)
     {
-        return CalculateWeights(difficulty, InstabilityWeights).Overall * 10;
+        return CalculateWeights(difficulty, InstabilityWeights).Overall;
     }
 
     private static SegmentedOverallDifficulty CalculateWeights(
@@ -37,7 +37,7 @@ public class CustomDifficultyCalculationProfile(
         AddWeightedScrolling(difficulty.Scrolling, weights.Scrolling);
 
         // TEMPORARY -- REMOVE THIS ONCE ALL ANALYZERS ARE IMPLEMENTED
-        overall.Overall *= 0.87;
+        overall.Overall *= 0.75;
 
         NormalizeValue(ref overall.Overall);
         return overall;

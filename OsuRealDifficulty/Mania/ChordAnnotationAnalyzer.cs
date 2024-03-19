@@ -3,7 +3,7 @@
 public sealed class ChordAnnotationAnalyzer
     : BaseSingleAnnotationFullAnalyzer<ChordAnnotation>
 {
-    public static SinglestreamPatternAnalyzer Instance { get; } = new();
+    public static ChordAnnotationAnalyzer Instance { get; } = new();
 
     protected override double SourceChordListWeight => 1;
 
@@ -19,11 +19,15 @@ public sealed class ChordAnnotationAnalyzer
 
             void AnalyzeCurrentPosition()
             {
-                int pressCount = pressColumns[i].PopCount();
+                var column = pressColumns[i];
+                int pressCount = column.PopCount();
                 if (pressCount <= 1)
                     return;
 
-                var annotation = new ChordAnnotation(chords[i].Offset, pressCount);
+                var columns = column.Data.GapBits();
+                var annotation = new ChordAnnotation(
+                    chords[i].Offset,
+                    column);
                 context.AddAnnotation(annotation);
             }
         }
@@ -38,6 +42,10 @@ public sealed class ChordAnnotationAnalyzer
         // Adjust for density of chords
         double densityBonus = 0;
         var chordAnnotations = context.Annotations;
+        if (chordAnnotations.Count is 0)
+            return AnalysisDifficultyValue.NormalizedZero;
+
+        var timeDifferences = new double[chordAnnotations.Count - 1];
         for (int i = 1; i < chordAnnotations.Count; i++)
         {
             const int baseMinDensityDistance = 350;
@@ -64,8 +72,9 @@ public sealed class ChordAnnotationAnalyzer
 
     protected override double CalculatePatternAbsoluteValue(ChordAnnotation annotation)
     {
-        double noteCount = annotation.NoteCount;
-        return noteCount.Pow(0.82);
+        double noteCount = annotation.NoteCount * 0.3;
+        double gap = annotation.ColumnGaps * 0.4 + 0.25;
+        return (noteCount.Pow(0.63) + gap.Pow(0.42)) / 8;
     }
 
     public override ref CalculationResult CalculationResultRef(

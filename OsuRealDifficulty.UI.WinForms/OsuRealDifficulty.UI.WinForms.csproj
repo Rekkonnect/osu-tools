@@ -8,7 +8,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
-    <Version>0.2.0</Version>
+    <DisplayName>osu!mania difficulty calculator</DisplayName>
+    <Title>$(DisplayName)</Title>
+    <Product>$(DisplayName)</Product>
+    <ProductName>$(DisplayName)</ProductName>
+    <Version>0.3.2</Version>
     <ProductVersion>$(Version)</ProductVersion>
   </PropertyGroup>
 

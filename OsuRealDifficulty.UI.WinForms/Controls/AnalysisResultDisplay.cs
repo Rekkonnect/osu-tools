@@ -1,4 +1,5 @@
 ﻿using OsuParsers.Database.Objects;
+using OsuParsers.Enums;
 using OsuRealDifficulty.Mania;
 using OsuRealDifficulty.UI.WinForms.Utilities;
 using Serilog;
@@ -112,6 +113,9 @@ public partial class AnalysisResultDisplay : UserControl
         // do not refresh the display if there is no beatmap
         if (!hasBeatmap)
             return;
+
+        originalCalculatedDifficultyLabel.DifficultyValue
+            = SelectedBeatmap!.ManiaStarRating[Mods.None];
 
         var difficulty = AnalyzedDifficulty;
 

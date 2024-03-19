@@ -4,6 +4,8 @@ namespace OsuRealDifficulty.UI.WinForms.Controls;
 
 public abstract class BaseDifficultyResultLabel : Label
 {
+    private Color? _initialForeColor;
+
     protected CalculationResult _difficultyValue = CalculationResult.Pending;
 
     public double DifficultyValue
@@ -31,5 +33,20 @@ public abstract class BaseDifficultyResultLabel : Label
         }
     }
 
+    public Func<CalculationResult, Color>? ForeColorCalculator;
+
     protected abstract void EvaluateDifficultyValue();
+
+    protected void AdjustForeColor()
+    {
+        if (ForeColorCalculator is null)
+            return;
+
+        _initialForeColor ??= ForeColor;
+
+        var newFore = ForeColorCalculator?.Invoke(_difficultyValue)
+            ?? _initialForeColor.Value;
+
+        ForeColor = newFore;
+    }
 }

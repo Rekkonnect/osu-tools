@@ -1,4 +1,5 @@
 ﻿using Garyon.Extensions;
+using Garyon.Functions;
 using OsuParsers.Database.Objects;
 using OsuParsers.Enums;
 
@@ -38,8 +39,9 @@ internal sealed class DbBeatmapSet(int id)
     public BeatmapSet DecodeSet(DirectoryInfo baseOsuDirectoryInfo)
     {
         var list = _beatmaps.Select(b => b.Read(baseOsuDirectoryInfo))
+            .Where(Predicates.NotNull)
             .ToList();
-        return new(list);
+        return new(list!);
     }
 
     public bool ContainsWithRuleset(Ruleset ruleset)

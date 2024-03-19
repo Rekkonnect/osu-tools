@@ -52,7 +52,7 @@ internal sealed class DbBeatmapSetDatabase
     {
         if (beatmap.HasNoBeatmapSetValue())
         {
-            return _beatmapSetIdDictionary.IdFor($"{beatmap.Title} - {beatmap.Artist}");
+            return _beatmapSetIdDictionary.IdFor($"{beatmap.Title} - {beatmap.Artist} - {beatmap.FolderName}");
         }
 
         return beatmap.BeatmapSetId;

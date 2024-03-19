@@ -1,3 +1,4 @@
+using Accessibility;
 using OsuParsers.Database.Objects;
 using OsuRealDifficulty.Mania;
 using OsuRealDifficulty.UI.WinForms.Controls;
@@ -6,7 +7,7 @@ using OsuRealDifficulty.UI.WinForms.Utilities;
 using Serilog;
 using Serilog.Events;
 using System.Diagnostics.CodeAnalysis;
-using System.DirectoryServices.ActiveDirectory;
+using static OsuRealDifficulty.UI.WinForms.Controls.SingleItemSelectionChangedListView;
 
 namespace OsuRealDifficulty.UI.WinForms;
 
@@ -104,7 +105,7 @@ public partial class MainForm : Form
                 };
                 popup.AddButton(DialogResult.Yes, "yes");
                 popup.AddButton(DialogResult.No, "no");
-                popup.YesSelected += ReloadMaps;
+                popup.YesSelected += ReloadMapsWithPotentialFilter;
                 _popupBoxManager.Show(popup);
 
                 return true;
@@ -124,7 +125,19 @@ public partial class MainForm : Form
                 return true;
             }
 
-            // TODO more shortcuts
+            // focus on beatmap set selection
+            case Keys.Control | Keys.B:
+            {
+                FocusBeatmapSetListViewSelectFirstIfNone();
+                return true;
+            }
+
+            // focus on beatmap difficulty selection
+            case Keys.Control | Keys.D:
+            {
+                FocusDifficultyListViewSelectFirstIfNone();
+                return true;
+            }
         }
 
         return false;
@@ -154,6 +167,7 @@ public partial class MainForm : Form
     {
         Log.Information("Requested loading the entire database");
 
+        _beatmapSelection.Clear(false);
         beatmapSetListView.Items.Clear();
         difficultyListView.Items.Clear();
 
@@ -175,6 +189,7 @@ public partial class MainForm : Form
                 "Loaded the entire database with {ManiaBeatmapSets} mania beatmap sets over {Time}ms",
                 database.BeatmapSetCount,
                 duration.TotalMilliseconds);
+            RefreshViewForCurrentSelectedBeatmap();
         }
         catch (Exception ex)
         {
@@ -250,13 +265,34 @@ public partial class MainForm : Form
         }
     }
 
+    private void beatmapSetListView_KeyDown(object sender, KeyEventArgs e)
+    {
+        // convenience shortcuts
+        switch (e.KeyCode)
+        {
+            case Keys.Enter:
+                FocusDifficultyListViewSelectFirstIfNone();
+                break;
+        }
+    }
+
     private void FocusBeatmapSetListViewSelectFirstIfNone()
     {
-        beatmapSetListView.Focus();
-        int selectedCount = beatmapSetListView.SelectedItems.Count;
-        if (selectedCount is 0 && beatmapSetListView.Items.Count > 0)
+        FocusListViewSelectFirstIfNone(beatmapSetListView);
+    }
+
+    private void FocusDifficultyListViewSelectFirstIfNone()
+    {
+        FocusListViewSelectFirstIfNone(difficultyListView);
+    }
+
+    private void FocusListViewSelectFirstIfNone(ListView listView)
+    {
+        listView.Focus();
+        int selectedCount = listView.SelectedItems.Count;
+        if (selectedCount is 0 && listView.Items.Count > 0)
         {
-            beatmapSetListView.SelectedIndices.Add(0);
+            listView.SelectedIndices.Add(0);
         }
     }
 
@@ -342,8 +378,8 @@ public partial class MainForm : Form
         RunSelectedBeatmapSetFilter();
     }
 
-    private void beatmapSetListView_ItemSelectionChanged(
-        object sender, ListViewItemSelectionChangedEventArgs e)
+    private void beatmapSetListView_CombinedItemSelectionChanged(
+        object sender, IReadOnlyList<MergedEventArgs> e)
     {
         var set = GetSelectedBeatmapSet();
         _beatmapSelection.BeatmapSet = set;
@@ -430,7 +466,21 @@ public partial class MainForm : Form
                 initiationTemplate);
 
             var songs = AppSettings.Instance.EffectiveBaseSongsDirectory;
-            var beatmap = dbBeatmap.Read(songs);
+            var beatmap = AppState.Instance.LoadProvider.Read(dbBeatmap, songs);
+
+            if (beatmap is null)
+            {
+                const string beatmapNotFoundTemplate = $$"""
+                    Beatmap file was not found for {{_beatmapLogInformationTemplate}}
+                    Expected file path: {FilePath}
+                    """;
+                LogBeatmap(
+                    LogEventLevel.Warning,
+                    dbBeatmap,
+                    beatmapNotFoundTemplate,
+                    dbBeatmap.FileInfo(songs).FullName);
+                return;
+            }
 
             const string readTemplate
                 = $"Read the file of the beatmap {_beatmapLogInformationTemplate}";
@@ -549,6 +599,11 @@ public partial class MainForm : Form
         // this is not a massive concern for now, as long as the
         // application doesn't completely freeze and doesn't hog
         // tons of resources
+        // NOTE: currently we employ a beatmap load cache where all
+        // the beatmaps are loaded in the memory and thus the
+        // millions of objects live in the memory without being
+        // collected, and therefore the GC collections don't occur as
+        // often, avoiding those stutters
 
         var songs = AppSettings.Instance.EffectiveBaseSongsDirectory;
         var allBeatmaps = AppState.Instance
@@ -577,7 +632,11 @@ public partial class MainForm : Form
         _backgroundCalculationInformation.FinishCalculation();
         _backgroundBeatmapCalculationTask = null;
         _hasRunAllBeatmaps = true;
-        Invoke(() => beginCalculateAllBeatmapsButton.Enabled = true);
+        Invoke(() =>
+        {
+            RefreshViewForCurrentSelectedBeatmap();
+            beginCalculateAllBeatmapsButton.Enabled = true;
+        });
     }
 
     private const string _beatmapLogInformationTemplate
@@ -586,15 +645,19 @@ public partial class MainForm : Form
     private static void LogBeatmap(
         LogEventLevel level,
         DbBeatmap beatmap,
-        string template)
+        string template,
+        params object?[] extraParameters)
     {
         Log.Logger.Write(
             level,
             template,
-            beatmap.RomanizedOrUnicodeArtist(),
-            beatmap.RomanizedOrUnicodeTitle(),
-            beatmap.Creator,
-            beatmap.Difficulty);
+            [
+                beatmap.RomanizedOrUnicodeArtist(),
+                beatmap.RomanizedOrUnicodeTitle(),
+                beatmap.Creator,
+                beatmap.Difficulty,
+                ..extraParameters
+            ]);
     }
 
     private static void LogEsotericDiagnostic(EsotericDiagnostic diagnostic)
@@ -647,6 +710,11 @@ public partial class MainForm : Form
 
     private void reloadBeatmapDatabaseButton_Click(object sender, EventArgs e)
     {
+        ReloadMapsWithPotentialFilter();
+    }
+
+    private void ReloadMapsWithPotentialFilter()
+    {
         ReloadMaps();
 
         // Do not unnecessarily run filters right after a reload
@@ -666,26 +734,19 @@ public partial class MainForm : Form
         LogViewForm.Open();
     }
 
-    private void difficultyListView_ItemSelectionChanged(
-        object sender, ListViewItemSelectionChangedEventArgs e)
+    private void difficultyListView_CombinedItemSelectionChanged(
+        object sender, IReadOnlyList<MergedEventArgs> e)
     {
-        // ISSUE: this triggers twice per selection,
-        // once for the deselection of the previous item
-        // and another one time for the selection of the current item
-        // this does not matter much since we don't perform any intensive
-        // operations other than retrieving the cache for a null beatmap
-
         var beatmap = GetSelectedBeatmap();
         _beatmapSelection.Beatmap = beatmap;
     }
 
     private void SelectedBeatmapSetChanged(DbBeatmapSet? set)
     {
-        RefreshViewForCurrentSelectedBeatmap();
-
         if (set is null)
         {
             difficultyListView.ClearBeatmaps();
+            RefreshViewForCurrentSelectedBeatmap();
             return;
         }
 
@@ -756,6 +817,20 @@ public partial class MainForm : Form
 
         public event Action<DbBeatmapSet?>? BeatmapSetChanged;
         public event Action<DbBeatmap?>? BeatmapChanged;
+
+        public void Clear(bool raiseEvents)
+        {
+            if (raiseEvents)
+            {
+                BeatmapSet = null;
+                Beatmap = null;
+            }
+            else
+            {
+                _beatmapSet = null;
+                _beatmap = null;
+            }
+        }
 
         private static bool AreBeatmapSetsEqual(DbBeatmapSet? x, DbBeatmapSet? y)
         {

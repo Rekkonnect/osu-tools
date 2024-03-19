@@ -30,6 +30,7 @@ partial class AnalysisResultDisplay
     {
         outerGroupBox = new GroupBox();
         overallGroupBox = new GroupBox();
+        originalCalculatedDifficultyLabel = new DifficultyResultLabel();
         label30 = new Label();
         instabilityLabel = new DifficultyResultLabel();
         label29 = new Label();
@@ -137,6 +138,7 @@ partial class AnalysisResultDisplay
         // overallGroupBox
         // 
         overallGroupBox.BackColor = Color.FromArgb(30, 30, 30);
+        overallGroupBox.Controls.Add(originalCalculatedDifficultyLabel);
         overallGroupBox.Controls.Add(label30);
         overallGroupBox.Controls.Add(instabilityLabel);
         overallGroupBox.Controls.Add(label29);
@@ -151,6 +153,19 @@ partial class AnalysisResultDisplay
         overallGroupBox.TabIndex = 20;
         overallGroupBox.TabStop = false;
         overallGroupBox.Text = "overall";
+        // 
+        // originalCalculatedDifficultyLabel
+        // 
+        originalCalculatedDifficultyLabel.AutoSize = true;
+        originalCalculatedDifficultyLabel.DifficultyValue = 12D;
+        originalCalculatedDifficultyLabel.Font = new Font("Aptos Display", 10F);
+        originalCalculatedDifficultyLabel.ForeColor = Color.Silver;
+        originalCalculatedDifficultyLabel.Location = new Point(12, 46);
+        originalCalculatedDifficultyLabel.Margin = new Padding(4, 0, 4, 0);
+        originalCalculatedDifficultyLabel.Name = "originalCalculatedDifficultyLabel";
+        originalCalculatedDifficultyLabel.Size = new Size(39, 18);
+        originalCalculatedDifficultyLabel.TabIndex = 22;
+        originalCalculatedDifficultyLabel.Text = "12.00";
         // 
         // label30
         // 
@@ -1222,4 +1237,5 @@ partial class AnalysisResultDisplay
     private Label label30;
     private DifficultyResultLabel instabilityLabel;
     private Label warningLabel;
+    private DifficultyResultLabel originalCalculatedDifficultyLabel;
 }

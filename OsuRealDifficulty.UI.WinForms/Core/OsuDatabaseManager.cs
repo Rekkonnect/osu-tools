@@ -5,7 +5,7 @@ namespace OsuRealDifficulty.UI.WinForms.Core;
 
 internal sealed class OsuDatabaseManager(AppSettings appSettings)
 {
-    public static OsuDatabaseManager Instance { get; } = new(AppSettings.Instance);
+    public static OsuDatabaseManager Instance => new(AppSettings.Instance);
 
     public AppSettings AppSettings { get; } = appSettings;
 

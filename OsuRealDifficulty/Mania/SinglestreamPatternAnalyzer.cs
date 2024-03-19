@@ -104,10 +104,10 @@ public sealed class SinglestreamPatternAnalyzer
         var averageColumnDistance = pattern.AverageColumnDistance;
 
         var nps = pattern.NotesPerSecond;
-        var npsMultiplier = nps / 15;
-        var averageColumnDistanceValue = Math.Pow(averageColumnDistance, 1.2);
-        var columnDistanceValue = Math.Log(columnDistance, 1.2) * npsMultiplier * averageColumnDistanceValue;
-        return columnDistanceValue / 12;
+        var npsMultiplier = Math.Pow(nps / 12, 2);
+        var averageColumnDistanceValue = Math.Pow(averageColumnDistance, 1.5);
+        var columnDistanceValue = Math.Log(columnDistance, 3) * npsMultiplier * averageColumnDistanceValue;
+        return columnDistanceValue / 8;
     }
 
     public override ref CalculationResult CalculationResultRef(

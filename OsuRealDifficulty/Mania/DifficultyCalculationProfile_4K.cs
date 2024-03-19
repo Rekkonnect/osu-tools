@@ -10,7 +10,7 @@ public class DifficultyCalculationProfile_4K()
         Dexterity = new()
         {
             Speed = 0.48,
-            Chord = 0.5,
+            Chord = 0.35,
             Dump = 0.3,
             Trill = 0.46,
             ChordGap = 0.43,

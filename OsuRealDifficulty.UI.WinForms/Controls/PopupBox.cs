@@ -1,4 +1,5 @@
 ﻿using OsuRealDifficulty.UI.WinForms.Utilities;
+using Serilog;
 
 namespace OsuRealDifficulty.UI.WinForms.Controls;
 
@@ -69,6 +70,44 @@ public partial class PopupBox : UserControl
     public PopupBox()
     {
         InitializeComponent();
+    }
+
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+    {
+        bool handled = HandleTabKeyDown(keyData);
+        if (handled)
+        {
+            Log.Verbose("Handled tab on popup box");
+            return true;
+        }
+
+        return base.ProcessCmdKey(ref msg, keyData);
+    }
+
+    private bool HandleTabKeyDown(Keys key)
+    {
+        if (key is Keys.Tab)
+        {
+            int currentIndex = GetCurrentSelectedButtonIndex();
+            var newIndex = currentIndex + 1;
+            newIndex %= buttonLayoutPanel.Controls.Count;
+            buttonLayoutPanel.Controls[newIndex].Focus();
+            return true;
+        }
+
+        return false;
+    }
+
+    private int GetCurrentSelectedButtonIndex()
+    {
+        var controls = buttonLayoutPanel.Controls;
+        for (int i = 0; i < controls.Count; i++)
+        {
+            if (controls[i].Focused)
+                return i;
+        }
+
+        return -1;
     }
 
     public void AddButton(PopupBoxButton button)
