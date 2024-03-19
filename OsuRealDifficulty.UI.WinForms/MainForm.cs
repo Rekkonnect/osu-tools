@@ -353,6 +353,10 @@ public partial class MainForm : Form
                     previouslySelectedSet.Title,
                     filterTime.TotalMilliseconds);
             }
+            else
+            {
+                _beatmapSelection.Clear(true);
+            }
         }
 
         switch (beatmapSetListView.Items.Count)
