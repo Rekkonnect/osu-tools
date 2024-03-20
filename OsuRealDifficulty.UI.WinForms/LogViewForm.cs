@@ -4,7 +4,7 @@ using OsuRealDifficulty.UI.WinForms.Utilities;
 
 namespace OsuRealDifficulty.UI.WinForms;
 
-public partial class LogViewForm : Form
+public partial class LogViewForm : ThemeFontForm
 {
     // retrieving the log string from the control's Text property
     // allocates a brand new string, which we don't want

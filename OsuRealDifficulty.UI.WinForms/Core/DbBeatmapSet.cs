@@ -5,7 +5,7 @@ using OsuParsers.Enums;
 
 namespace OsuRealDifficulty.UI.WinForms.Core;
 
-internal sealed class DbBeatmapSet(int id)
+public sealed class DbBeatmapSet(int id)
 {
     private readonly List<DbBeatmap> _beatmaps = new();
 

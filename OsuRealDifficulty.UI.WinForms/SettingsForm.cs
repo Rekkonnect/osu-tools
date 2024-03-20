@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace OsuRealDifficulty.UI.WinForms;
 
-public partial class SettingsForm : Form
+public partial class SettingsForm : ThemeFontForm
 {
     // disabled because the BindTo extensions are not properly implemented
     private static readonly bool _enableBindings = false;

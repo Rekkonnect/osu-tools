@@ -112,8 +112,7 @@ partial class LogViewForm
         // 
         // LogViewForm
         // 
-        AutoScaleDimensions = new SizeF(7F, 17F);
-        AutoScaleMode = AutoScaleMode.Font;
+        AutoScaleMode = AutoScaleMode.None;
         BackColor = Color.FromArgb(30, 30, 30);
         ClientSize = new Size(800, 288);
         Controls.Add(contentPanel);

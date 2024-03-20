@@ -59,5 +59,16 @@ public class BackgroundCalculationInformation
         InitiationChanged?.Invoke(this);
     }
 
+    public void Reset()
+    {
+        IsRunning = false;
+        TotalBeatmaps = 0;
+        ProcessedBeatmaps = 0;
+        StartTime = DateTime.Now;
+        EndTime = DateTime.MaxValue;
+
+        InitiationChanged?.Invoke(this);
+    }
+
     public delegate void CalculationEventHandler(BackgroundCalculationInformation information);
 }

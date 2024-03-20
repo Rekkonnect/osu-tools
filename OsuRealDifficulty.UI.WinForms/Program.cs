@@ -12,7 +12,10 @@ internal static class Program
     [STAThread]
     internal static void Main()
     {
-        ApplicationConfiguration.Initialize();
+        //ApplicationConfiguration.Initialize();
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        Application.SetHighDpiMode(HighDpiMode.DpiUnaware);
         SetDefaultFont();
 
         SetupSerilog();

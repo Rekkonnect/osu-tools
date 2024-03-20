@@ -1133,8 +1133,7 @@ partial class AnalysisResultDisplay
         // 
         // AnalysisResultDisplay
         // 
-        AutoScaleDimensions = new SizeF(7F, 17F);
-        AutoScaleMode = AutoScaleMode.Font;
+        AutoScaleMode = AutoScaleMode.Inherit;
         BackColor = Color.FromArgb(30, 30, 30);
         Controls.Add(outerGroupBox);
         DoubleBuffered = true;

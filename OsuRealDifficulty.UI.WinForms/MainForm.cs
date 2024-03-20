@@ -1,4 +1,3 @@
-using Accessibility;
 using OsuParsers.Database.Objects;
 using OsuRealDifficulty.Mania;
 using OsuRealDifficulty.UI.WinForms.Controls;
@@ -11,7 +10,7 @@ using static OsuRealDifficulty.UI.WinForms.Controls.SingleItemSelectionChangedLi
 
 namespace OsuRealDifficulty.UI.WinForms;
 
-public partial class MainForm : Form
+public partial class MainForm : ThemeFontForm
 {
     private readonly CancellationTokenFactory _difficultyCalculationCancellationTokenFactory
         = new();
@@ -147,9 +146,6 @@ public partial class MainForm : Form
     {
         Text = ApplicationMetadata.FullTitle;
 
-        var fontFamily = ThemeFonts.Instance.MainFontFamily;
-        this.RecursivelyReplaceFontFamilyWithMain(fontFamily);
-
         ReloadMaps();
 
         if (AppSettings.Instance.AnalyzeAllOnStartup)
@@ -180,6 +176,7 @@ public partial class MainForm : Form
         {
             var start = DateTime.Now;
             AppStateManager.Instance.LoadDbBeatmapSetDatabase();
+            _backgroundCalculationInformation.Reset();
             GC.Collect();
             var database = AppState.Instance.ManiaBeatmapSetDatabase!;
             beatmapSetListView.SetBeatmapSets(database.BeatmapSets);
@@ -529,6 +526,13 @@ public partial class MainForm : Form
             AppState.Instance.CalculationCache.SetForBeatmap(
                 dbBeatmap, finalResult);
 
+            bool matchingDisplayedBeatmap =
+                CurrentBeatmapSelection.AreBeatmapsEqual(difficultyResultDisplay.SelectedBeatmap, dbBeatmap);
+            if (matchingDisplayedBeatmap)
+            {
+                Invoke(RefreshViewForCurrentSelectedBeatmap);
+            }
+
             const string analysisCompleteTemplate
                 = $"Successfully completed beatmap analysis for {_beatmapLogInformationTemplate}";
             LogBeatmap(
@@ -780,92 +784,5 @@ public partial class MainForm : Form
     private void beginCalculateAllBeatmapsButton_Click(object sender, EventArgs e)
     {
         TryExecuteCalculationForAllBeatmaps();
-    }
-
-    private class CurrentBeatmapSelection
-    {
-        private DbBeatmapSet? _beatmapSet;
-        private DbBeatmap? _beatmap;
-
-        public DbBeatmapSet? BeatmapSet
-        {
-            get
-            {
-                return _beatmapSet;
-            }
-            set
-            {
-                if (AreBeatmapSetsEqual(_beatmapSet, value))
-                    return;
-
-                _beatmapSet = value;
-                BeatmapSetChanged?.Invoke(value);
-            }
-        }
-
-        public DbBeatmap? Beatmap
-        {
-            get
-            {
-                return _beatmap;
-            }
-            set
-            {
-                if (AreBeatmapsEqual(_beatmap, value))
-                    return;
-
-                _beatmap = value;
-                BeatmapChanged?.Invoke(value);
-            }
-        }
-
-        public event Action<DbBeatmapSet?>? BeatmapSetChanged;
-        public event Action<DbBeatmap?>? BeatmapChanged;
-
-        public void Clear(bool raiseEvents)
-        {
-            if (raiseEvents)
-            {
-                BeatmapSet = null;
-                Beatmap = null;
-            }
-            else
-            {
-                _beatmapSet = null;
-                _beatmap = null;
-            }
-        }
-
-        private static bool AreBeatmapSetsEqual(DbBeatmapSet? x, DbBeatmapSet? y)
-        {
-            return x?.SetId == y?.SetId;
-        }
-        private static bool AreBeatmapsEqual(DbBeatmap? x, DbBeatmap? y)
-        {
-            var definitelyEqual = AreDefinitelyEqual(x, y);
-            if (definitelyEqual is not null)
-            {
-                return definitelyEqual.Value;
-            }
-
-            // enough checks -- we don't have to overdo it
-            return x!.BeatmapId == y!.BeatmapId
-                && x.Difficulty == y.Difficulty
-                && x.BeatmapSetId == y.BeatmapSetId;
-        }
-
-        private static bool? AreDefinitelyEqual(object? x, object? y)
-        {
-            bool xn = x is null;
-            bool yn = y is null;
-
-            if (xn && yn)
-                return true;
-
-            if (xn ^ yn)
-                return false;
-
-            return null;
-        }
     }
 }

@@ -85,7 +85,6 @@ partial class MainForm
         // 
         // difficultyResultDisplay
         // 
-        difficultyResultDisplay.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         difficultyResultDisplay.BackColor = Color.FromArgb(30, 30, 30);
         difficultyResultDisplay.Caption = "difficulty";
         difficultyResultDisplay.Font = new Font("Aptos Display", 10F);

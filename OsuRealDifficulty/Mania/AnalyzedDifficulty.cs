@@ -273,13 +273,6 @@ public class AnalyzedDifficulty
 
     public struct JackRate : IDifficultyRate
     {
-        /*
-         * |   -|
-         * |  - |
-         * | -  |
-         * |--  |
-         *   ^ minijack
-         */
         /// <summary>
         /// Minijacks are two-chord jacks of the same fingers.
         /// </summary>
@@ -289,13 +282,6 @@ public class AnalyzedDifficulty
         /// </remarks>
         public required CalculationResult Minijack;
 
-        /*
-         * |--- |
-         * |  --|
-         * |-- -|
-         * |--- |
-         *  ^^ chordjack
-         */
         /// <summary>
         /// Chordjacks are jacks involving multiple fingers per jack instance
         /// that are possibly alternating.
@@ -305,13 +291,6 @@ public class AnalyzedDifficulty
         /// </remarks>
         public required CalculationResult Chordjack;
 
-        /*
-         * | - -|
-         * | -- |
-         * | -  |
-         * |--  |
-         *   ^ anchor
-         */
         /// <summary>
         /// Anchors are 3+-chord jacks of the same fingers.
         /// </summary>
@@ -321,51 +300,12 @@ public class AnalyzedDifficulty
         /// </remarks>
         public required CalculationResult Anchor;
 
-        /*
-         * |  --|
-         * |  - |
-         * | -  |
-         * |--  |
-         *   ^ jackstream
-         */
         /// <summary>
         /// Jackstreams involve jacks of multiple fingers that are possibly
         /// alternating.
         /// </summary>
         public required CalculationResult Jackstream;
 
-        /*
-         * |  - |
-         * |----| < fieldjack
-         * |- --|
-         * |----| < fieldjack
-         * 
-         * |     - |
-         * |-------| < fieldjack
-         * |   -   |
-         * |-------| < fieldjack-ish
-         * |    -  |
-         * NOTE: 7K is rewritten into 8K with alternating hand presses
-         * Occupying all columns in the same chord is a field press, regardless
-         * of the rewriting. If the preceding or the succeeding notes occupy the same
-         * finger, it is a fieldjack.
-         * In the above example, both are fieldjacks due to the next notes being
-         * in non-special columns. In the example below, these are not fieldjacks:
-         * 
-         * |   -   |
-         * |-------| < NOT fieldjack
-         * |   -   |
-         * |-------| < NOT fieldjack
-         * |   -   |
-         * 
-         * The rewrite interprets this section as:
-         * 
-         * |   -    |
-         * |--- ----|
-         * |   -    |
-         * |--- ----|
-         * |   -    |
-         */
         /// <summary>
         /// Fieldjacks involve pressing all the columns in any stream
         /// section, where any notes next to the fieldjack would be considered
@@ -377,13 +317,6 @@ public class AnalyzedDifficulty
         /// </remarks>
         public required CalculationResult Fieldjack;
 
-        /*
-         * |- - |
-         * | -  |
-         * |- --|
-         * |-- -|
-         *  ^  ^ double hand jack
-         */
         /// <summary>
         /// Double hand jack involves jacks that require jacking both hands.
         /// </summary>

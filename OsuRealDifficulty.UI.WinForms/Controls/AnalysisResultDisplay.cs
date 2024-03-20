@@ -115,7 +115,8 @@ public partial class AnalysisResultDisplay : UserControl
             return;
 
         originalCalculatedDifficultyLabel.DifficultyValue
-            = SelectedBeatmap!.ManiaStarRating[Mods.None];
+            = SelectedBeatmap!.ManiaStarRating
+                .GetValueOrDefault(Mods.None);
 
         var difficulty = AnalyzedDifficulty;
 

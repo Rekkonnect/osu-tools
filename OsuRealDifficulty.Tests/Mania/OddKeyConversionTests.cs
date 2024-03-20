@@ -19,12 +19,12 @@ public sealed class OddKeyConversionTests
             """;
 
         const string convertedChordString = """
-            |-   -   |
+            |-  -    |
             | - -    |
-            |  - -   |
-            |   - -  |
+            |  --    |
+            |    --  |
             |    - - |
-            |   -   -|
+            |    -  -|
             |    -   |
             """;
 
@@ -49,7 +49,7 @@ public sealed class OddKeyConversionTests
             | -      |
             |  -     |
             |    --  |
-            |   -  - |
+            |    - - |
             |       -|
             |    -   |
             """;
@@ -97,8 +97,8 @@ public sealed class OddKeyConversionTests
             """;
 
         const string convertedChordString = """
-            |-   ^   |
-            | -  -   |
+            |-  ^    |
+            | - -    |
             |  --    |
             |    ^-  |
             |    | - |

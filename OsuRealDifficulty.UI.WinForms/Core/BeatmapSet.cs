@@ -2,7 +2,7 @@
 
 namespace OsuRealDifficulty.UI.WinForms.Core;
 
-internal sealed class BeatmapSet
+public sealed class BeatmapSet
 {
     private readonly List<Beatmap> _beatmaps = new();
 

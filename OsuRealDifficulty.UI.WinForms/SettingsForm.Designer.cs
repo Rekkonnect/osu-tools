@@ -324,8 +324,7 @@ partial class SettingsForm
         // 
         // SettingsForm
         // 
-        AutoScaleDimensions = new SizeF(7F, 17F);
-        AutoScaleMode = AutoScaleMode.Font;
+        AutoScaleMode = AutoScaleMode.None;
         BackColor = Color.FromArgb(30, 30, 30);
         ClientSize = new Size(433, 551);
         Controls.Add(contentPanel);
