@@ -57,8 +57,8 @@ partial class MainForm
         keyCountFilterCheckBox = new CheckBox();
         difficultyListView = new BeatmapListView();
         columnHeader1 = new ColumnHeader();
-        columnHeader8 = new ColumnHeader();
         columnHeader2 = new ColumnHeader();
+        columnHeader8 = new ColumnHeader();
         columnHeader3 = new ColumnHeader();
         columnHeader4 = new ColumnHeader();
         columnHeader5 = new ColumnHeader();
@@ -324,16 +324,16 @@ partial class MainForm
         columnHeader1.Text = "difficulty name";
         columnHeader1.Width = 205;
         // 
-        // columnHeader8
-        // 
-        columnHeader8.Text = "sr";
-        columnHeader8.TextAlign = HorizontalAlignment.Center;
-        // 
         // columnHeader2
         // 
         columnHeader2.Text = "keys";
         columnHeader2.TextAlign = HorizontalAlignment.Center;
         columnHeader2.Width = 40;
+        // 
+        // columnHeader8
+        // 
+        columnHeader8.Text = "sr";
+        columnHeader8.TextAlign = HorizontalAlignment.Center;
         // 
         // columnHeader3
         // 
@@ -482,7 +482,6 @@ partial class MainForm
         // settingsButton
         // 
         settingsButton.BackColor = Color.FromArgb(40, 40, 40);
-        settingsButton.Enabled = false;
         settingsButton.FlatAppearance.BorderColor = Color.Silver;
         settingsButton.FlatAppearance.MouseDownBackColor = Color.Gray;
         settingsButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(72, 72, 72);

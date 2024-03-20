@@ -59,7 +59,7 @@ internal static class Program
 
     private static void SetupAppSettings()
     {
-        AppSettingsManager.Instance.InitializeSettingsInstance();
+        AppSettingsManager.Instance.OverwriteSettingsInstance();
 
         Application.ApplicationExit += WriteSettings;
     }

@@ -6,10 +6,12 @@ internal sealed class AppSettings
 {
     public static AppSettings Instance { get; set; } = new();
 
+    public bool AnalyzeOnSelection = true;
+    public bool AnalyzeSetOnSelection = true;
+    public bool InvalidateAllCachedCalculationsOnRefresh = true;
+
     public bool AnalyzeAllOnStartup = false;
     public bool AnalyzeAllOnDatabaseRefresh = false;
-    public bool AnalyzeOnSelection = true;
-    public bool InvalidateAllCachedCalculationsOnRefresh = true;
 
     public string? BaseOsuDataDirectoryString
     {
@@ -26,7 +28,7 @@ internal sealed class AppSettings
             }
         }
     }
-    public string? BaseSongsDirectoryString
+    public string? BaseBeatmapsDirectoryString
     {
         get => BaseSongsDirectory?.FullName;
         set

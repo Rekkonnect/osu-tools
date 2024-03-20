@@ -709,7 +709,7 @@ public partial class MainForm : Form
 
     private void ShowSettings()
     {
-        // TODO
+        FormInstance.Open<SettingsForm>();
     }
 
     private void reloadBeatmapDatabaseButton_Click(object sender, EventArgs e)
@@ -735,7 +735,7 @@ public partial class MainForm : Form
 
     private void ShowLogs()
     {
-        LogViewForm.Open();
+        FormInstance.Open<LogViewForm>();
     }
 
     private void difficultyListView_CombinedItemSelectionChanged(

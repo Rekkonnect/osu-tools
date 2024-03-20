@@ -1,4 +1,6 @@
-﻿namespace OsuRealDifficulty.UI.WinForms.Controls;
+﻿using OsuRealDifficulty.UI.WinForms.Core;
+
+namespace OsuRealDifficulty.UI.WinForms.Controls;
 
 public partial class BackgroundCalculationReporter : UserControl
 {

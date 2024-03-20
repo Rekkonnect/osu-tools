@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-namespace OsuRealDifficulty.Mania;
+﻿namespace OsuRealDifficulty.Mania;
 
 public sealed class JackstreamPatternDifficultyAnalyzer
     : DiscerningChordListDifficultyAnalyzer
@@ -26,7 +24,7 @@ public sealed class JackstreamPatternDifficultyAnalyzer
     {
         double averageTimeDistance = jackstream.AverageTimeDistance;
         double distanceMultiplier = Math.Pow(250 / averageTimeDistance, 1.3);
-        double hitCountMultiplier = Math.Pow(Math.Log(jackstream.HitCount, 6), 0.6 + distanceMultiplier);
+        double hitCountMultiplier = Math.Pow(Math.Log(jackstream.HitCount, 5), 0.6 + distanceMultiplier);
         double columnBase = jackstream.ColumnCount + 1;
         double columnCountMultiplier = Math.Pow(columnBase, 0.41);
         return distanceMultiplier * columnCountMultiplier * hitCountMultiplier / 6;

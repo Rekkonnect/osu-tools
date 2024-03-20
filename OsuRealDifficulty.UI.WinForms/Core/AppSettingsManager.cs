@@ -22,13 +22,18 @@ internal class AppSettingsManager(string filePath)
 
     public FileInfo FilePath => new(_filePath);
 
-    public void InitializeSettingsInstance()
+    public void OverwriteSettingsInstance()
     {
         var read = Read();
         if (read is not null)
         {
             AppSettings.Instance = read;
         }
+    }
+
+    public AppSettings ReadOrDefault(AppSettings @default)
+    {
+        return Read() ?? @default;
     }
 
     public AppSettings? Read()

@@ -1,19 +1,18 @@
-﻿using OsuRealDifficulty.UI.WinForms.Logging;
+﻿using OsuRealDifficulty.UI.WinForms.Core;
+using OsuRealDifficulty.UI.WinForms.Logging;
 using OsuRealDifficulty.UI.WinForms.Utilities;
 
 namespace OsuRealDifficulty.UI.WinForms;
 
 public partial class LogViewForm : Form
 {
-    public static LogViewForm? Active { get; private set; }
-
     // retrieving the log string from the control's Text property
     // allocates a brand new string, which we don't want
     private string _displayedLogString = string.Empty;
 
     private readonly CancellationTokenSource _loopTaskTokenSource = new();
 
-    private LogViewForm()
+    public LogViewForm()
     {
         InitializeComponent();
     }
@@ -29,7 +28,6 @@ public partial class LogViewForm : Form
 
     protected override void OnFormClosing(FormClosingEventArgs e)
     {
-        Active = null;
         _loopTaskTokenSource.Cancel();
         base.OnFormClosing(e);
     }
@@ -73,15 +71,5 @@ public partial class LogViewForm : Form
     private void InvokeRefreshLog()
     {
         Invoke(RefreshLog);
-    }
-
-    public static void Open()
-    {
-        if (Active is null)
-        {
-            Active = new LogViewForm();
-        }
-        Active.Show();
-        Active.Focus();
     }
 }

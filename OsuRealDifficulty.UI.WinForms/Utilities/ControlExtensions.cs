@@ -38,7 +38,7 @@ public static class ControlExtensions
         if (text.Length is 0)
             return;
 
-        textBox.Select(text.Length - 1, 0);
+        textBox.Select(text.Length, 0);
         textBox.ScrollToCaret();
     }
 
@@ -48,7 +48,7 @@ public static class ControlExtensions
         if (length is 0)
             return;
 
-        textBox.Select(length - 1, 0);
+        textBox.Select(length, 0);
         textBox.ScrollToCaret();
     }
 }

@@ -8,12 +8,23 @@ public sealed class KeyCountFilterTextBox : TextBox
 
     public int KeyCount => Text.ParseInt32OrDefault(DefaultKeyCount);
 
-    protected override void OnTextChanged(EventArgs e)
+    protected override void OnKeyDown(KeyEventArgs e)
     {
-        if (Text.Length is 0)
+        var digitKeyValue = e.KeyCode.GetDigitKeyValue();
+        if (digitKeyValue < 1)
             return;
 
-        bool parsed = int.TryParse(Text, out _);
+        var newText = digitKeyValue.ToString();
+        this.SetTextScrollToEnd(newText);
+    }
+
+    protected override void OnTextChanged(EventArgs e)
+    {
+        var text = Text;
+        if (text.Length is 0)
+            return;
+
+        bool parsed = int.TryParse(text, out _);
         if (!parsed)
         {
             ResetToDefaultKeyCount();

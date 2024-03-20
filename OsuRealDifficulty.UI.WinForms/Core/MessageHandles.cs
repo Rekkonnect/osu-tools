@@ -1,5 +1,5 @@
 ﻿#pragma warning disable IDE0130 // namespace does not match folder structure
-namespace System.Windows.Forms;
+namespace OsuRealDifficulty.UI.WinForms.Core;
 
 // Kind thanks to
 // https://wiki.winehq.org/List_Of_Windows_Messages

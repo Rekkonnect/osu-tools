@@ -1,4 +1,4 @@
-﻿namespace OsuRealDifficulty.UI.WinForms;
+﻿namespace OsuRealDifficulty.UI.WinForms.Core;
 
 public sealed class LoopingTask(
     int refreshPeriod,

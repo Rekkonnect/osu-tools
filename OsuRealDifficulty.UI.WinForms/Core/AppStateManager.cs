@@ -1,4 +1,5 @@
-﻿using OsuParsers.Enums;
+﻿using OsuParsers.Database.Objects;
+using OsuParsers.Enums;
 
 namespace OsuRealDifficulty.UI.WinForms.Core;
 
@@ -18,12 +19,20 @@ internal sealed class AppStateManager(AppState appState, AppSettings? customSett
         var database = AppState.OsuDatabaseManager.ReadEntireDbBeatmapSetDatabase();
         AppState.BeatmapSetDatabase = database;
 
-        var maniaDatabase = database.Filter(s => s.Ruleset is Ruleset.Mania);
+        var maniaDatabase = database.Filter(IsProperMania);
         AppState.ManiaBeatmapSetDatabase = maniaDatabase;
 
         if (EffectiveSettings.InvalidateAllCachedCalculationsOnRefresh)
         {
             AppState.CalculationCache.Clear();
         }
+    }
+
+    private static bool IsProperMania(DbBeatmap beatmap)
+    {
+        // .osz2 files are submitted beatmaps, which may also sometimes be deleted
+        // they also tend to have all their diffs set to 0
+        return beatmap.Ruleset is Ruleset.Mania
+            && !beatmap.IsOsz2;
     }
 }
