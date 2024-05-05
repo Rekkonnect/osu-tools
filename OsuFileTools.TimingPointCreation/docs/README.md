@@ -14,7 +14,7 @@ Usually (but not always) the highest subdivision we encounter is the subdivision
 For example, if we have a phrase that has 1/8 and 1/16 notes, then the subdivision of the polyrhythm phrase is 1/16, unless the numbers don't add up.
 
 For this document we will use the X:Y/Z notation for further clarification due to the said ambiguities.
-Most examples will be from **Chaos Time the DARK** by **t+pazolite**, whose assets are [here](docs/examples/chaos-time).
+Most examples will be from **Chaos Time the DARK** by **t+pazolite**, whose assets are [here](examples/chaos-time).
 
 Examples of polyrhythm phrases in musical scores include:
 
