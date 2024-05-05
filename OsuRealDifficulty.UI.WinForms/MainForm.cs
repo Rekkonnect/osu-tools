@@ -3,6 +3,7 @@ using OsuRealDifficulty.Mania;
 using OsuRealDifficulty.UI.WinForms.Controls;
 using OsuRealDifficulty.UI.WinForms.Core;
 using OsuRealDifficulty.UI.WinForms.Utilities;
+using OsuTools.Common;
 using Serilog;
 using Serilog.Events;
 using System.Diagnostics.CodeAnalysis;

@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuTools.Common", "OsuTools
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuRealDifficulty.Tests", "OsuRealDifficulty.Tests\OsuRealDifficulty.Tests.csproj", "{564DB7F0-ACE0-4321-BEBB-D13E89F39C58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuRealDifficulty.UI.WinForms", "OsuRealDifficulty.UI.WinForms\OsuRealDifficulty.UI.WinForms.csproj", "{72AF93A8-CEA3-4B3C-835F-0EAFC50D6572}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsuRealDifficulty.UI.WinForms", "OsuRealDifficulty.UI.WinForms\OsuRealDifficulty.UI.WinForms.csproj", "{72AF93A8-CEA3-4B3C-835F-0EAFC50D6572}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuFileTools.TimingPointCreation", "OsuFileTools.TimingPointCreation\OsuFileTools.TimingPointCreation.csproj", "{03913CBC-9E39-4924-BCD1-83C10393C8F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuFileTools.TimingPointCreation.Tests", "OsuFileTools.TimingPointCreation.Tests\OsuFileTools.TimingPointCreation.Tests.csproj", "{982CF432-25B1-46DF-ADEB-E6104A595109}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{72AF93A8-CEA3-4B3C-835F-0EAFC50D6572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72AF93A8-CEA3-4B3C-835F-0EAFC50D6572}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72AF93A8-CEA3-4B3C-835F-0EAFC50D6572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03913CBC-9E39-4924-BCD1-83C10393C8F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03913CBC-9E39-4924-BCD1-83C10393C8F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03913CBC-9E39-4924-BCD1-83C10393C8F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03913CBC-9E39-4924-BCD1-83C10393C8F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{982CF432-25B1-46DF-ADEB-E6104A595109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{982CF432-25B1-46DF-ADEB-E6104A595109}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{982CF432-25B1-46DF-ADEB-E6104A595109}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{982CF432-25B1-46DF-ADEB-E6104A595109}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

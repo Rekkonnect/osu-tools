@@ -1,6 +1,7 @@
 ﻿using Garyon.Extensions;
 using OsuParsers.Database.Objects;
 using OsuParsers.Enums;
+using OsuTools.Common;
 using System.Collections;
 
 namespace OsuRealDifficulty.UI.WinForms.Controls;

@@ -1,10 +1,11 @@
-﻿using OsuParsers.Beatmaps.Objects;
+﻿using OsuParsers.Beatmaps;
+using OsuParsers.Beatmaps.Objects;
 using OsuParsers.Beatmaps.Sections;
 using OsuParsers.Database.Objects;
 using OsuParsers.Decoders;
 using OsuParsers.Enums;
 
-namespace OsuRealDifficulty;
+namespace OsuTools.Common;
 
 public static class OsuConvenienceExtensions
 {
@@ -20,6 +21,19 @@ public static class OsuConvenienceExtensions
     public static BeatLength BeatLength(this TimingPoint timingPoint)
     {
         return new(timingPoint.BeatLength);
+    }
+
+    // ok peppy but why the fuck did you do this?
+    public static double GetSliderVelocity(this TimingPoint timingPoint)
+    {
+        double rate = timingPoint.BeatLength;
+        return 100 / -rate;
+    }
+
+    public static void SetSliderVelocity(this TimingPoint timingPoint, double value)
+    {
+        var rate = 100 / -value;
+        timingPoint.BeatLength = rate;
     }
 
     #region DbBeatmap

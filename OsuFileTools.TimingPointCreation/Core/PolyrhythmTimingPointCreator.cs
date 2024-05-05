@@ -1,0 +1,109 @@
+﻿using OsuParsers.Beatmaps.Objects;
+using OsuTools.Common;
+
+namespace OsuFileTools.TimingPointCreation.Core;
+
+public class PolyrhythmTimingPointCreator
+{
+    public TimingPointList CreateTimingPoints(
+        IReadOnlyList<PolyrhythmSection> sections,
+        PolyrhythmTimingPointCreationOptions options)
+    {
+        var list = new TimingPointList();
+
+        // unoptimized because of the list content migration
+        foreach (var section in sections)
+        {
+            var inner = CreateTimingPoints(section, options);
+            list.TimingPoints.AddRange(inner.TimingPoints);
+        }
+
+        return list;
+    }
+
+    public TimingPointList CreateTimingPoints(
+        PolyrhythmSection section,
+        PolyrhythmTimingPointCreationOptions options)
+    {
+        var measureLength = section.BeatLength.Length * section.TimeSignature.Nominator;
+
+        var result = new TimingPointList();
+        TimingPoint? previousParent = null;
+
+        double offset = section.Offset;
+
+        foreach (var measure in section.Measures)
+        {
+            CreateForMeasure(measure);
+        }
+
+        return result;
+
+        void CreateForMeasure(PolyrhythmMeasure measure)
+        {
+            foreach (var phrase in measure.Phrases)
+            {
+                CreateForPhrase(phrase);
+            }
+        }
+
+        void CreateForPhrase(BasePolyrhythmPhrase phrase)
+        {
+            var phraseLength = measureLength * phrase.QuantizedRhythmicalValue.Ratio;
+            var noteLength = phraseLength / phrase.PolyValue;
+            var beatLength = noteLength * options.NoteBeatDivisor;
+
+            var previousParentLength = previousParent?.BeatLength().Length;
+            if (beatLength != previousParentLength)
+            {
+                TimingPointFactory.CreateWithNormalization(
+                    new BeatLength(beatLength),
+                    options.NormalizedBeatLength,
+                    out var parent,
+                    out var normalizer);
+
+                int intOffset = (int)offset;
+                parent.Offset = intOffset;
+                normalizer.Offset = intOffset;
+
+                result.TimingPoints.Add(parent);
+                result.TimingPoints.Add(normalizer);
+            }
+
+            offset += phraseLength * 1000;
+        }
+    }
+}
+
+public class PolyrhythmTimingPointCreationOptions
+{
+    public required BeatLength NormalizedBeatLength;
+    public required int NoteBeatDivisor;
+}
+
+public static class TimingPointFactory
+{
+    public static void CreateWithNormalization(
+        BeatLength currentBeatLength,
+        BeatLength normalizedBeatLength,
+        out TimingPoint parent,
+        out TimingPoint normalizer)
+    {
+        parent = new()
+        {
+            BeatLength = currentBeatLength.Length * 1000,
+        };
+        var normalizationRatio = currentBeatLength.Length / normalizedBeatLength.Length;
+        normalizer = CreateSV(normalizationRatio);
+    }
+
+    public static TimingPoint CreateSV(double velocity)
+    {
+        var timingPoint = new TimingPoint
+        {
+            Inherited = true
+        };
+        timingPoint.SetSliderVelocity(velocity);
+        return timingPoint;
+    }
+}
