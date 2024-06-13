@@ -8,10 +8,10 @@ public sealed class TimingPointEncapsulation(
     public TimingPoint Parent { get; } = parent;
     public List<TimingPoint> InheritedPoints { get; } = inheritedPoints;
 
-    public int StartOffset => Parent.Offset;
-    public int EndOffset { get; set; } = int.MaxValue;
+    public double StartOffset => Parent.Offset;
+    public double EndOffset { get; set; } = int.MaxValue;
 
-    public int Length => EndOffset - StartOffset;
+    public double Length => EndOffset - StartOffset;
 
     public bool HandlesOffset(int offset)
     {

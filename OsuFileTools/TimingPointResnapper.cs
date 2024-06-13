@@ -37,8 +37,7 @@ internal class TimingPointResnapper : ITransformer
             int beats = GetClosestSnappedDivisorBeats(offset, parent, previousBeatLength);
             var divisorLength = parent.BeatLength / Options.TimingSignatureDivisor;
             double newOffset = divisorLength * beats;
-            int newIntOffset = (int)Math.Round(newOffset);
-            int newTimingPointOffset = parent.Offset + newIntOffset;
+            double newTimingPointOffset = parent.Offset + newOffset;
             timingPoint.Offset = newTimingPointOffset;
         }
         else
@@ -48,13 +47,13 @@ internal class TimingPointResnapper : ITransformer
         }
     }
 
-    private int GetClosestSnappedOffset(int offset, TimingPoint parentTiming)
+    private int GetClosestSnappedOffset(double offset, TimingPoint parentTiming)
     {
         var length = new BeatLength(parentTiming.BeatLength);
         return GetClosestSnappedOffset(offset, parentTiming, length);
     }
 
-    private int GetClosestSnappedOffset(int offset, TimingPoint parentTiming, BeatLength beatLength)
+    private int GetClosestSnappedOffset(double offset, TimingPoint parentTiming, BeatLength beatLength)
     {
         int beats = GetClosestSnappedDivisorBeats(offset, parentTiming, beatLength);
         double beatDuration = beatLength.Length;
@@ -63,11 +62,11 @@ internal class TimingPointResnapper : ITransformer
         return intSnapped;
     }
     private int GetClosestSnappedDivisorBeats(
-        int offset,
+        double offset,
         TimingPoint parentTiming,
         BeatLength beatLength)
     {
-        int localOffset = offset - parentTiming.Offset;
+        double localOffset = offset - parentTiming.Offset;
         // We won't support this case for now
         if (localOffset < 0)
             return -1;
