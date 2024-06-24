@@ -9,35 +9,41 @@ public class PolyrhythmSectionParser
     public static IReadOnlyList<PolyrhythmSection> Parse(
         string text)
     {
-        return Parse(text.AsSpan().EnumerateLines());
+        var enumerator = text.AsSpan().EnumerateLines();
+        return Parse(enumerator);
     }
 
     public static IReadOnlyList<PolyrhythmSection> Parse(
-        SpanLineEnumerator lines)
+        SpanLineEnumerator enumerator)
     {
-        bool any = lines.MoveNext();
+        var observer = new SpanLineEnumeratorObserver();
+        bool any = observer.MoveNext(ref enumerator);
         if (!any)
             return [];
 
         var sections = new List<PolyrhythmSection>();
         while (true)
         {
-            var section = ParseSection(ref lines);
+            var section = ParseSection(ref enumerator, ref observer);
             if (section is null)
                 break;
 
             sections.Add(section);
+
+            if (!observer.IsActive)
+                break;
         }
 
         return sections;
     }
 
     private static PolyrhythmSection? ParseSection(
-        ref SpanLineEnumerator lines)
+        ref SpanLineEnumerator enumerator,
+        ref SpanLineEnumeratorObserver observer)
     {
-        EatEmptyLines(ref lines);
+        EatEmptyLines(ref enumerator, ref observer);
 
-        var current = lines.Current;
+        var current = enumerator.Current;
         if (current.IsEmpty)
             return null;
 
@@ -47,12 +53,15 @@ public class PolyrhythmSectionParser
         }
 
         var section = ParseTiming(current);
-        lines.MoveNext();
+        observer.MoveNext(ref enumerator);
 
         while (true)
         {
-            EatEmptyLines(ref lines);
-            var measure = TryParseMeasure(ref lines);
+            EatEmptyLines(ref enumerator, ref observer);
+            if (!observer.IsActive)
+                break;
+
+            var measure = TryParseMeasure(ref enumerator, ref observer);
             if (measure is null)
                 break;
 
@@ -62,28 +71,31 @@ public class PolyrhythmSectionParser
         return section;
     }
 
-    private static void EatEmptyLines(ref SpanLineEnumerator lines)
+    private static void EatEmptyLines(
+        ref SpanLineEnumerator enumerator,
+        ref SpanLineEnumeratorObserver observer)
     {
         while (true)
         {
-            var current = lines.Current;
+            var current = enumerator.Current;
             if (current.Length is not 0)
                 break;
 
-            bool hasMore = lines.MoveNext();
+            bool hasMore = observer.MoveNext(ref enumerator);
             if (!hasMore)
                 return;
         }
     }
 
     private static PolyrhythmMeasure? TryParseMeasure(
-        ref SpanLineEnumerator lines)
+        ref SpanLineEnumerator enumerator,
+        ref SpanLineEnumeratorObserver observer)
     {
         var phrases = new List<BasePolyrhythmPhrase>();
 
         while (true)
         {
-            var current = lines.Current;
+            var current = enumerator.Current;
             if (current.Length is 0)
                 break;
 
@@ -100,7 +112,7 @@ public class PolyrhythmSectionParser
             phrases.Add(phrase);
 
 end:
-            if (!lines.MoveNext())
+            if (!observer.MoveNext(ref enumerator))
             {
                 break;
             }

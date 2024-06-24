@@ -99,6 +99,7 @@ partial class SimpleGeneratorsControl
         createTimingPointsButton.TabIndex = 10;
         createTimingPointsButton.Text = "Create Timing Points";
         createTimingPointsButton.UseVisualStyleBackColor = true;
+        createTimingPointsButton.Click += createTimingPointsButton_Click;
         // 
         // groupBox4
         // 

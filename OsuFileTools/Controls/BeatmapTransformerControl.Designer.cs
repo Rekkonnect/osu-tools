@@ -91,6 +91,7 @@ partial class BeatmapTransformerControl
         applyInheritedTimingPointButton.TabIndex = 5;
         applyInheritedTimingPointButton.Text = "Apply";
         applyInheritedTimingPointButton.UseVisualStyleBackColor = true;
+        applyInheritedTimingPointButton.Click += applyInheritedTimingPointButton_Click;
         // 
         // inheritedTimingPointCreatorBaselineBpmNumeric
         // 
@@ -136,6 +137,7 @@ partial class BeatmapTransformerControl
         applyTimingPointResnapButton.TabIndex = 5;
         applyTimingPointResnapButton.Text = "Apply";
         applyTimingPointResnapButton.UseVisualStyleBackColor = true;
+        applyTimingPointResnapButton.Click += applyTimingPointResnapButton_Click;
         // 
         // timingPointResnapperPreviousBeatLength
         // 
@@ -204,6 +206,7 @@ partial class BeatmapTransformerControl
         revertTransformedBeatmapButton.TabIndex = 8;
         revertTransformedBeatmapButton.Text = "Revert";
         revertTransformedBeatmapButton.UseVisualStyleBackColor = true;
+        revertTransformedBeatmapButton.Click += revertTransformedBeatmapButton_Click;
         // 
         // saveTransformedBeatmapButton
         // 
@@ -214,6 +217,7 @@ partial class BeatmapTransformerControl
         saveTransformedBeatmapButton.TabIndex = 7;
         saveTransformedBeatmapButton.Text = "Save";
         saveTransformedBeatmapButton.UseVisualStyleBackColor = true;
+        saveTransformedBeatmapButton.Click += saveTransformedBeatmapButton_Click;
         // 
         // transformedBeatmapText
         // 
@@ -245,6 +249,7 @@ partial class BeatmapTransformerControl
         loadSourceBeatmapButton.TabIndex = 6;
         loadSourceBeatmapButton.Text = "Load";
         loadSourceBeatmapButton.UseVisualStyleBackColor = true;
+        loadSourceBeatmapButton.Click += loadSourceBeatmapButton_Click;
         // 
         // sourceBeatmapText
         // 

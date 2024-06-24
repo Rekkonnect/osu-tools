@@ -70,6 +70,7 @@ partial class PolyrhythmCreatorControl
         createTimingPointsButton.TabIndex = 5;
         createTimingPointsButton.Text = "Create Timing Points";
         createTimingPointsButton.UseVisualStyleBackColor = true;
+        createTimingPointsButton.Click += createTimingPointsButton_Click;
         // 
         // groupBox4
         // 
@@ -174,6 +175,7 @@ partial class PolyrhythmCreatorControl
         loadSourceNotationButton.TabIndex = 6;
         loadSourceNotationButton.Text = "Load";
         loadSourceNotationButton.UseVisualStyleBackColor = true;
+        loadSourceNotationButton.Click += loadSourceNotationButton_Click;
         // 
         // sourceNotationText
         // 
