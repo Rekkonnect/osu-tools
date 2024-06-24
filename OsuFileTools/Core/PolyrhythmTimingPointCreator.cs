@@ -7,7 +7,7 @@ public class PolyrhythmTimingPointCreator
 {
     public TimingPointList CreateTimingPoints(
         IReadOnlyList<PolyrhythmSection> sections,
-        PolyrhythmTimingPointCreationOptions options)
+        Options options)
     {
         var list = new TimingPointList();
 
@@ -23,7 +23,7 @@ public class PolyrhythmTimingPointCreator
 
     public TimingPointList CreateTimingPoints(
         PolyrhythmSection section,
-        PolyrhythmTimingPointCreationOptions options)
+        Options options)
     {
         var measureLength = section.BeatLength.Length * section.TimeSignature.Nominator;
 
@@ -73,10 +73,10 @@ public class PolyrhythmTimingPointCreator
             offset += phraseLength * 1000;
         }
     }
-}
 
-public class PolyrhythmTimingPointCreationOptions
-{
-    public required BeatLength NormalizedBeatLength;
-    public required int NoteBeatDivisor;
+    public sealed class Options
+    {
+        public required BeatLength NormalizedBeatLength;
+        public required int NoteBeatDivisor;
+    }
 }

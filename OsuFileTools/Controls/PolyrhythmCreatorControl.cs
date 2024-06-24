@@ -83,7 +83,7 @@ public partial class PolyrhythmCreatorControl : UserControl
     {
         var text = sourceNotationText.Text;
         var section = PolyrhythmSectionParser.Parse(text);
-        var options = new PolyrhythmTimingPointCreationOptions
+        var options = new PolyrhythmTimingPointCreator.Options
         {
             NormalizedBeatLength = BeatLength.FromBpm((double)normalizedBpmNumeric.Value),
             NoteBeatDivisor = (int)normalBeatDivisorNumeric.Value,

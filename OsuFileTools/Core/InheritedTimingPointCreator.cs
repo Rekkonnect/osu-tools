@@ -4,9 +4,11 @@ using OsuTools.Common;
 
 namespace OsuFileTools.Core;
 
-public sealed class InheritedTimingPointCreator : ITransformer
+public sealed class InheritedTimingPointCreator(
+    InheritedTimingPointCreator.Options options)
+    : ITransformer
 {
-    public required InheritedTimingPointCreationOptions Options { get; init; }
+    private readonly Options _options = options;
 
     public Beatmap Transform(Beatmap b)
     {
@@ -36,16 +38,16 @@ public sealed class InheritedTimingPointCreator : ITransformer
         var inherited = parent.Clone();
         var parentBeatLength = parent.BeatLengthNormalized();
         var parentBpm = parentBeatLength.Bpm;
-        var baselineBpm = Options.BaselineBpm;
+        var baselineBpm = _options.BaselineBpm;
         var ratio = parentBpm / baselineBpm;
 
         inherited.Inherited = true;
         inherited.SetSliderVelocity(1 / ratio);
         return inherited;
     }
-}
 
-public sealed class InheritedTimingPointCreationOptions
-{
-    public double BaselineBpm { get; set; }
+    public sealed class Options
+    {
+        public double BaselineBpm;
+    }
 }

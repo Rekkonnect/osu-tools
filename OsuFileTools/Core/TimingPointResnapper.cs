@@ -4,9 +4,11 @@ using OsuTools.Common;
 
 namespace OsuFileTools.Core;
 
-internal class TimingPointResnapper : ITransformer
+internal class TimingPointResnapper(
+    TimingPointResnapper.Options options)
+    : ITransformer
 {
-    public required TimingPointResnappingOptions Options { get; init; }
+    private readonly Options _options = options;
 
     public Beatmap Transform(Beatmap b)
     {
@@ -30,12 +32,12 @@ internal class TimingPointResnapper : ITransformer
     private void TransformTimingPoint(TimingPoint timingPoint, TimingPoint parent)
     {
         var offset = timingPoint.Offset;
-        if (Options.PreviousBeatLength is BeatLength previousBeatLength)
+        if (_options.PreviousBeatLength is BeatLength previousBeatLength)
         {
             // Calculate the existing snap point from the previous beat length
             // And then snap based on the number of beat divisors from the parent timing point's offset
             int beats = GetClosestSnappedDivisorBeats(offset, parent, previousBeatLength);
-            var divisorLength = parent.BeatLength / Options.TimingSignatureDivisor;
+            var divisorLength = parent.BeatLength / _options.TimingSignatureDivisor;
             double newOffset = divisorLength * beats;
             double newTimingPointOffset = parent.Offset + newOffset;
             timingPoint.Offset = newTimingPointOffset;
@@ -72,9 +74,9 @@ internal class TimingPointResnapper : ITransformer
             return -1;
 
         double beatDuration = beatLength.Length;
-        double divisorDuration = beatDuration / Options.TimingSignatureDivisor;
+        double divisorDuration = beatDuration / _options.TimingSignatureDivisor;
         double offsetBeats = localOffset / beatDuration;
-        double divisorBeats = Options.TimingSignatureDivisor * offsetBeats;
+        double divisorBeats = _options.TimingSignatureDivisor * offsetBeats;
         int prevIntDivisorBeats = (int)divisorBeats;
         int nextIntDivisorBeats = prevIntDivisorBeats + 1;
         double prevSnapped = prevIntDivisorBeats * divisorDuration;
@@ -93,10 +95,10 @@ internal class TimingPointResnapper : ITransformer
             return nextIntDivisorBeats;
         }
     }
-}
 
-public sealed class TimingPointResnappingOptions
-{
-    public int TimingSignatureDivisor { get; set; }
-    public BeatLength? PreviousBeatLength { get; set; }
+    public sealed class Options
+    {
+        public int TimingSignatureDivisor;
+        public BeatLength? PreviousBeatLength;
+    }
 }

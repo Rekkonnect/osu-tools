@@ -19,7 +19,7 @@ public partial class BeatmapTransformerControl : UserControl
 
     private void applyTimingPointResnapButton_Click(object sender, EventArgs e)
     {
-        var options = new TimingPointResnappingOptions();
+        var options = new TimingPointResnapper.Options();
         var previousBeatLength = (double)timingPointResnapperPreviousBeatLength.Value;
         if (previousBeatLength > 0)
         {
@@ -28,17 +28,17 @@ public partial class BeatmapTransformerControl : UserControl
 
         options.TimingSignatureDivisor = (int)timingPointResnapperDivisor.Value;
 
-        var resnapper = new TimingPointResnapper { Options = options };
+        var resnapper = new TimingPointResnapper(options);
         ApplyTransformation(resnapper);
     }
 
     private void applyInheritedTimingPointButton_Click(object sender, EventArgs e)
     {
-        var options = new InheritedTimingPointCreationOptions();
+        var options = new InheritedTimingPointCreator.Options();
         var baselineBpm = (double)inheritedTimingPointCreatorBaselineBpmNumeric.Value;
         options.BaselineBpm = baselineBpm;
 
-        var creator = new InheritedTimingPointCreator { Options = options };
+        var creator = new InheritedTimingPointCreator(options);
         ApplyTransformation(creator);
     }
 
