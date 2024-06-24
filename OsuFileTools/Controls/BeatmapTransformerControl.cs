@@ -1,8 +1,9 @@
-﻿using OsuParsers.Beatmaps;
+﻿using OsuFileTools.Core;
+using OsuParsers.Beatmaps;
 using OsuParsers.Decoders;
 using OsuParsers.Encoders;
 
-namespace OsuFileTools;
+namespace OsuFileTools.Controls;
 
 public partial class BeatmapTransformerControl : UserControl
 {

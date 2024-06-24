@@ -32,11 +32,11 @@ partial class MainForm
         saveDialogBeatmap = new SaveFileDialog();
         tabControl1 = new TabControl();
         transformerPage = new TabPage();
-        beatmapTransformerControl1 = new BeatmapTransformerControl();
+        beatmapTransformerControl1 = new Controls.BeatmapTransformerControl();
         simpleGeneratorPage = new TabPage();
-        simpleGeneratorsControl1 = new SimpleGeneratorsControl();
+        simpleGeneratorsControl1 = new Controls.SimpleGeneratorsControl();
         polyrhythmPage = new TabPage();
-        polyrhythmCreatorControl1 = new PolyrhythmCreatorControl();
+        polyrhythmCreatorControl1 = new Controls.PolyrhythmCreatorControl();
         tabControl1.SuspendLayout();
         transformerPage.SuspendLayout();
         simpleGeneratorPage.SuspendLayout();
@@ -138,7 +138,7 @@ partial class MainForm
     private TabPage transformerPage;
     private TabPage simpleGeneratorPage;
     private TabPage polyrhythmPage;
-    private BeatmapTransformerControl beatmapTransformerControl1;
-    private SimpleGeneratorsControl simpleGeneratorsControl1;
-    private PolyrhythmCreatorControl polyrhythmCreatorControl1;
+    private Controls.BeatmapTransformerControl beatmapTransformerControl1;
+    private Controls.SimpleGeneratorsControl simpleGeneratorsControl1;
+    private Controls.PolyrhythmCreatorControl polyrhythmCreatorControl1;
 }

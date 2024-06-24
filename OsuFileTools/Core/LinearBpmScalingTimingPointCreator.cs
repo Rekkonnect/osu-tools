@@ -1,7 +1,7 @@
 ﻿using OsuParsers.Beatmaps.Objects;
 using OsuTools.Common;
 
-namespace OsuFileTools;
+namespace OsuFileTools.Core;
 
 public sealed class LinearBpmScalingTimingPointCreator(
     LinearBpmScalingTimingPointCreator.Options options)

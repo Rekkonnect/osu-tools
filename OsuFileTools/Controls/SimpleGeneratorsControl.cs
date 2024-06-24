@@ -1,6 +1,7 @@
-﻿using OsuParsers.Encoders;
+﻿using OsuFileTools.Core;
+using OsuParsers.Encoders;
 
-namespace OsuFileTools;
+namespace OsuFileTools.Controls;
 
 public partial class SimpleGeneratorsControl : UserControl
 {

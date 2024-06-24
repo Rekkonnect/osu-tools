@@ -1,4 +1,4 @@
-﻿namespace OsuFileTools;
+﻿namespace OsuFileTools.Controls;
 
 partial class PolyrhythmCreatorControl
 {

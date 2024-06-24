@@ -2,7 +2,7 @@
 using OsuParsers.Encoders;
 using OsuTools.Common;
 
-namespace OsuFileTools;
+namespace OsuFileTools.Controls;
 
 public partial class PolyrhythmCreatorControl : UserControl
 {

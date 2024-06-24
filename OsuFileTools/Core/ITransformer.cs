@@ -1,6 +1,6 @@
 ﻿using OsuParsers.Beatmaps;
 
-namespace OsuFileTools;
+namespace OsuFileTools.Core;
 
 internal interface ITransformer
 {

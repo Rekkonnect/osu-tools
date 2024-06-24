@@ -2,7 +2,7 @@
 using OsuParsers.Beatmaps.Objects;
 using OsuTools.Common;
 
-namespace OsuFileTools;
+namespace OsuFileTools.Core;
 
 internal class TimingPointResnapper : ITransformer
 {
