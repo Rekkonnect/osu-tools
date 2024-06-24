@@ -1,7 +1,7 @@
-using OsuFileTools.TimingPointCreation.Core;
+using OsuFileTools.Core;
 using OsuTools.Common;
 
-namespace OsuFileTools.TimingPointCreation.Tests;
+namespace OsuFileTools.Tests;
 
 public class PolyrhythmParsingTests
 {
@@ -30,23 +30,23 @@ public class PolyrhythmParsingTests
         var expectedMeasures = new[]
         {
             PolyrhythmMeasure.FromPhrases([
-                    new SimplePolyrhythmPhrase(4, 3, 8),
-                    new SimplePolyrhythmPhrase(2, 2, 16),
-                    new ComplexPolyrhythmPhrase(2, 2, 8, [
-                            new PhraseNote(2, 0, false),
-                            new PhraseNote(2, 0, false),
-                            new PhraseNote(1, 0, false),
-                        ]),
-                    new SimplePolyrhythmPhrase(2, 2, 8),
-                ]),
+                new SimplePolyrhythmPhrase(4, 3, 8),
+                new SimplePolyrhythmPhrase(2, 2, 16),
+                new ComplexPolyrhythmPhrase(2, 2, 8, [
+                        new PhraseNote(2, 0, false),
+                        new PhraseNote(2, 0, false),
+                        new PhraseNote(1, 0, false),
+                    ]),
+                new SimplePolyrhythmPhrase(2, 2, 8),
+            ]),
 
             PolyrhythmMeasure.FromPhrases([
-                    new SimplePolyrhythmPhrase(4, 3, 8),
-                    new SimplePolyrhythmPhrase(2, 2, 16),
-                    new SimplePolyrhythmPhrase(3, 2, 16),
-                    new SimplePolyrhythmPhrase(2, 2, 16),
-                    new SimplePolyrhythmPhrase(1, 1, 4),
-                ]),
+                new SimplePolyrhythmPhrase(4, 3, 8),
+                new SimplePolyrhythmPhrase(2, 2, 16),
+                new SimplePolyrhythmPhrase(3, 2, 16),
+                new SimplePolyrhythmPhrase(2, 2, 16),
+                new SimplePolyrhythmPhrase(1, 1, 4),
+            ]),
 
             // Good fucking luck denoting the rest
         };

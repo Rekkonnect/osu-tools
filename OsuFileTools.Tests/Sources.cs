@@ -1,4 +1,4 @@
-﻿namespace OsuFileTools.TimingPointCreation.Tests;
+﻿namespace OsuFileTools.Tests;
 
 public static class Sources
 {

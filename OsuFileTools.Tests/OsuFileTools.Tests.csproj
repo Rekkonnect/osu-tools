@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OsuFileTools.TimingPointCreation\OsuFileTools.TimingPointCreation.csproj" />
+    <ProjectReference Include="..\OsuFileTools\OsuFileTools.csproj" />
   </ItemGroup>
 
   <ItemGroup>
