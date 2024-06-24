@@ -12,6 +12,19 @@ public sealed class EncapsulatedTimingPointList
             .FirstOrDefault(s => s.HandlesOffset(offset));
     }
 
+    public TimingPointList Flatten()
+    {
+        var result = new TimingPointList();
+
+        foreach (var encapsulation in Encapsulations)
+        {
+            result.TimingPoints.Add(encapsulation.Parent);
+            result.TimingPoints.AddRange(encapsulation.InheritedPoints);
+        }
+
+        return result;
+    }
+
     public static EncapsulatedTimingPointList FromBeatmap(Beatmap beatmap)
     {
         var list = TimingPointList.FromBeatmap(beatmap);

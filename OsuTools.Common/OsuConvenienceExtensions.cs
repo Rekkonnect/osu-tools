@@ -23,6 +23,11 @@ public static class OsuConvenienceExtensions
         return new(timingPoint.BeatLength);
     }
 
+    public static BeatLength BeatLengthNormalized(this TimingPoint timingPoint)
+    {
+        return new(timingPoint.BeatLength / 1000);
+    }
+
     // ok peppy but why the fuck did you do this?
     public static double GetSliderVelocity(this TimingPoint timingPoint)
     {
