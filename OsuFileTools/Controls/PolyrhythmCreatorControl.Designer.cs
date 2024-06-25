@@ -100,7 +100,7 @@ partial class PolyrhythmCreatorControl
         // label3
         // 
         label3.AutoSize = true;
-        label3.Location = new Point(139, 50);
+        label3.Location = new Point(139, 49);
         label3.Name = "label3";
         label3.Size = new Size(21, 15);
         label3.TabIndex = 3;
@@ -108,7 +108,7 @@ partial class PolyrhythmCreatorControl
         // 
         // normalBeatDivisorNumeric
         // 
-        normalBeatDivisorNumeric.Location = new Point(165, 48);
+        normalBeatDivisorNumeric.Location = new Point(160, 47);
         normalBeatDivisorNumeric.Maximum = new decimal(new int[] { 32, 0, 0, 0 });
         normalBeatDivisorNumeric.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
         normalBeatDivisorNumeric.Name = "normalBeatDivisorNumeric";
@@ -119,7 +119,7 @@ partial class PolyrhythmCreatorControl
         // label2
         // 
         label2.AutoSize = true;
-        label2.Location = new Point(9, 50);
+        label2.Location = new Point(21, 49);
         label2.Name = "label2";
         label2.Size = new Size(112, 15);
         label2.TabIndex = 1;
@@ -128,7 +128,7 @@ partial class PolyrhythmCreatorControl
         // label1
         // 
         label1.AutoSize = true;
-        label1.Location = new Point(28, 23);
+        label1.Location = new Point(37, 24);
         label1.Name = "label1";
         label1.Size = new Size(96, 15);
         label1.TabIndex = 0;

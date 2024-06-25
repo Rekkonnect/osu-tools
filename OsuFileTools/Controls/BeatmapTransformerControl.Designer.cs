@@ -35,7 +35,7 @@ partial class BeatmapTransformerControl
         label6 = new Label();
         groupBox4 = new GroupBox();
         applyTimingPointResnapButton = new Button();
-        timingPointResnapperPreviousBeatLength = new NumericUpDown();
+        timingPointResnapperPreviousBpm = new NumericUpDown();
         label3 = new Label();
         timingPointResnapperDivisor = new NumericUpDown();
         label2 = new Label();
@@ -53,7 +53,7 @@ partial class BeatmapTransformerControl
         groupBox5.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)inheritedTimingPointCreatorBaselineBpmNumeric).BeginInit();
         groupBox4.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)timingPointResnapperPreviousBeatLength).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)timingPointResnapperPreviousBpm).BeginInit();
         ((System.ComponentModel.ISupportInitialize)timingPointResnapperDivisor).BeginInit();
         groupBox2.SuspendLayout();
         groupBox1.SuspendLayout();
@@ -116,7 +116,7 @@ partial class BeatmapTransformerControl
         // groupBox4
         // 
         groupBox4.Controls.Add(applyTimingPointResnapButton);
-        groupBox4.Controls.Add(timingPointResnapperPreviousBeatLength);
+        groupBox4.Controls.Add(timingPointResnapperPreviousBpm);
         groupBox4.Controls.Add(label3);
         groupBox4.Controls.Add(timingPointResnapperDivisor);
         groupBox4.Controls.Add(label2);
@@ -139,14 +139,14 @@ partial class BeatmapTransformerControl
         applyTimingPointResnapButton.UseVisualStyleBackColor = true;
         applyTimingPointResnapButton.Click += applyTimingPointResnapButton_Click;
         // 
-        // timingPointResnapperPreviousBeatLength
+        // timingPointResnapperPreviousBpm
         // 
-        timingPointResnapperPreviousBeatLength.DecimalPlaces = 17;
-        timingPointResnapperPreviousBeatLength.Location = new Point(139, 22);
-        timingPointResnapperPreviousBeatLength.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
-        timingPointResnapperPreviousBeatLength.Name = "timingPointResnapperPreviousBeatLength";
-        timingPointResnapperPreviousBeatLength.Size = new Size(183, 23);
-        timingPointResnapperPreviousBeatLength.TabIndex = 4;
+        timingPointResnapperPreviousBpm.DecimalPlaces = 6;
+        timingPointResnapperPreviousBpm.Location = new Point(139, 22);
+        timingPointResnapperPreviousBpm.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+        timingPointResnapperPreviousBpm.Name = "timingPointResnapperPreviousBpm";
+        timingPointResnapperPreviousBpm.Size = new Size(183, 23);
+        timingPointResnapperPreviousBpm.TabIndex = 4;
         // 
         // label3
         // 
@@ -179,11 +179,11 @@ partial class BeatmapTransformerControl
         // label1
         // 
         label1.AutoSize = true;
-        label1.Location = new Point(15, 24);
+        label1.Location = new Point(53, 24);
         label1.Name = "label1";
-        label1.Size = new Size(118, 15);
+        label1.Size = new Size(80, 15);
         label1.TabIndex = 0;
-        label1.Text = "Previous Beat Length";
+        label1.Text = "Previous BPM";
         // 
         // groupBox2
         // 
@@ -280,7 +280,7 @@ partial class BeatmapTransformerControl
         ((System.ComponentModel.ISupportInitialize)inheritedTimingPointCreatorBaselineBpmNumeric).EndInit();
         groupBox4.ResumeLayout(false);
         groupBox4.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)timingPointResnapperPreviousBeatLength).EndInit();
+        ((System.ComponentModel.ISupportInitialize)timingPointResnapperPreviousBpm).EndInit();
         ((System.ComponentModel.ISupportInitialize)timingPointResnapperDivisor).EndInit();
         groupBox2.ResumeLayout(false);
         groupBox2.PerformLayout();
@@ -298,7 +298,7 @@ partial class BeatmapTransformerControl
     private Label label6;
     private GroupBox groupBox4;
     private Button applyTimingPointResnapButton;
-    private NumericUpDown timingPointResnapperPreviousBeatLength;
+    private NumericUpDown timingPointResnapperPreviousBpm;
     private Label label3;
     private NumericUpDown timingPointResnapperDivisor;
     private Label label2;

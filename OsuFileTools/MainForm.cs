@@ -1,11 +1,15 @@
+using System.Reflection;
+
 namespace OsuFileTools;
 
 public partial class MainForm : Form
 {
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     public MainForm()
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     {
         InitializeComponent();
+
+        var version = InformationalVersion.InformationalVersionForAssembly(
+            Assembly.GetExecutingAssembly())!;
+        Text = $"osu! file tools [v{version.Version}]";
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace OsuFileTools.Controls;
 
-partial class SimpleGeneratorsControl
+partial class TimingPointGenerationControl
 {
     /// <summary> 
     /// Required designer variable.
@@ -74,7 +74,7 @@ partial class SimpleGeneratorsControl
         // label5
         // 
         label5.AutoSize = true;
-        label5.Location = new Point(9, 25);
+        label5.Location = new Point(18, 25);
         label5.Name = "label5";
         label5.Size = new Size(121, 15);
         label5.TabIndex = 7;
@@ -134,7 +134,7 @@ partial class SimpleGeneratorsControl
         // label7
         // 
         label7.AutoSize = true;
-        label7.Location = new Point(37, 53);
+        label7.Location = new Point(46, 53);
         label7.Name = "label7";
         label7.Size = new Size(87, 15);
         label7.TabIndex = 10;
@@ -152,7 +152,7 @@ partial class SimpleGeneratorsControl
         // label6
         // 
         label6.AutoSize = true;
-        label6.Location = new Point(33, 24);
+        label6.Location = new Point(42, 24);
         label6.Name = "label6";
         label6.Size = new Size(91, 15);
         label6.TabIndex = 8;
@@ -172,7 +172,7 @@ partial class SimpleGeneratorsControl
         // label4
         // 
         label4.AutoSize = true;
-        label4.Location = new Point(67, 111);
+        label4.Location = new Point(76, 111);
         label4.Name = "label4";
         label4.Size = new Size(57, 15);
         label4.TabIndex = 6;
@@ -221,7 +221,7 @@ partial class SimpleGeneratorsControl
         // label2
         // 
         label2.AutoSize = true;
-        label2.Location = new Point(19, 140);
+        label2.Location = new Point(28, 140);
         label2.Name = "label2";
         label2.Size = new Size(105, 15);
         label2.TabIndex = 1;
@@ -230,7 +230,7 @@ partial class SimpleGeneratorsControl
         // label1
         // 
         label1.AutoSize = true;
-        label1.Location = new Point(65, 82);
+        label1.Location = new Point(74, 82);
         label1.Name = "label1";
         label1.Size = new Size(59, 15);
         label1.TabIndex = 0;

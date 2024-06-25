@@ -3,9 +3,9 @@ using OsuParsers.Encoders;
 
 namespace OsuFileTools.Controls;
 
-public partial class SimpleGeneratorsControl : UserControl
+public partial class TimingPointGenerationControl : UserControl
 {
-    public SimpleGeneratorsControl()
+    public TimingPointGenerationControl()
     {
         InitializeComponent();
         generationOperationCombo.SelectedIndex = 0;

@@ -33,13 +33,13 @@ partial class MainForm
         tabControl1 = new TabControl();
         transformerPage = new TabPage();
         beatmapTransformerControl1 = new Controls.BeatmapTransformerControl();
-        simpleGeneratorPage = new TabPage();
-        simpleGeneratorsControl1 = new Controls.SimpleGeneratorsControl();
+        timingPointGenerationPage = new TabPage();
+        simpleGeneratorsControl1 = new Controls.TimingPointGenerationControl();
         polyrhythmPage = new TabPage();
         polyrhythmCreatorControl1 = new Controls.PolyrhythmCreatorControl();
         tabControl1.SuspendLayout();
         transformerPage.SuspendLayout();
-        simpleGeneratorPage.SuspendLayout();
+        timingPointGenerationPage.SuspendLayout();
         polyrhythmPage.SuspendLayout();
         SuspendLayout();
         // 
@@ -50,7 +50,7 @@ partial class MainForm
         // tabControl1
         // 
         tabControl1.Controls.Add(transformerPage);
-        tabControl1.Controls.Add(simpleGeneratorPage);
+        tabControl1.Controls.Add(timingPointGenerationPage);
         tabControl1.Controls.Add(polyrhythmPage);
         tabControl1.Dock = DockStyle.Fill;
         tabControl1.Location = new Point(6, 6);
@@ -78,16 +78,16 @@ partial class MainForm
         beatmapTransformerControl1.Size = new Size(1129, 647);
         beatmapTransformerControl1.TabIndex = 0;
         // 
-        // simpleGeneratorPage
+        // timingPointGenerationPage
         // 
-        simpleGeneratorPage.Controls.Add(simpleGeneratorsControl1);
-        simpleGeneratorPage.Location = new Point(4, 24);
-        simpleGeneratorPage.Name = "simpleGeneratorPage";
-        simpleGeneratorPage.Padding = new Padding(3);
-        simpleGeneratorPage.Size = new Size(1128, 644);
-        simpleGeneratorPage.TabIndex = 1;
-        simpleGeneratorPage.Text = "Simple Generators";
-        simpleGeneratorPage.UseVisualStyleBackColor = true;
+        timingPointGenerationPage.Controls.Add(simpleGeneratorsControl1);
+        timingPointGenerationPage.Location = new Point(4, 24);
+        timingPointGenerationPage.Name = "timingPointGenerationPage";
+        timingPointGenerationPage.Padding = new Padding(3);
+        timingPointGenerationPage.Size = new Size(1128, 644);
+        timingPointGenerationPage.TabIndex = 1;
+        timingPointGenerationPage.Text = "Timing Point Generation";
+        timingPointGenerationPage.UseVisualStyleBackColor = true;
         // 
         // simpleGeneratorsControl1
         // 
@@ -120,13 +120,14 @@ partial class MainForm
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(1148, 684);
         Controls.Add(tabControl1);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         Name = "MainForm";
         Padding = new Padding(6);
         Text = "osu! file tools";
         tabControl1.ResumeLayout(false);
         transformerPage.ResumeLayout(false);
         transformerPage.PerformLayout();
-        simpleGeneratorPage.ResumeLayout(false);
+        timingPointGenerationPage.ResumeLayout(false);
         polyrhythmPage.ResumeLayout(false);
         ResumeLayout(false);
     }
@@ -136,9 +137,9 @@ partial class MainForm
     private SaveFileDialog saveDialogBeatmap;
     private TabControl tabControl1;
     private TabPage transformerPage;
-    private TabPage simpleGeneratorPage;
+    private TabPage timingPointGenerationPage;
     private TabPage polyrhythmPage;
     private Controls.BeatmapTransformerControl beatmapTransformerControl1;
-    private Controls.SimpleGeneratorsControl simpleGeneratorsControl1;
+    private Controls.TimingPointGenerationControl simpleGeneratorsControl1;
     private Controls.PolyrhythmCreatorControl polyrhythmCreatorControl1;
 }

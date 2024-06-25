@@ -2,6 +2,7 @@
 using OsuParsers.Beatmaps;
 using OsuParsers.Decoders;
 using OsuParsers.Encoders;
+using OsuTools.Common;
 
 namespace OsuFileTools.Controls;
 
@@ -20,10 +21,10 @@ public partial class BeatmapTransformerControl : UserControl
     private void applyTimingPointResnapButton_Click(object sender, EventArgs e)
     {
         var options = new TimingPointResnapper.Options();
-        var previousBeatLength = (double)timingPointResnapperPreviousBeatLength.Value;
-        if (previousBeatLength > 0)
+        var previousBpm = (double)timingPointResnapperPreviousBpm.Value;
+        if (previousBpm > 0)
         {
-            options.PreviousBeatLength = new(previousBeatLength);
+            options.PreviousBeatLength = BeatLength.FromBpm(previousBpm);
         }
 
         options.TimingSignatureDivisor = (int)timingPointResnapperDivisor.Value;
@@ -44,10 +45,31 @@ public partial class BeatmapTransformerControl : UserControl
 
     private void ApplyTransformation(ITransformer transformer)
     {
+        bool loaded = EvaluateBeatmapLoadStatus();
+        if (!loaded)
+            return;
+
         var beatmap = _transformedBeatmap;
         var newBeatmap = transformer.Transform(beatmap);
         _transformedBeatmap = newBeatmap;
         transformedBeatmapText.Lines = BeatmapEncoder.Encode(newBeatmap).ToArray();
+    }
+
+    private bool EvaluateBeatmapLoadStatus()
+    {
+        if (_transformedBeatmap is null)
+        {
+            MessageBox.Show(
+                $"""
+                Please load a beatmap from the source beatmap panel.
+                """,
+                "No beatmap loaded",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+            return false;
+        }
+
+        return true;
     }
 
     private void LoadBeatmap(string path)
@@ -106,6 +128,10 @@ public partial class BeatmapTransformerControl : UserControl
 
     private void RequestSavingBeatmap()
     {
+        bool loaded = EvaluateBeatmapLoadStatus();
+        if (!loaded)
+            return;
+
         var result = saveDialogBeatmap.ShowDialog();
         if (result is DialogResult.OK)
         {
