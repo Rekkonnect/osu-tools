@@ -24,7 +24,7 @@ public sealed class InheritedTimingPointCreator(
             encapsulation.InheritedPoints.RemoveAll(s => s.Offset == parent.Offset);
 
             var inherited = CreateInherited(parent);
-            encapsulation.InheritedPoints.Add(inherited);
+            encapsulation.InheritedPoints.Insert(0, inherited);
         }
 
         var newTimingPoints = encapsulations.Flatten();
@@ -36,7 +36,7 @@ public sealed class InheritedTimingPointCreator(
     private TimingPoint CreateInherited(TimingPoint parent)
     {
         var inherited = parent.Clone();
-        var parentBeatLength = parent.BeatLengthNormalized();
+        var parentBeatLength = parent.BeatLength();
         var parentBpm = parentBeatLength.Bpm;
         var baselineBpm = _options.BaselineBpm;
         var ratio = parentBpm / baselineBpm;

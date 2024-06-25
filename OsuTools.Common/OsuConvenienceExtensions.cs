@@ -20,11 +20,6 @@ public static class OsuConvenienceExtensions
 
     public static BeatLength BeatLength(this TimingPoint timingPoint)
     {
-        return new(timingPoint.BeatLength);
-    }
-
-    public static BeatLength BeatLengthNormalized(this TimingPoint timingPoint)
-    {
         return new(timingPoint.BeatLength / 1000);
     }
 

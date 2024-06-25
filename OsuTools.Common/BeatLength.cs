@@ -1,14 +1,16 @@
 ﻿namespace OsuTools.Common;
 
-public readonly record struct BeatLength(double Length)
+public readonly record struct BeatLength(double Seconds)
 {
-    public double Bps => 1 / Length;
-    public double Bpm => Bps * 60;
+    public TimeSpan Length => TimeSpan.FromSeconds(Seconds);
+
+    public double Bps => 1 / Seconds;
+    public double Bpm => 60 / Seconds;
 
     public static BeatLength FromBps(double bps)
     {
-        double length = 1 / bps;
-        return new(length);
+        double seconds = 1 / bps;
+        return new(seconds);
     }
     public static BeatLength FromBpm(double bpm)
     {

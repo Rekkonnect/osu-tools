@@ -121,6 +121,7 @@ partial class MainForm
         ClientSize = new Size(1148, 684);
         Controls.Add(tabControl1);
         FormBorderStyle = FormBorderStyle.FixedSingle;
+        MaximizeBox = false;
         Name = "MainForm";
         Padding = new Padding(6);
         Text = "osu! file tools";

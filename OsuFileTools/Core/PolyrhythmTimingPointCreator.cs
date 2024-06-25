@@ -25,7 +25,7 @@ public class PolyrhythmTimingPointCreator
         PolyrhythmSection section,
         Options options)
     {
-        var measureLength = section.BeatLength.Length * section.TimeSignature.Nominator;
+        var measureSeconds = section.BeatLength.Seconds * section.TimeSignature.Nominator;
 
         var result = new TimingPointList();
         TimingPoint? previousParent = null;
@@ -49,15 +49,15 @@ public class PolyrhythmTimingPointCreator
 
         void CreateForPhrase(BasePolyrhythmPhrase phrase)
         {
-            var phraseLength = measureLength * phrase.QuantizedRhythmicalValue.Ratio;
-            var noteLength = phraseLength / phrase.PolyValue;
-            var beatLength = noteLength * options.NoteBeatDivisor;
+            var phraseSeconds = measureSeconds * phrase.QuantizedRhythmicalValue.Ratio;
+            var noteSeconds = phraseSeconds / phrase.PolyValue;
+            var beatSeconds = noteSeconds * options.NoteBeatDivisor;
 
-            var previousParentLength = previousParent?.BeatLength().Length;
-            if (beatLength != previousParentLength)
+            var previousParentSeconds = previousParent?.BeatLength().Seconds;
+            if (beatSeconds != previousParentSeconds)
             {
                 TimingPointFactory.CreateWithNormalization(
-                    new BeatLength(beatLength),
+                    new BeatLength(beatSeconds),
                     options.NormalizedBeatLength,
                     out var parent,
                     out var normalizer);
@@ -70,7 +70,7 @@ public class PolyrhythmTimingPointCreator
                 result.TimingPoints.Add(normalizer);
             }
 
-            offset += phraseLength * 1000;
+            offset += phraseSeconds * 1000;
         }
     }
 

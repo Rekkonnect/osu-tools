@@ -18,12 +18,12 @@ public sealed class LinearBpmScalingTimingPointCreator(
         while (currentOffset < _options.EndOffset && currentBpm > 0)
         {
             var bpm = currentBpm;
-            var beatLength = BeatLength.FromBpm(bpm).Length * 1000;
+            var beatMs = BeatLength.FromBpm(bpm).Seconds * 1000;
 
             var timingPoint = new TimingPoint
             {
                 Offset = currentOffset,
-                BeatLength = beatLength,
+                BeatLength = beatMs,
             };
             points.TimingPoints.Add(timingPoint);
 
@@ -33,7 +33,7 @@ public sealed class LinearBpmScalingTimingPointCreator(
 
             var timingDuration = _options.StepNominator / (double)_options.StepDenominator * 4;
 
-            currentOffset += timingDuration * beatLength;
+            currentOffset += timingDuration * beatMs;
             currentBpm += _options.BpmStep;
         }
 

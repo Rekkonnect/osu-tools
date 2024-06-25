@@ -58,7 +58,7 @@ internal class TimingPointResnapper(
     private int GetClosestSnappedOffset(double offset, TimingPoint parentTiming, BeatLength beatLength)
     {
         int beats = GetClosestSnappedDivisorBeats(offset, parentTiming, beatLength);
-        double beatDuration = beatLength.Length;
+        double beatDuration = beatLength.Seconds;
         double snapped = beats * beatDuration;
         int intSnapped = (int)Math.Round(snapped);
         return intSnapped;
@@ -73,7 +73,7 @@ internal class TimingPointResnapper(
         if (localOffset < 0)
             return -1;
 
-        double beatDuration = beatLength.Length;
+        double beatDuration = beatLength.Seconds;
         double divisorDuration = beatDuration / _options.TimingSignatureDivisor;
         double offsetBeats = localOffset / beatDuration;
         double divisorBeats = _options.TimingSignatureDivisor * offsetBeats;

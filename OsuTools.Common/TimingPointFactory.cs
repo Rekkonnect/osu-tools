@@ -12,9 +12,9 @@ public static class TimingPointFactory
     {
         parent = new()
         {
-            BeatLength = currentBeatLength.Length * 1000,
+            BeatLength = currentBeatLength.Seconds * 1000,
         };
-        var normalizationRatio = currentBeatLength.Length / normalizedBeatLength.Length;
+        var normalizationRatio = currentBeatLength.Seconds / normalizedBeatLength.Seconds;
         normalizer = CreateSV(normalizationRatio);
     }
 
