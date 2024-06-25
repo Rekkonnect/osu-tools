@@ -1,6 +1,5 @@
 ﻿using Garyon.Extensions;
 using OsuTools.Common;
-using System.Text;
 
 namespace OsuFileTools.Core;
 
@@ -10,27 +9,27 @@ public class PolyrhythmSectionParser
         string text)
     {
         var enumerator = text.AsSpan().EnumerateLines();
-        return Parse(enumerator);
+        var lines = new SpanLineEnumeratorWrapper(enumerator);
+        return Parse(lines);
     }
 
     public static IReadOnlyList<PolyrhythmSection> Parse(
-        SpanLineEnumerator enumerator)
+        SpanLineEnumeratorWrapper lines)
     {
-        var observer = new SpanLineEnumeratorObserver();
-        bool any = observer.MoveNext(ref enumerator);
+        bool any = lines.MoveNext();
         if (!any)
             return [];
 
         var sections = new List<PolyrhythmSection>();
         while (true)
         {
-            var section = ParseSection(ref enumerator, ref observer);
+            var section = ParseSection(ref lines);
             if (section is null)
                 break;
 
             sections.Add(section);
 
-            if (!observer.IsActive)
+            if (!lines.IsActive)
                 break;
         }
 
@@ -38,12 +37,11 @@ public class PolyrhythmSectionParser
     }
 
     private static PolyrhythmSection? ParseSection(
-        ref SpanLineEnumerator enumerator,
-        ref SpanLineEnumeratorObserver observer)
+        ref SpanLineEnumeratorWrapper lines)
     {
-        EatEmptyLines(ref enumerator, ref observer);
+        EatEmptyLines(ref lines);
 
-        var current = enumerator.Current;
+        var current = lines.Current;
         if (current.IsEmpty)
             return null;
 
@@ -53,15 +51,15 @@ public class PolyrhythmSectionParser
         }
 
         var section = ParseTiming(current);
-        observer.MoveNext(ref enumerator);
+        lines.MoveNext();
 
         while (true)
         {
-            EatEmptyLines(ref enumerator, ref observer);
-            if (!observer.IsActive)
+            EatEmptyLines(ref lines);
+            if (!lines.IsActive)
                 break;
 
-            var measure = TryParseMeasure(ref enumerator, ref observer);
+            var measure = TryParseMeasure(ref lines);
             if (measure is null)
                 break;
 
@@ -72,30 +70,28 @@ public class PolyrhythmSectionParser
     }
 
     private static void EatEmptyLines(
-        ref SpanLineEnumerator enumerator,
-        ref SpanLineEnumeratorObserver observer)
+        ref SpanLineEnumeratorWrapper lines)
     {
         while (true)
         {
-            var current = enumerator.Current;
+            var current = lines.Current;
             if (current.Length is not 0)
                 break;
 
-            bool hasMore = observer.MoveNext(ref enumerator);
+            bool hasMore = lines.MoveNext();
             if (!hasMore)
                 return;
         }
     }
 
     private static PolyrhythmMeasure? TryParseMeasure(
-        ref SpanLineEnumerator enumerator,
-        ref SpanLineEnumeratorObserver observer)
+        ref SpanLineEnumeratorWrapper lines)
     {
         var phrases = new List<BasePolyrhythmPhrase>();
 
         while (true)
         {
-            var current = enumerator.Current;
+            var current = lines.Current;
             if (current.Length is 0)
                 break;
 
@@ -112,7 +108,7 @@ public class PolyrhythmSectionParser
             phrases.Add(phrase);
 
 end:
-            if (!observer.MoveNext(ref enumerator))
+            if (!lines.MoveNext())
             {
                 break;
             }
