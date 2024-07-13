@@ -1,6 +1,5 @@
 ﻿using OsuParsers.Beatmaps;
 using OsuParsers.Beatmaps.Objects;
-using OsuParsers.Beatmaps.Sections;
 using OsuParsers.Database.Objects;
 using OsuParsers.Decoders;
 using OsuParsers.Enums;
@@ -9,15 +8,6 @@ namespace OsuTools.Common;
 
 public static class OsuConvenienceExtensions
 {
-    public static int ManiaKeyCount(this Beatmap beatmap)
-    {
-        return beatmap.DifficultySection.ManiaKeyCount();
-    }
-    public static int ManiaKeyCount(this BeatmapDifficultySection difficultySection)
-    {
-        return (int)difficultySection.CircleSize;
-    }
-
     public static BeatLength BeatLength(this TimingPoint timingPoint)
     {
         return new(timingPoint.BeatLength / 1000);

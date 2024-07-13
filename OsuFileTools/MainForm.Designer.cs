@@ -28,8 +28,6 @@ partial class MainForm
     /// </summary>
     private void InitializeComponent()
     {
-        loadBeatmapDialog = new OpenFileDialog();
-        saveDialogBeatmap = new SaveFileDialog();
         tabControl1 = new TabControl();
         transformerPage = new TabPage();
         beatmapTransformerControl1 = new Controls.BeatmapTransformerControl();
@@ -37,21 +35,23 @@ partial class MainForm
         simpleGeneratorsControl1 = new Controls.TimingPointGenerationControl();
         polyrhythmPage = new TabPage();
         polyrhythmCreatorControl1 = new Controls.PolyrhythmCreatorControl();
+        tabPage1 = new TabPage();
+        groupBox1 = new GroupBox();
+        hitsoundExtractorControl1 = new Controls.HitsoundExtractorControl();
         tabControl1.SuspendLayout();
         transformerPage.SuspendLayout();
         timingPointGenerationPage.SuspendLayout();
         polyrhythmPage.SuspendLayout();
+        tabPage1.SuspendLayout();
+        groupBox1.SuspendLayout();
         SuspendLayout();
-        // 
-        // loadBeatmapDialog
-        // 
-        loadBeatmapDialog.InitialDirectory = "%localappdata%/osu!";
         // 
         // tabControl1
         // 
         tabControl1.Controls.Add(transformerPage);
         tabControl1.Controls.Add(timingPointGenerationPage);
         tabControl1.Controls.Add(polyrhythmPage);
+        tabControl1.Controls.Add(tabPage1);
         tabControl1.Dock = DockStyle.Fill;
         tabControl1.Location = new Point(6, 6);
         tabControl1.Name = "tabControl1";
@@ -114,6 +114,34 @@ partial class MainForm
         polyrhythmCreatorControl1.Size = new Size(1127, 643);
         polyrhythmCreatorControl1.TabIndex = 0;
         // 
+        // tabPage1
+        // 
+        tabPage1.Controls.Add(groupBox1);
+        tabPage1.Location = new Point(4, 24);
+        tabPage1.Name = "tabPage1";
+        tabPage1.Padding = new Padding(3);
+        tabPage1.Size = new Size(1128, 644);
+        tabPage1.TabIndex = 3;
+        tabPage1.Text = "Hitsounds";
+        tabPage1.UseVisualStyleBackColor = true;
+        // 
+        // groupBox1
+        // 
+        groupBox1.Controls.Add(hitsoundExtractorControl1);
+        groupBox1.Location = new Point(0, 2);
+        groupBox1.Name = "groupBox1";
+        groupBox1.Size = new Size(583, 269);
+        groupBox1.TabIndex = 1;
+        groupBox1.TabStop = false;
+        groupBox1.Text = "Hitsound Extractor";
+        // 
+        // hitsoundExtractorControl1
+        // 
+        hitsoundExtractorControl1.Location = new Point(6, 22);
+        hitsoundExtractorControl1.Name = "hitsoundExtractorControl1";
+        hitsoundExtractorControl1.Size = new Size(571, 226);
+        hitsoundExtractorControl1.TabIndex = 0;
+        // 
         // MainForm
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
@@ -130,12 +158,12 @@ partial class MainForm
         transformerPage.PerformLayout();
         timingPointGenerationPage.ResumeLayout(false);
         polyrhythmPage.ResumeLayout(false);
+        tabPage1.ResumeLayout(false);
+        groupBox1.ResumeLayout(false);
         ResumeLayout(false);
     }
 
     #endregion
-    private OpenFileDialog loadBeatmapDialog;
-    private SaveFileDialog saveDialogBeatmap;
     private TabControl tabControl1;
     private TabPage transformerPage;
     private TabPage timingPointGenerationPage;
@@ -143,4 +171,7 @@ partial class MainForm
     private Controls.BeatmapTransformerControl beatmapTransformerControl1;
     private Controls.TimingPointGenerationControl simpleGeneratorsControl1;
     private Controls.PolyrhythmCreatorControl polyrhythmCreatorControl1;
+    private TabPage tabPage1;
+    private GroupBox groupBox1;
+    private Controls.HitsoundExtractorControl hitsoundExtractorControl1;
 }
