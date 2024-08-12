@@ -8,6 +8,8 @@ namespace OsuFileTools.Controls;
 
 public partial class BeatmapTransformerControl : UserControl
 {
+    private static readonly Guid _fileDialogGuid = new("9787CB0F-FA2F-4699-B03B-849043754355");
+
     private Beatmap _sourceBeatmap;
     private Beatmap _transformedBeatmap;
 
@@ -16,6 +18,9 @@ public partial class BeatmapTransformerControl : UserControl
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     {
         InitializeComponent();
+
+        loadBeatmapDialog.ClientGuid = _fileDialogGuid;
+        saveDialogBeatmap.ClientGuid = _fileDialogGuid;
     }
 
     private void applyTimingPointResnapButton_Click(object sender, EventArgs e)
@@ -41,6 +46,19 @@ public partial class BeatmapTransformerControl : UserControl
 
         var creator = new InheritedTimingPointCreator(options);
         ApplyTransformation(creator);
+    }
+
+    private void applyGlobalOffsetMoveButton_Click(object sender, EventArgs e)
+    {
+        var options = new GlobalOffsetMover.Options
+        {
+            OffsetStart = (double)globalOffsetMoverOffsetStartNumeric.Value,
+            OffsetEnd = (double)globalOffsetMoverOffsetEndNumeric.Value,
+            MoveBy = (double)globalOffsetMoverMoveOffsetsByNumeric.Value,
+        };
+
+        var mover = new GlobalOffsetMover(options);
+        ApplyTransformation(mover);
     }
 
     private void ApplyTransformation(ITransformer transformer)

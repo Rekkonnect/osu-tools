@@ -29,6 +29,14 @@ partial class BeatmapTransformerControl
     private void InitializeComponent()
     {
         groupBox3 = new GroupBox();
+        groupBox6 = new GroupBox();
+        globalOffsetMoverMoveOffsetsByNumeric = new NumericUpDown();
+        globalOffsetMoverOffsetEndNumeric = new NumericUpDown();
+        label7 = new Label();
+        label5 = new Label();
+        applyGlobalOffsetMoveButton = new Button();
+        globalOffsetMoverOffsetStartNumeric = new NumericUpDown();
+        label4 = new Label();
         groupBox5 = new GroupBox();
         applyInheritedTimingPointButton = new Button();
         inheritedTimingPointCreatorBaselineBpmNumeric = new NumericUpDown();
@@ -50,6 +58,10 @@ partial class BeatmapTransformerControl
         loadBeatmapDialog = new OpenFileDialog();
         saveDialogBeatmap = new SaveFileDialog();
         groupBox3.SuspendLayout();
+        groupBox6.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)globalOffsetMoverMoveOffsetsByNumeric).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)globalOffsetMoverOffsetEndNumeric).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)globalOffsetMoverOffsetStartNumeric).BeginInit();
         groupBox5.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)inheritedTimingPointCreatorBaselineBpmNumeric).BeginInit();
         groupBox4.SuspendLayout();
@@ -61,6 +73,7 @@ partial class BeatmapTransformerControl
         // 
         // groupBox3
         // 
+        groupBox3.Controls.Add(groupBox6);
         groupBox3.Controls.Add(groupBox5);
         groupBox3.Controls.Add(groupBox4);
         groupBox3.Location = new Point(786, 0);
@@ -69,6 +82,88 @@ partial class BeatmapTransformerControl
         groupBox3.TabIndex = 5;
         groupBox3.TabStop = false;
         groupBox3.Text = "Transformations";
+        // 
+        // groupBox6
+        // 
+        groupBox6.Controls.Add(globalOffsetMoverMoveOffsetsByNumeric);
+        groupBox6.Controls.Add(globalOffsetMoverOffsetEndNumeric);
+        groupBox6.Controls.Add(label7);
+        groupBox6.Controls.Add(label5);
+        groupBox6.Controls.Add(applyGlobalOffsetMoveButton);
+        groupBox6.Controls.Add(globalOffsetMoverOffsetStartNumeric);
+        groupBox6.Controls.Add(label4);
+        groupBox6.Location = new Point(6, 276);
+        groupBox6.Name = "groupBox6";
+        groupBox6.Size = new Size(328, 150);
+        groupBox6.TabIndex = 7;
+        groupBox6.TabStop = false;
+        groupBox6.Text = "Global Offset Mover";
+        // 
+        // globalOffsetMoverMoveOffsetsByNumeric
+        // 
+        globalOffsetMoverMoveOffsetsByNumeric.DecimalPlaces = 3;
+        globalOffsetMoverMoveOffsetsByNumeric.Location = new Point(139, 74);
+        globalOffsetMoverMoveOffsetsByNumeric.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
+        globalOffsetMoverMoveOffsetsByNumeric.Minimum = new decimal(new int[] { 99999999, 0, 0, int.MinValue });
+        globalOffsetMoverMoveOffsetsByNumeric.Name = "globalOffsetMoverMoveOffsetsByNumeric";
+        globalOffsetMoverMoveOffsetsByNumeric.Size = new Size(183, 23);
+        globalOffsetMoverMoveOffsetsByNumeric.TabIndex = 10;
+        // 
+        // globalOffsetMoverOffsetEndNumeric
+        // 
+        globalOffsetMoverOffsetEndNumeric.DecimalPlaces = 3;
+        globalOffsetMoverOffsetEndNumeric.Location = new Point(139, 48);
+        globalOffsetMoverOffsetEndNumeric.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
+        globalOffsetMoverOffsetEndNumeric.Name = "globalOffsetMoverOffsetEndNumeric";
+        globalOffsetMoverOffsetEndNumeric.Size = new Size(183, 23);
+        globalOffsetMoverOffsetEndNumeric.TabIndex = 9;
+        // 
+        // label7
+        // 
+        label7.AutoSize = true;
+        label7.Location = new Point(15, 76);
+        label7.Name = "label7";
+        label7.Size = new Size(118, 15);
+        label7.TabIndex = 8;
+        label7.Text = "Move offsets by (ms)";
+        // 
+        // label5
+        // 
+        label5.AutoSize = true;
+        label5.Location = new Point(44, 50);
+        label5.Name = "label5";
+        label5.Size = new Size(89, 15);
+        label5.TabIndex = 6;
+        label5.Text = "Offset end (ms)";
+        // 
+        // applyGlobalOffsetMoveButton
+        // 
+        applyGlobalOffsetMoveButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        applyGlobalOffsetMoveButton.Location = new Point(226, 115);
+        applyGlobalOffsetMoveButton.Name = "applyGlobalOffsetMoveButton";
+        applyGlobalOffsetMoveButton.Size = new Size(96, 29);
+        applyGlobalOffsetMoveButton.TabIndex = 5;
+        applyGlobalOffsetMoveButton.Text = "Apply";
+        applyGlobalOffsetMoveButton.UseVisualStyleBackColor = true;
+        applyGlobalOffsetMoveButton.Click += applyGlobalOffsetMoveButton_Click;
+        // 
+        // globalOffsetMoverOffsetStartNumeric
+        // 
+        globalOffsetMoverOffsetStartNumeric.DecimalPlaces = 3;
+        globalOffsetMoverOffsetStartNumeric.Location = new Point(139, 22);
+        globalOffsetMoverOffsetStartNumeric.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
+        globalOffsetMoverOffsetStartNumeric.Name = "globalOffsetMoverOffsetStartNumeric";
+        globalOffsetMoverOffsetStartNumeric.Size = new Size(183, 23);
+        globalOffsetMoverOffsetStartNumeric.TabIndex = 4;
+        // 
+        // label4
+        // 
+        label4.AutoSize = true;
+        label4.Location = new Point(41, 24);
+        label4.Name = "label4";
+        label4.Size = new Size(92, 15);
+        label4.TabIndex = 0;
+        label4.Text = "Offset start (ms)";
         // 
         // groupBox5
         // 
@@ -170,11 +265,11 @@ partial class BeatmapTransformerControl
         // label2
         // 
         label2.AutoSize = true;
-        label2.Location = new Point(64, 49);
+        label2.Location = new Point(65, 49);
         label2.Name = "label2";
-        label2.Size = new Size(69, 15);
+        label2.Size = new Size(68, 15);
         label2.TabIndex = 1;
-        label2.Text = "Beat Divisor";
+        label2.Text = "Beat divisor";
         // 
         // label1
         // 
@@ -275,6 +370,11 @@ partial class BeatmapTransformerControl
         Name = "BeatmapTransformerControl";
         Size = new Size(1129, 643);
         groupBox3.ResumeLayout(false);
+        groupBox6.ResumeLayout(false);
+        groupBox6.PerformLayout();
+        ((System.ComponentModel.ISupportInitialize)globalOffsetMoverMoveOffsetsByNumeric).EndInit();
+        ((System.ComponentModel.ISupportInitialize)globalOffsetMoverOffsetEndNumeric).EndInit();
+        ((System.ComponentModel.ISupportInitialize)globalOffsetMoverOffsetStartNumeric).EndInit();
         groupBox5.ResumeLayout(false);
         groupBox5.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)inheritedTimingPointCreatorBaselineBpmNumeric).EndInit();
@@ -312,4 +412,12 @@ partial class BeatmapTransformerControl
     private TextBox sourceBeatmapText;
     private OpenFileDialog loadBeatmapDialog;
     private SaveFileDialog saveDialogBeatmap;
+    private GroupBox groupBox6;
+    private Button applyGlobalOffsetMoveButton;
+    private NumericUpDown globalOffsetMoverOffsetStartNumeric;
+    private Label label4;
+    private NumericUpDown globalOffsetMoverMoveOffsetsByNumeric;
+    private NumericUpDown globalOffsetMoverOffsetEndNumeric;
+    private Label label7;
+    private Label label5;
 }
