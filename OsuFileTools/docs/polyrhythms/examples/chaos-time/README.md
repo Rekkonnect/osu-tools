@@ -16,3 +16,4 @@ The original musical score snippet shown in the MV contains mistakes, as can be 
 - **Measure 8**<br/>The score shows a 4:5/8 phrase with four notes, when it's actually a 4:5/16 phrase with three notes, as can be shown in the waveform snapshot file. See the notation file for the 
 - **Measure 14**<br/>The score shows a 5:3/8 phrase of 5 eighths, but it's actually a 4:3/8 phrase with 4 eighths.
 - **Measure 15**<br/>Same mistake as in measure 14, both phrases can be heard the exact same.
+- **Measure 16**<br/>The score shows a 7:6/16 phrase but the song actually has a 8:6/16 phrase leading to the 3:2/16 phrase. [Discussion](https://osu.ppy.sh/beatmapsets/2229698/discussion/-/generalAll#/4525086)
