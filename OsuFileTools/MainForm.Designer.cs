@@ -38,12 +38,15 @@ partial class MainForm
         tabPage1 = new TabPage();
         groupBox1 = new GroupBox();
         hitsoundExtractorControl1 = new Controls.HitsoundExtractorControl();
+        tabPage2 = new TabPage();
+        beatmapCreatorRenamerControl1 = new Controls.BeatmapCreatorRenamerControl();
         tabControl1.SuspendLayout();
         transformerPage.SuspendLayout();
         timingPointGenerationPage.SuspendLayout();
         polyrhythmPage.SuspendLayout();
         tabPage1.SuspendLayout();
         groupBox1.SuspendLayout();
+        tabPage2.SuspendLayout();
         SuspendLayout();
         // 
         // tabControl1
@@ -52,6 +55,7 @@ partial class MainForm
         tabControl1.Controls.Add(timingPointGenerationPage);
         tabControl1.Controls.Add(polyrhythmPage);
         tabControl1.Controls.Add(tabPage1);
+        tabControl1.Controls.Add(tabPage2);
         tabControl1.Dock = DockStyle.Fill;
         tabControl1.Location = new Point(6, 6);
         tabControl1.Name = "tabControl1";
@@ -128,7 +132,7 @@ partial class MainForm
         // groupBox1
         // 
         groupBox1.Controls.Add(hitsoundExtractorControl1);
-        groupBox1.Location = new Point(0, 2);
+        groupBox1.Location = new Point(0, 1);
         groupBox1.Name = "groupBox1";
         groupBox1.Size = new Size(583, 269);
         groupBox1.TabIndex = 1;
@@ -141,6 +145,24 @@ partial class MainForm
         hitsoundExtractorControl1.Name = "hitsoundExtractorControl1";
         hitsoundExtractorControl1.Size = new Size(571, 226);
         hitsoundExtractorControl1.TabIndex = 0;
+        // 
+        // tabPage2
+        // 
+        tabPage2.Controls.Add(beatmapCreatorRenamerControl1);
+        tabPage2.Location = new Point(4, 24);
+        tabPage2.Name = "tabPage2";
+        tabPage2.Padding = new Padding(3);
+        tabPage2.Size = new Size(1128, 644);
+        tabPage2.TabIndex = 4;
+        tabPage2.Text = "Beatmap Creator Renaming";
+        tabPage2.UseVisualStyleBackColor = true;
+        // 
+        // beatmapCreatorRenamerControl1
+        // 
+        beatmapCreatorRenamerControl1.Location = new Point(0, 0);
+        beatmapCreatorRenamerControl1.Name = "beatmapCreatorRenamerControl1";
+        beatmapCreatorRenamerControl1.Size = new Size(341, 592);
+        beatmapCreatorRenamerControl1.TabIndex = 0;
         // 
         // MainForm
         // 
@@ -160,6 +182,7 @@ partial class MainForm
         polyrhythmPage.ResumeLayout(false);
         tabPage1.ResumeLayout(false);
         groupBox1.ResumeLayout(false);
+        tabPage2.ResumeLayout(false);
         ResumeLayout(false);
     }
 
@@ -174,4 +197,6 @@ partial class MainForm
     private TabPage tabPage1;
     private GroupBox groupBox1;
     private Controls.HitsoundExtractorControl hitsoundExtractorControl1;
+    private TabPage tabPage2;
+    private Controls.BeatmapCreatorRenamerControl beatmapCreatorRenamerControl1;
 }
